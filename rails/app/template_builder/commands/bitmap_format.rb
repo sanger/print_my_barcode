@@ -1,0 +1,34 @@
+#Bit map font format command (PC)
+
+module Commands
+
+  class BitmapFormat < Commands::Base
+
+    include Commands::Formatting
+
+    # Description: Sets the bit map font command
+    # Format: [ESC] PCaaa; bbbb, cccc, d, e, ff (, ghh), ii, j [LF] [NUL]
+    # Example: PC001;0020,0035,1,1,G,00,B
+    # aaa: Character string number (000 - 199)
+    # bbbb: Print origin of format of X-coordinate
+    # cccc: Print origin of Y-coordinate
+    # d: Character horizontal magnification
+    # e: Character vertical magnification
+    # ff: Type of font mainly G (Helvetica medium)
+    # ghh: Fine adjustment of character to character space.
+    # g: Increase (+) or decrease (-) character to character space
+    # hh: No of spaces between characters (00 - 99)
+    # ii: Rotational angles of character and character string (mostly 00)
+    # j: Character attribution (mostly B for black character)
+
+    set_prefix "PC"
+
+    optional_attributes horizontal_magnification: "1", vertical_magnification: "1", font: "G", space_adjustment: "00"
+
+    def control_codes
+      "#{x_origin},#{y_origin},#{horizontal_magnification},#{vertical_magnification},#{font},#{space_adjustment},B"
+    end
+    
+  end
+
+end
