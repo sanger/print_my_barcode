@@ -23,10 +23,10 @@ module Commands
 
     set_prefix "PC"
 
-    optional_attributes horizontal_magnification: "1", vertical_magnification: "1", font: "G", space_adjustment: "00"
+    optional_attributes horizontal_magnification: "1", vertical_magnification: "1", font: "G", space_adjustment: "00", rotational_angles: "00"
 
     def control_codes
-      "#{x_origin},#{y_origin},#{horizontal_magnification},#{vertical_magnification},#{font},#{space_adjustment},B"
+      "#{x_origin},#{y_origin},#{horizontal_magnification},#{vertical_magnification},#{font},+#{space_adjustment},#{rotational_angles},B"
     end
     
   end

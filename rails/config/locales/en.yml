@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+
+en:
+  errors:
+    messages:
+      existence: "does not exist"

@@ -22,7 +22,7 @@ module Commands
       "I,0001,0002C3201"
     end
 
-    def output
+    def formatted
       super(';')
     end
     

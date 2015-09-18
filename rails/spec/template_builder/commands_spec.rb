@@ -14,17 +14,17 @@ RSpec.describe "Commands", type: :model do |variable|
       expect(command.control_codes).to eq("CC12345")
     end
 
-    it "should produce some appropriate output text" do
-      expect(command.output).to eq("PFCC12345")
-      expect(command.output(';')).to eq("PF;CC12345")
+    it "should produce some appropriate formatted text" do
+      expect(command.formatted).to eq("PFCC12345")
+      expect(command.formatted(';')).to eq("PF;CC12345")
     end
 
     it "should output the line" do
-      expect(command.output_line).to eq("\u001bPFCC12345\n\u0000")
+      expect(command.output).to eq("\u001bPFCC12345\n\u0000")
     end
 
     it "should produce an appropriate command" do
-      expect(Commands::Base.command).to eq(command.output_line)
+      expect(Commands::Base.command).to eq(command.output)
     end
 
     it "should respond to the appropriate prefix" do
@@ -61,7 +61,7 @@ RSpec.describe "Commands", type: :model do |variable|
     end
 
     it "should have an appropriate separator in the output" do
-      expect(command.output_line).to include(";")
+      expect(command.output).to include(";")
 
     end
 
@@ -81,7 +81,7 @@ RSpec.describe "Commands", type: :model do |variable|
     end
 
     it "should have an appropriate separator in the output" do
-      expect(command.output_line).to include(";")
+      expect(command.output).to include(";")
 
     end
 
@@ -106,7 +106,7 @@ RSpec.describe "Commands", type: :model do |variable|
     let(:command) { Commands::ClearImageBuffer.new }
 
     it "should produce some appropriate output text" do
-      expect(command.output).to eq("C")
+      expect(command.formatted).to eq("C")
       expect(command).to be_c
     end
   end
@@ -115,7 +115,7 @@ RSpec.describe "Commands", type: :model do |variable|
 
     let(:command) { Commands::BitmapFormat.new(id: "001", x_origin: "0020", y_origin: "0035")}
     let(:command_with_options) { Commands::BitmapFormat.new(id: "001", x_origin: "0020", y_origin: "0035", 
-      horizontal_magnification: "05", vertical_magnification: "05", font: "B", space_adjustment: "12")}
+      horizontal_magnification: "05", vertical_magnification: "05", font: "B", space_adjustment: "12", rotational_angles: "11")}
 
     it "should have an appropriate prefix" do
       expect(command.prefix).to eq("PC")
@@ -123,26 +123,26 @@ RSpec.describe "Commands", type: :model do |variable|
     end
 
     it "should have appropriate control codes" do
-      expect(command.control_codes).to eq("0020,0035,1,1,G,00,B")
-      expect(command_with_options.control_codes).to eq("0020,0035,05,05,B,12,B")
+      expect(command.control_codes).to eq("0020,0035,1,1,G,+00,00,B")
+      expect(command_with_options.control_codes).to eq("0020,0035,05,05,B,+12,11,B")
     end
 
-    it "should have the id in the output" do
-      expect(command.output).to start_with("PC001;")
+    it "should have the id in the formatting" do
+      expect(command.formatted).to start_with("PC001;")
     end
   end
 
   context "Draw Bitmap" do
 
-    let(:command) { Commands::BitmapDraw.new("001", "field_name")}
+    let(:command) { Commands::BitmapDraw.new("001", "a_value")}
 
     it "should have an appropriate prefix" do
       expect(command.prefix).to eq("RC")
       expect(command).to be_rc
     end
 
-    it "should produce some appropriate output" do
-      expect(command.output).to eq("#{command.prefix}001;{{field_name}}")
+    it "should produce some appropriate formatting" do
+      expect(command.formatted).to eq("#{command.prefix}001;a_value")
     end
 
   end
@@ -163,23 +163,23 @@ RSpec.describe "Commands", type: :model do |variable|
       expect(command_with_options.control_codes).to eq("0300,0000,9,3,01,0,0100,+0000000000,002,0,00")
     end
 
-    it "should have the id in the output" do
-      expect(command.output).to start_with("XB001;")
+    it "should have the id in the formatting" do
+      expect(command.formatted).to start_with("XB001;")
     end
     
   end
 
   context "Draw Barcode" do
 
-    let(:command) { Commands::BarcodeDraw.new("001", "field_name")}
+    let(:command) { Commands::BarcodeDraw.new("001", "a_value")}
 
     it "should have an appropriate prefix" do
       expect(command.prefix).to eq("RB")
       expect(command).to be_rb
     end
 
-    it "should produce some appropriate output" do
-      expect(command.output).to eq("#{command.prefix}001;{{field_name}}")
+    it "should produce some appropriate formatting" do
+      expect(command.formatted).to eq("#{command.prefix}001;a_value")
     end
 
   end
@@ -202,4 +202,58 @@ RSpec.describe "Commands", type: :model do |variable|
     end
     
   end
+
+  context Commands::Outputter do
+
+    class MyCommands
+      include Commands::Outputter
+
+      attr_reader :nil_command
+
+      set_commands_list :set_label_size, "C", "T", "XS", :nil_command, :array_of_commands
+
+      def set_label_size
+        Commands::SetLabelSize.new(pitch_length: "1234",print_width: "5678",print_length: "9012")
+      end
+
+      def array_of_commands
+        [
+          Commands::AdjustPosition.new(feed_value: "25"),
+          Commands::BarcodeDraw.new("123", "ABC"),
+          Commands::AdjustPrintDensity.new(fine_adjustment: "4")
+        ]
+      end
+    end
+
+    subject { MyCommands.new}
+
+    it "should have the correct list of commands" do
+      expect(subject.commands_list).to eq([:set_label_size, "C", "T", "XS", :nil_command, :array_of_commands])
+    end
+
+    it "should have the correct commands" do
+      commands = subject.commands
+      expect(commands.count).to eq(8)
+      expect(commands.first).to be_d
+      expect(commands[1]).to be_c
+      expect(commands[2]).to be_t
+      expect(commands[3]).to be_xs
+      expect(commands[4]).to be_nil
+      expect(commands[5]).to be_ax
+      expect(commands[6]).to be_rb
+      expect(commands.last).to be_ay
+    end
+
+    it "should have the correct output" do
+      output = Commands::SetLabelSize.command(pitch_length: "1234",print_width: "5678",print_length: "9012") <<
+      Commands::ClearImageBuffer.command <<
+      Commands::Feed.command <<
+      Commands::Issue.command <<
+      Commands::AdjustPosition.command(feed_value: "25") <<
+      Commands::BarcodeDraw.command("123", "ABC") <<
+      Commands::AdjustPrintDensity.command(fine_adjustment: "4")
+      expect(subject.output).to eq(output)
+    end
+  end
+
 end

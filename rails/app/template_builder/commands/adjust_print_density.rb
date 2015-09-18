@@ -23,7 +23,7 @@ module Commands
       "+#{fine_adjustment},0"
     end
 
-    def output
+    def formatted
       super(';')
     end
   end

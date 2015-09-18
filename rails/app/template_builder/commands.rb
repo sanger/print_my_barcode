@@ -25,7 +25,7 @@ module Commands
       set_options(options)
     end
 
-    def output(separator = ";")
+    def formatted(separator = ";")
       "#{prefix}#{id}#{separator}#{control_codes}"
     end
   end
@@ -34,16 +34,22 @@ module Commands
     extend ActiveSupport::Concern
 
     included do
-      attr_reader :id, :field_name
+      attr_reader :id, :value
     end
 
-    def initialize(id, field_name)
+    module ClassMethods
+      def command(id, value)
+        new(id, value).output
+      end
+    end
+
+    def initialize(id, value)
       @id = id
-      @field_name = field_name
+      @value = value
     end
 
-    def output(separator = ";")
-      "#{prefix}#{id}#{separator}{{#{field_name}}}"
+    def formatted(separator = ";")
+      "#{prefix}#{id}#{separator}#{value}"
     end
   end
 
@@ -59,6 +65,43 @@ module Commands
           prefix
         end
       end
+    end
+  end
+
+  module Outputter
+    extend ActiveSupport::Concern
+
+    module ClassMethods
+      def set_commands_list(*list)
+        define_method :commands_list do
+          list
+        end
+      end
+
+    end
+
+    def standard_commands
+      {
+        "C"   => Commands::ClearImageBuffer,
+        "T"   => Commands::Feed,
+        "XS"  => Commands::Issue
+      }
+    end
+
+    def commands
+      @commands ||= [].tap do |c|
+        commands_list.each do |command|
+          if command.instance_of? String
+            c << standard_commands[command].new
+          else
+            c << self.send(command)
+          end
+        end
+      end.flatten
+    end
+
+    def output
+      commands.compact.collect { |c| c.output }.reduce(:<<)
     end
   end
 end

@@ -25,7 +25,7 @@ module Commands
       "+#{feed_value},+000,+00"
     end
 
-    def output
+    def formatted
       super(';')
     end
 

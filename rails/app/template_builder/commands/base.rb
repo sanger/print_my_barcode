@@ -9,11 +9,11 @@ module Commands
     LF    = "\n"
     NUL   = "\u0000"
 
-    def self.command(*args)
-      if args.empty?
-        new.output_line
+    def self.command(args = nil)
+      if args.nil?
+        new.output
       else
-        new(args).output_line
+        new(args).output
       end
     end
 
@@ -21,12 +21,12 @@ module Commands
       "CC12345"
     end
 
-    def output(separator = '')
+    def formatted(separator = '')
       "#{prefix}#{separator}#{control_codes}"
     end
 
-    def output_line
-      "#{ESC}#{output}#{LF}#{NUL}"
+    def output
+      "#{ESC}#{formatted}#{LF}#{NUL}"
     end
 
     def method_missing(method_name, *arguments, &block)

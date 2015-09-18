@@ -1,0 +1,3 @@
+class Label < Section
+  
+end
