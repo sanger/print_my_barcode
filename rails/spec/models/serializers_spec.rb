@@ -25,4 +25,5 @@ RSpec.describe "Serializers", type: :model do |variable|
     expect(json.space_adjustment).to eq(bitmap.space_adjustment)
     expect(json.rotational_angles).to eq(bitmap.rotational_angles)
   end
+
 end

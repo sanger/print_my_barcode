@@ -26,6 +26,11 @@ class V1::LabelTemplatesController < ApplicationController
     end
   end
 
+  def print
+    @template_builder = TemplateBuilder.new(current_resource, params[:print])
+    render json: @template_builder
+  end
+
 private
 
   def current_resource

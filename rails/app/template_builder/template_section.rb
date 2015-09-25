@@ -2,6 +2,7 @@ class TemplateSection
 
   include SubclassChecker
   include Commands::Outputter
+  include ActiveModel::Serializers::JSON
 
   has_subclasses :header, :footer, :label
 
@@ -23,6 +24,13 @@ class TemplateSection
 
   def drawings
     @drawings ||= []
+  end
+
+  def as_json(options = {})
+    values.inject({}) do |hsh, (k,v)|
+      hsh[k] = v
+      hsh
+    end
   end
 
 private

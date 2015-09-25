@@ -67,4 +67,24 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
   end
+
+  it "should print a label template with values" do
+    label_template = create(:label_template)
+    header_values = label_template.header.drawings.pluck(:field_name).to_h_derived
+    label_values = label_template.label.drawings.pluck(:field_name).to_h_derived
+    footer_values = label_template.footer.drawings.pluck(:field_name).to_h_derived
+    post print_v1_label_template_path(label_template), print: { header: header_values, label: label_values, footer: footer_values }
+    expect(response).to be_success
+    json = ActiveSupport::JSON.decode(response.body)
+    expect(json["header"]).to eq(header_values)
+    expect(json["label"]).to eq(label_values)
+    expect(json["footer"]).to eq(footer_values)
+
+    post print_v1_label_template_path(label_template), print: { label: label_values, footer: footer_values }
+    expect(response).to be_success
+    json = ActiveSupport::JSON.decode(response.body)
+    expect(json["header"]).to be_nil
+    expect(json["label"]).to eq(label_values)
+    expect(json["footer"]).to eq(footer_values)
+  end
 end

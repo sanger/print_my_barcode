@@ -2,8 +2,14 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :label_types
-    resources :label_templates
+    resources :label_templates do
+      member do
+        post 'print'
+      end
+    end
+    resources :printers, only: [:index, :show, :create]
   end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

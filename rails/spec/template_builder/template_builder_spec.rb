@@ -53,6 +53,11 @@ RSpec.describe TemplateBuilder, type: :model do |variable|
     it "commands list should be correct" do
       expect(subject.commands_list).to eq([:set_label_size, :adjust_print_density, :adjust_position, "T", :header, :label, :footer])
     end
+
+    it "should produce the correct json" do
+      expect(subject.as_json).to eq({ header: header_values, label: label_values, footer: footer_values})
+    end
+
   end
 
   context "with a section missing" do
@@ -61,6 +66,10 @@ RSpec.describe TemplateBuilder, type: :model do |variable|
 
     it "should not create the missing section" do
       expect(subject.header).to be_nil
+    end
+
+    it "should produce the correct json" do
+      expect(subject.as_json).to eq({ header: nil, label: label_values, footer: footer_values})
     end
   end
 

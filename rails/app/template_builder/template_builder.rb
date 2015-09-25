@@ -1,6 +1,7 @@
 class TemplateBuilder
 
   include Commands::Outputter
+  include ActiveModel::Serializers::JSON
 
   attr_reader :header, :label, :footer
 
@@ -23,6 +24,14 @@ class TemplateBuilder
 
   def set_label_size
     @set_label_size ||= Commands::SetLabelSize.new(template_attributes)
+  end
+
+  def as_json(options = {})
+    {
+      header: header.as_json,
+      label: label.as_json,
+      footer: footer.as_json
+    }
   end
 
 private
