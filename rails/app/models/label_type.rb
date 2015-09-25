@@ -9,12 +9,10 @@ class LabelType < ActiveRecord::Base
   validates :fine_adjustment, presence: true, format: {with: /\A\d{3}\z/}
 
   def template_attributes
-    {
-      feed_value: feed_value, 
-      fine_adjustment: fine_adjustment,
-      pitch_length: pitch_length, 
-      print_width: print_width,
-      print_length: print_length
-    }
+    self.as_json.symbolize_keys
+  end
+
+  def as_json(options = {})
+    super( { except: [:created_at, :updated_at]}.merge(options) )
   end
 end

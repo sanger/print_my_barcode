@@ -4,19 +4,19 @@ RSpec.describe Section, type: :model do
 
   it "can have many drawings" do
     bitmaps = create_list(:bitmap, 3)
-    section = create(:section, drawings: bitmaps)
+    section = create(:section, bitmaps: bitmaps)
     expect(section.drawings.count).to eq(3)
   end
 
   it "can have many barcodes" do
     barcodes = create_list(:barcode, 3)
-    section = create(:section, drawings: barcodes)
+    section = create(:section, barcodes: barcodes)
     expect(section.barcodes.count).to eq(3)
   end
 
   it "can have many bitmaps" do
     bitmaps = create_list(:bitmap, 3)
-    section = create(:section, drawings: bitmaps)
+    section = create(:section, bitmaps: bitmaps)
     expect(section.bitmaps.count).to eq(3)
   end
 

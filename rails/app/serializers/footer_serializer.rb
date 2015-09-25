@@ -1,0 +1,3 @@
+class FooterSerializer < SectionSerializer
+  
+end

@@ -3,8 +3,8 @@ FactoryGirl.define do
 
     trait :drawings do
       after(:create) do |section|
-        section.drawings << FactoryGirl.create_list(:barcode, 2)
-        section.drawings << FactoryGirl.create_list(:bitmap, 2)
+        section.barcodes << FactoryGirl.create_list(:barcode, 2)
+        section.bitmaps << FactoryGirl.create_list(:bitmap, 2)
       end
     end
 

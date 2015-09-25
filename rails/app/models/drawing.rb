@@ -28,6 +28,10 @@ class Drawing < ActiveRecord::Base
     options.merge(id: padded_placeholder_id, x_origin: x_origin, y_origin: y_origin)
   end
 
+  def self.permitted_attributes
+    (stored_attributes[:options] || []) + [:x_origin, :y_origin, :field_name]
+  end
+
 private
   
   def add_placeholder_id

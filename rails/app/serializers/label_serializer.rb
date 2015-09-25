@@ -1,0 +1,3 @@
+class LabelSerializer < SectionSerializer
+  
+end

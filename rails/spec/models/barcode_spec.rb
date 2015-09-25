@@ -28,7 +28,7 @@ RSpec.describe Barcode, type: :model do
     expect(build(:barcode, placeholder_id: 1).padded_placeholder_id).to eq("01")
   end
 
-  it "template_attributes should containt the correct attributes" do
+  it "template_attributes should contain the correct attributes" do
     barcode = create(:barcode)
     expect(barcode.template_attributes).to eq(barcode.options.merge(id: barcode.padded_placeholder_id, x_origin: barcode.x_origin, y_origin: barcode.y_origin))
   end

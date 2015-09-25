@@ -52,11 +52,18 @@ RSpec.describe LabelType, type: :model do
     expect(build(:label_type, fine_adjustment: "AAAA")).to_not be_valid
   end
 
-  it "should have the correct template attributes" do
-    label_type = build(:label_type)
+  it "#template_attributes should return the correct attributes" do
+    label_type = create(:label_type)
     expect(label_type.template_attributes).to eq(
-      {feed_value: label_type.feed_value, fine_adjustment: label_type.fine_adjustment,
-        pitch_length: label_type.pitch_length, print_width: label_type.print_width,
-        print_length: label_type.print_length})
+      {
+        id: label_type.id,
+        name: label_type.name,
+        feed_value: label_type.feed_value,
+        fine_adjustment: label_type.fine_adjustment,
+        pitch_length: label_type.pitch_length, 
+        print_width: label_type.print_width,
+        print_length: label_type.print_length
+      }
+    )
   end
 end
