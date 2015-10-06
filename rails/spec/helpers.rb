@@ -2,6 +2,7 @@ module Helpers
   def label_template_params
     ActionController::Parameters.new(
       label_template: {
+        name: build(:label_template).name,
         label_type_id: create(:label_type).id,
         header_attributes: header_attributes,
         label_attributes: label_attributes,
@@ -12,6 +13,7 @@ module Helpers
   def label_template_params_with_invalid_label_type
     ActionController::Parameters.new(
       label_template: {
+        name: build(:label_template).name,
         header_attributes: header_attributes,
         label_attributes: label_attributes,
         footer_attributes: footer_attributes
@@ -21,6 +23,7 @@ module Helpers
   def label_template_params_with_invalid_association
      ActionController::Parameters.new(
       label_template: {
+        name: build(:label_template).name,
         label_type_id: create(:label_type).id,
         header_attributes: header_attributes,
         label_attributes: label_attributes,

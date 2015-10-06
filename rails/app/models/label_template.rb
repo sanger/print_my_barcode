@@ -1,5 +1,7 @@
 class LabelTemplate < ActiveRecord::Base
 
+  validates :name, presence: true, uniqueness: {case_sensitive: false}
+
   belongs_to :label_type
 
   validates :label_type, existence: true
@@ -16,7 +18,9 @@ class LabelTemplate < ActiveRecord::Base
   end
 
   def self.permitted_attributes
-    [ "label_type_id",
+    [ 
+      "name",
+      "label_type_id",
       "header_attributes" => Section.permitted_attributes, 
       "label_attributes" => Section.permitted_attributes, 
       "footer_attributes" => Section.permitted_attributes

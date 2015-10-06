@@ -6,14 +6,14 @@ RSpec.describe V1::LabelTypesController, type: :request do |variable|
     label_types = create_list(:label_type, 5)
     get v1_label_types_path
     expect(response).to be_success
-    expect(ActiveSupport::JSON.decode(response.body).length).to eq(label_types.length)
+    expect(ActiveSupport::JSON.decode(response.body)["label_types"].length).to eq(label_types.length)
   end
 
   it "should allow retrieval of information about a particular label type" do
     label_type = create(:label_type)
     get v1_label_type_path(label_type)
     expect(response).to be_success
-    json = ActiveSupport::JSON.decode(response.body)
+    json = ActiveSupport::JSON.decode(response.body)["label_type"]
     expect(json["id"]).to eq(label_type.id)
     expect(json["feed_value"]).to eq(label_type.feed_value)
     expect(json["fine_adjustment"]).to eq(label_type.fine_adjustment)
@@ -44,7 +44,7 @@ RSpec.describe V1::LabelTypesController, type: :request do |variable|
     new_name = build(:label_type).name
     patch v1_label_type_path(label_type), label_type: { name: new_name }
     expect(response).to be_success
-    expect(ActiveSupport::JSON.decode(response.body)["name"]).to eq(new_name)
+    expect(ActiveSupport::JSON.decode(response.body)["label_type"]["name"]).to eq(new_name)
   end
 
   it "should prevent update of existing label type with invalid attributes" do

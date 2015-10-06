@@ -9,18 +9,18 @@ class V1::PrintersController < ApplicationController
   end
 
   def create
-    @printer = Printer.new(printer_params)
-    if @printer.save
-      render json: @printer
+    printer = Printer.new(printer_params)
+    if printer.save
+      render json: printer
     else
-      render json: {errors: @printer.errors.full_messages}, status: :unprocessable_entity
+      render json: { errors: printer.errors }, status: :unprocessable_entity
     end
   end
 
 protected
 
   def current_resource
-    @current_resource ||= Printer.find(params[:id]) if params[:id]
+    Printer.find(params[:id]) if params[:id]
   end
 
   def printer_params

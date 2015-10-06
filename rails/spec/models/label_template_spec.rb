@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe LabelTemplate, type: :model, helpers: true do
+
+  it "should not be valid without a name" do
+    expect(build(:label_template, name: nil)).to_not be_valid
+  end
+
+  it "should not be valid without a unique name" do
+    label_template = create(:label_template)
+    expect(build(:label_template, name: label_template.name)).to_not be_valid
+  end
+
   it "should not be valid without a label_type" do
     expect(build(:label_template, label_type: nil)).to_not be_valid
   end

@@ -9,32 +9,31 @@ class V1::LabelTemplatesController < ApplicationController
   end
 
   def create
-    @label_template = LabelTemplate.new(label_template_params)
-    if @label_template.save
-      render json: @label_template
+    label_template = LabelTemplate.new label_template_params
+    if label_template.save
+      render json: label_template
     else
-      render json: { errors: @label_template.errors.full_messages}, status: :unprocessable_entity
+      render json: { errors: label_template.errors }, status: :unprocessable_entity
     end
   end
 
   def update
-    @label_template = current_resource
-    if @label_template.update_attributes(label_template_params)
-      render json: @label_template
+    label_template = current_resource
+    if label_template.update_attributes(label_template_params)
+      render json: label_template
     else
-      render json: { errors: @label_template.errors.full_messages}, status: :unprocessable_entity
+      render json: { errors: label_template.errors }, status: :unprocessable_entity
     end
   end
 
   def print
-    @template_builder = TemplateBuilder.new(current_resource, params[:print])
-    render json: @template_builder
+    render json: TemplateBuilder.new(current_resource, params[:print])
   end
 
 private
 
   def current_resource
-    @current_resource ||= LabelTemplate.find(params[:id]) if params[:id]
+    LabelTemplate.find(params[:id]) if params[:id]
   end
 
   def label_template_params

@@ -1,0 +1,33 @@
+<form {{action formAction on='submit' }}>
+  <fieldset>
+      <ul>
+        <li>
+          <label for='name'>Name</label>
+          {{input value=model.name id='name'}}
+        </li>
+        <li>
+          <label for='pitchLength'>Pitch Length</label>
+          {{input value=model.pitchLength id='pitch-length'}}
+        </li>
+        <li>
+          <label for='printWidth'>Print Width</label>
+          {{input value=model.printWidth id='print-width'}}
+        </li>
+        <li>
+         <label for='printLength'>Print Length</label>
+          {{input value=model.printLength id='print-length'}}
+        </li>
+        <li>
+         <label for='feedValue'>Feed Value</label>
+          {{input value=model.feedValue id='feed-value'}}
+        </li>
+        <li>
+          <label for='fineAdjustment'>Fine Adjustment</label>
+          {{input value=model.fineAdjustment id='fine-adjustment'}}
+        </li>
+        <li>
+         <button type="submit">Submit</button>
+        </li>
+      </ul>
+  </fieldset>
+</form>

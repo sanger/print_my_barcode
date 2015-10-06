@@ -1,5 +1,5 @@
 class LabelTemplateSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name
 
   has_one :label_type
   has_one :header

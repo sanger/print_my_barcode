@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150925101550) do
   add_index "drawings", ["section_id"], name: "index_drawings_on_section_id"
 
   create_table "label_templates", force: :cascade do |t|
+    t.string   "name"
     t.integer  "label_type_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
