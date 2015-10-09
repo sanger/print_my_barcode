@@ -1,10 +1,15 @@
-<form {{action formAction on='submit' }}>
+<form {{action 'submit' on='submit' }}>
   <fieldset>
       <ul>
         <li>
           <label for='name'>Name</label>
           {{input value=model.name id='name'}}
         </li>
+        {{#each model.errors.name as |error|}}
+          <div class="error">
+            {{error.message}}
+          </div>
+        {{/each}}
         <li>
           <label for='pitchLength'>Pitch Length</label>
           {{input value=model.pitchLength id='pitch-length'}}

@@ -1,31 +1,30 @@
+import Mirage from 'ember-cli-mirage';
+
 export default function() {
   this.namespace = 'v1';
 
   this.get('/label_types');
   this.get('/label_types/:label_type_id');
   this.get('/label_types/:label_type_id/edit');
-  // this.post('/label_types');
-  this.put('/label_types/:label_type_id');
 
   this.post('/label_types', function(db, request) {
     var params = JSON.parse(request.requestBody);
-    if (params.label_type.name === undefined) {
-      return { errors:{ name:["can't be blank"]}};
+    if (params.label_type.name === null) {
+      return new Mirage.Response(422, {}, { errors:{ name:["can't be blank"]}});
     }
     var label_type = db.label_types.insert(params);
     return {label_type: label_type};
   });
 
-  // this.put('/label_types/:label_type_id', function(db, request) {
-  //   var label_type_id = request.params.label_type_id;
-  //   var params = JSON.parse(request.requestBody);
-  //   if (label_type.name === undefined) {
-  //     return { errors:{ name:["can't be blank"]}}
-  //   };
-
-  //   var label_type = db.label_types.update(label_type_id, params);
-  //   return {label_type: label_type};
-  // });
+  this.put('/label_types/:label_type_id', function(db, request) {
+    var label_type_id = request.params.label_type_id;
+    var params = JSON.parse(request.requestBody);
+   if (params.label_type.name === null) {
+      return { errors:{ name:["can't be blank"]}};
+    }
+    var label_type = db.label_types.update(label_type_id, params.label_type);
+    return {label_type: label_type};
+  });
 
   // These comments are here to help you get started. Feel free to delete them.
 

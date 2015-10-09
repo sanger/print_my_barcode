@@ -75,16 +75,33 @@ test('Should be able to create a new label type', function(assert){
     click('button[type=submit]');
 
     andThen(function() {
-      assert.equal(find("a:contains('Label Type 1')").length, 1);
-      click('a:contains("Label Type 1")');
+      visit('label_types/1');
 
       andThen(function() {
+        assert.equal(find('h4').text(), 'Label Type 1');
         assert.ok(find('div:contains("pitch length: 0110")'));
         assert.ok(find('div:contains("print width: 0920")'));
         assert.ok(find('div:contains("print length: 0080")'));
         assert.ok(find('div:contains("feed value: 08")'));
         assert.ok(find('div:contains("fine adjustment: 004")'));
       });
+    });
+  });
+});
+
+test('Should return an error if the label type has incorrect attributes', function(assert){
+  visit('label_types/new');
+
+  andThen(function() {
+    fillIn(find('input#pitch-length'), "0110");
+    fillIn(find('input#print-width'), "0920");
+    fillIn(find('input#print-length'), "0080");
+    fillIn(find('input#feed-value'), "08");
+    fillIn(find('input#fine-adjustment'), "004");
+    click('button[type=submit]');
+
+    andThen(function() {
+      assert.equal(find("div:contains('can't be blank')").length, 1);
     });
   });
 });
