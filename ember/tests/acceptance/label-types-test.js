@@ -90,6 +90,7 @@ test('Should be able to create a new label type', function(assert){
 });
 
 test('Should return an error if the label type has incorrect attributes', function(assert){
+
   visit('label_types/new');
 
   andThen(function() {
@@ -101,7 +102,7 @@ test('Should return an error if the label type has incorrect attributes', functi
     click('button[type=submit]');
 
     andThen(function() {
-      assert.equal(find("div:contains('can't be blank')").length, 1);
+      assert.notEqual(find(".error").html().search('can\'t be blank'), -1);
     });
   });
 });
