@@ -1,10 +1,13 @@
-<article>
-  <h4>{{model.name}}</h4>
-  <div>pitch length: {{model.pitchLength}}</div>
-  <div>print width: {{model.printWidth}}</div>
-  <div>print length: {{model.printLength}}</div>
-  <div>feed value: {{model.feedValue}}</div>
-  <div>fine adjustment: {{model.fineAdjustment}}</div>
+<article class="box-right">
+  <ul>
+    <li><button class="close" {{action 'close'}}>x</button></li>
+    <li><h4>{{model.name}}</h4></li>
+    <li><div>pitch length:</div> <div>{{model.pitchLength}}</div></li>
+    <li><div>print width:</div> {{model.printWidth}}</li>
+    <li><div>print length:</div> <div>{{model.printLength}}</div></li>
+    <li><div>feed value:</div> <div>{{model.feedValue}}</div></li>
+    <li><div>fine adjustment:</div> <div>{{model.fineAdjustment}}</div></li>
+  </ul>
 </article>
 
 {{outlet}}

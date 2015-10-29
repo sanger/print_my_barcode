@@ -1,0 +1,198 @@
+@import "shared";
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+a{
+  color: black;
+
+  &:hover, &:visited{
+    color: black;
+    text-decoration: underline;
+  }
+
+  text-decoration: none;
+}
+
+ul, ol{
+  list-style-type: none;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  font: {
+    size: 0.9em;
+    family: 'Helvetica Neue', helvetica, arial, sans-serif;
+  }
+}
+
+.body{
+  clear: both;
+  padding-top: 50px;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 400px;
+}
+
+header, footer{
+  float: left;
+  width: 100%;
+}
+
+header{
+  border-bottom: 1px dotted gray;
+  padding-bottom: 10px;
+  height: 40px;
+
+  a{
+    text-decoration: none;
+  }
+
+  h2{
+    margin-top: 5px;
+    padding: 5px;
+  }
+}
+
+section{
+  margin: 20px;
+
+  h3{
+    padding-bottom: 20px;
+  }
+
+  ul{
+
+    li{
+      padding: 10px;
+
+      a{
+        padding-right: 10px;
+      }
+    }
+
+  }
+
+}
+
+
+
+
+
+.box-left{
+  float: left;
+}
+
+
+.box-right{
+
+  margin-left: 300px;
+
+  ul{
+    border: solid black 1px;
+    width: 30%;
+    padding: 10px;
+
+    h4{
+      margin-bottom: 10px;
+    }
+
+    li{
+
+      padding: 5px;
+      div{
+        display: inline-block;
+
+        &:first-child{
+          width: 120px;
+        }
+      }
+    }
+  }
+}
+
+form{
+  border: solid 1px gray;
+  width: 25%;
+  margin: 0 auto;
+
+ 
+
+  fieldset{
+
+    border: none;
+    width: 80%;
+    margin: 0 auto;
+    padding: 5px;
+
+    label{
+      display: block;
+      padding-bottom: 2px;
+    }
+
+    input[type=text], input[type=password], select, textarea{
+      width: 100%;
+      padding: 5px;
+    }
+
+    input[type=text], input[type=password], textarea, input[type=search], select {
+      @include rounded-corners(2px);
+    }
+
+    input[type=text], input[type=password], textarea, select {
+      border-style: solid;
+      border-width: 1px;
+      border-color: gray;
+
+      &:focus{
+        border-color: black;
+        @include highlight(0px,0px,3px,black);
+      }
+    }
+
+    input[type=search]{
+      border: none;
+    }
+
+    input[type=checkbox]{
+      width: 50px;
+      position: relative;
+      transform: scale(1.5);
+    }
+
+    button{
+      position: relative;
+      left: 80%;
+      height: 30px;
+      width: 60px;
+      @include rounded-corners(2px);
+      border: 1px solid gray;
+    }
+
+    .error{
+      div{
+        color: red;
+      }
+      input{
+        border: solid 1px red;
+      }
+    }
+
+  }
+
+}
+
+.close{
+  position: relative;
+  top: 0px;
+  left: 95%;
+  width: 20px;
+  height: 20px;
+}
+
+
+

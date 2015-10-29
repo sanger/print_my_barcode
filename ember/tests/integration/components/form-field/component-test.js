@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
 moduleForComponent('form-field', 'Integration | Component | form field', {
   integration: true,
@@ -26,26 +27,31 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim(), 'template block text');
 });
 
-test('it should output the label and input', function(assert) {
+test("it should output the correct attributes", function(assert) {
 
-  this.render(hbs`{{form-field label='myLabel' type='text' value="some text"}}`);
+  var model = Ember.Object.create({
+    attrA: "a",
+    attrB: "b",
+    attrC: "c",
+    errors: Ember.Object.create({
+      attrC: [ { message: "cant be blank" } ]
+    })
+  });
 
-  assert.equal(this.$('label').text().trim(), "myLabel");
+  this.set('model', model);
+
+  this.set('for', 'attrA');
+  this.render(hbs`{{form-field for=for type='text' model=model}}`);
+  assert.equal(this.$('label').text().trim(), "Attr A");
 
   var input = this.$('input');
   assert.equal(input.attr('type'), "text");
-  assert.equal(input.attr('id'), "myLabel");
-  
-});
+  assert.equal(input.attr('id'), "attrA");
 
-test('it should output the errors', function(assert) {
+  this.set('for', 'attrC');
+  this.render(hbs`{{form-field for=for type='text' model=model}}`);
+  assert.equal(this.$('label').text().trim(), "Attr C");
 
-  var errors = [ { message: "cant be blank" } ];
-  this.set('errors', errors);
-  this.render(hbs`{{form-field label='myLabel' type='text' value="some text" errors=errors}}`);
-
-  console.log(this.$('li').html());
-  
   assert.equal(this.$('.error').length, 1);
-});
 
+});

@@ -1,37 +1,23 @@
-<form {{action 'submit' on='submit' }}>
+<form {{action 'submit' on='submit'}}>
   <fieldset>
       <ul>
+
+        <li><button class="close" {{action 'close'}}>x</button></li>
+
+        {{form-field for="name" type='text' model=model}}
+
+        {{form-field for="pitchLength" type='text' model=model}}
+
+        {{form-field for="printWidth" type='text' model=model}}
+
+        {{form-field for="printLength" type='text' model=model}}
+
+        {{form-field for='feedValue' type='text' model=model}}
+
+        {{form-field for='fineAdjustment' type='text' model=model}}
+        
         <li>
-          <label for='name'>Name</label>
-          {{input value=model.name id='name'}}
-        </li>
-        {{#each model.errors.name as |error|}}
-          <div class="error">
-            {{error.message}}
-          </div>
-        {{/each}}
-        <li>
-          <label for='pitchLength'>Pitch Length</label>
-          {{input value=model.pitchLength id='pitch-length'}}
-        </li>
-        <li>
-          <label for='printWidth'>Print Width</label>
-          {{input value=model.printWidth id='print-width'}}
-        </li>
-        <li>
-         <label for='printLength'>Print Length</label>
-          {{input value=model.printLength id='print-length'}}
-        </li>
-        <li>
-         <label for='feedValue'>Feed Value</label>
-          {{input value=model.feedValue id='feed-value'}}
-        </li>
-        <li>
-          <label for='fineAdjustment'>Fine Adjustment</label>
-          {{input value=model.fineAdjustment id='fine-adjustment'}}
-        </li>
-        <li>
-         <button type="submit">Submit</button>
+         <button type="submit">Add</button>
         </li>
       </ul>
   </fieldset>

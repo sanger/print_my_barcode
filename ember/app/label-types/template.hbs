@@ -1,12 +1,18 @@
-<h3>Label Types</h3>
-<section>
+<section class="box-left">
+  <div>{{link-to 'Add' 'label_types.new'}}</div>
   <ul>
     {{#each model as |item|}}
       <li>
         {{link-to item.name 'label_types.show' item}}
+        {{#if item.id}}
+          {{link-to 'Edit' 'label_types.edit' item}}
+        {{/if}}
       </li>
+
     {{/each}}
   </ul>
 </section>
 
-{{outlet}}
+{{outlet 'form'}}
+
+{{outlet 'show'}}

@@ -18,7 +18,6 @@ test('visiting /label_types', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/label_types');
-    assert.equal(find('h3').text().trim(), "Label Types");
   });
 });
 
@@ -27,7 +26,7 @@ test('Should list all label types', function(assert) {
   visit('/label_types');
 
   andThen(function() {
-    assert.equal(find('a:contains("Label Type")').length, 5);
+    assert.equal(find('ul').find('a:contains("Label Type")').length, 5);
   });
 });
 
@@ -45,7 +44,7 @@ test("Should be able to navigate to a label type page", function(assert) {
   });
 });
 
-test('Should be able visit a label type page', function(assert) {
+test('Should be able to visit a label type page', function(assert) {
   var label_type = server.create('label_type');
   visit('/label_types/' + label_type.id);
 
@@ -54,24 +53,17 @@ test('Should be able visit a label type page', function(assert) {
   });
 });
 
-test('Should be able to visit a new label type', function(assert){
-  visit('label_types/new');
-
-  andThen(function() {
-    assert.equal(find('h4').text(), 'New Label Type');
-  });
-});
-
 test('Should be able to create a new label type', function(assert){
-  visit('label_types/new');
+  visit('label_types');
+  click('a:contains("Add")');
 
   andThen(function() {
     fillIn(find('input#name'), 'Label Type 1');
-    fillIn(find('input#pitch-length'), "0110");
-    fillIn(find('input#print-width'), "0920");
-    fillIn(find('input#print-length'), "0080");
-    fillIn(find('input#feed-value'), "08");
-    fillIn(find('input#fine-adjustment'), "004");
+    fillIn(find('input#pitchLength'), "0110");
+    fillIn(find('input#printWidth'), "0920");
+    fillIn(find('input#printLength'), "0080");
+    fillIn(find('input#feedValue'), "08");
+    fillIn(find('input#fineAdjustment'), "004");
     click('button[type=submit]');
 
     andThen(function() {
@@ -94,11 +86,11 @@ test('Should return an error if the label type has incorrect attributes', functi
   visit('label_types/new');
 
   andThen(function() {
-    fillIn(find('input#pitch-length'), "0110");
-    fillIn(find('input#print-width'), "0920");
-    fillIn(find('input#print-length'), "0080");
-    fillIn(find('input#feed-value'), "08");
-    fillIn(find('input#fine-adjustment'), "004");
+    fillIn(find('input#pitchLength'), "0110");
+    fillIn(find('input#printWidth'), "0920");
+    fillIn(find('input#printLength'), "0080");
+    fillIn(find('input#feedValue'), "08");
+    fillIn(find('input#fineAdjustment'), "004");
     click('button[type=submit]');
 
     andThen(function() {

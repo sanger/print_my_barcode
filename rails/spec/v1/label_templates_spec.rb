@@ -6,7 +6,7 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
     label_templates = create_list(:label_template, 5)
     get v1_label_templates_path
     expect(response).to be_success
-    expect(ActiveSupport::JSON.decode(response.body)["label_templates"].length).to eq(label_templates.length)
+    expect(JSON.parse(response.body)["label_templates"].length).to eq(label_templates.length)
   end
 
   it "should allow retrieval of information about a particular label template" do
