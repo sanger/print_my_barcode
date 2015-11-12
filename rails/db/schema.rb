@@ -63,10 +63,9 @@ ActiveRecord::Schema.define(version: 20151028142416) do
   add_index "sections", ["label_template_id"], name: "index_sections_on_label_template_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "login"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

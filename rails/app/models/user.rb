@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 
-  has_secure_password
+  validates :login, presence: true, uniqueness: true
 
-  validates :username, presence: true, uniqueness: true
+  def self.authenticate(username, password)
+    exists?(login: username) && Ldap.authenticate(username, password)
+  end
 end
