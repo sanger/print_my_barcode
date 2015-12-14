@@ -12,8 +12,8 @@ module Commands
     # aaa: Character string number (000 - 199)
     # bbbb: Print origin of format of X-coordinate
     # cccc: Print origin of Y-coordinate
-    # d: Character horizontal magnification
-    # e: Character vertical magnification
+    # d: Character horizontal magnification (Two digit designation enables magnifications in 0.5 units) e.g 05
+    # e: Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1) e.g. 05
     # ff: Type of font mainly G (Helvetica medium)
     # ghh: Fine adjustment of character to character space.
     # g: Increase (+) or decrease (-) character to character space

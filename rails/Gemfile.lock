@@ -40,6 +40,7 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     builder (3.2.2)
+    cups (0.1.10)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     factory_girl (4.5.0)
@@ -131,6 +132,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  cups (~> 0.1.10)
   factory_girl_rails
   net-ldap
   puma

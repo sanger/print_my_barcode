@@ -1,3 +1,5 @@
+# Example: 
+#  LabelType.create(name: "Plate", feed_value: "004", fine_adjustment: "08", pitch_length: "0110", print_width: "0920", print_length: "0080")
 class LabelType < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}

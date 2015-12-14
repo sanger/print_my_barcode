@@ -1,3 +1,6 @@
+# Example:
+#  Barcode.create(field_name: "barcode", x_origin: "0300", y_origin: "0000", barcode_type: "9",
+#  one_module_width: "02", height: "0070")
 class Barcode < Drawing
   store :options, accessors: [:barcode_type, :one_module_width, :height]
 

@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Bitmap, type: :model do
   it "validate format of horizontal_magnification" do
-    expect(build(:bitmap, horizontal_magnification: "11")).to_not be_valid
+    expect(build(:bitmap, horizontal_magnification: "111")).to_not be_valid
     expect(build(:bitmap, horizontal_magnification: "X")).to_not be_valid
   end
 
   it "should validate format of vertical_magnification" do
-    expect(build(:bitmap, vertical_magnification: "11")).to_not be_valid
+    expect(build(:bitmap, vertical_magnification: "111")).to_not be_valid
     expect(build(:bitmap, vertical_magnification: "X")).to_not be_valid
   end
 
