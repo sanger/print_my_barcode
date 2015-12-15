@@ -9,4 +9,11 @@ RSpec.describe Printer, type: :model do
     printer = create(:printer)
     expect(build(:printer, name: printer.name)).to_not be_valid
   end
+
+  it "should have a valid protocol" do
+    printer = create(:printer)
+    expect(printer).to be_LPD
+    printer.update_attribute(:protocol, "IPP")
+    expect(printer.reload).to be_IPP
+  end
 end

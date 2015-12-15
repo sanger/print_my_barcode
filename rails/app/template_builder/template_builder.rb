@@ -34,6 +34,10 @@ class TemplateBuilder
     }
   end
 
+  def valid?
+    label
+  end
+
 private
 
   attr_reader :label_template, :template_attributes
