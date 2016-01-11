@@ -23,13 +23,20 @@ RSpec.describe PrintLabel, type: :model do
     expect(build(:print_label, values: {label: { "label_1": "some text"}})).to_not be_valid
   end
 
-  # it "should print the label if it is valid" do
-    
-  #   print_label = build(:print_label)
+  it "should print the label if it is valid" do
+    print_label = build(:print_label)
+    print_job = PrintJob.build(print_label.printer, build(:template_builder))
+    allow(print_job).to receive(:run).and_return(true)
+    allow(print_label).to receive(:print_job).and_return(print_job)
+    expect(print_label.run).to be_truthy
+  end
 
-  # end
-
-  # it "should not print the label if it is not valid" do
-  # end
+  it "should not print the label if it is not valid" do
+    print_label = build(:print_label)
+    print_job = PrintJob.build(print_label.printer, build(:template_builder))
+    allow(print_job).to receive(:run).and_return(false)
+    allow(print_label).to receive(:print_job).and_return(print_job)
+    expect(print_label.run).to be_falsey
+  end
   
 end

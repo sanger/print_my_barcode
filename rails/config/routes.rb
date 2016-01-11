@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       end
     end
     resources :printers, only: [:index, :show, :create]
+    resources :print_labels, only: [:create]
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

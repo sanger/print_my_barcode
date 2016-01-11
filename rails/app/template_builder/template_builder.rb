@@ -35,7 +35,7 @@ class TemplateBuilder
   end
 
   def valid?
-    label
+    label.present?
   end
 
 private

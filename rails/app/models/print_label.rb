@@ -1,9 +1,10 @@
 class PrintLabel
 
-  include ActiveModel::Model 
+  include ActiveModel::Model
+  include ActiveModel::Serialization
 
   attr_accessor :printer_name, :label_template_id, :values
-  attr_reader :printer, :label_template
+  attr_reader :printer, :label_template, :print_job, :template
 
   validates_presence_of :printer_name, :label_template_id, :values
   validate :check_printer, :check_label_template, :check_values
@@ -12,6 +13,17 @@ class PrintLabel
     super
     @printer = Printer.find_by_name(printer_name)
     @label_template = LabelTemplate.find_by_id(label_template_id)
+    @values = values
+  end
+
+  def run
+    if valid?
+      @template = TemplateBuilder.new(label_template, values)
+      @print_job = PrintJob.build(printer, template)
+      print_job.run
+    else
+      false
+    end
   end
 
 private
