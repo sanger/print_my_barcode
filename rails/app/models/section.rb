@@ -19,4 +19,8 @@ class Section < ActiveRecord::Base
     { "bitmaps_attributes" => Bitmap.permitted_attributes, "barcodes_attributes" => Barcode.permitted_attributes }
   end
 
+  def field_names
+    drawings.pluck(:field_name)
+  end
+
 end

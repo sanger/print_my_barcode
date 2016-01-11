@@ -2,30 +2,27 @@ require "rails_helper"
 
 RSpec.describe TemplateSection, type: :model do |variable|
 
-  let!(:header)         { create(:header_with_drawings) }
-  let(:values)          { header.drawings.pluck(:field_name).to_h_derived }
-  subject               { TemplateSection.new(header, values) }
+  let!(:label_template)         { create(:label_template) }
+  subject                       { TemplateSection.new(label_template.header, label_template.field_names.dummy_values[:header]) }
 
   it "should have the correct type" do
     expect(subject).to be_header
 
-    label = create(:label_with_drawings)
-    expect(TemplateSection.new(label, label.drawings.pluck(:field_name).to_h_derived)).to be_label
+    expect(TemplateSection.new(label_template.label, label_template.field_names.dummy_values[:label])).to be_label
 
-    footer = create(:footer_with_drawings)
-    expect(TemplateSection.new(footer, footer.drawings.pluck(:field_name).to_h_derived)).to be_footer
+    expect(TemplateSection.new(label_template.footer, label_template.field_names.dummy_values[:footer])).to be_footer
   end
 
   it "should have the correct number of formats" do
-    expect(subject.formats.count).to eq(header.drawings.count)
+    expect(subject.formats.count).to eq(label_template.header.drawings.count)
   end
 
   it "should have the correct number of drawings" do
-    expect(subject.drawings.count).to eq(header.drawings.count)
+    expect(subject.drawings.count).to eq(label_template.header.drawings.count)
   end
 
   it "the formats and drawings should be of the correct type and have the correct attributes" do
-    barcode = header.barcodes.first
+    barcode = label_template.header.barcodes.first
     format = subject.formats.find { |d| d.id == barcode.padded_placeholder_id }
     expect(format).to be_xb
     expect(format.x_origin).to eq(barcode.x_origin)
@@ -33,9 +30,9 @@ RSpec.describe TemplateSection, type: :model do |variable|
 
     drawing = subject.drawings.find { |d| d.id == barcode.padded_placeholder_id }
     expect(drawing).to be_rb
-    expect(drawing.value).to eq(values[barcode.field_name])
+    expect(drawing.value).to eq(label_template.field_names.dummy_values[:header][barcode.field_name])
 
-    bitmap = header.bitmaps.first
+    bitmap = label_template.header.bitmaps.first
     format = subject.formats.find { |d| d.id == bitmap.padded_placeholder_id }
     expect(format).to be_pc
     expect(format.x_origin).to eq(bitmap.x_origin)
@@ -43,7 +40,7 @@ RSpec.describe TemplateSection, type: :model do |variable|
 
     drawing = subject.drawings.find { |d| d.id == bitmap.padded_placeholder_id }
     expect(drawing).to be_rc
-    expect(drawing.value).to eq(values[bitmap.field_name])
+    expect(drawing.value).to eq(label_template.field_names.dummy_values[:header][bitmap.field_name])
 
   end
 
@@ -52,7 +49,7 @@ RSpec.describe TemplateSection, type: :model do |variable|
   end
 
   it "should produce the correct json" do
-    expect(subject.as_json).to eq(values)
+    expect(subject.as_json).to eq(label_template.field_names.dummy_values[:header])
   end
 
 end

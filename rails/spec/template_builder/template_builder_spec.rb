@@ -1,20 +1,12 @@
 require "rails_helper"
 
 RSpec.describe TemplateBuilder, type: :model do |variable|
-  
-  let!(:header)           { create(:header_with_drawings) }
-  let(:header_values)     { header.drawings.pluck(:field_name).to_h_derived }
-  let!(:label)            { create(:label_with_drawings) }
-  let(:label_values)      { label.drawings.pluck(:field_name).to_h_derived }
-  let!(:footer)           { create(:footer_with_drawings) }
-  let(:footer_values)     { footer.drawings.pluck(:field_name).to_h_derived }
-  let!(:label_template)   { create(:label_template, header: header, label: label, footer: footer) }
+
+  let!(:label_template)  { create(:label_template)}
 
   context "with all sections" do
 
-    let(:values)            { { header: header_values, label: label_values, footer: footer_values} }
-    let!(:label_template)   { create(:label_template, header: header, label: label, footer: footer) }
-    subject                 { TemplateBuilder.new( label_template, values ) }
+    subject                 { TemplateBuilder.new( label_template, label_template.field_names.dummy_values ) }
 
     it "should have the correct feed value" do
       expect(subject.adjust_position.feed_value).to eq(label_template.label_type.feed_value)
@@ -38,16 +30,13 @@ RSpec.describe TemplateBuilder, type: :model do |variable|
 
     it "should create the appropriate sections" do
       expect(subject.header).to be_header
-      expect(subject.header.section).to eq(header)
-      expect(subject.header.values).to eq(header_values)
+      expect(subject.header.values).to eq(label_template.field_names.dummy_values[:header])
 
       expect(subject.label).to be_label
-      expect(subject.label.section).to eq(label)
-      expect(subject.label.values).to eq(label_values)
+      expect(subject.label.values).to eq(label_template.field_names.dummy_values[:label])
 
       expect(subject.footer).to be_footer
-      expect(subject.footer.section).to eq(footer)
-      expect(subject.footer.values).to eq(footer_values)
+      expect(subject.footer.values).to eq(label_template.field_names.dummy_values[:footer])
     end
 
     it "commands list should be correct" do
@@ -55,21 +44,20 @@ RSpec.describe TemplateBuilder, type: :model do |variable|
     end
 
     it "should produce the correct json" do
-      expect(subject.as_json).to eq({ header: header_values, label: label_values, footer: footer_values})
+      expect(subject.as_json).to eq({ header: label_template.field_names.dummy_values[:header], label: label_template.field_names.dummy_values[:label], footer: label_template.field_names.dummy_values[:footer]})
     end
 
   end
 
   context "with a section missing" do
-    let(:values)            { { label: label_values, footer: footer_values} }
-    subject                 { TemplateBuilder.new( label_template, values ) }
+    subject                 { TemplateBuilder.new( label_template, label_template.field_names.dummy_values.except(:header) ) }
 
     it "should not create the missing section" do
       expect(subject.header).to be_nil
     end
 
     it "should produce the correct json" do
-      expect(subject.as_json).to eq({ header: nil, label: label_values, footer: footer_values})
+      expect(subject.as_json).to eq({ header: nil, label: label_template.field_names.dummy_values[:label], footer: label_template.field_names.dummy_values[:footer]})
     end
   end
 

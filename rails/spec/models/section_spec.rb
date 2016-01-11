@@ -26,4 +26,10 @@ RSpec.describe Section, type: :model do
     expect(Section.find_by_type(:header)).to eq(header)
   end
 
+  it "#field_names should return a list of field names with type of section" do
+    barcodes = create_list(:barcode, 3)
+    header = create(:header, barcodes: barcodes)
+    expect(header.field_names).to eq( barcodes.map { |barcode| barcode.field_name} )
+  end
+
 end

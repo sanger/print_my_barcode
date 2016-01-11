@@ -23,6 +23,13 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     expect(label_template.sections.count).to eq(3)
   end
 
+  it "should be able to extract field names" do
+    label_template = create(:label_template)
+    expect(label_template.field_names.header).to eq(label_template.header.field_names)
+    expect(label_template.field_names.label).to eq(label_template.label.field_names)
+    expect(label_template.field_names.footer).to eq(label_template.footer.field_names)
+  end
+
   context "permitted attributes" do
 
     let!(:params) { label_template_params }

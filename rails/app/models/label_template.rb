@@ -12,9 +12,16 @@ class LabelTemplate < ActiveRecord::Base
 
   accepts_nested_attributes_for :header, :label, :footer
 
-
   def sections
     Section.where(label_template: self)
+  end
+
+  def field_names
+    LabelFields.new do |lf|
+      sections.each do |section|
+        lf.add(section.type.downcase, section.field_names)
+      end
+    end
   end
 
   def self.permitted_attributes
