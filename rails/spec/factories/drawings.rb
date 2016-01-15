@@ -8,6 +8,8 @@ FactoryGirl.define do
       barcode_type "7"
       one_module_width "09"
       height "0170"
+      rotational_angle "1"
+      one_cell_width "03"
       sequence(:field_name) {|n| "barcode_#{n}" }
     end
 

@@ -20,7 +20,7 @@ RSpec.describe PrintLabel, type: :model do
   it "should have some values" do
     expect(build(:print_label, label_template_id: label_template.id, values: label_template.field_names.dummy_values)).to be_valid
     expect(build(:print_label, values: nil)).to_not be_valid
-    expect(build(:print_label, values: {label: { "label_1": "some text"}})).to_not be_valid
+    expect(build(:print_label, values: {labels: [{ "label_1": "some text"}]})).to_not be_valid
   end
 
   it "should print the label if it is valid" do

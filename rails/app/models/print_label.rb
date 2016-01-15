@@ -38,8 +38,10 @@ private
 
   def check_values
     if label_template && values
-      unless values[:label].keys == label_template.field_names.label
-        errors.add(:base, "The label does not contain the required fields")
+      values[:labels].each do |label|
+        unless label.keys == label_template.field_names.label
+          errors.add(:base, "The label does not contain the required fields")
+        end
       end
     end
   end

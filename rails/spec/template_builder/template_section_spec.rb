@@ -3,14 +3,14 @@ require "rails_helper"
 RSpec.describe TemplateSection, type: :model do |variable|
 
   let!(:label_template)         { create(:label_template) }
-  subject                       { TemplateSection.new(label_template.header, label_template.field_names.dummy_values[:header]) }
+  subject                       { TemplateSection.new(label_template.header, label_template.field_names.dummy_values[:headers].first) }
 
   it "should have the correct type" do
     expect(subject).to be_header
 
-    expect(TemplateSection.new(label_template.label, label_template.field_names.dummy_values[:label])).to be_label
+    expect(TemplateSection.new(label_template.label, label_template.field_names.dummy_values[:labels].first)).to be_label
 
-    expect(TemplateSection.new(label_template.footer, label_template.field_names.dummy_values[:footer])).to be_footer
+    expect(TemplateSection.new(label_template.footer, label_template.field_names.dummy_values[:footers].first)).to be_footer
   end
 
   it "should have the correct number of formats" do
@@ -30,7 +30,7 @@ RSpec.describe TemplateSection, type: :model do |variable|
 
     drawing = subject.drawings.find { |d| d.id == barcode.padded_placeholder_id }
     expect(drawing).to be_rb
-    expect(drawing.value).to eq(label_template.field_names.dummy_values[:header][barcode.field_name])
+    expect(drawing.value).to eq(label_template.field_names.dummy_values[:headers].first[barcode.field_name])
 
     bitmap = label_template.header.bitmaps.first
     format = subject.formats.find { |d| d.id == bitmap.padded_placeholder_id }
@@ -40,7 +40,7 @@ RSpec.describe TemplateSection, type: :model do |variable|
 
     drawing = subject.drawings.find { |d| d.id == bitmap.padded_placeholder_id }
     expect(drawing).to be_rc
-    expect(drawing.value).to eq(label_template.field_names.dummy_values[:header][bitmap.field_name])
+    expect(drawing.value).to eq(label_template.field_names.dummy_values[:headers].first[bitmap.field_name])
 
   end
 
@@ -49,7 +49,7 @@ RSpec.describe TemplateSection, type: :model do |variable|
   end
 
   it "should produce the correct json" do
-    expect(subject.as_json).to eq(label_template.field_names.dummy_values[:header])
+    expect(subject.as_json).to eq(label_template.field_names.dummy_values[:headers].first)
   end
 
 end

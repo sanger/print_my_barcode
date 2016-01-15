@@ -3,9 +3,9 @@ class TemplateBuilder
   include Commands::Outputter
   include ActiveModel::Serializers::JSON
 
-  attr_reader :header, :label, :footer
+  attr_reader :headers, :labels, :footers
 
-  set_commands_list :set_label_size, :adjust_print_density, :adjust_position, "T", :header, :label, :footer
+  set_commands_list :set_label_size, :adjust_print_density, :adjust_position, "T", :headers, :labels, :footers
 
   def initialize(label_template, values)
     @label_template = label_template
@@ -28,14 +28,50 @@ class TemplateBuilder
 
   def as_json(options = {})
     {
-      header: header.as_json,
-      label: label.as_json,
-      footer: footer.as_json
+      headers: headers.as_json,
+      labels: labels.as_json,
+      footers: footers.as_json
     }
   end
 
   def valid?
-    label.present?
+    labels.present?
+  end
+
+  class Sections
+
+    include ActiveModel::Serializers::JSON
+    include Enumerable
+
+    attr_reader :section_type, :sections
+
+    def initialize(section_type, values)
+      @section_type = section_type
+      @sections = create_sections(values)
+    end
+
+    def as_json
+      sections.collect(&:as_json)
+    end
+
+    def each(&block)
+      sections.each(&block)
+    end
+
+    def output
+      sections.collect { |c| c.output }.reduce(:<<)
+    end
+
+  private
+
+    def create_sections(values)
+      [].tap do |s|
+        values.each do |v|
+          s << TemplateSection.new(section_type, v)
+        end
+      end
+    end
+    
   end
 
 private
@@ -44,7 +80,7 @@ private
 
   def create_sections(values)
     values.each do |k, v|
-      set_instance_variable(k, TemplateSection.new(label_template.sections.find_by_type(k), v))
+      set_instance_variable(k, TemplateBuilder::Sections.new(label_template.sections.find_by_type(k.singularize), v))
     end
   end
 

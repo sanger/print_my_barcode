@@ -29,35 +29,42 @@ RSpec.describe TemplateBuilder, type: :model do |variable|
     end
 
     it "should create the appropriate sections" do
-      expect(subject.header).to be_header
-      expect(subject.header.values).to eq(label_template.field_names.dummy_values[:header])
+      subject.headers.each_with_index do |header, i|
+        expect(header).to be_header
+        expect(header.values).to eq(label_template.field_names.dummy_values[:headers][i])
+      end
 
-      expect(subject.label).to be_label
-      expect(subject.label.values).to eq(label_template.field_names.dummy_values[:label])
+      subject.labels.each_with_index do |label, i|
+        expect(label).to be_label
+        expect(label.values).to eq(label_template.field_names.dummy_values[:labels][i])
+      end
 
-      expect(subject.footer).to be_footer
-      expect(subject.footer.values).to eq(label_template.field_names.dummy_values[:footer])
+      subject.footers.each_with_index do |footer, i|
+        expect(footer).to be_footer
+        expect(footer.values).to eq(label_template.field_names.dummy_values[:footers][i])
+      end
+
     end
 
     it "commands list should be correct" do
-      expect(subject.commands_list).to eq([:set_label_size, :adjust_print_density, :adjust_position, "T", :header, :label, :footer])
+      expect(subject.commands_list).to eq([:set_label_size, :adjust_print_density, :adjust_position, "T", :headers, :labels, :footers])
     end
 
     it "should produce the correct json" do
-      expect(subject.as_json).to eq({ header: label_template.field_names.dummy_values[:header], label: label_template.field_names.dummy_values[:label], footer: label_template.field_names.dummy_values[:footer]})
+      expect(subject.as_json).to eq( { headers: label_template.field_names.dummy_values[:headers], labels: label_template.field_names.dummy_values[:labels], footers: label_template.field_names.dummy_values[:footers]})
     end
 
   end
 
   context "with a section missing" do
-    subject                 { TemplateBuilder.new( label_template, label_template.field_names.dummy_values.except(:header) ) }
+    subject                 { TemplateBuilder.new( label_template, label_template.field_names.dummy_values.except(:headers) ) }
 
     it "should not create the missing section" do
-      expect(subject.header).to be_nil
+      expect(subject.headers).to be_nil
     end
 
     it "should produce the correct json" do
-      expect(subject.as_json).to eq({ header: nil, label: label_template.field_names.dummy_values[:label], footer: label_template.field_names.dummy_values[:footer]})
+      expect(subject.as_json).to eq({ headers: nil, labels: label_template.field_names.dummy_values[:labels], footers: label_template.field_names.dummy_values[:footers]})
     end
   end
 

@@ -152,6 +152,8 @@ RSpec.describe "Commands", type: :model do |variable|
     let(:command) { Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000")}
     let(:command_with_options) { Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000", 
       barcode_type: "9", one_module_width: "01", height: "0100")}
+    let(:command_with_2d_options) { Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000", 
+      barcode_type: "Q", one_cell_width: "50", rotational_angle: "3")}
 
     it "should have an appropriate prefix" do
       expect(command.prefix).to eq("XB")
@@ -161,6 +163,7 @@ RSpec.describe "Commands", type: :model do |variable|
     it "should have appropriate control codes" do
       expect(command.control_codes).to eq("0300,0000,5,3,02,0,0070,+0000000000,002,0,00")
       expect(command_with_options.control_codes).to eq("0300,0000,9,3,01,0,0100,+0000000000,002,0,00")
+      expect(command_with_2d_options.control_codes).to eq("0300,0000,Q,20,50,05,3")
     end
 
     it "should have the id in the formatting" do

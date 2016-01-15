@@ -27,7 +27,11 @@ RSpec.describe LabelFields, type: :model do |variable|
   end
 
   it "should be able to create some dummy values" do
-    expect(label_fields.dummy_values).to eq({ header: {header_text_1: "header_text_1", header_text_2: "header_text_2"}, label: {label_text_1: "label_text_1", label_text_2: "label_text_2"}, footer: {footer_text_1: "footer_text_1", footer_text_2: "footer_text_2"} }.with_indifferent_access)
+    expect(label_fields.dummy_values).to eq({ 
+      headers: [{header_text_1: "header_text_1", header_text_2: "header_text_2"}, {header_text_1: "header_text_1", header_text_2: "header_text_2"}], 
+      labels: [{label_text_1: "label_text_1", label_text_2: "label_text_2"}, {label_text_1: "label_text_1", label_text_2: "label_text_2"}], 
+      footers: [{footer_text_1: "footer_text_1", footer_text_2: "footer_text_2"}, {footer_text_1: "footer_text_1", footer_text_2: "footer_text_2"}] 
+      }.with_indifferent_access)
   end
 
 end

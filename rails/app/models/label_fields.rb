@@ -14,7 +14,8 @@ class LabelFields
 
   def dummy_values
     SECTIONS.inject({}) do |result, section|
-      result[section] = Hash[instance_variable_get("@#{section.to_s}").collect { |v| [v,v]}]
+      value = Hash[instance_variable_get("@#{section.to_s}").collect { |v| [v,v]}]
+      result[section.to_s.pluralize] = [value, value]
       result
     end.with_indifferent_access
   end
