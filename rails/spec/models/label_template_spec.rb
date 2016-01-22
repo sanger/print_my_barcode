@@ -15,19 +15,16 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     expect(build(:label_template, label_type: nil)).to_not be_valid
   end
 
-  it "should have a header, footer and label" do
+  it "should have labels" do
     label_template = build(:label_template)
-    expect(label_template.header).to_not be_nil
-    expect(label_template.footer).to_not be_nil
-    expect(label_template.label).to_not be_nil
-    expect(label_template.sections.count).to eq(3)
+    expect(label_template.labels).to_not be_empty
   end
 
   it "should be able to extract field names" do
     label_template = create(:label_template)
-    expect(label_template.field_names.header).to eq(label_template.header.field_names)
-    expect(label_template.field_names.label).to eq(label_template.label.field_names)
-    expect(label_template.field_names.footer).to eq(label_template.footer.field_names)
+    label_template.labels.each do |label|
+      expect(label_template.field_names[label.name]).to eq(label.field_names)
+    end
   end
 
   context "permitted attributes" do
@@ -39,28 +36,20 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
       expect(permitted[:label_type_id]).not_to be_nil
     end
 
-    it "header_attributes should be permitted" do
-      expect(permitted[:header_attributes]).not_to be_nil
-    end
-
     it "label_attributes should be permitted" do
-      expect(permitted[:label_attributes]).not_to be_nil
-    end
-
-    it "footer_attributes should be permitted" do
-      expect(permitted[:footer_attributes]).not_to be_nil
+      expect(permitted[:labels_attributes]).not_to be_nil
     end
 
     it "barcodes_attributes should be permitted" do
-      expect(permitted[:header_attributes][:barcodes_attributes]).not_to be_nil
+      expect(permitted[:labels_attributes].first[:barcodes_attributes]).not_to be_nil
     end
 
     it "bitmaps_attributes should be permitted" do
-      expect(permitted[:label_attributes][:bitmaps_attributes]).not_to be_nil
+      expect(permitted[:labels_attributes].first[:bitmaps_attributes]).not_to be_nil
     end
 
     it "bitmap attributes should be permitted" do
-      bitmap = permitted[:label_attributes][:bitmaps_attributes].first
+      bitmap = permitted[:labels_attributes].first[:bitmaps_attributes].first
       expect(bitmap[:horizontal_magnification]).not_to be_nil
       expect(bitmap[:vertical_magnification]).not_to be_nil
       expect(bitmap[:font]).not_to be_nil
@@ -72,7 +61,7 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     end
 
     it "barcode attributes should be permitted" do
-      bitmap = permitted[:label_attributes][:barcodes_attributes].first
+      bitmap = permitted[:labels_attributes].first[:barcodes_attributes].first
       expect(bitmap[:barcode_type]).not_to be_nil
       expect(bitmap[:one_module_width]).not_to be_nil
       expect(bitmap[:height]).not_to be_nil

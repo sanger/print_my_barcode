@@ -28,11 +28,11 @@ RSpec.describe Barcode, type: :model do
   end
 
   it "should assign a placeholder id if there is a section" do
-    section = create(:section)
+    label = create(:label)
 
-    create_list(:bitmap, 2, section: section)
-    expect(create(:barcode, section: section).placeholder_id).to eq(1)
-    expect(create(:barcode, section: section).placeholder_id).to eq(2)
+    create_list(:bitmap, 2, label: label)
+    expect(create(:barcode, label: label).placeholder_id).to eq(1)
+    expect(create(:barcode, label: label).placeholder_id).to eq(2)
   end
 
   it "should pad the placeholder_id" do

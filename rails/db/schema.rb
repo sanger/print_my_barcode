@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215103838) do
+ActiveRecord::Schema.define(version: 20150925101550) do
 
   create_table "drawings", force: :cascade do |t|
     t.string   "x_origin"
@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(version: 20151215103838) do
     t.string   "field_name"
     t.integer  "placeholder_id"
     t.text     "options"
-    t.integer  "section_id"
+    t.integer  "label_id"
     t.string   "type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
-  add_index "drawings", ["section_id"], name: "index_drawings_on_section_id"
+  add_index "drawings", ["label_id"], name: "index_drawings_on_label_id"
 
   create_table "label_templates", force: :cascade do |t|
     t.string   "name"
@@ -47,26 +47,20 @@ ActiveRecord::Schema.define(version: 20151215103838) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "printers", force: :cascade do |t|
+  create_table "labels", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "protocol",   default: 0
-  end
-
-  create_table "sections", force: :cascade do |t|
-    t.string   "type"
     t.integer  "label_template_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
 
-  add_index "sections", ["label_template_id"], name: "index_sections_on_label_template_id"
+  add_index "labels", ["label_template_id"], name: "index_labels_on_label_template_id"
 
-  create_table "users", force: :cascade do |t|
-    t.string   "login"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "printers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "protocol",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

@@ -1,3 +1,0 @@
-class Footer < Section
-  
-end

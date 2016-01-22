@@ -19,7 +19,7 @@ class Barcode < Drawing
 private
   
   def add_placeholder_id
-    return unless section
-    self.placeholder_id = section.barcodes.count+1
+    return unless label
+    self.placeholder_id = label.barcodes.count+1
   end
 end

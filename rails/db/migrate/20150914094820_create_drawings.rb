@@ -6,7 +6,7 @@ class CreateDrawings < ActiveRecord::Migration
       t.string :field_name
       t.integer :placeholder_id
       t.text :options
-      t.references :section, index: true, foreign_key: true
+      t.references :label, index: true, foreign_key: true
       t.string :type
 
       t.timestamps null: false

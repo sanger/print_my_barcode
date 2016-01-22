@@ -6,21 +6,21 @@ class LabelTemplate < ActiveRecord::Base
 
   validates :label_type, existence: true
 
-  has_one :header
-  has_one :footer
-  has_one :label
+  has_many :labels
 
-  accepts_nested_attributes_for :header, :label, :footer
-
-  def sections
-    Section.where(label_template: self)
-  end
+  accepts_nested_attributes_for :labels
 
   def field_names
-    LabelFields.new do |lf|
-      sections.each do |section|
-        lf.add(section.type.downcase, section.field_names)
-      end
+    label_fields.to_h
+  end
+
+  def dummy_values
+    label_fields.dummy_values
+  end
+
+  def label_fields
+    @label_fields ||= LabelFields.new do |lf|
+      labels.each { |label| lf.add(label) }
     end
   end
 
@@ -28,9 +28,7 @@ class LabelTemplate < ActiveRecord::Base
     [ 
       "name",
       "label_type_id",
-      "header_attributes" => Section.permitted_attributes, 
-      "label_attributes" => Section.permitted_attributes, 
-      "footer_attributes" => Section.permitted_attributes
+      "labels_attributes" => Label.permitted_attributes, 
     ]
   end
 

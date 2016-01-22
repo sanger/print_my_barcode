@@ -17,7 +17,7 @@ class Bitmap < Drawing
 private
   
   def add_placeholder_id
-    return unless section
-    self.placeholder_id = section.bitmaps.count+1
+    return unless label
+    self.placeholder_id = label.bitmaps.count+1
   end
 end

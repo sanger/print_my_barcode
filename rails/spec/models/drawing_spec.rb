@@ -24,9 +24,9 @@ RSpec.describe Drawing, type: :model do
   it "should assign a paceholder_id if there is a section" do
     expect(create(:drawing).placeholder_id).to be_nil
     
-    section = create(:section)
-    expect(create(:drawing, section: section).placeholder_id).to eq(1)
-    expect(create(:drawing, section: section).placeholder_id).to eq(2)
+    label = create(:label)
+    expect(create(:drawing, label: label).placeholder_id).to eq(1)
+    expect(create(:drawing, label: label).placeholder_id).to eq(2)
   end
 
   it "should pad the placeholder_id" do

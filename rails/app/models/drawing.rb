@@ -4,7 +4,7 @@ class Drawing < ActiveRecord::Base
 
   before_create :add_placeholder_id
 
-  belongs_to :section
+  belongs_to :label
 
   validates_presence_of :field_name
 
@@ -35,8 +35,8 @@ class Drawing < ActiveRecord::Base
 private
   
   def add_placeholder_id
-    return unless section
-    self.placeholder_id = section.drawings.count+1
+    return unless label
+    self.placeholder_id = label.drawings.count+1
   end
 
   def pad_placeholder(n)
