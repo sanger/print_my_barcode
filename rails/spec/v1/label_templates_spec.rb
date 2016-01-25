@@ -17,12 +17,10 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
     expect(json["label_type"]).to eq(label_template.label_type.as_json)
     expect(json["name"]).to eq(label_template.name)
 
-    expect(json["header"].length).to eq(2)
-    expect(json["label"].length).to eq(2)
-    expect(json["footer"].length).to eq(2)
-
-    expect(json["header"]["barcodes"].length).to eq(label_template.header.barcodes.count)
-    expect(json["header"]["bitmaps"].length).to eq(label_template.header.barcodes.count)
+    expect(json["labels"].length).to eq(label_template.labels.count)
+    label = json["labels"].first
+    expect(label["barcodes"].length).to eq(label_template.labels.find_by_name(label["name"]).barcodes.count)
+    expect(label["bitmaps"].length).to eq(label_template.labels.find_by_name(label["name"]).barcodes.count)
 
   end
 
@@ -35,20 +33,21 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
     label_template = LabelTemplate.first
     expect(label_template.name).to eq(params[:label_template][:name])
     expect(label_template.label_type_id).to eq(params[:label_template][:label_type_id])
-    expect(label_template.header).to_not be_nil
-    expect(label_template.label).to_not be_nil
-    expect(label_template.footer).to_not be_nil
-    expect(label_template.header.barcodes.count).to eq(params[:label_template][:header_attributes][:barcodes_attributes].length)
-    expect(label_template.footer.bitmaps.count).to eq(params[:label_template][:footer_attributes][:bitmaps_attributes].length)
+    expect(label_template.labels).to_not be_empty
+    expect(label_template.labels.count).to eq(params[:label_template][:labels_attributes].length)
+    expect(label_template.labels.first.barcodes.count).to eq(params[:label_template][:labels_attributes].first[:barcodes_attributes].length)
+    expect(label_template.labels.first.bitmaps.count).to eq(params[:label_template][:labels_attributes].first[:bitmaps_attributes].length)
   end
 
-  it "should prevent creation of a new label template with invalid attributes" do
+  it "should prevent creation of a new label template with invalid label type" do
     expect {
       post v1_label_templates_path, label_template_params_with_invalid_label_type
       }.to_not change(LabelTemplate, :count)
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
+  end
 
+  it "should prevent creation of a new label template with invalid association" do
     expect {
       post v1_label_templates_path, label_template_params_with_invalid_association
       }.to_not change(LabelTemplate, :count)
@@ -71,20 +70,4 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
   end
 
-  it "should print a label template with values" do
-    label_template = create(:label_template)
-    post print_v1_label_template_path(label_template), print: label_template.field_names.dummy_values
-    expect(response).to be_success
-    json = ActiveSupport::JSON.decode(response.body)
-    expect(json["header"]).to eq(label_template.field_names.dummy_values[:header])
-    expect(json["label"]).to eq(label_template.field_names.dummy_values[:label])
-    expect(json["footer"]).to eq(label_template.field_names.dummy_values[:footer])
-
-    post print_v1_label_template_path(label_template), print: label_template.field_names.dummy_values.except(:header)
-    expect(response).to be_success
-    json = ActiveSupport::JSON.decode(response.body)
-    expect(json["header"]).to be_nil
-    expect(json["label"]).to eq(label_template.field_names.dummy_values[:label])
-    expect(json["footer"]).to eq(label_template.field_names.dummy_values[:footer])
-  end
 end

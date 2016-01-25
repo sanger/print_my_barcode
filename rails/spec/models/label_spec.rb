@@ -30,9 +30,12 @@ RSpec.describe Label, type: :model do
     expect(build(:label, name: nil)).to_not be_valid
   end
 
-  it "label should not be valid without a unique name" do
-    label = create(:label)
-    expect(build(:label, name: label.name)).to_not be_valid
+  it "label should be unique for a particular label template" do
+    label_template_1 = create(:label_template)
+    label_template_2 = create(:label_template)
+    label = create(:label, label_template: label_template_1)
+    expect(build(:label, label_template: label_template_1, name: label.name)).to_not be_valid
+    expect(build(:label, label_template: label_template_2, name: label.name)).to be_valid
   end
 
   it "label should only be valid in a particular format" do

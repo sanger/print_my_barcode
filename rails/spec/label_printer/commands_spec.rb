@@ -24,7 +24,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
     end
 
     it "should produce an appropriate command" do
-      expect(Commands::Base.command).to eq(command.output)
+      expect(LabelPrinter::Commands::Base.command).to eq(command.output)
     end
 
     it "should respond to the appropriate prefix" do
@@ -229,9 +229,9 @@ RSpec.describe LabelPrinter::Commands, type: :model do
 
        def hash_of_commands
         {
-          a: Commands::AdjustPosition.new(feed_value: "100"),
-          b: Commands::BarcodeDraw.new("123", "CDE"),
-          c: Commands::AdjustPrintDensity.new(fine_adjustment: "5")
+          a: LabelPrinter::Commands::AdjustPosition.new(feed_value: "100"),
+          b: LabelPrinter::Commands::BarcodeDraw.new("123", "CDE"),
+          c: LabelPrinter::Commands::AdjustPrintDensity.new(fine_adjustment: "5")
         }
       end
     end

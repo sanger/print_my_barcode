@@ -44,6 +44,7 @@ private
 
   def invalid_label_attributes
     {
+      name: build(:label).name,
       barcodes_attributes: [ attributes_for(:barcode), attributes_for(:barcode) ],
       bitmaps_attributes: [ attributes_for(:bitmap).except(:x_origin), attributes_for(:bitmap) ],
     }

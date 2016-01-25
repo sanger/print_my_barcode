@@ -1,3 +1,0 @@
-class HeaderSerializer < SectionSerializer
-  
-end

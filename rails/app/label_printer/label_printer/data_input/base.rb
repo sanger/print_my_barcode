@@ -28,8 +28,12 @@ module LabelPrinter
         @set_label_size ||= LabelPrinter::Commands::SetLabelSize.new(template_attributes)
       end
 
-      def as_json
+      def as_json(options = {})
         values
+      end
+
+      def valid?
+        labels.any?
       end
 
     private

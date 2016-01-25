@@ -5,7 +5,8 @@ class Label < ActiveRecord::Base
 
   belongs_to :label_template
 
-  validates :name, presence: true, uniqueness: true
+  validates_presence_of :name
+  validates :name, uniqueness: { scope: :label_template_id }
   validates_format_of :name, with: /\A[\w\_]+\z/
   
   accepts_nested_attributes_for :bitmaps, :barcodes

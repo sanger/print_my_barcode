@@ -3,13 +3,9 @@ Rails.application.routes.draw do
   namespace :v1 do
     resources :sessions, only: [:create, :destroy]
     resources :label_types
-    resources :label_templates do
-      member do
-        post 'print'
-      end
-    end
+    resources :label_templates
     resources :printers, only: [:index, :show, :create]
-    resources :print_labels, only: [:create]
+    resources :print_jobs, only: [:create]
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

@@ -18,7 +18,7 @@ module LabelPrinter
         add_commands(values)
       end
 
-      def as_json
+      def as_json(options = {})
         values
       end
 
