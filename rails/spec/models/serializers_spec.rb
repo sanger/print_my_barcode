@@ -26,4 +26,12 @@ RSpec.describe "Serializers", type: :model do |variable|
     expect(json.rotational_angles).to eq(bitmap.rotational_angles)
   end
 
+  it "Print Job should output the correct attributes" do
+    print_job = build(:print_job)
+    json = PrintJobSerializer.new(print_job)
+    expect(json.printer_name).to eq(print_job.printer_name)
+    expect(json.label_template_id).to eq(print_job.label_template_id)
+    expect(json.labels).to eq(print_job.labels)
+  end
+
 end

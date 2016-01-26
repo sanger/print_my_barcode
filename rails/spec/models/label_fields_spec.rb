@@ -30,12 +30,12 @@ RSpec.describe LabelFields, type: :model do
     expect(label_fields.find(:footer)).to eq(["footer_text_1", "footer_text_2"])
   end
 
-  it "should be able to create some dummy values" do
-    expect(label_fields.dummy_values.find(:header)).to eq({header_text_1: "header_text_1", header_text_2: "header_text_2"}.with_indifferent_access)
-    expect(label_fields.dummy_values.find(:label2)).to eq({label_text_3: "label_text_3", label_text_4: "label_text_4"}.with_indifferent_access)
-    expect(label_fields.dummy_values.to_h).to eq({ 
+  it "should be able to create some dummy labels" do
+    expect(label_fields.dummy_labels.find(:header)).to eq({header_text_1: "header_text_1", header_text_2: "header_text_2"}.with_indifferent_access)
+    expect(label_fields.dummy_labels.find(:label2)).to eq({label_text_3: "label_text_3", label_text_4: "label_text_4"}.with_indifferent_access)
+    expect(label_fields.dummy_labels.to_h).to eq({ 
       header: {header_text_1: "header_text_1", header_text_2: "header_text_2"}, 
-      labels: [
+      body: [
                 { label1: {label_text_1: "label_text_1", label_text_2: "label_text_2"},
                   label2: {label_text_3: "label_text_3", label_text_4: "label_text_4"} },
                 { label1: {label_text_1: "label_text_1", label_text_2: "label_text_2"},
@@ -46,7 +46,7 @@ RSpec.describe LabelFields, type: :model do
   end
 
   it "should provide an actual count which is based on the actual number of dummy values" do
-    expect(label_fields.dummy_values.actual_count).to eq(6)
+    expect(label_fields.dummy_labels.actual_count).to eq(6)
   end
 
 end

@@ -22,11 +22,11 @@ class LabelFields
     labels[key.to_sym]
   end
 
-  def dummy_values
-    @dummy_values ||= DummyValues.new(labels)
+  def dummy_labels
+    @dummy_labels ||= DummyLabels.new(labels)
   end
 
-  class DummyValues
+  class DummyLabels
 
     PLACEHOLDERS = [:header, :footer]
 
@@ -47,7 +47,7 @@ class LabelFields
     end
 
     def to_h
-      values.to_h.slice(*PLACEHOLDERS).merge({labels: labels}).with_indifferent_access
+      values.to_h.slice(*PLACEHOLDERS).merge({body: labels}).with_indifferent_access
     end
 
     def actual_count

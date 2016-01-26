@@ -45,7 +45,7 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
   context "Label" do
 
     let!(:label)        { label_template.labels.first }
-    subject             { LabelPrinter::DataInput::Label.new(label, label_template.dummy_values.find(label.name))}
+    subject             { LabelPrinter::DataInput::Label.new(label, label_template.dummy_labels.find(label.name))}
 
     it "should have the correct name" do
       expect(subject.name).to eq(label.name)
@@ -65,7 +65,7 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
 
       drawing = subject.drawings.find(barcode.field_name)
       expect(drawing).to be_rb
-      expect(drawing.value).to eq(label_template.dummy_values.find(label.name)[barcode.field_name])
+      expect(drawing.value).to eq(label_template.dummy_labels.find(label.name)[barcode.field_name])
 
       bitmap = label.bitmaps.first
       format = subject.formats.find(bitmap.field_name)
@@ -75,7 +75,7 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
 
       drawing = subject.drawings.find(bitmap.field_name)
       expect(drawing).to be_rc
-      expect(drawing.value).to eq(label_template.dummy_values.find(label.name)[bitmap.field_name])
+      expect(drawing.value).to eq(label_template.dummy_labels.find(label.name)[bitmap.field_name])
     end
 
     it "should have the correct list of commands" do
@@ -83,14 +83,14 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
     end
 
     it "should produce the correct json" do
-      expect(subject.as_json).to eq(label_template.dummy_values.find(label.name))
+      expect(subject.as_json).to eq(label_template.dummy_labels.find(label.name))
     end
   end
 
   context "DataInput" do
 
     context "with all sections" do
-      subject { LabelPrinter::DataInput.build( label_template, label_template.dummy_values.to_h ) }
+      subject { LabelPrinter::DataInput.build( label_template, label_template.dummy_labels.to_h ) }
 
       it "should have the correct feed value" do
         expect(subject.adjust_position.feed_value).to eq(label_template.label_type.feed_value)
@@ -113,10 +113,10 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       end
 
       it "should have the correct labels" do
-        expect(subject.labels.count).to eq(label_template.dummy_values.actual_count)
+        expect(subject.labels.count).to eq(label_template.dummy_labels.actual_count)
         label_template.labels.each do |label|
           expect(subject.labels.find(label.name)).to_not be_nil
-          expect(subject.labels.find_by(label.name).values).to eq(label_template.dummy_values.find(label.name))
+          expect(subject.labels.find_by(label.name).values).to eq(label_template.dummy_labels.find(label.name))
         end
       end
 
@@ -125,7 +125,7 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       end
 
       it "should produce the correct json" do
-        expect(subject.as_json).to eq(label_template.dummy_values.to_h)
+        expect(subject.as_json).to eq(label_template.dummy_labels.to_h)
       end
 
       it "should produce the correct output" do

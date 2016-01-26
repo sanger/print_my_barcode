@@ -9,18 +9,18 @@ module LabelPrinter
 
       has_subclasses :LPD, :IPP, :TOF
 
-      attr_accessor :printer_name, :label_template_id, :printer, :data
+      attr_accessor :printer_name, :label_template_id, :printer, :labels
       attr_reader :label_template, :data_input
 
-      validates_presence_of :data
-      validate :check_printer, :check_label_template, :check_data
+      validates_presence_of :labels
+      validate :check_printer, :check_label_template, :check_labels
 
       def initialize(attributes = {})
         super
         @printer ||= Printer.find_by_name(printer_name)
         @label_template = LabelTemplate.find_by_id(label_template_id)
-        @data ||= {}
-        @data_input = LabelPrinter::DataInput::Base.new(label_template, data) if valid?
+        @labels ||= {}
+        @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) if valid?
       end
 
       def execute
@@ -41,8 +41,8 @@ module LabelPrinter
         errors.add(:base, "Label template does not exist") unless label_template
       end
 
-      def check_data
-        errors.add(:base, "There should be some data") unless data.any?
+      def check_labels
+        errors.add(:base, "There should be some labels") unless labels.any?
       end
       
     end

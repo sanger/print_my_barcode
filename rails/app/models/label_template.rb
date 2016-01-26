@@ -14,8 +14,8 @@ class LabelTemplate < ActiveRecord::Base
     label_fields.to_h
   end
 
-  def dummy_values
-    label_fields.dummy_values
+  def dummy_labels
+    label_fields.dummy_labels
   end
 
   def label_fields

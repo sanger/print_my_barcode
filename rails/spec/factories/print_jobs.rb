@@ -7,9 +7,9 @@ FactoryGirl.define do
 
     printer_name { create(:printer).name }
     label_template_id { label_template.id }
-    data { label_template.dummy_values.to_h }
+    labels { label_template.dummy_labels.to_h }
 
-    initialize_with { new(printer_name: printer_name, label_template_id: label_template_id, data: data) }
+    initialize_with { new(printer_name: printer_name, label_template_id: label_template_id, labels: labels) }
   end
 
 end
