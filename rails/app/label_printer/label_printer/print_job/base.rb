@@ -1,6 +1,14 @@
 module LabelPrinter
   module PrintJob
 
+    ##
+    # A print job is an ActiveModel object
+    # For a print job to be execute it needs to be valid.
+    # For a print job to be valid it needs to meet the following criteria:
+    # * The printer needs to exist.
+    # * The label template needs to exist.
+    # * It needs to have some labels.
+    # If a print job is valid a DataInput object is created.
     class Base
 
       include ActiveModel::Model
@@ -23,10 +31,14 @@ module LabelPrinter
         @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) if valid?
       end
 
+      ##
+      # A base object should never send a job to a printer, because there won't be one!
       def execute
         valid?
       end
 
+      ##
+      # e.g. <# LabelPrinter::PrintJob::LPD >.type = LPD
       def type
         self.class.to_s.demodulize.capitalize
       end

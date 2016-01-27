@@ -129,11 +129,11 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       end
 
       it "should produce the correct output" do
-        expect(subject.output).to eq( subject.set_label_size.output << 
-                                      subject.adjust_print_density.output <<
-                                      subject.adjust_position.output <<
+        expect(subject.to_s).to eq( subject.set_label_size.to_s << 
+                                      subject.adjust_print_density.to_s <<
+                                      subject.adjust_position.to_s <<
                                       LabelPrinter::Commands::Feed.command <<
-                                      subject.labels.output)
+                                      subject.labels.to_s)
       end
 
     end

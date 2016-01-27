@@ -12,6 +12,8 @@ class Barcode < Drawing
 
   validates_format_of :height, with: /\A\d{4}\z/, allow_blank: true
 
+  ##
+  # e.g. 01
   def padded_placeholder_id
     pad_placeholder(2)
   end

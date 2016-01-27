@@ -20,11 +20,11 @@ RSpec.describe LabelPrinter::Commands, type: :model do
     end
 
     it "should output the line" do
-      expect(command.output).to eq("\u001bPFCC12345\n\u0000")
+      expect(command.to_s).to eq("\u001bPFCC12345\n\u0000")
     end
 
     it "should produce an appropriate command" do
-      expect(LabelPrinter::Commands::Base.command).to eq(command.output)
+      expect(LabelPrinter::Commands::Base.command).to eq(command.to_s)
     end
 
     it "should respond to the appropriate prefix" do
@@ -61,7 +61,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
     end
 
     it "should have an appropriate separator in the output" do
-      expect(command.output).to include(";")
+      expect(command.to_s).to include(";")
 
     end
 
@@ -81,7 +81,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
     end
 
     it "should have an appropriate separator in the output" do
-      expect(command.output).to include(";")
+      expect(command.to_s).to include(";")
 
     end
 
@@ -201,7 +201,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
     end
 
     it "should produce some appropriate output" do
-      expect(command.output).to include(';')
+      expect(command.to_s).to include(';')
     end
     
   end
@@ -269,7 +269,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
       LabelPrinter::Commands::AdjustPosition.command(feed_value: "100") <<
       LabelPrinter::Commands::BarcodeDraw.command("123", "CDE") <<
       LabelPrinter::Commands::AdjustPrintDensity.command(fine_adjustment: "5")
-      expect(subject.output).to eq(output)
+      expect(subject.to_s).to eq(output)
     end
   end
 

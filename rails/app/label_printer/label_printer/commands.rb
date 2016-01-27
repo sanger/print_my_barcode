@@ -72,7 +72,7 @@ module LabelPrinter
       # Create a new drawing command and create the output.
       module ClassMethods
         def command(id, value)
-          new(id, value).output
+          new(id, value).to_s
         end
       end
 
@@ -166,8 +166,8 @@ module LabelPrinter
 
       ##
       # Takes an array of commands produces the output and reduces it into a single string.
-      def output
-        commands.compact.collect { |c| c.output }.reduce(:<<)
+      def to_s
+        commands.compact.collect { |c| c.to_s }.reduce(:<<)
       end
     end
   end

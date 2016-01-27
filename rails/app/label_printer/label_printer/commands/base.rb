@@ -21,9 +21,9 @@ module LabelPrinter
       # Produces the output for a command without the necessity to initialize it.
       def self.command(args = nil)
         if args.nil?
-          new.output
+          new.to_s
         else
-          new(args).output
+          new(args).to_s
         end
       end
 
@@ -44,7 +44,7 @@ module LabelPrinter
       ##
       # The output which is sent to the printer includes formatted command with escape characters.
       # e.g. [ESC]PF;ABCDE12345[LF][NUL]
-      def output
+      def to_s
         "#{ESC}#{formatted}#{LF}#{NUL}"
       end
 

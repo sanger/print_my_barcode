@@ -1,5 +1,12 @@
 module LabelPrinter
   module DataInput
+
+    ##
+    # A DataInput::Label is related to an ActiveRecord Label
+    # It also implements the Commands::Outputter
+    # Each Label is made of formats and drawings which are either barcodes or bitmaps.
+    # The formats and drawings are implemented as a DataInput::List
+
     class Label
 
       include LabelPrinter::Commands::Outputter
@@ -9,6 +16,9 @@ module LabelPrinter
 
       set_commands_list :formats, "C", :drawings, "XS", "C"
 
+      ##
+      # Create a list of formats and drawings
+      # Find each value in the Label table and add it the formats and drawings.
       def initialize(label, values)
         @label = label
         @name = label.name
@@ -18,10 +28,15 @@ module LabelPrinter
         add_commands(values)
       end
 
+      ##
+      # Just return the passed in values.
+      # No nonsens with rejigging the whole thing.
       def as_json(options = {})
         values
       end
 
+      ##
+      # A list of Barcode and Bitmap formats.
       class Formats < List
         def add(item)
           super(item.field_name, if item.barcode?
@@ -32,6 +47,8 @@ module LabelPrinter
         end
       end
 
+      ##
+      # A list of Barcode and Bitmap drawings.
       class Drawings < List
         def add(item, value)
           super(item.field_name, if item.barcode?

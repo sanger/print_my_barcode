@@ -17,3 +17,6 @@
 /tmp
 
 .DS_Store
+
+#ignore docs
+/doc/app

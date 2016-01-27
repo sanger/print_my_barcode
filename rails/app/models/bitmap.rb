@@ -10,6 +10,8 @@ class Bitmap < Drawing
 
   validates_format_of :font, with: /\A[A-W]{1}\z/, allow_blank: true
 
+  ##
+  # e.g. 001
   def padded_placeholder_id
     pad_placeholder(3)
   end
