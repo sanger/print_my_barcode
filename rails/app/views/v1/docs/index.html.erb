@@ -695,7 +695,7 @@
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
       </span><span class="p">}</span><span class="w">
-      </span><span class="s2">"labels"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"labels_attributes"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"List of labels for the label template. Each label will consist of a name, an array of bitmaps and an array of barcodes."</span><span class="w">
         </span><span class="s2">"required"</span><span class="err">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
         </span><span class="s2">"type"</span><span class="err">:</span><span class="w"> </span><span class="s2">"array"</span><span class="w">
@@ -706,7 +706,7 @@
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
             </span><span class="s2">"example"</span><span class="err">:</span><span class="w"> </span><span class="s2">"label_1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"bitmaps"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"bitmaps_attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An array of bitmaps that are part of the label"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="err">array</span><span class="p">,</span><span class="w">
             </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -760,7 +760,7 @@
               </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"barcodes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"barcodes_attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An array of barcodes that are part of the label"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -965,7 +965,12 @@
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"errors"</span><span class="p">:{</span><span class="w">
     </span><span class="nt">"name"</span><span class="p">:[</span><span class="s2">"can't be blank"</span><span class="p">],</span><span class="w">
-    </span><span class="nt">"label_type"</span><span class="p">:[</span><span class="s2">"does not exist"</span><span class="p">]</span><span class="w">
+    </span><span class="nt">"label_type"</span><span class="p">:[</span><span class="s2">"does not exist"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"labels.bitmaps.field_name"</span><span class="p">:[</span><span class="s2">"can't be blank"</span><span class="p">,</span><span class="s2">"is invalid"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"labels.bitmaps.x_origin"</span><span class="p">:[</span><span class="s2">"can't be blank"</span><span class="p">,</span><span class="s2">"is invalid"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"labels.bitmaps.y_origin"</span><span class="p">:[</span><span class="s2">"can't be blank"</span><span class="p">,</span><span class="s2">"is invalid"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"labels.bitmaps"</span><span class="p">:[</span><span class="s2">"is invalid"</span><span class="p">],</span><span class="nt">"name"</span><span class="p">:[</span><span class="s2">"has already been taken"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"labels"</span><span class="p">:[</span><span class="s2">"is invalid"</span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>

@@ -9,17 +9,12 @@ class LabelTemplate < ActiveRecord::Base
 
   accepts_nested_attributes_for :labels
 
+  delegate :dummy_labels, to: :label_fields
+
   ##
   # Returns all of the field names as a hash.
   def field_names
     label_fields.to_h
-  end
-
-  ##
-  # Produces an object with all of the labels populated which can be used for testing e.g.
-  # to produce an output file.
-  def dummy_labels
-    label_fields.dummy_labels
   end
 
   ##

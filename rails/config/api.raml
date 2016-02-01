@@ -267,7 +267,7 @@ version: 1.0
                   "type": "string",
                   "example": 1
                 }
-                "labels": {
+                "labels_attributes": {
                   "description": "List of labels for the label template. Each label will consist of a name, an array of bitmaps and an array of barcodes."
                   "required": false
                   "type": "array"
@@ -278,7 +278,7 @@ version: 1.0
                       "type": "string"
                       "example": "label_1"
                     },
-                    "bitmaps": {
+                    "bitmaps_attributes": {
                       "description": "An array of bitmaps that are part of the label",
                       "type": array,
                       "required": false,
@@ -332,7 +332,7 @@ version: 1.0
                         }
                       }
                     },
-                    "barcodes": {
+                    "barcodes_attributes": {
                       "description": "An array of barcodes that are part of the label",
                       "type": "array",
                       "required": false,
@@ -518,7 +518,12 @@ version: 1.0
               {
                 "errors":{
                   "name":["can't be blank"],
-                  "label_type":["does not exist"]
+                  "label_type":["does not exist"],
+                  "labels.bitmaps.field_name":["can't be blank","is invalid"],
+                  "labels.bitmaps.x_origin":["can't be blank","is invalid"],
+                  "labels.bitmaps.y_origin":["can't be blank","is invalid"],
+                  "labels.bitmaps":["is invalid"],"name":["has already been taken"],
+                  "labels":["is invalid"]
                 }
               }
 /print_jobs:

@@ -28,6 +28,10 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     end
   end
 
+  it "should not be valid unless label is valid" do
+    expect(build(:label_template, labels_attributes: [invalid_label_attributes])).to_not be_valid
+  end
+
   it "should have labels" do
     label_template = build(:label_template)
     expect(label_template.labels).to_not be_empty
