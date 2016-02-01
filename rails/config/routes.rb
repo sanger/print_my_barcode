@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     resources :label_templates
     resources :printers, only: [:index, :show, :create]
     resources :print_jobs, only: [:create]
+
+    get 'docs', to: 'docs#index'
+    root 'docs#index'
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

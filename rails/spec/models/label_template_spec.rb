@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe LabelTemplate, type: :model, helpers: true do
 
+  let!(:label_type) { create(:label_type) }
+
   it "should not be valid without a name" do
     expect(build(:label_template, name: nil)).to_not be_valid
   end
@@ -11,8 +13,19 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     expect(build(:label_template, name: label_template.name)).to_not be_valid
   end
 
-  it "should not be valid without a label_type" do
-    expect(build(:label_template, label_type: nil)).to_not be_valid
+  context "label type" do
+
+    it "should be valid if it exists" do
+      expect(build(:label_template, label_type_id: label_type.id)).to be_valid
+    end
+
+    it "should not be valid if it is blank" do
+      expect(build(:label_template, label_type: nil)).to_not be_valid
+    end
+
+    it "should not be valid if label type id is not a valid label type" do
+      expect(build(:label_template, label_type_id: 100)).to_not be_valid
+    end
   end
 
   it "should have labels" do

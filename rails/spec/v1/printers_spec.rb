@@ -6,7 +6,7 @@ RSpec.describe V1::PrintersController, type: :request do |variable|
     printers = create_list(:printer, 5)
     get v1_printers_path
     expect(response).to be_success
-    expect(ActiveSupport::JSON.decode(response.body)["printers"].length).to eq(printers.length)
+    expect(ActiveSupport::JSON.decode(response.body).length).to eq(printers.length)
   end
 
   it "should allow retrieval of information about a particular printer" do

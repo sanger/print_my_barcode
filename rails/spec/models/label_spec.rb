@@ -38,7 +38,7 @@ RSpec.describe Label, type: :model do
     expect(build(:label, label_template: label_template_2, name: label.name)).to be_valid
   end
 
-  it "label should only be valid in a particular format" do
+  it "name should only be valid in a particular format" do
     expect(build(:label, name: "label_1")).to be_valid
     expect(build(:label, name: "label 1")).to_not be_valid
     expect(build(:label, name: "label-1")).to_not be_valid

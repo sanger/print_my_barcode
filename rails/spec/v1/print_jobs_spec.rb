@@ -9,7 +9,7 @@ RSpec.describe V1::PrintJobsController, type: :request do
     allow_any_instance_of(LabelPrinter::PrintJob::LPD).to receive(:execute).and_return(true)
     post v1_print_jobs_path, {print_job: { printer_name: printer.name, label_template_id: label_template.id, labels: label_template.dummy_labels.to_h}}.to_json, {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json'}
     expect(response).to be_success
-    json = ActiveSupport::JSON.decode(response.body)["print_job"]
+    json = ActiveSupport::JSON.decode(response.body)
     expect(json["printer_name"]).to eq(printer.name)
     expect(json["label_template_id"]).to eq(label_template.id)
     expect(json["labels"]).to eq(label_template.dummy_labels.to_h)
