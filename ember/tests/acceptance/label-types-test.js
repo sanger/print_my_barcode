@@ -22,18 +22,19 @@ test('visiting /label_types', function(assert) {
 });
 
 test('Should list all label types', function(assert) {
-  server.createList('label_type', 5);
+  var label_types = server.createList('label_type', 5);
   visit('/label_types');
 
-  andThen(function() {
-    assert.equal(find('ul').find('a:contains("Label Type")').length, 5);
+  label_types.forEach(function(label_type){
+    andThen(function() {
+      assert.ok(find('td:contains("' + label_type.name + '")'));
+    });
   });
 });
 
 test("Should be able to navigate to a label type page", function(assert) {
   var label_type = server.create('label_type');
-  visit('/label_types');
-  click('a:contains(' + label_type.name + ')');
+  visit('/label_types/' + label_type.id);
 
   andThen(function() {
     assert.ok(find('div:contains("pitch length: ' + label_type.pitchLength + '")'));
@@ -55,7 +56,7 @@ test('Should be able to visit a label type page', function(assert) {
 
 test('Should be able to create a new label type', function(assert){
   visit('label_types');
-  click('a:contains("Add")');
+  click('button:contains("+")');
 
   andThen(function() {
     fillIn(find('input#name'), 'Label Type 1');
@@ -107,7 +108,7 @@ test('Should be able to edit an existing label type', function(assert){
     fillIn(find('input#name'), 'Updated label type');
     click('button[type=submit]');
      andThen(function() {
-        assert.equal(find("a:contains('Updated label type')").length, 1);
+        assert.equal(find("td:contains('Updated label type')").length, 1);
      });
   });
   
