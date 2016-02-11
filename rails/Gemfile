@@ -32,3 +32,7 @@ gem 'puma'
 group :development do
   gem 'raml_ruby', '~> 0.1.1'
 end
+
+group :deployment do
+  gem 'mysql2'
+end
