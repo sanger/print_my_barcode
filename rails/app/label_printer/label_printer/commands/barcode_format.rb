@@ -38,13 +38,13 @@ module LabelPrinter
 
         set_prefix "XB"
 
-        optional_attributes barcode_type: "5", one_module_width: "02", height: "0070", one_cell_width: "01", rotational_angle: "1"
+        optional_attributes barcode_type: "5", type_of_check_digit: "3", one_module_width: "02", height: "0070", one_cell_width: "01", rotational_angle: "1"
 
         def control_codes
             if barcode_type == "Q"
                 "#{x_origin},#{y_origin},#{barcode_type},20,#{one_cell_width},05,#{rotational_angle}"
             else
-                "#{x_origin},#{y_origin},#{barcode_type},3,#{one_module_width},0,#{height},+0000000000,002,0,00"
+                "#{x_origin},#{y_origin},#{barcode_type},#{type_of_check_digit},#{one_module_width},0,#{height},+0000000000,002,0,00"
             end
         end
         
