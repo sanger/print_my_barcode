@@ -27,6 +27,11 @@ RSpec.describe Barcode, type: :model do
     expect(build(:barcode, one_module_width: "XX")).to_not be_valid
   end
 
+  it "should validate format of type of check digit" do
+    expect(build(:barcode, type_of_check_digit: "X")).to_not be_valid
+    expect(build(:barcode, type_of_check_digit: "22")).to_not be_valid
+  end
+
   it "should assign a placeholder id if there is a section" do
     label = create(:label)
 

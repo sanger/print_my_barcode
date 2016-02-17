@@ -1,0 +1,11 @@
+{
+  "label_type":
+  {
+    "name": "CGAP - Thin",
+    "feed_value": "002",
+    "fine_adjustment": "10",
+    "pitch_length": "0110",
+    "print_width": "0850",
+    "print_length": "0070"
+  }
+}

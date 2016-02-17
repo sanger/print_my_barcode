@@ -17,7 +17,7 @@ version: 1.0
               "required": true,
               "properties": {
                 "name":{
-                  "description": "The name of the label",
+                  "description": "The name of the label type",
                   "required": true,
                   "type": "string",
                   "example": "Plate"
@@ -258,7 +258,7 @@ version: 1.0
                 "name": {
                   "description": "The unique name of the Label Template",
                   "required": true,
-                  "type": "string"
+                  "type": "string",
                   "example": "LabWhere"
                 },
                 "label_type_id": {
@@ -266,21 +266,21 @@ version: 1.0
                   "required": true,
                   "type": "string",
                   "example": 1
-                }
+                },
                 "labels_attributes": {
-                  "description": "List of labels for the label template. Each label will consist of a name, an array of bitmaps and an array of barcodes."
-                  "required": false
-                  "type": "array"
+                  "description": "List of labels for the label template. Each label will consist of a name, an array of bitmaps and an array of barcodes.",
+                  "required": false,
+                  "type": "array",
                   "properties" : {
                     "name":{
                       "description": "Label name, which should be unique for the label template",
                       "required": true,
-                      "type": "string"
+                      "type": "string",
                       "example": "label_1"
                     },
                     "bitmaps_attributes": {
                       "description": "An array of bitmaps that are part of the label",
-                      "type": array,
+                      "type": "array",
                       "required": false,
                       "properties": {
                         "field_name": {
@@ -297,7 +297,7 @@ version: 1.0
                         },
                         "y_origin": {
                           "description": "Print origin of Y-coordinate of barcode",
-                          "type": string,
+                          "type": "string",
                           "required": true,
                           "example": "0060"
                         },
@@ -309,7 +309,7 @@ version: 1.0
                         }, 
                         "vertical_magnification":{
                           "description": "Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1)",
-                          "type": string,
+                          "type": "string",
                           "required": false,
                           "example": "05"
                         },
@@ -321,12 +321,12 @@ version: 1.0
                         },
                         "space_adjustment":{
                           "description": "No of spaces between characters (00 - 99)",
-                          "type": string,
+                          "type": "string",
                           "required": false
                         }, 
                         "rotational_angles":{
-                          "description": "Rotational angles of character and character string (mostly 00)"
-                          "type": string,
+                          "description": "Rotational angles of character and character string (mostly 00)",
+                          "type": "string",
                           "required": false,
                           "example": "00"
                         }
@@ -351,18 +351,24 @@ version: 1.0
                         },
                         "y_origin": {
                           "description": "Print origin of Y-coordinate of barcode",
-                          type: string,
-                          required: false,
-                          example: "0060"
+                          "type": "string",
+                          "required": false,
+                          "example": "0060"
                         },
-                        barcode_type: {
-                          description: "A single letter or number indicating the type of barcode e.g. code128, EAN13, 2D",
-                          type: string,
-                          required: false,
-                          example: "Q"
+                        "barcode_type": {
+                          "description": "A single letter or number indicating the type of barcode e.g. code128, EAN13, 2D",
+                          "type": "string",
+                          "required": false,
+                          "example": "Q"
                         },
-                        one_module_width: {
-                          description: "1-module width 0-15 in dots",
+                        "type_of_check_digit": {
+                          "description": "Type of check digit",
+                          "type": "string",
+                          "required": false,
+                          "example": "2"
+                        },
+                        "one_module_width": {
+                          "description": "1-module width 0-15 in dots",
                           "type": "string",
                           "required": false,
                           "example": "06"
