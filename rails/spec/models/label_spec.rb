@@ -45,4 +45,13 @@ RSpec.describe Label, type: :model do
     expect(build(:label, name: "label1*")).to_not be_valid
   end
 
+  it "should destroy all associated records" do
+    label = create(:label_with_drawings)
+    drawing_ids = label.drawings.pluck(:id)
+    label.destroy
+    drawing_ids.each do |drawing_id|
+      expect(Drawing.find_by_id(drawing_id)).to be_nil
+    end
+  end
+
 end

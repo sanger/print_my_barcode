@@ -1,7 +1,7 @@
 class LabelTemplate < ActiveRecord::Base
 
   belongs_to :label_type
-  has_many :labels
+  has_many :labels, dependent: :destroy
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :label_type, existence: true

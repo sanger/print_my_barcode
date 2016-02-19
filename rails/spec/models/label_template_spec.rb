@@ -89,5 +89,14 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
 
   end
 
+  it "should destroy associated records" do
+    label_template = create(:label_template)
+    label_ids = label_template.labels.pluck(:id)
+    label_template.destroy
+    label_ids.each do |label_id|
+      expect(Label.find_by_id(label_id)).to be_nil
+    end
+  end
+
   
 end
