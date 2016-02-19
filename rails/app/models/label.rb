@@ -1,7 +1,7 @@
 class Label < ActiveRecord::Base
 
-  has_many :bitmaps
-  has_many :barcodes
+  has_many :bitmaps, dependent: :destroy
+  has_many :barcodes, dependent: :destroy
 
   belongs_to :label_template
 
