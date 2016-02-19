@@ -17,7 +17,7 @@ version: 1.0
               "required": true,
               "properties": {
                 "name":{
-                  "description": "The name of the label type",
+                  "description": "The unique name name of the label type",
                   "required": true,
                   "type": "string",
                   "example": "Plate"
@@ -26,30 +26,35 @@ version: 1.0
                   "description":  "Feed value to be finely adjusted (000 - 500)",
                   "required": true,
                   "type": "string",
+                  "pattern": "/\A\d{3}\z/"
                   "example": "004"
                 },
                 "fine_adjustment":{
                   "description": "Print density fine adjustment value 00 to 10 (in units of 1 step)",
                   "required": true,
                   "type": "string",
+                  "pattern": "/\A\d{2}\z/",
                   "example": "08"
                 },
                 "pitch_length":{
-                  "description": "Pitch length of the label",
+                  "description": "Pitch length of the label (4 digits)",
                   "required": true,
                   "type": "string",
+                  "pattern": "/\A\d{4}\z/",
                   "example": "0110"
                 }, 
                 "print_width":{
-                  "description": "Effective print width",
+                  "description": "Effective print width (4 digits)",
                   "required": true,
                   "type": "string",
+                  "pattern": "/\A\d{4}\z/",
                   "example": "0920"
                 }, 
                 "print_length":{
-                  "description": "Effective print length",
+                  "description": "Effective print length (4 digits)",
                   "required": true,
                   "type": "string",
+                  "pattern": "/\A\d{4}\z/",
                   "example": "0080"
                 }
               }
@@ -276,6 +281,7 @@ version: 1.0
                       "description": "Label name, which should be unique for the label template",
                       "required": true,
                       "type": "string",
+                      "pattern": "/\A[\w\_]+\z/"
                       "example": "label_1"
                     },
                     "bitmaps_attributes": {
@@ -284,51 +290,65 @@ version: 1.0
                       "required": false,
                       "properties": {
                         "field_name": {
-                          "description": "The unique name of the field",
+                          "description": "The unique name of the field (unique in the context of the label template)",
                           "required": true,
                           "type": "string",
+                          "pattern": "/\A[\w\_]+\z/",
                           "example": "bitmap_1"
                         },
                         "x_origin": {
-                          "description": "Print origin of X-coordinate of barcode",
+                          "description": "Print origin of X-coordinate of barcode (fixed as 4 digits)",
                           "type": "string",
                           "required": true,
+                          "pattern": "/\A\d{4}\z/",
                           "example": "0040"
                         },
                         "y_origin": {
-                          "description": "Print origin of Y-coordinate of barcode",
+                          "description": "Print origin of Y-coordinate of barcode (fixed as 4 digits)",
                           "type": "string",
                           "required": true,
+                          "pattern": "/\A\d{4}\z/",
                           "example": "0060"
                         },
                         "horizontal_magnification":{
                           "description": "Character horizontal magnification (Two digit designation enables magnifications in 0.5 units)",
                           "type": "string",
                           "required": false,
-                          "example": "05"
+                          "pattern": "/\A\d{1,2}\z/"
+                          "example": "05",
+                          "default": "1"
                         }, 
                         "vertical_magnification":{
                           "description": "Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1)",
                           "type": "string",
                           "required": false,
-                          "example": "05"
+                          "pattern": "/\A\d{1,2}\z/",
+                          "example": "05",
+                          "default": "1"
                         },
                         "font":{
                           "description": "Type of font e.g. Helvetica medium",
                           "type": "string",
                           "required": false,
-                          "example": "G"
+                          "format": "/\A[A-W]{1}\z/",
+                          "example": "G",
+                          "default": "G"
                         },
                         "space_adjustment":{
                           "description": "No of spaces between characters (00 - 99)",
                           "type": "string",
-                          "required": false
+                          "format": "/\A\d{2}\z/"
+                          "required": false,
+                          "default": "00",
+                          "example": "00"
                         }, 
                         "rotational_angles":{
                           "description": "Rotational angles of character and character string (mostly 00)",
                           "type": "string",
                           "required": false,
-                          "example": "00"
+                          "format": "/\A\d{2}\z/",
+                          "example": "00",
+                          "default": "00"
                         }
                       }
                     },
@@ -341,55 +361,65 @@ version: 1.0
                           "description": "The unique name of the field",
                           "required": true,
                           "type": "string",
+                          "pattern": "/\A[\w\_]+\z/",
                           "example": "barcode_1"
                         },
                         "x_origin": {
-                          "description": "Print origin of X-coordinate of barcode",
+                          "description": "Print origin of X-coordinate of barcode (fixed as 4 digits)",
                           "type": "string",
                           "required": true,
+                          "pattern": "/\A\d{4}\z/",
                           "example": "0040"
                         },
                         "y_origin": {
-                          "description": "Print origin of Y-coordinate of barcode",
+                          "description": "Print origin of Y-coordinate of barcode (fixed as 4 digits)",
                           "type": "string",
-                          "required": false,
+                          "required": true,
+                          "pattern": "/\A\d{4}\z/",
                           "example": "0060"
                         },
                         "barcode_type": {
-                          "description": "A single letter or number indicating the type of barcode e.g. code128, EAN13, 2D",
+                          "description": "A single letter or number indicating the type of barcode e.g. code128 - 9, EAN13 - 5, 2D - Q",
                           "type": "string",
                           "required": false,
+                          "pattern": "/\A[0-9A-Z]{1}\z/",
+                          "default": "5",
                           "example": "Q"
                         },
                         "type_of_check_digit": {
-                          "description": "Type of check digit",
+                          "description": "Type of check digit (1-5)",
                           "type": "string",
                           "required": false,
-                          "example": "2"
+                          "example": "2",
+                          "default": "3"
                         },
                         "one_module_width": {
                           "description": "1-module width 0-15 in dots",
                           "type": "string",
                           "required": false,
-                          "example": "06"
+                          "example": "06",
+                          "default": "02"
                         },
                         "one_cell_width": {
                           "description": "1-cell width 00 to 99 (in dots)",
                           "type": "string",
                           "required": false,
-                          "example": "99"
+                          "example": "99",
+                          "default": "01"
                         },
                         "rotational_angle": {
                           "description": "rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)",
                           "type": "string",
                           "required": false,
-                          "example": "1"
+                          "example": "1",
+                          "default": "1"
                         },
                         "height": {
                           "description": "Height of barcode (0001 - 1000)",
                           "type": "string",
                           "required": false,
-                          "example": "0070"
+                          "example": "0070",
+                          "default": "0070"
                         }
                       }
                     }
@@ -627,5 +657,55 @@ version: 1.0
                   "labels": ["can't be blank","There should be some labels"],
                   "printer":["Printer does not exist"],
                   "label_template":["Label template does not exist"]
+                }
+              }
+/printers:
+  post:
+    description: Create a new printer
+    body:
+      application/json:
+        schema: |
+          {
+            "printer":
+            {
+              "type": "object",
+              "required": true,
+              "properties":
+              {
+                "name": {
+                  "description": "The unique name of the printer. Relates to the printer name on the network",
+                  "required": true,
+                  "type": "string",
+                  "example": "d304bc"
+                },
+                "protocol": {
+                  "description": "The protocol which the printer uses",
+                  "required": false,
+                  "type": "string",
+                  "enum": ["LPD", "IPP", "TOF"],
+                  "default": "LPD"
+                }
+
+              }
+            }
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "id":1,
+                "name":"e367bc",
+                "protocol":"LPD"
+              }
+      422:
+        body:
+          application/json:
+            example: |
+              {
+                "errors":
+                {
+                  "name": ["can't be blank"]
                 }
               }

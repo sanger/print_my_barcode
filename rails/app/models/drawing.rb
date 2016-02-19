@@ -34,7 +34,7 @@ class Drawing < ActiveRecord::Base
   end
 
   ##
-  # Used to creare commands when building a print job. All of the options along with the placeholder_id and x and y origins.
+  # Used to create commands when building a print job. All of the options along with the placeholder_id and x and y origins.
   def template_attributes
     options.merge(id: padded_placeholder_id, x_origin: x_origin, y_origin: y_origin)
   end

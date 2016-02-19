@@ -367,7 +367,7 @@
     </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The name of the label"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The unique name name of the label type"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Plate"</span><span class="w">
@@ -376,30 +376,35 @@
         </span><span class="nt">"description"</span><span class="p">:</span><span class="w">  </span><span class="s2">"Feed value to be finely adjusted (000 - 500)"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"004"</span><span class="w">
+        </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{3}\z/"</span><span class="w">
+        </span><span class="s2">"example"</span><span class="err">:</span><span class="w"> </span><span class="s2">"004"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"fine_adjustment"</span><span class="p">:{</span><span class="w">
         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print density fine adjustment value 00 to 10 (in units of 1 step)"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{2}\z/"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"08"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"pitch_length"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pitch length of the label"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pitch length of the label (4 digits)"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0110"</span><span class="w">
       </span><span class="p">},</span><span class="w"> 
       </span><span class="nt">"print_width"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Effective print width"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Effective print width (4 digits)"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0920"</span><span class="w">
       </span><span class="p">},</span><span class="w"> 
       </span><span class="nt">"print_length"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Effective print length"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Effective print length (4 digits)"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0080"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -704,7 +709,8 @@
             </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Label name, which should be unique for the label template"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"label_1"</span><span class="w">
+            </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A[\w\_]+\z/"</span><span class="w">
+            </span><span class="s2">"example"</span><span class="err">:</span><span class="w"> </span><span class="s2">"label_1"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="nt">"bitmaps_attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"An array of bitmaps that are part of the label"</span><span class="p">,</span><span class="w">
@@ -712,51 +718,65 @@
             </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
             </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"field_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The unique name of the field"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The unique name of the field (unique in the context of the label template)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A[\w\_]+\z/"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bitmap_1"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"x_origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of X-coordinate of barcode"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of X-coordinate of barcode (fixed as 4 digits)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0040"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"y_origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of Y-coordinate of barcode"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of Y-coordinate of barcode (fixed as 4 digits)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0060"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"horizontal_magnification"</span><span class="p">:{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Character horizontal magnification (Two digit designation enables magnifications in 0.5 units)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05"</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{1,2}\z/"</span><span class="w">
+                </span><span class="s2">"example"</span><span class="err">:</span><span class="w"> </span><span class="s2">"05"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
               </span><span class="p">},</span><span class="w"> 
               </span><span class="nt">"vertical_magnification"</span><span class="p">:{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05"</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{1,2}\z/"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"05"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"font"</span><span class="p">:{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Type of font e.g. Helvetica medium"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"G"</span><span class="w">
+                </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A[A-W]{1}\z/"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"G"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"G"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"space_adjustment"</span><span class="p">:{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"No of spaces between characters (00 - 99)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+                </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{2}\z/"</span><span class="w">
+                </span><span class="s2">"required"</span><span class="err">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="w">
               </span><span class="p">},</span><span class="w"> 
               </span><span class="nt">"rotational_angles"</span><span class="p">:{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rotational angles of character and character string (mostly 00)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="w">
+                </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{2}\z/"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00"</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">},</span><span class="w">
@@ -769,55 +789,65 @@
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The unique name of the field"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A[\w\_]+\z/"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode_1"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"x_origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of X-coordinate of barcode"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of X-coordinate of barcode (fixed as 4 digits)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0040"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"y_origin"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of Y-coordinate of barcode"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Print origin of Y-coordinate of barcode (fixed as 4 digits)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0060"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"barcode_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A single letter or number indicating the type of barcode e.g. code128, EAN13, 2D"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A single letter or number indicating the type of barcode e.g. code128 - 9, EAN13 - 5, 2D - Q"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A[0-9A-Z]{1}\z/"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Q"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"type_of_check_digit"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Type of check digit"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Type of check digit (1-5)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"one_module_width"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-module width 0-15 in dots"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"06"</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"06"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"one_cell_width"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-cell width 00 to 99 (in dots)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99"</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"rotational_angle"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
               </span><span class="p">},</span><span class="w">
               </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
                 </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Height of barcode (0001 - 1000)"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                 </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0070"</span><span class="w">
+                </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0070"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0070"</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
@@ -1116,6 +1146,98 @@
     </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"can't be blank"</span><span class="p">,</span><span class="s2">"There should be some labels"</span><span class="p">],</span><span class="w">
     </span><span class="nt">"printer"</span><span class="p">:[</span><span class="s2">"Printer does not exist"</span><span class="p">],</span><span class="w">
     </span><span class="nt">"label_template"</span><span class="p">:[</span><span class="s2">"Label template does not exist"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</code></pre>
+  </div>
+</section>
+  </div>
+</section>
+  </div>
+</section>
+  </div>
+</section>
+  </div>
+</section>
+  </div>
+</section><section>
+  <label for="collapse-47"><h2>/printers </h2></label><input aria-hidden="true" checked id="collapse-47" type="checkbox">
+  <div class="collapse_content">
+<div class="properties">
+</div><section>
+  <label for="collapse-48"><h3>post </h3></label><input aria-hidden="true" checked id="collapse-48" type="checkbox">
+  <div class="collapse_content">
+<div class="method_description">
+  <p>Create a new printer</p>
+  
+</div><section>
+  <label for="collapse-49"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-49" type="checkbox">
+  <div class="collapse_content"><section>
+  <label for="collapse-50"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-50" type="checkbox">
+  <div class="collapse_content"><section>
+  <label for="collapse-51"><h5>Schema </h5></label><input aria-hidden="true" checked id="collapse-51" type="checkbox">
+  <div class="collapse_content"><pre><code class="schema"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"printer"</span><span class="p">:</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The unique name of the printer. Relates to the printer name on the network"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d304bc"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The protocol which the printer uses"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"LPD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IPP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TOF"</span><span class="p">],</span><span class="w">
+        </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LPD"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</code></pre>
+  </div>
+</section>
+  </div>
+</section>
+  </div>
+</section><section>
+  <label for="collapse-52"><h4>Responses </h4></label><input aria-hidden="true" checked id="collapse-52" type="checkbox">
+  <div class="collapse_content"><section>
+  <label for="collapse-53"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-53" type="checkbox">
+  <div class="collapse_content"><section>
+  <label for="collapse-54"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-54" type="checkbox">
+  <div class="collapse_content"><section>
+  <label for="collapse-55"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-55" type="checkbox">
+  <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"e367bc"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="s2">"LPD"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</code></pre>
+  </div>
+</section>
+  </div>
+</section>
+  </div>
+</section><section>
+  <label for="collapse-56"><h5>422 </h5></label><input aria-hidden="true" checked id="collapse-56" type="checkbox">
+  <div class="collapse_content"><section>
+  <label for="collapse-57"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-57" type="checkbox">
+  <div class="collapse_content"><section>
+  <label for="collapse-58"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-58" type="checkbox">
+  <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"errors"</span><span class="p">:</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"can't be blank"</span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
