@@ -1,12 +1,12 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('label-type', 'Unit | Model | label type', {
+moduleForModel('label', 'Unit | Model | label', {
   // Specify the other units that are required for this test.
-  needs: ['model:label-template']
+  needs: ['model:bitmap', 'model:barcode']
 });
 
 test('it exists', function(assert) {
-  var model = this.subject();
-  // var store = this.store();
+  let model = this.subject();
+  // let store = this.store();
   assert.ok(!!model);
 });

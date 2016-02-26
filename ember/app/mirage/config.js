@@ -3,6 +3,7 @@ import Mirage from 'ember-cli-mirage';
 export default function() {
   this.namespace = 'v1';
 
+  // Label Types
   this.get('/label_types');
   this.get('/label_types/:label_type_id');
   this.get('/label_types/:label_type_id/edit');
@@ -25,6 +26,10 @@ export default function() {
     var label_type = db.label_types.update(label_type_id, params.label_type);
     return {label_type: label_type};
   });
+
+  // Label Templates
+  this.get('label_templates');
+  this.get('label_templates/:label_template_id');
 
   // These comments are here to help you get started. Feel free to delete them.
 

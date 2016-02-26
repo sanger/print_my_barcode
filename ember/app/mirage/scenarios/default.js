@@ -4,5 +4,6 @@ export default function(server) {
   // data will not be loaded in your tests.
 
   // server.createList('contact', 10);
-  server.createList('label_type', 10);  
+  server.createList('label_type', 10);
+  server.createList('label_template', 5);
 }

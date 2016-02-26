@@ -25,11 +25,16 @@ test('Should list all label types', function(assert) {
   var label_types = server.createList('label_type', 5);
   visit('/label_types');
 
-  label_types.forEach(function(label_type){
-    andThen(function() {
-      assert.ok(find('td:contains("' + label_type.name + '")'));
+  andThen(function() {
+    assert.equal(find('tr').length, label_types.length+1);
+
+    label_types.forEach(function(label_type){
+      andThen(function() {
+        assert.ok(find('td:contains("' + label_type.name + '")'));
+      });
     });
   });
+
 });
 
 test("Should be able to navigate to a label type page", function(assert) {
