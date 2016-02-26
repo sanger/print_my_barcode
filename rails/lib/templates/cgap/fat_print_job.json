@@ -1,0 +1,23 @@
+{
+  "print_job":
+  { 
+    "label_template_id":5,
+    "printer_name": "e367bc",
+    "labels":
+    {
+      "body":
+      [
+        {
+          "label_1":
+          {
+            "barcode_text": "REA 2000000100029", 
+            "reagent_name": "L-Glutamine-Na Pyruvate 1:1", 
+            "batch_no": "Batch: 555", 
+            "date": "Created: 08/02/2016", 
+            "barcode": "2000000100036"
+          }
+        }
+      ]
+    }
+  }
+}
