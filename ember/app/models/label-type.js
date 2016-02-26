@@ -6,5 +6,6 @@ export default DS.Model.extend({
   printWidth: DS.attr('string'),
   printLength: DS.attr('string'),
   feedValue: DS.attr('string'),
-  fineAdjustment: DS.attr('string')
+  fineAdjustment: DS.attr('string'),
+  labelTemplates: DS.hasMany('label-template')
 });

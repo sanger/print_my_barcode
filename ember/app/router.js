@@ -11,7 +11,10 @@ Router.map(function() {
     this.route('show', { path: ':label_type_id'});
     this.route('edit', { path: ':label_type_id/edit'});
    });
-  this.route('label_templates');
+
+  this.resource('label_templates', function() {
+    this.route('show', { path: ':label_template_id'});
+  });
 });
 
 export default Router;
