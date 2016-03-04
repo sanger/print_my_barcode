@@ -6,22 +6,22 @@ RSpec.describe V1::LabelTypesController, type: :request do |variable|
     label_types = create_list(:label_type, 5)
     get v1_label_types_path
     expect(response).to be_success
-    expect(ActiveSupport::JSON.decode(response.body)["label_types"].length).to eq(label_types.length)
+    expect(ActiveSupport::JSON.decode(response.body)["data"].length).to eq(label_types.length)
   end
 
   it "should allow retrieval of information about a particular label type" do
     label_type = create(:label_type)
     get v1_label_type_path(label_type)
     expect(response).to be_success
-    json = ActiveSupport::JSON.decode(response.body)["label_type"]
-    expect(json["id"]).to eq(label_type.id)
-    expect(json["feed_value"]).to eq(label_type.feed_value)
-    expect(json["fine_adjustment"]).to eq(label_type.fine_adjustment)
-    expect(json["pitch_length"]).to eq(label_type.pitch_length)
-    expect(json["print_width"]).to eq(label_type.print_width)
-    expect(json["print_length"]).to eq(label_type.print_length)
-    expect(json["name"]).to eq(label_type.name)
-
+    json = ActiveSupport::JSON.decode(response.body)["data"]
+    json_attributes = json["attributes"]
+    expect(json["id"].to_i).to eq(label_type.id)
+    expect(json_attributes["feed_value"]).to eq(label_type.feed_value)
+    expect(json_attributes["fine_adjustment"]).to eq(label_type.fine_adjustment)
+    expect(json_attributes["pitch_length"]).to eq(label_type.pitch_length)
+    expect(json_attributes["print_width"]).to eq(label_type.print_width)
+    expect(json_attributes["print_length"]).to eq(label_type.print_length)
+    expect(json_attributes["name"]).to eq(label_type.name)
   end
 
   it "should allow creation of a new label type" do
@@ -44,7 +44,7 @@ RSpec.describe V1::LabelTypesController, type: :request do |variable|
     new_name = build(:label_type).name
     patch v1_label_type_path(label_type), label_type: { name: new_name }
     expect(response).to be_success
-    expect(ActiveSupport::JSON.decode(response.body)["label_type"]["name"]).to eq(new_name)
+    expect(ActiveSupport::JSON.decode(response.body)["data"]["attributes"]["name"]).to eq(new_name)
   end
 
   it "should prevent update of existing label type with invalid attributes" do

@@ -5,7 +5,7 @@ class V1::LabelTemplatesController < ApplicationController
   end
 
   def show
-    render json: current_resource
+    render json: current_resource, include: '**'
   end
 
   def create
