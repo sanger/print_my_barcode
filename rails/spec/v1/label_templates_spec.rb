@@ -29,21 +29,22 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
   it "should allow creation of a new label template" do
     params = label_template_params
     expect {
-      post v1_label_templates_path, params
+      post v1_label_templates_path, params.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"} 
       }.to change(LabelTemplate, :count).by(1)
     expect(response).to be_success
     label_template = LabelTemplate.first
-    expect(label_template.name).to eq(params[:label_template][:name])
-    expect(label_template.label_type_id).to eq(params[:label_template][:label_type_id])
+
+    expect(label_template.name).to eq(params[:data][:attributes][:name])
+    expect(label_template.label_type_id).to eq(params[:data][:attributes][:label_type_id])
     expect(label_template.labels).to_not be_empty
-    expect(label_template.labels.count).to eq(params[:label_template][:labels_attributes].length)
-    expect(label_template.labels.first.barcodes.count).to eq(params[:label_template][:labels_attributes].first[:barcodes_attributes].length)
-    expect(label_template.labels.first.bitmaps.count).to eq(params[:label_template][:labels_attributes].first[:bitmaps_attributes].length)
+    expect(label_template.labels.count).to eq(params[:data][:attributes][:labels_attributes].length)
+    expect(label_template.labels.first.barcodes.count).to eq(params[:data][:attributes][:labels_attributes].first[:barcodes_attributes].length)
+    expect(label_template.labels.first.bitmaps.count).to eq(params[:data][:attributes][:labels_attributes].first[:bitmaps_attributes].length)
   end
 
   it "should prevent creation of a new label template with invalid label type" do
     expect {
-      post v1_label_templates_path, label_template_params_with_invalid_label_type
+      post v1_label_templates_path, {data:{type: :label_template, attributes:label_template_params_with_invalid_label_type}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"} 
       }.to_not change(LabelTemplate, :count)
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
@@ -51,7 +52,7 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
 
   it "should prevent creation of a new label template with invalid association" do
     expect {
-      post v1_label_templates_path, label_template_params_with_invalid_association
+      post v1_label_templates_path, {data:{type: :label_template, attributes:label_template_params_with_invalid_association}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"} 
       }.to_not change(LabelTemplate, :count)
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
@@ -60,14 +61,14 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
   it "should allow update of existing label template" do
     label_template = create(:label_template)
     label_type = create(:label_type)
-    patch v1_label_template_path(label_template), label_template: { label_type_id: label_type.id }
+    patch v1_label_template_path(label_template), {data:{type: :label_template, attributes: { label_type_id: label_type.id }}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
     expect(response).to be_success
     expect(ActiveSupport::JSON.decode(response.body)["data"]["relationships"]["label_type"]["data"]["id"].to_i).to eq(label_type.id)
   end
 
   it "should prevent update of existing label template with invalid attributes" do
     label_template = create(:label_template)
-    patch v1_label_template_path(label_template), label_template: { label_type_id: nil }
+    patch v1_label_template_path(label_template), {data:{type: :label_template, attributes:{ label_type_id: nil }}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
   end

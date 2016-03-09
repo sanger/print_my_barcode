@@ -34,4 +34,11 @@ RSpec.describe "Serializers", type: :model do |variable|
     expect(json.labels).to eq(print_job.labels)
   end
 
+  it "label should output the correct attributes" do
+    label = create(:label_with_drawings)
+    json = LabelSerializer.new(label).object
+    expect(json.name).to eq(label.name)
+    expect(json.barcodes.length).to eq(label.barcodes.count)
+    expect(json.bitmaps.length).to eq(label.bitmaps.count)
+  end
 end

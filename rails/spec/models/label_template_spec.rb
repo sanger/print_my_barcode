@@ -47,7 +47,7 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
   context "permitted attributes" do
 
     let!(:params) { label_template_params }
-    let(:permitted) { params.require(:label_template).permit(LabelTemplate.permitted_attributes)}
+    let(:permitted) { params.require(:data).require(:attributes).permit(LabelTemplate.permitted_attributes)}
 
     it "label_type_id should be permitted" do
       expect(permitted[:label_type_id]).not_to be_nil

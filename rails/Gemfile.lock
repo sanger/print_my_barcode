@@ -43,6 +43,7 @@ GEM
     addressable (2.3.8)
     arel (6.0.3)
     builder (3.2.2)
+    byebug (8.2.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     factory_girl (4.5.0)
@@ -151,6 +152,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0.rc4)
+  byebug
   factory_girl_rails
   mysql2
   puma

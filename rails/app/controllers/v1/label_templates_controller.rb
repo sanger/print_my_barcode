@@ -33,7 +33,7 @@ private
   end
 
   def label_template_params
-    params.require(:label_template).permit(LabelTemplate.permitted_attributes)
+    params.require(:data).require(:attributes).permit(LabelTemplate.permitted_attributes)
   end
   
 end

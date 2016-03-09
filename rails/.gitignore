@@ -20,3 +20,5 @@
 
 #ignore docs
 /doc/app
+
+.byebug_history
