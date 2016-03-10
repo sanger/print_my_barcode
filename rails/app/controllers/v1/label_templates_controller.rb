@@ -1,7 +1,7 @@
 class V1::LabelTemplatesController < ApplicationController
 
   def index
-    render json: LabelTemplate.all
+    render json: LabelTemplate.all, include: '**'
   end
 
   def show
@@ -11,7 +11,7 @@ class V1::LabelTemplatesController < ApplicationController
   def create
     label_template = LabelTemplate.new label_template_params
     if label_template.save
-      render json: label_template
+      render json: label_template, include: '**'
     else
       render json: { errors: label_template.errors }, status: :unprocessable_entity
     end
@@ -20,7 +20,7 @@ class V1::LabelTemplatesController < ApplicationController
   def update
     label_template = current_resource
     if label_template.update_attributes(label_template_params)
-      render json: label_template
+      render json: label_template, include: '**'
     else
       render json: { errors: label_template.errors }, status: :unprocessable_entity
     end
