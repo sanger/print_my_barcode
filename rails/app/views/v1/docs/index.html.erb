@@ -368,7 +368,7 @@
     </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The type of the object, here: 'label_type'"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"label_type"</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -829,7 +829,7 @@
     </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The type of the object, here: 'label_template'"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"label_template"</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -1426,30 +1426,35 @@
 </div><section>
   <label for="collapse-49"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-49" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-50"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-50" type="checkbox">
+  <label for="collapse-50"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-50" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-51"><h5>Schema </h5></label><input aria-hidden="true" checked id="collapse-51" type="checkbox">
   <div class="collapse_content"><pre><code class="schema"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"printer"</span><span class="p">:</span><span class="w">
-  </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The unique name of the printer. Relates to the printer name on the network"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d304bc"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The protocol which the printer uses"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The type of the object, here: 'printer'"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"LPD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IPP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TOF"</span><span class="p">],</span><span class="w">
-        </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LPD"</span><span class="w">
+        </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"printer"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The unique name of the printer. Relates to the printer name on the network"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d304bc"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The protocol which the printer uses"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"LPD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IPP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TOF"</span><span class="p">],</span><span class="w">
+          </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LPD"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
-
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1469,9 +1474,14 @@
   <div class="collapse_content"><section>
   <label for="collapse-55"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-55" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"e367bc"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"protocol"</span><span class="p">:</span><span class="s2">"LPD"</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"printers"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e576bc"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"protocol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LPD"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </code></pre>
