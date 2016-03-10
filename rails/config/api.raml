@@ -18,7 +18,7 @@ version: 1.0
               "properties": {
                 "type": {
                   "description": "The type of the object, here: 'label_type'",
-                  "required": true,
+                  "required": false,
                   "type": "string",
                   "example": "label_type"
                 },
@@ -402,7 +402,7 @@ version: 1.0
               "properties": {
                 "type": {
                   "description": "The type of the object, here: 'label_template'",
-                  "required": true,
+                  "required": false,
                   "type": "string",
                   "example": "label_template"
                 },
@@ -917,29 +917,34 @@ version: 1.0
   post:
     description: Create a new printer
     body:
-      application/json:
+      application/vnd.api+json:
         schema: |
           {
-            "printer":
-            {
+            "data":{
               "type": "object",
               "required": true,
-              "properties":
-              {
-                "name": {
-                  "description": "The unique name of the printer. Relates to the printer name on the network",
-                  "required": true,
-                  "type": "string",
-                  "example": "d304bc"
-                },
-                "protocol": {
-                  "description": "The protocol which the printer uses",
+              "properties": {
+                "type": {
+                  "description": "The type of the object, here: 'printer'",
                   "required": false,
                   "type": "string",
-                  "enum": ["LPD", "IPP", "TOF"],
-                  "default": "LPD"
+                  "example": "printer"
+                },
+                "attributes":{
+                  "name": {
+                    "description": "The unique name of the printer. Relates to the printer name on the network",
+                    "required": true,
+                    "type": "string",
+                    "example": "d304bc"
+                  },
+                  "protocol": {
+                    "description": "The protocol which the printer uses",
+                    "required": false,
+                    "type": "string",
+                    "enum": ["LPD", "IPP", "TOF"],
+                    "default": "LPD"
+                  }
                 }
-
               }
             }
           }
@@ -949,9 +954,14 @@ version: 1.0
           application/json:
             example: |
               {
-                "id":1,
-                "name":"e367bc",
-                "protocol":"LPD"
+                "data": {
+                  "id": "1",
+                  "type": "printers",
+                  "attributes": {
+                    "name": "e576bc",
+                    "protocol": "LPD"
+                  }
+                }
               }
       422:
         body:

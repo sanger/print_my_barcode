@@ -2,8 +2,7 @@ module Helpers
   def label_template_params
     ActionController::Parameters.new(
       {data:
-        {type: :label_template, 
-        attributes:{
+        {attributes:{
           name: build(:label_template).name,
           label_type_id: create(:label_type).id,
           labels_attributes: labels_attributes
