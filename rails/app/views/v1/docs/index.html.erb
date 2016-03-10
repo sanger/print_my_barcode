@@ -430,7 +430,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-7"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-7" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-8"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-8" type="checkbox">
+  <label for="collapse-8"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-8" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-9"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-9" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -457,7 +457,7 @@
 </section><section>
   <label for="collapse-10"><h5>422 </h5></label><input aria-hidden="true" checked id="collapse-10" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-11"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-11" type="checkbox">
+  <label for="collapse-11"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-11" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-12"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-12" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -493,7 +493,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-15"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-15" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-16"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-16" type="checkbox">
+  <label for="collapse-16"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-16" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-17"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-17" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -565,7 +565,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-21"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-21" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-22"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-22" type="checkbox">
+  <label for="collapse-22"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-22" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-23"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-23" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -1015,7 +1015,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-29"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-29" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-30"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-30" type="checkbox">
+  <label for="collapse-30"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-30" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-31"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-31" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -1247,7 +1247,7 @@
 </section><section>
   <label for="collapse-32"><h5>422 </h5></label><input aria-hidden="true" checked id="collapse-32" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-33"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-33" type="checkbox">
+  <label for="collapse-33"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-33" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-34"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-34" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -1291,43 +1291,50 @@
   <div class="collapse_content"><section>
   <label for="collapse-39"><h5>Schema </h5></label><input aria-hidden="true" checked id="collapse-39" type="checkbox">
   <div class="collapse_content"><pre><code class="schema"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"print_job"</span><span class="p">:</span><span class="w">
-  </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"properties"</span><span class="p">:{</span><span class="w">
-      </span><span class="nt">"printer_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The name of the printer to print the job to"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d304bc"</span><span class="w">
+    </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The type of the object, here: 'printer'"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"printer"</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"label_template_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The id of the label template to use for the print job"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"labels"</span><span class="p">:{</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The labels that are to be printed"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Header label"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"header_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"header_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_2"</span><span class="p">}</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A body of labels"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="p">}},</span><span class="w"> </span><span class="p">{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="p">}}]</span><span class="w">
-          </span><span class="p">},</span><span class="w">
-          </span><span class="nt">"footer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Footer label"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"footer_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"footer_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_2"</span><span class="p">}</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"printer_name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The name of the printer to print the job to"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d304bc"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"label_template_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The id of the label template to use for the print job"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"labels"</span><span class="p">:{</span><span class="w">
+          </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The labels that are to be printed"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Header label"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"header_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"header_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_2"</span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A body of labels"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="p">}},</span><span class="w"> </span><span class="p">{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w"> </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="p">}}]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"footer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Footer label"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"object"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"footer_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"footer_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_2"</span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -1346,38 +1353,44 @@
   <div class="collapse_content"><section>
   <label for="collapse-41"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-41" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-42"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-42" type="checkbox">
+  <label for="collapse-42"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-42" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-43"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-43" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"printer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d304bc"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"label_template_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"header_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_1"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"header_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_2"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> 
-    </span><span class="nt">"footer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"footer_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_1"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"footer_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_2"</span><span class="w">
-    </span><span class="p">},</span><span class="w"> 
-    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w"> 
-          </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="w">
-         </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w"> 
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w"> 
-          </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"print_jobs"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"printer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d304bc"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"label_template_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"labels"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"header"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"header_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"header_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"header_text_2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"footer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"footer_text_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"footer_text_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"footer_text_2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"location"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"parent_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"parent_location"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"barcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
       </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w"> 
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 </code></pre>

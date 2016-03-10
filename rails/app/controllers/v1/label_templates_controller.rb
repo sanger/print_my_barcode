@@ -1,5 +1,7 @@
 class V1::LabelTemplatesController < ApplicationController
 
+  #'**' includes all nested associated resources in the "included" member
+
   def index
     render json: LabelTemplate.all, include: '**'
   end

@@ -71,7 +71,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |  
               {
                 "data": {
@@ -89,7 +89,7 @@ version: 1.0
               }              
       422:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
               "errors":
@@ -107,7 +107,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
                 "data": 
@@ -157,7 +157,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
                 "data": 
@@ -580,7 +580,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
                 "data": {
@@ -803,7 +803,7 @@ version: 1.0
               }
       422:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
                 "errors":{
@@ -823,43 +823,50 @@ version: 1.0
       application/json:
         schema: |
           {
-            "print_job":
-            {
+            "data":{
               "type": "object",
               "required": true,
-              "properties":{
-                "printer_name": {
-                  "description": "The name of the printer to print the job to",
-                  "required": true,
-                  "example": "d304bc"
+              "properties": {
+                "type": {
+                  "description": "The type of the object, here: 'printer'",
+                  "required": false,
+                  "type": "string",
+                  "example": "printer"
                 },
-                "label_template_id": {
-                  "description": "The id of the label template to use for the print job",
-                  "required": true,
-                  "example": 1
-                },
-                "labels":{
-                  "description": "The labels that are to be printed",
-                  "required": true,
-                  "type": "object",
-                  "properties": {
-                    "header": {
-                      "description": "Header label",
-                      "required": false,
-                      "type": "object",
-                      "example": {"header_text_1": "header_text_1", "header_text_2": "header_text_2"}
-                    },
-                    "body": {
-                      "description": "A body of labels",
-                      "required": true,
-                      "type": "array",
-                      "example": [{"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}, {"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}]
-                    },
-                    "footer": {
-                      "description": "Footer label",
-                      "required": false,
-                      "type": "object",
-                      "example": {"footer_text_1": "footer_text_1", "footer_text_2": "footer_text_2"}
+                "attributes":{
+                  "printer_name": {
+                    "description": "The name of the printer to print the job to",
+                    "required": true,
+                    "example": "d304bc"
+                  },
+                  "label_template_id": {
+                    "description": "The id of the label template to use for the print job",
+                    "required": true,
+                    "example": 1
+                  },
+                  "labels":{
+                    "description": "The labels that are to be printed",
+                    "required": true,
+                    "type": "object",
+                    "properties": {
+                      "header": {
+                        "description": "Header label",
+                        "required": false,
+                        "type": "object",
+                        "example": {"header_text_1": "header_text_1", "header_text_2": "header_text_2"}
+                      },
+                      "body": {
+                        "description": "A body of labels",
+                        "required": true,
+                        "type": "array",
+                        "example": [{"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}, {"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}]
+                      },
+                      "footer": {
+                        "description": "Footer label",
+                        "required": false,
+                        "type": "object",
+                        "example": {"footer_text_1": "footer_text_1", "footer_text_2": "footer_text_2"}
+                      }
                     }
                   }
                 }
@@ -869,37 +876,43 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
-                "printer_name": "d304bc",
-                "label_template_id": 1,
-                "labels": {
-                  "header": {
-                    "header_text_1": "header_text_1",
-                    "header_text_2": "header_text_2"
-                  }, 
-                  "footer": {
-                    "footer_text_1": "footer_text_1",
-                    "footer_text_2": "footer_text_2"
-                  }, 
-                  "body": [
-                    {
-                      "location": {
-                        "location": "location", 
-                        "parent_location": "parent_location",
-                        "barcode": "barcode"
-                       }
-                    }, 
-                    {
-                      "location": {
-                        "location": "location", 
-                        "parent_location": "parent_location",
-                        "barcode": "barcode"
-                      }
+                "data": {
+                  "id": "",
+                  "type": "print_jobs",
+                  "attributes": {
+                    "printer_name": "d304bc",
+                    "label_template_id": 1,
+                    "labels": {
+                      "header": {
+                        "header_text_1": "header_text_1",
+                        "header_text_2": "header_text_2"
+                      },
+                      "footer": {
+                        "footer_text_1": "footer_text_1",
+                        "footer_text_2": "footer_text_2"
+                      },
+                      "body": [
+                        {
+                          "location": {
+                            "location": "location",
+                            "parent_location": "parent_location",
+                            "barcode": "barcode"
+                          }
+                        },
+                        {
+                          "location": {
+                            "location": "location",
+                            "parent_location": "parent_location",
+                            "barcode": "barcode"
+                          }
+                        }
+                      ]
                     }
-                  ]
-                } 
+                  }
+                }
               }
       422:
         body:
