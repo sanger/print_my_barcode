@@ -32,6 +32,18 @@ RSpec.describe Barcode, type: :model do
     expect(build(:barcode, type_of_check_digit: "22")).to_not be_valid
   end
 
+  it "should validate format of number of columns" do
+    expect(build(:barcode, no_of_columns: "1")).to_not be_valid
+    expect(build(:barcode, no_of_columns: "X")).to_not be_valid
+    expect(build(:barcode, no_of_columns: "333")).to_not be_valid
+  end
+
+  it "should validate format of bar height" do
+    expect(build(:barcode, bar_height: "111")).to_not be_valid
+    expect(build(:barcode, bar_height: "XXX")).to_not be_valid
+    expect(build(:barcode, bar_height: "11111")).to_not be_valid
+  end
+
   it "should assign a placeholder id if there is a section" do
     label = create(:label)
 

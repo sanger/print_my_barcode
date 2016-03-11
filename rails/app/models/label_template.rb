@@ -36,4 +36,20 @@ class LabelTemplate < ActiveRecord::Base
     ]
   end
 
+  ##
+  # An implementation of dup which allows the name to be changed.
+  # Dup the original template. If a name is not passed the name will be changed
+  # to "label_template_name copy"
+  # dup each of the labels and add it to the new label template
+  # Saving the dup will create a whole new record with new ids.
+  def super_dup(new_name = nil)
+    duped = self.dup
+    duped.name = new_name || "#{name} copy"
+    labels.each do |label|
+      duped.labels << label.dup
+    end
+    duped.save
+    duped
+  end
+
 end

@@ -150,10 +150,6 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context "Format Barcode" do
 
     let(:command) { LabelPrinter::Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000")}
-    let(:command_with_options) { LabelPrinter::Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000", 
-      barcode_type: "9", type_of_check_digit: "2", one_module_width: "01", height: "0100")}
-    let(:command_with_2d_options) { LabelPrinter::Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000", 
-      barcode_type: "Q", one_cell_width: "50", rotational_angle: "3")}
 
     it "should have an appropriate prefix" do
       expect(command.prefix).to eq("XB")
@@ -162,14 +158,40 @@ RSpec.describe LabelPrinter::Commands, type: :model do
 
     it "should have appropriate control codes" do
       expect(command.control_codes).to eq("0300,0000,5,3,02,0,0070,+0000000000,002,0,00")
-      expect(command_with_options.control_codes).to eq("0300,0000,9,2,01,0,0100,+0000000000,002,0,00")
-      expect(command_with_2d_options.control_codes).to eq("0300,0000,Q,20,50,05,3")
     end
 
     it "should have the id in the formatting" do
       expect(command.formatted).to start_with("XB001;")
     end
-    
+
+    context "1D" do
+
+      let(:command) { LabelPrinter::Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000", 
+        barcode_type: "9", type_of_check_digit: "2", one_module_width: "01", height: "0100")}
+
+      it "should have appropriate control codes" do
+        expect(command.control_codes).to eq("0300,0000,9,2,01,0,0100,+0000000000,002,0,00")
+      end
+    end
+
+    context "2D" do
+      let(:command) { LabelPrinter::Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000", 
+        barcode_type: "Q", one_cell_width: "50", rotational_angle: "3")}
+
+      it "should have appropriate control codes" do
+        expect(command.control_codes).to eq("0300,0000,Q,20,50,05,3")
+      end
+    end
+
+    context "PDF417" do
+       let(:command) { LabelPrinter::Commands::BarcodeFormat.new(id: "001", x_origin: "0300", y_origin: "0000", 
+          barcode_type: "P", one_module_width: "01", no_of_columns: "10", bar_height: "0100")}
+
+      it "should have appropriate control codes" do
+        expect(command.control_codes).to eq("0300,0000,P,00,01,10,0,0100")
+      end
+    end
+
   end
 
   context "Draw Barcode" do
