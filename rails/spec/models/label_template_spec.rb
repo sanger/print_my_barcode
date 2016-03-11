@@ -98,5 +98,19 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     end
   end
 
+  it "should dup a label correctly" do
+    label_template = create(:label_template)
+    label_template_dup = label_template.super_dup
+    expect(label_template_dup.name).to eq("#{label_template.name} copy")
+    expect(label_template_dup.label_type).to eq(label_template.label_type)
+    expect(label_template_dup.labels.count).to eq(label_template.labels.count)
+    label_template_dup_label_ids = label_template_dup.labels.pluck(:id)
+    label_template.labels.pluck(:id).each do |id|
+      expect(label_template_dup_label_ids).to_not include(id)
+    end
+    label_template_dup = label_template.super_dup("A new label template")
+    expect(label_template_dup.name).to eq("A new label template")
+  end
+
   
 end

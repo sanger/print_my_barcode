@@ -36,16 +36,27 @@ module LabelPrinter
         # gg: Format ID No function (ignore)
         # h: Rotational angle of bar code 0: 0° 1: 90° 2: 180° 3: 270°
 
+        # PDF417
+        # Format: [ESC] XBaa; bbbb, cccc, d, ee, ff, gg, h, iiii [LF] [NUL]
+        # Example: XB02,0300,0000,P,00,01,10,0,0100
+        # aa: Bar code number (00 - 31)
+        # bbbb: Print origin of X-coordinate of bar code
+        # cccc: Print origin of Y-coordinate of bar code
+        # d: Type of bar code
+        # ee: Security level defaults to 00 (Level 0)
+        # ff: 1-module width 0-15 in dots
+        # gg: No of columns (01-30)
+        # h: rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)
+        # iiii: Bar height (0000 - 0100 in 0.1mm units)
+
         set_prefix "XB"
 
-        optional_attributes barcode_type: "5", type_of_check_digit: "3", one_module_width: "02", height: "0070", one_cell_width: "01", rotational_angle: "1"
+        optional_attributes barcode_type: "5", type_of_check_digit: "3", one_module_width: "02", height: "0070", one_cell_width: "04", rotational_angle: "1", no_of_columns: "01", bar_height: "0010"
 
         def control_codes
-            if barcode_type == "Q"
-                "#{x_origin},#{y_origin},#{barcode_type},20,#{one_cell_width},05,#{rotational_angle}"
-            else
-                "#{x_origin},#{y_origin},#{barcode_type},#{type_of_check_digit},#{one_module_width},0,#{height},+0000000000,002,0,00"
-            end
+            return "#{x_origin},#{y_origin},#{barcode_type},20,#{one_cell_width},05,#{rotational_angle}" if barcode_type == "Q"
+            return "#{x_origin},#{y_origin},#{barcode_type},00,#{one_module_width},#{no_of_columns},0,#{bar_height}" if barcode_type == "P"
+            "#{x_origin},#{y_origin},#{barcode_type},#{type_of_check_digit},#{one_module_width},0,#{height},+0000000000,002,0,00"
         end
         
       end

@@ -54,4 +54,17 @@ RSpec.describe Label, type: :model do
     end
   end
 
+  it "should dup a label correctly" do
+    label = create(:label_with_drawings, label_template: create(:label_template))
+    duped_label = label.dup
+    expect(duped_label.name).to eq(label.name)
+    expect(duped_label.label_template).to be_nil
+    expect(duped_label.barcodes.count).to eq(label.barcodes.count)
+    expect(duped_label.bitmaps.count).to eq(label.bitmaps.count)
+    duped_label_drawing_ids = duped_label.drawings.pluck(:id)
+    label.drawings.pluck(:id).each do |id|
+      expect(duped_label_drawing_ids).to_not include(id)
+    end
+  end
+
 end
