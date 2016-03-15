@@ -11,6 +11,8 @@ FactoryGirl.define do
       rotational_angle "1"
       one_cell_width "03"
       type_of_check_digit "2"
+      bar_height "0001"
+      no_of_columns "01"
       sequence(:field_name) {|n| "barcode_#{n}" }
     end
 

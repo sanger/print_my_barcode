@@ -11,6 +11,11 @@ RSpec.describe "Serializers", type: :model do |variable|
     expect(json.barcode_type).to eq(barcode.barcode_type)
     expect(json.one_module_width).to eq(barcode.one_module_width)
     expect(json.height).to eq(barcode.height)
+    expect(json.rotational_angle).to eq(barcode.rotational_angle)
+    expect(json.one_cell_width).to eq(barcode.one_cell_width)
+    expect(json.type_of_check_digit).to eq(barcode.type_of_check_digit)
+    expect(json.no_of_columns).to eq(barcode.no_of_columns)
+    expect(json.bar_height).to eq(barcode.bar_height)
   end
 
   it "bitmap should output the correct attributes" do

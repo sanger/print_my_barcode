@@ -1,4 +1,4 @@
-class BarcodeSerializer < DrawingSerializer
+class BarcodeSerializer < ActiveModel::Serializer
   
-  attributes :barcode_type, :one_module_width, :height
+  attributes *Barcode.permitted_attributes
 end
