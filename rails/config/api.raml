@@ -8,54 +8,62 @@ version: 1.0
   post:
     description: Create a new Label Type
     body:
-      application/json:
+      application/vnd.api+json:
         schema: |
           {
-            "label_type":
+            "data":
             {
               "type": "object",
               "required": true,
               "properties": {
-                "name":{
-                  "description": "The unique name name of the label type",
-                  "required": true,
+                "type": {
+                  "description": "The type of the object, here: 'label_type'",
+                  "required": false,
                   "type": "string",
-                  "example": "Plate"
+                  "example": "label_type"
                 },
-                "feed_value":{
-                  "description":  "Feed value to be finely adjusted (000 - 500)",
-                  "required": true,
-                  "type": "string",
-                  "pattern": "/\A\d{3}\z/"
-                  "example": "004"
-                },
-                "fine_adjustment":{
-                  "description": "Print density fine adjustment value 00 to 10 (in units of 1 step)",
-                  "required": true,
-                  "type": "string",
-                  "pattern": "/\A\d{2}\z/",
-                  "example": "08"
-                },
-                "pitch_length":{
-                  "description": "Pitch length of the label (4 digits)",
-                  "required": true,
-                  "type": "string",
-                  "pattern": "/\A\d{4}\z/",
-                  "example": "0110"
-                }, 
-                "print_width":{
-                  "description": "Effective print width (4 digits)",
-                  "required": true,
-                  "type": "string",
-                  "pattern": "/\A\d{4}\z/",
-                  "example": "0920"
-                }, 
-                "print_length":{
-                  "description": "Effective print length (4 digits)",
-                  "required": true,
-                  "type": "string",
-                  "pattern": "/\A\d{4}\z/",
-                  "example": "0080"
+                "attributes": {
+                  "name":{
+                    "description": "The unique name name of the label type",
+                    "required": true,
+                    "type": "string",
+                    "example": "Plate"
+                  },
+                  "feed_value":{
+                    "description":  "Feed value to be finely adjusted (000 - 500)",
+                    "required": true,
+                    "type": "string",
+                    "pattern": "/\A\d{3}\z/",
+                    "example": "004"
+                  },
+                  "fine_adjustment":{
+                    "description": "Print density fine adjustment value 00 to 10 (in units of 1 step)",
+                    "required": true,
+                    "type": "string",
+                    "pattern": "/\A\d{2}\z/",
+                    "example": "08"
+                  },
+                  "pitch_length":{
+                    "description": "Pitch length of the label (4 digits)",
+                    "required": true,
+                    "type": "string",
+                    "pattern": "/\A\d{4}\z/",
+                    "example": "0110"
+                  }, 
+                  "print_width":{
+                    "description": "Effective print width (4 digits)",
+                    "required": true,
+                    "type": "string",
+                    "pattern": "/\A\d{4}\z/",
+                    "example": "0920"
+                  }, 
+                  "print_length":{
+                    "description": "Effective print length (4 digits)",
+                    "required": true,
+                    "type": "string",
+                    "pattern": "/\A\d{4}\z/",
+                    "example": "0080"
+                  }
                 }
               }
             }
@@ -63,22 +71,25 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
-            example: |
-              [
-                {
-                  "id":1,
-                  "feed_value":"008",
-                  "fine_adjustment":"02",
-                  "pitch_length":"0430",
-                  "print_width":"0300",
-                  "print_length":"0400",
-                  "name":"Tube"
+          application/vnd.api+json:
+            example: |  
+              {
+                "data": {
+                  "id": "2",
+                  "type": "label_types",
+                  "attributes": {
+                    "feed_value": "008",
+                    "fine_adjustment": "04",
+                    "pitch_length": "0100",
+                    "print_width": "0350",
+                    "print_length": "0450",
+                    "name": "Label Type 7"
+                  }
                 }
-              ]
+              }              
       422:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
               "errors":
@@ -96,460 +107,703 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
-              [
-                {
-                  "id":2,
-                  "feed_value":"08",
-                  "fine_adjustment":"022",
-                  "pitch_length":"0430",
-                  "print_width":"0300",
-                  "print_length":"0400",
-                  "name":"Tube"
-                },
-                {
-                  "id":3,
-                  "feed_value":"08",
-                  "fine_adjustment":"004",
-                  "pitch_length":"0110",
-                  "print_width":"0920",
-                  "print_length":"0080",
-                  "name":"Rack"
-                },
-                {
-                  "id":4,
-                  "feed_value":"08",
-                  "fine_adjustment":"004",
-                  "pitch_length":"0110",
-                  "print_width":"0920",
-                  "print_length":"0080",
-                  "name":"Plate"
-                }
-              ]
+              {
+                "data": 
+                [
+                  {
+                    "id": "1",
+                    "type": "label_types",
+                    "attributes": {
+                      "feed_value": "008",
+                      "fine_adjustment": "04",
+                      "pitch_length": "0110",
+                      "print_width": "0920",
+                      "print_length": "0080",
+                      "name": "Plate"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "type": "label_types",
+                    "attributes": {
+                      "feed_value":"08",
+                      "fine_adjustment":"022",
+                      "pitch_length":"0430",
+                      "print_width":"0300",
+                      "print_length":"0400",
+                      "name":"Tube"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "type": "label_types",
+                    "attributes": {
+                      "feed_value":"08",
+                      "fine_adjustment":"004",
+                      "pitch_length":"0110",
+                      "print_width":"0920",
+                      "print_length":"0080",
+                      "name":"Rack"
+                    }
+                  }
+                ]
+              }              
+
 /label_templates:
   get:
     description: Return a list of all of the Label Templates
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
-              [
-                {
-                  "id": 1,
-                  "name": "LabWhere",
-                  "label_type":
-                    {
-                      "id":4,
-                      "feed_value":"08",
-                      "fine_adjustment":"004",
-                      "pitch_length":"0110",
-                      "print_width":"0920",
-                      "print_length":"0080",
-                      "name":"Plate"
+              {
+                "data": 
+                [
+                  {
+                    "id": "1",
+                    "type": "label_templates",
+                    "attributes": {
+                      "name": "LabWhere"
                     },
-                  "labels":
-                  [
-                    {
-                      "name": "header",
-                      "bitmaps": 
-                      [
-                        {
-                          "x_origin":"0030",
-                          "y_origin":"0035",
-                          "field_name":"location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        },
-                        {
-                          "x_origin":"0030",
-                          "y_origin":"0065",
-                          "field_name":"parent_location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
+                    "relationships": {
+                      "label_type": {
+                        "data": {
+                          "id": "1",
+                          "type": "label_types"
                         }
-                      ],
-                      "barcodes":
-                      [
-                      ]
-                    },
-                    {
-                      "name":"location",
-                      "bitmaps":
-                      [
-                        {
-                          "x_origin":"0030",
-                          "y_origin":"0035",
-                          "field_name":"location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        },
-                        {
-                          "x_origin":"0030",
-                          "y_origin":"0065",
-                          "field_name":"parent_location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        }
-                      ],
-                      "barcodes":
-                      [
-                        {
-                          "x_origin":"0300",
-                          "y_origin":"0000",
-                          "field_name":"barcode",
-                          "barcode_type":"9",
-                          "one_module_width":"02",
-                          "height":"0070"
-                        }
-                      ]
-                    },
-                    {
-                      "name":"footer",
-                      "bitmaps":
-                      [
-                        {
-                          "x_origin":"0050",
-                          "y_origin":"0035",
-                          "field_name":"footer_text_1",
-                          "horizontal_magnification":"1",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        },
-                        {
-                          "x_origin":"0020",
-                          "y_origin":"0065",
-                          "field_name":"footer_text_2",
-                          "horizontal_magnification":"1",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        }
-                      ],
-                      "barcodes":
-                      [
-                      ]
-                    ]
+                      },
+                      "labels": {
+                        "data": 
+                        [
+                          {
+                            "id": "1",
+                            "type": "labels"
+                          },
+                          {
+                            "id": "2",
+                            "type": "labels"
+                          },
+                          {
+                            "id": "3",
+                            "type": "labels"
+                          }
+                        ]
+                      }
+                    }
                   }
-                }
-              ]
+                ],
+                "included": 
+                [
+                  {
+                    "id": "1",
+                    "type": "label_types",
+                    "attributes": {
+                      "feed_value": "008",
+                      "fine_adjustment": "04",
+                      "pitch_length": "0110",
+                      "print_width": "0920",
+                      "print_length": "0080",
+                      "name": "Plate"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "type": "labels",
+                    "attributes": {
+                      "name": "header"
+                    },
+                    "relationships": {
+                      "bitmaps": {
+                        "data": 
+                        [
+                          {
+                            "id": "1",
+                            "type": "bitmaps"
+                          },
+                          {
+                            "id": "2",
+                            "type": "bitmaps"
+                          }
+                        ]
+                      },
+                      "barcodes": {
+                        "data": [ ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0020",
+                      "y_origin": "0035",
+                      "field_name": "header_text_1",
+                      "horizontal_magnification": "1",
+                      "vertical_magnification": "1",
+                      "font": "G",
+                      "space_adjustment": "00",
+                      "rotational_angles": "00"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0020",
+                      "y_origin": "0065",
+                      "field_name": "header_text_2",
+                      "horizontal_magnification": "1",
+                      "vertical_magnification": "1",
+                      "font": "G",
+                      "space_adjustment": "00",
+                      "rotational_angles": "00"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "type": "labels",
+                    "attributes": {
+                      "name": "location"
+                    },
+                    "relationships": {
+                      "bitmaps": {
+                        "data": 
+                        [
+                          {
+                            "id": "3",
+                            "type": "bitmaps"
+                          },
+                          {
+                            "id": "4",
+                            "type": "bitmaps"
+                          }
+                        ]
+                      },
+                      "barcodes": 
+                      {
+                        "data": 
+                        [
+                          {
+                            "id": "5",
+                            "type": "barcodes"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "location",
+                      "horizontal_magnification": "05",
+                      "vertical_magnification": "1",
+                      "font": "G",
+                      "space_adjustment": "00",
+                      "rotational_angles": "00"
+                    }
+                  },
+                  {
+                    "id": "4",
+                    "type": "bitmaps",
+                    "attributes": {
+                        "x_origin": "0030",
+                        "y_origin": "0065",
+                        "field_name": "parent_location",
+                        "horizontal_magnification": "05",
+                        "vertical_magnification": "1",
+                        "font": "G",
+                        "space_adjustment": "00",
+                        "rotational_angles": "00"
+                    }
+                  },
+                  {
+                    "id": "5",
+                    "type": "barcodes",
+                    "attributes": {
+                      "x_origin": "0300",
+                      "y_origin": "0000",
+                      "field_name": "barcode",
+                      "barcode_type": "9",
+                      "one_module_width": "02",
+                      "height": "0070"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "type": "labels",
+                    "attributes": {
+                      "name": "footer"
+                    },
+                    "relationships": {
+                      "bitmaps": {
+                        "data": 
+                        [
+                          {
+                            "id": "6",
+                            "type": "bitmaps"
+                          },
+                          {
+                              "id": "7",
+                              "type": "bitmaps"
+                          }
+                        ]
+                      },
+                      "barcodes": {
+                        "data": [ ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "6",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0050",
+                      "y_origin": "0035",
+                      "field_name": "footer_text_1",
+                      "horizontal_magnification": "1",
+                      "vertical_magnification": "1",
+                      "font": "G",
+                      "space_adjustment": "00",
+                      "rotational_angles": "00"
+                    }
+                  },
+                  {
+                    "id": "7",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0020",
+                      "y_origin": "0065",
+                      "field_name": "footer_text_2",
+                      "horizontal_magnification": "1",
+                      "vertical_magnification": "1",
+                      "font": "G",
+                      "space_adjustment": "00",
+                      "rotational_angles": "00"
+                    }
+                  }
+                ]
+              }
   post:
     description: Create a new Label Template
     body:
-      application/json:
+      application/vnd.api+json:
         schema: |
           {
-            "label_template":
+            "data":
             {
               "type": "object",
               "required": true,
               "properties": {
-                "name": {
-                  "description": "The unique name of the Label Template",
-                  "required": true,
-                  "type": "string",
-                  "example": "LabWhere"
-                },
-                "label_type_id": {
-                  "description": "The id of the Label Type with which the template is associated",
-                  "required": true,
-                  "type": "string",
-                  "example": 1
-                },
-                "labels_attributes": {
-                  "description": "List of labels for the label template. Each label will consist of a name, an array of bitmaps and an array of barcodes.",
+                "type": {
+                  "description": "The type of the object, here: 'label_template'",
                   "required": false,
-                  "type": "array",
-                  "properties" : {
-                    "name":{
-                      "description": "Label name, which should be unique for the label template",
-                      "required": true,
-                      "type": "string",
-                      "pattern": "/\A[\w\_]+\z/"
-                      "example": "label_1"
-                    },
-                    "bitmaps_attributes": {
-                      "description": "An array of bitmaps that are part of the label",
-                      "type": "array",
-                      "required": false,
-                      "properties": {
-                        "field_name": {
-                          "description": "The unique name of the field (unique in the context of the label template)",
-                          "required": true,
-                          "type": "string",
-                          "pattern": "/\A[\w\_]+\z/",
-                          "example": "bitmap_1"
-                        },
-                        "x_origin": {
-                          "description": "Print origin of X-coordinate of barcode (fixed as 4 digits)",
-                          "type": "string",
-                          "required": true,
-                          "pattern": "/\A\d{4}\z/",
-                          "example": "0040"
-                        },
-                        "y_origin": {
-                          "description": "Print origin of Y-coordinate of barcode (fixed as 4 digits)",
-                          "type": "string",
-                          "required": true,
-                          "pattern": "/\A\d{4}\z/",
-                          "example": "0060"
-                        },
-                        "horizontal_magnification":{
-                          "description": "Character horizontal magnification (Two digit designation enables magnifications in 0.5 units)",
-                          "type": "string",
-                          "required": false,
-                          "pattern": "/\A\d{1,2}\z/"
-                          "example": "05",
-                          "default": "1"
-                        }, 
-                        "vertical_magnification":{
-                          "description": "Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1)",
-                          "type": "string",
-                          "required": false,
-                          "pattern": "/\A\d{1,2}\z/",
-                          "example": "05",
-                          "default": "1"
-                        },
-                        "font":{
-                          "description": "Type of font e.g. Helvetica medium",
-                          "type": "string",
-                          "required": false,
-                          "format": "/\A[A-W]{1}\z/",
-                          "example": "G",
-                          "default": "G"
-                        },
-                        "space_adjustment":{
-                          "description": "No of spaces between characters (00 - 99)",
-                          "type": "string",
-                          "format": "/\A\d{2}\z/"
-                          "required": false,
-                          "default": "00",
-                          "example": "00"
-                        }, 
-                        "rotational_angles":{
-                          "description": "Rotational angles of character and character string (mostly 00)",
-                          "type": "string",
-                          "required": false,
-                          "format": "/\A\d{2}\z/",
-                          "example": "00",
-                          "default": "00"
+                  "type": "string",
+                  "example": "label_template"
+                },
+                "attributes":{
+                  "name": {
+                    "description": "The unique name of the Label Template",
+                    "required": true,
+                    "type": "string",
+                    "example": "LabWhere"
+                  },
+                  "label_type_id": {
+                    "description": "The id of the Label Type with which the template is associated",
+                    "required": true,
+                    "type": "string",
+                    "example": 1
+                  },
+                  "labels_attributes": {
+                    "description": "List of labels for the label template. Each label will consist of a name, an array of bitmaps and an array of barcodes.",
+                    "required": false,
+                    "type": "array",
+                    "properties" : {
+                      "name":{
+                        "description": "Label name, which should be unique for the label template",
+                        "required": true,
+                        "type": "string",
+                        "pattern": "/\A[\w\_]+\z/",
+                        "example": "label_1"
+                      },
+                      "bitmaps_attributes": {
+                        "description": "An array of bitmaps that are part of the label",
+                        "type": "array",
+                        "required": false,
+                        "properties": {
+                          "field_name": {
+                            "description": "The unique name of the field (unique in the context of the label template)",
+                            "required": true,
+                            "type": "string",
+                            "pattern": "/\A[\w\_]+\z/",
+                            "example": "bitmap_1"
+                          },
+                          "x_origin": {
+                            "description": "Print origin of X-coordinate of barcode (fixed as 4 digits)",
+                            "type": "string",
+                            "required": true,
+                            "pattern": "/\A\d{4}\z/",
+                            "example": "0040"
+                          },
+                          "y_origin": {
+                            "description": "Print origin of Y-coordinate of barcode (fixed as 4 digits)",
+                            "type": "string",
+                            "required": true,
+                            "pattern": "/\A\d{4}\z/",
+                            "example": "0060"
+                          },
+                          "horizontal_magnification":{
+                            "description": "Character horizontal magnification (Two digit designation enables magnifications in 0.5 units)",
+                            "type": "string",
+                            "required": false,
+                            "pattern": "/\A\d{1,2}\z/",
+                            "example": "05",
+                            "default": "1"
+                          }, 
+                          "vertical_magnification":{
+                            "description": "Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1)",
+                            "type": "string",
+                            "required": false,
+                            "pattern": "/\A\d{1,2}\z/",
+                            "example": "05",
+                            "default": "1"
+                          },
+                          "font":{
+                            "description": "Type of font e.g. Helvetica medium",
+                            "type": "string",
+                            "required": false,
+                            "format": "/\A[A-W]{1}\z/",
+                            "example": "G",
+                            "default": "G"
+                          },
+                          "space_adjustment":{
+                            "description": "No of spaces between characters (00 - 99)",
+                            "type": "string",
+                            "format": "/\A\d{2}\z/",
+                            "required": false,
+                            "default": "00",
+                            "example": "00"
+                          }, 
+                          "rotational_angles":{
+                            "description": "Rotational angles of character and character string (mostly 00)",
+                            "type": "string",
+                            "required": false,
+                            "format": "/\A\d{2}\z/",
+                            "example": "00",
+                            "default": "00"
+                          }
                         }
-                      }
-                    },
-                    "barcodes_attributes": {
-                      "description": "An array of barcodes that are part of the label",
-                      "type": "array",
-                      "required": false,
-                      "properties": {
-                        "field_name": {
-                          "description": "The unique name of the field",
-                          "required": true,
-                          "type": "string",
-                          "pattern": "/\A[\w\_]+\z/",
-                          "example": "barcode_1"
-                        },
-                        "x_origin": {
-                          "description": "Print origin of X-coordinate of barcode (fixed as 4 digits)",
-                          "type": "string",
-                          "required": true,
-                          "pattern": "/\A\d{4}\z/",
-                          "example": "0040"
-                        },
-                        "y_origin": {
-                          "description": "Print origin of Y-coordinate of barcode (fixed as 4 digits)",
-                          "type": "string",
-                          "required": true,
-                          "pattern": "/\A\d{4}\z/",
-                          "example": "0060"
-                        },
-                        "barcode_type": {
-                          "description": "A single letter or number indicating the type of barcode e.g. code128 - 9, EAN13 - 5, 2D - Q",
-                          "type": "string",
-                          "required": false,
-                          "pattern": "/\A[0-9A-Z]{1}\z/",
-                          "default": "5",
-                          "example": "Q"
-                        },
-                        "type_of_check_digit": {
-                          "description": "Type of check digit (1-5)",
-                          "type": "string",
-                          "required": false,
-                          "example": "2",
-                          "default": "3"
-                        },
-                        "one_module_width": {
-                          "description": "1-module width 0-15 in dots",
-                          "type": "string",
-                          "required": false,
-                          "example": "06",
-                          "default": "02"
-                        },
-                        "one_cell_width": {
-                          "description": "1-cell width 00 to 99 (in dots)",
-                          "type": "string",
-                          "required": false,
-                          "example": "99",
-                          "default": "01"
-                        },
-                        "rotational_angle": {
-                          "description": "rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)",
-                          "type": "string",
-                          "required": false,
-                          "example": "1",
-                          "default": "1"
-                        },
-                        "height": {
-                          "description": "Height of barcode (0001 - 1000)",
-                          "type": "string",
-                          "required": false,
-                          "example": "0070",
-                          "default": "0070"
+                      },
+                      "barcodes_attributes": {
+                        "description": "An array of barcodes that are part of the label",
+                        "type": "array",
+                        "required": false,
+                        "properties": {
+                          "field_name": {
+                            "description": "The unique name of the field",
+                            "required": true,
+                            "type": "string",
+                            "pattern": "/\A[\w\_]+\z/",
+                            "example": "barcode_1"
+                          },
+                          "x_origin": {
+                            "description": "Print origin of X-coordinate of barcode (fixed as 4 digits)",
+                            "type": "string",
+                            "required": true,
+                            "pattern": "/\A\d{4}\z/",
+                            "example": "0040"
+                          },
+                          "y_origin": {
+                            "description": "Print origin of Y-coordinate of barcode (fixed as 4 digits)",
+                            "type": "string",
+                            "required": true,
+                            "pattern": "/\A\d{4}\z/",
+                            "example": "0060"
+                          },
+                          "barcode_type": {
+                            "description": "A single letter or number indicating the type of barcode e.g. code128 - 9, EAN13 - 5, 2D - Q",
+                            "type": "string",
+                            "required": false,
+                            "pattern": "/\A[0-9A-Z]{1}\z/",
+                            "default": "5",
+                            "example": "Q"
+                          },
+                          "type_of_check_digit": {
+                            "description": "Type of check digit (1-5)",
+                            "type": "string",
+                            "required": false,
+                            "example": "2",
+                            "default": "3"
+                          },
+                          "one_module_width": {
+                            "description": "1-module width 0-15 in dots",
+                            "type": "string",
+                            "required": false,
+                            "example": "06",
+                            "default": "02"
+                          },
+                          "one_cell_width": {
+                            "description": "1-cell width 00 to 99 (in dots)",
+                            "type": "string",
+                            "required": false,
+                            "example": "99",
+                            "default": "01"
+                          },
+                          "rotational_angle": {
+                            "description": "rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)",
+                            "type": "string",
+                            "required": false,
+                            "example": "1",
+                            "default": "1"
+                          },
+                          "height": {
+                            "description": "Height of barcode (0001 - 1000)",
+                            "type": "string",
+                            "required": false,
+                            "example": "0070",
+                            "default": "0070"
+                          }
                         }
                       }
                     }
-                    
                   }
                 }
               }
-
             }
           }
+          
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
+                "data": {
                   "id": 1,
-                  "name": "LabWhere",
-                  "label_type":
-                    {
-                      "id":4,
-                      "feed_value":"08",
-                      "fine_adjustment":"004",
-                      "pitch_length":"0110",
-                      "print_width":"0920",
-                      "print_length":"0080",
-                      "name":"Plate"
+                  "type": "label_templates",
+                  "attributes":{
+                    "name": "LabWhere"
+                  },
+                  "relationships":{
+                    "label_type":{
+                      "data":{
+                        "id": "1",
+                        "type": "label_types"
+                      }
                     },
-                  "labels":
-                  [
-                    {
-                      "name": "header",
-                      "bitmaps": 
+                    "labels": {
+                      "data": 
                       [
                         {
-                          "x_origin":"0030",
-                          "y_origin":"0035",
-                          "field_name":"location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
+                          "id": "13",
+                          "type": "labels"
                         },
                         {
-                          "x_origin":"0030",
-                          "y_origin":"0065",
-                          "field_name":"parent_location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        }
-                      ],
-                      "barcodes":
-                      [
-                      ]
-                    },
-                    {
-                      "name":"location",
-                      "bitmaps":
-                      [
-                        {
-                          "x_origin":"0030",
-                          "y_origin":"0035",
-                          "field_name":"location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        },
-                        {
-                          "x_origin":"0030",
-                          "y_origin":"0065",
-                          "field_name":"parent_location",
-                          "horizontal_magnification":"05",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        }
-                      ],
-                      "barcodes":
-                      [
-                        {
-                          "x_origin":"0300",
-                          "y_origin":"0000",
-                          "field_name":"barcode",
-                          "barcode_type":"9",
-                          "one_module_width":"02",
-                          "height":"0070"
+                          "id": "14",
+                          "type": "labels"
                         }
                       ]
-                    },
-                    {
-                      "name":"footer",
-                      "bitmaps":
-                      [
-                        {
-                          "x_origin":"0050",
-                          "y_origin":"0035",
-                          "field_name":"footer_text_1",
-                          "horizontal_magnification":"1",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        },
-                        {
-                          "x_origin":"0020",
-                          "y_origin":"0065",
-                          "field_name":"footer_text_2",
-                          "horizontal_magnification":"1",
-                          "vertical_magnification":"1",
-                          "font":"G",
-                          "space_adjustment":"00",
-                          "rotational_angles":"00"
-                        }
-                      ],
-                      "barcodes":
-                      [
-                      ]
-                    ]
+                    }
                   }
-                }
+                },
+                "included": 
+                [
+                  {
+                    "id": "1",
+                    "type": "label_types",
+                    "attributes": {
+                      "feed_value": "008",
+                      "fine_adjustment": "04",
+                      "pitch_length": "0110",
+                      "print_width": "0920",
+                      "print_length": "0080",
+                      "name": "Plate"
+                    }
+                  },
+                  {
+                    "id": "13",
+                    "type": "labels",
+                    "attributes": {
+                      "name": "label_13"
+                    },
+                    "relationships": {
+                      "bitmaps": {
+                        "data": 
+                        [
+                          {
+                            "id": "39",
+                            "type": "bitmaps"
+                          },
+                          {
+                            "id": "40",
+                            "type": "bitmaps"
+                          }
+                        ]
+                      },
+                      "barcodes": {
+                        "data": 
+                        [
+                          {
+                            "id": "41",
+                            "type": "barcodes"
+                          },
+                          {
+                            "id": "42",
+                            "type": "barcodes"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "39",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "bitmap_15",
+                      "horizontal_magnification": "2",
+                      "vertical_magnification": "4",
+                      "font": "A",
+                      "space_adjustment": "12",
+                      "rotational_angles": "14"
+                    }
+                  },
+                  {
+                    "id": "40",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "bitmap_16",
+                      "horizontal_magnification": "2",
+                      "vertical_magnification": "4",
+                      "font": "A",
+                      "space_adjustment": "12",
+                      "rotational_angles": "14"
+                    }
+                  },
+                  {
+                    "id": "41",
+                    "type": "barcodes",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "barcode_15",
+                      "barcode_type": "7",
+                      "one_module_width": "09",
+                      "height": "0170"
+                    }
+                  },
+                  {
+                    "id": "42",
+                    "type": "barcodes",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "barcode_16",
+                      "barcode_type": "7",
+                      "one_module_width": "09",
+                      "height": "0170"
+                    }
+                  },
+                  {
+                    "id": "14",
+                    "type": "labels",
+                    "attributes": {
+                      "name": "label_14"
+                    },
+                    "relationships": {
+                      "bitmaps": {
+                        "data": 
+                        [
+                          {
+                            "id": "43",
+                            "type": "bitmaps"
+                          },
+                          {
+                            "id": "44",
+                            "type": "bitmaps"
+                          }
+                        ]
+                      },
+                      "barcodes": {
+                        "data": 
+                        [
+                          {
+                            "id": "45",
+                            "type": "barcodes"
+                          },
+                          {
+                            "id": "46",
+                            "type": "barcodes"
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "id": "43",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "bitmap_17",
+                      "horizontal_magnification": "2",
+                      "vertical_magnification": "4",
+                      "font": "A",
+                      "space_adjustment": "12",
+                      "rotational_angles": "14"
+                    }
+                  },
+                  {
+                    "id": "44",
+                    "type": "bitmaps",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "bitmap_18",
+                      "horizontal_magnification": "2",
+                      "vertical_magnification": "4",
+                      "font": "A",
+                      "space_adjustment": "12",
+                      "rotational_angles": "14"
+                    }
+                  },
+                  {
+                    "id": "45",
+                    "type": "barcodes",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "barcode_17",
+                      "barcode_type": "7",
+                      "one_module_width": "09",
+                      "height": "0170"
+                    }
+                  },
+                  {
+                    "id": "46",
+                    "type": "barcodes",
+                    "attributes": {
+                      "x_origin": "0030",
+                      "y_origin": "0035",
+                      "field_name": "barcode_18",
+                      "barcode_type": "7",
+                      "one_module_width": "09",
+                      "height": "0170"
+                    }
+                  }
+                ]
+              }
       422:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
                 "errors":{
@@ -569,43 +823,50 @@ version: 1.0
       application/json:
         schema: |
           {
-            "print_job":
-            {
+            "data":{
               "type": "object",
               "required": true,
-              "properties":{
-                "printer_name": {
-                  "description": "The name of the printer to print the job to",
-                  "required": true,
-                  "example": "d304bc"
+              "properties": {
+                "type": {
+                  "description": "The type of the object, here: 'printer'",
+                  "required": false,
+                  "type": "string",
+                  "example": "printer"
                 },
-                "label_template_id": {
-                  "description": "The id of the label template to use for the print job",
-                  "required": true,
-                  "example": 1
-                },
-                "labels":{
-                  "description": "The labels that are to be printed",
-                  "required": true,
-                  "type": "object",
-                  "properties": {
-                    "header": {
-                      "description": "Header label",
-                      "required": false,
-                      "type": "object",
-                      "example": {"header_text_1": "header_text_1", "header_text_2": "header_text_2"}
-                    },
-                    "body": {
-                      "description": "A body of labels",
-                      "required": true,
-                      "type": "array",
-                      "example": [{"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}, {"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}]
-                    },
-                    "footer": {
-                      "description": "Footer label",
-                      "required": false,
-                      "type": "object",
-                      "example": {"footer_text_1": "footer_text_1", "footer_text_2": "footer_text_2"}
+                "attributes":{
+                  "printer_name": {
+                    "description": "The name of the printer to print the job to",
+                    "required": true,
+                    "example": "d304bc"
+                  },
+                  "label_template_id": {
+                    "description": "The id of the label template to use for the print job",
+                    "required": true,
+                    "example": 1
+                  },
+                  "labels":{
+                    "description": "The labels that are to be printed",
+                    "required": true,
+                    "type": "object",
+                    "properties": {
+                      "header": {
+                        "description": "Header label",
+                        "required": false,
+                        "type": "object",
+                        "example": {"header_text_1": "header_text_1", "header_text_2": "header_text_2"}
+                      },
+                      "body": {
+                        "description": "A body of labels",
+                        "required": true,
+                        "type": "array",
+                        "example": [{"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}, {"location": {"location": "location", "parent_location": "parent_location", "barcode": "barcode"}}]
+                      },
+                      "footer": {
+                        "description": "Footer label",
+                        "required": false,
+                        "type": "object",
+                        "example": {"footer_text_1": "footer_text_1", "footer_text_2": "footer_text_2"}
+                      }
                     }
                   }
                 }
@@ -615,37 +876,43 @@ version: 1.0
     responses:
       200:
         body:
-          application/json:
+          application/vnd.api+json:
             example: |
               {
-                "printer_name": "d304bc",
-                "label_template_id": 1,
-                "labels": {
-                  "header": {
-                    "header_text_1": "header_text_1",
-                    "header_text_2": "header_text_2"
-                  }, 
-                  "footer": {
-                    "footer_text_1": "footer_text_1",
-                    "footer_text_2": "footer_text_2"
-                  }, 
-                  "body": [
-                    {
-                      "location": {
-                        "location": "location", 
-                        "parent_location": "parent_location",
-                        "barcode": "barcode"
-                       }
-                    }, 
-                    {
-                      "location": {
-                        "location": "location", 
-                        "parent_location": "parent_location",
-                        "barcode": "barcode"
-                      }
+                "data": {
+                  "id": "",
+                  "type": "print_jobs",
+                  "attributes": {
+                    "printer_name": "d304bc",
+                    "label_template_id": 1,
+                    "labels": {
+                      "header": {
+                        "header_text_1": "header_text_1",
+                        "header_text_2": "header_text_2"
+                      },
+                      "footer": {
+                        "footer_text_1": "footer_text_1",
+                        "footer_text_2": "footer_text_2"
+                      },
+                      "body": [
+                        {
+                          "location": {
+                            "location": "location",
+                            "parent_location": "parent_location",
+                            "barcode": "barcode"
+                          }
+                        },
+                        {
+                          "location": {
+                            "location": "location",
+                            "parent_location": "parent_location",
+                            "barcode": "barcode"
+                          }
+                        }
+                      ]
                     }
-                  ]
-                } 
+                  }
+                }
               }
       422:
         body:
@@ -663,29 +930,34 @@ version: 1.0
   post:
     description: Create a new printer
     body:
-      application/json:
+      application/vnd.api+json:
         schema: |
           {
-            "printer":
-            {
+            "data":{
               "type": "object",
               "required": true,
-              "properties":
-              {
-                "name": {
-                  "description": "The unique name of the printer. Relates to the printer name on the network",
-                  "required": true,
-                  "type": "string",
-                  "example": "d304bc"
-                },
-                "protocol": {
-                  "description": "The protocol which the printer uses",
+              "properties": {
+                "type": {
+                  "description": "The type of the object, here: 'printer'",
                   "required": false,
                   "type": "string",
-                  "enum": ["LPD", "IPP", "TOF"],
-                  "default": "LPD"
+                  "example": "printer"
+                },
+                "attributes":{
+                  "name": {
+                    "description": "The unique name of the printer. Relates to the printer name on the network",
+                    "required": true,
+                    "type": "string",
+                    "example": "d304bc"
+                  },
+                  "protocol": {
+                    "description": "The protocol which the printer uses",
+                    "required": false,
+                    "type": "string",
+                    "enum": ["LPD", "IPP", "TOF"],
+                    "default": "LPD"
+                  }
                 }
-
               }
             }
           }
@@ -695,9 +967,14 @@ version: 1.0
           application/json:
             example: |
               {
-                "id":1,
-                "name":"e367bc",
-                "protocol":"LPD"
+                "data": {
+                  "id": "1",
+                  "type": "printers",
+                  "attributes": {
+                    "name": "e576bc",
+                    "protocol": "LPD"
+                  }
+                }
               }
       422:
         body:
