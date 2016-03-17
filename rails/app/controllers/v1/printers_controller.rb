@@ -24,7 +24,7 @@ protected
   end
 
   def printer_params
-    params.require(:printer).permit(:name)
+    params.require(:data).require(:attributes).permit(:name)
   end
   
 end
