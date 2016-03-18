@@ -71,7 +71,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/vnd.api+json:
+          application/json:
             example: |  
               {
                 "data": {
@@ -89,7 +89,7 @@ version: 1.0
               }              
       422:
         body:
-          application/vnd.api+json:
+          application/json:
             example: |
               {
               "errors":
@@ -107,7 +107,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/vnd.api+json:
+          application/json:
             example: |
               {
                 "data": 
@@ -157,7 +157,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/vnd.api+json:
+          application/json:
             example: |
               {
                 "data": 
@@ -537,6 +537,7 @@ version: 1.0
                             "description": "Type of check digit (1-5)",
                             "type": "string",
                             "required": false,
+                            "pattern": "/\A\d{1}\z/",
                             "example": "2",
                             "default": "3"
                           },
@@ -544,6 +545,7 @@ version: 1.0
                             "description": "1-module width 0-15 in dots",
                             "type": "string",
                             "required": false,
+                            "pattern": "/\A\d{2}\z/",
                             "example": "06",
                             "default": "02"
                           },
@@ -551,6 +553,7 @@ version: 1.0
                             "description": "1-cell width 00 to 99 (in dots)",
                             "type": "string",
                             "required": false,
+                            "pattern": "/\A\d{2}\z/",
                             "example": "99",
                             "default": "01"
                           },
@@ -558,6 +561,7 @@ version: 1.0
                             "description": "rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)",
                             "type": "string",
                             "required": false,
+                            "pattern": "/\A\d{1}\z/",
                             "example": "1",
                             "default": "1"
                           },
@@ -565,8 +569,25 @@ version: 1.0
                             "description": "Height of barcode (0001 - 1000)",
                             "type": "string",
                             "required": false,
+                            "pattern": "/\A\d{4}\z/",
                             "example": "0070",
                             "default": "0070"
+                          },
+                          "no_of_columns": {
+                            "description": "Number of columns for PDF417 barcodes (01-30)",
+                            "type": "string",
+                            "required": false,
+                            "pattern": "/\A\d{2}\z/",
+                            "example": "04",
+                            "default": "01"
+                          },
+                          "bar_height": {
+                            "description": "Height of bar for PDF417 barcodes (000-0100)",
+                            "type": "string",
+                            "required": false,
+                            "pattern": "/\A\d{4}\z/",
+                            "example": "0010",
+                            "default": "0010"
                           }
                         }
                       }
@@ -580,7 +601,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/vnd.api+json:
+          application/json:
             example: |
               {
                 "data": {
@@ -697,7 +718,12 @@ version: 1.0
                       "field_name": "barcode_15",
                       "barcode_type": "7",
                       "one_module_width": "09",
-                      "height": "0170"
+                      "height": "0170",
+                      "one_cell_width": null,
+                      "type_of_check_digit": null,
+                      "rotational_angle": null,
+                      "no_of_columns": null,
+                      "bar_height": null
                     }
                   },
                   {
@@ -709,7 +735,12 @@ version: 1.0
                       "field_name": "barcode_16",
                       "barcode_type": "7",
                       "one_module_width": "09",
-                      "height": "0170"
+                      "height": "0170",
+                      "one_cell_width": null,
+                      "type_of_check_digit": null,
+                      "rotational_angle": null,
+                      "no_of_columns": null,
+                      "bar_height": null
                     }
                   },
                   {
@@ -803,7 +834,7 @@ version: 1.0
               }
       422:
         body:
-          application/vnd.api+json:
+          application/json:
             example: |
               {
                 "errors":{
@@ -820,7 +851,7 @@ version: 1.0
   post:
     description: Print a label to a named printer and selected label template
     body:
-      application/json:
+      application/vnd.api+json:
         schema: |
           {
             "data":{
@@ -876,7 +907,7 @@ version: 1.0
     responses:
       200:
         body:
-          application/vnd.api+json:
+          application/json:
             example: |
               {
                 "data": {
