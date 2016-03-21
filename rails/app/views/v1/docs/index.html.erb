@@ -430,7 +430,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-7"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-7" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-8"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-8" type="checkbox">
+  <label for="collapse-8"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-8" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-9"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-9" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -457,7 +457,7 @@
 </section><section>
   <label for="collapse-10"><h5>422 </h5></label><input aria-hidden="true" checked id="collapse-10" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-11"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-11" type="checkbox">
+  <label for="collapse-11"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-11" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-12"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-12" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -493,7 +493,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-15"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-15" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-16"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-16" type="checkbox">
+  <label for="collapse-16"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-16" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-17"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-17" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -565,7 +565,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-21"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-21" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-22"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-22" type="checkbox">
+  <label for="collapse-22"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-22" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-23"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-23" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -964,6 +964,7 @@
                   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Type of check digit (1-5)"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{1}\z/"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
@@ -971,6 +972,7 @@
                   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-module width 0-15 in dots"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{2}\z/"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"06"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"02"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
@@ -978,6 +980,7 @@
                   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1-cell width 00 to 99 (in dots)"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{2}\z/"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
@@ -985,6 +988,7 @@
                   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{1}\z/"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
                 </span><span class="p">},</span><span class="w">
@@ -992,8 +996,25 @@
                   </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Height of barcode (0001 - 1000)"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0070"</span><span class="p">,</span><span class="w">
                   </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0070"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"no_of_columns"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Number of columns for PDF417 barcodes (01-30)"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{2}\z/"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"04"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"bar_height"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Height of bar for PDF417 barcodes (000-0100)"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"required"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"pattern"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/\A\d{4}\z/"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"example"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0010"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0010"</span><span class="w">
                 </span><span class="p">}</span><span class="w">
               </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1015,7 +1036,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-29"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-29" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-30"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-30" type="checkbox">
+  <label for="collapse-30"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-30" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-31"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-31" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -1133,7 +1154,12 @@
         </span><span class="nt">"field_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode_15"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"barcode_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"one_module_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0170"</span><span class="w">
+        </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0170"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"one_cell_width"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type_of_check_digit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rotational_angle"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"no_of_columns"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bar_height"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1145,7 +1171,12 @@
         </span><span class="nt">"field_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"barcode_16"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"barcode_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"one_module_width"</span><span class="p">:</span><span class="w"> </span><span class="s2">"09"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0170"</span><span class="w">
+        </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0170"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"one_cell_width"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"type_of_check_digit"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rotational_angle"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"no_of_columns"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"bar_height"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1247,7 +1278,7 @@
 </section><section>
   <label for="collapse-32"><h5>422 </h5></label><input aria-hidden="true" checked id="collapse-32" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-33"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-33" type="checkbox">
+  <label for="collapse-33"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-33" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-34"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-34" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -1287,7 +1318,7 @@
 </div><section>
   <label for="collapse-37"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-37" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-38"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-38" type="checkbox">
+  <label for="collapse-38"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-38" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-39"><h5>Schema </h5></label><input aria-hidden="true" checked id="collapse-39" type="checkbox">
   <div class="collapse_content"><pre><code class="schema"><pre class="highlight"><code><span class="p">{</span><span class="w">
@@ -1353,7 +1384,7 @@
   <div class="collapse_content"><section>
   <label for="collapse-41"><h5>200 </h5></label><input aria-hidden="true" checked id="collapse-41" type="checkbox">
   <div class="collapse_content"><section>
-  <label for="collapse-42"><h5>application/vnd.api+json </h5></label><input aria-hidden="true" checked id="collapse-42" type="checkbox">
+  <label for="collapse-42"><h5>application/json </h5></label><input aria-hidden="true" checked id="collapse-42" type="checkbox">
   <div class="collapse_content"><section>
   <label for="collapse-43"><h5>Example </h5></label><input aria-hidden="true" checked id="collapse-43" type="checkbox">
   <div class="collapse_content"><pre><code class="example"><pre class="highlight"><code><span class="p">{</span><span class="w">
