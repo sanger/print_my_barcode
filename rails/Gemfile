@@ -30,6 +30,8 @@ gem 'byebug'
 # Deploy with Capistrano
 # gem 'capistrano', :group => :development
 
+gem 'exception_notification'
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
