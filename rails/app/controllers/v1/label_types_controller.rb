@@ -33,7 +33,7 @@ private
   end
 
   def label_type_params
-    params.require(:label_type).permit(:name, :feed_value, :fine_adjustment,:pitch_length, :print_width,:print_length)
+    params.require(:data).require(:attributes).permit(:name, :feed_value, :fine_adjustment,:pitch_length, :print_width,:print_length)
   end
   
 end

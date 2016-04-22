@@ -1,5 +1,4 @@
-class BitmapSerializer < DrawingSerializer
+class BitmapSerializer < ActiveModel::Serializer
   
-  attributes :horizontal_magnification, :vertical_magnification, :font, :space_adjustment, :rotational_angles
-  
+  attributes *Bitmap.permitted_attributes
 end

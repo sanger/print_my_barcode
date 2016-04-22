@@ -43,6 +43,10 @@ module LabelPrinter
         self.class.to_s.demodulize.capitalize
       end
 
+      def id
+        nil
+      end
+
     private
 
       def check_printer

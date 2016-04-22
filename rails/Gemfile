@@ -9,9 +9,10 @@ group :development, :test do
   gem 'spring'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.1'
+  gem 'byebug'
 end
 
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.10.0.rc4'
 
 gem 'puma'
 
@@ -26,6 +27,8 @@ gem 'puma'
 
 # Deploy with Capistrano
 # gem 'capistrano', :group => :development
+
+gem 'exception_notification'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

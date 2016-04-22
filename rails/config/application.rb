@@ -37,5 +37,7 @@ module PrintMyBarcode
         g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
 
+    config.mailer = config_for(:mailer)
+
   end
 end

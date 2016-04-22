@@ -20,3 +20,6 @@
 
 #ignore docs
 /doc/app
+
+/public/print_job.txt
+.byebug_history
