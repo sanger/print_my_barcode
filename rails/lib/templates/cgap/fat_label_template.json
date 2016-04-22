@@ -1,0 +1,64 @@
+{
+  "label_template":{
+    "label_type_id": 5,
+    "name": "CGAP - Fat",
+    "labels_attributes":[
+      {
+        "name": "label_1",
+        "bitmaps_attributes": [
+          {
+            "field_name": "barcode_text",
+            "x_origin": "0000",
+            "y_origin": "0115",
+            "horizontal_magnification": "05",
+            "vertical_magnification": "05",
+            "font": "H",
+            "space_adjustment": "01",
+            "rotational_angles": "00"
+          },
+          {
+            "field_name": "reagent_name",
+            "x_origin": "0000",
+            "y_origin": "0140",
+            "horizontal_magnification": "05",
+            "vertical_magnification": "05",
+            "font": "H",
+            "space_adjustment": "01",
+            "rotational_angles": "00"
+          },
+          {
+            "field_name": "batch_no",
+            "x_origin": "0000",
+            "y_origin": "0165",
+            "horizontal_magnification": "05",
+            "vertical_magnification": "05",
+            "font": "H",
+            "space_adjustment": "01",
+            "rotational_angles": "00"
+          },
+          {
+            "field_name": "date",
+            "x_origin": "0000",
+            "y_origin": "0190",
+            "horizontal_magnification": "05",
+            "vertical_magnification": "05",
+            "font": "H",
+            "space_adjustment": "01",
+            "rotational_angles": "00"
+          }
+        ],
+        "barcodes_attributes": [
+          {
+            "field_name": "barcode",
+            "x_origin": "0035",
+            "y_origin": "0000",
+            "barcode_type": "5",
+            "type_of_check_digit": "2",
+            "one_module_width": "02",
+            "height": "0080"
+          }
+        ]
+      }
+    ]
+  }
+}

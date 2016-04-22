@@ -1,0 +1,11 @@
+{
+  "label_type":
+  {
+    "name": "CGAP - Fat",
+    "feed_value": "002",
+    "fine_adjustment": "10",
+    "pitch_length": "0280",
+    "print_width": "0330",
+    "print_length": "0200"
+  }
+}
