@@ -24,6 +24,12 @@ RSpec.describe V1::PrintJobsController, type: :request do
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
   end
 
+  it "should return an error if request provides incorrect parameters" do
+    post v1_print_jobs_path, {data: {attributes: { printer_name: printer.name, label_type_id: label_template.id, labels: label_template.dummy_labels.to_h}}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
+    expect(response).to have_http_status(:unprocessable_entity)
+    expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
+  end
+
 end
 
 
