@@ -13,7 +13,7 @@ class V1::LabelTemplatesController < ApplicationController
   def create
     label_template = LabelTemplate.new label_template_params
     if label_template.save
-      render json: label_template, include: '**'
+      render json: label_template, include: '**', status: :created
     else
       render json: { errors: label_template.errors }, status: :unprocessable_entity
     end
@@ -37,5 +37,5 @@ private
   def label_template_params
     params.require(:data).require(:attributes).permit(LabelTemplate.permitted_attributes)
   end
-  
+
 end
