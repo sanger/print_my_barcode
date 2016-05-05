@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |variable|
-  
+
   it "should allow retrieval of all label template" do
     label_templates = create_list(:label_template, 5)
     get v1_label_templates_path
@@ -29,9 +29,10 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
   it "should allow creation of a new label template" do
     params = label_template_params
     expect {
-      post v1_label_templates_path, params.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"} 
+      post v1_label_templates_path, params.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
       }.to change(LabelTemplate, :count).by(1)
     expect(response).to be_success
+    expect(response).to have_http_status(:created)
     label_template = LabelTemplate.first
 
     expect(label_template.name).to eq(params[:data][:attributes][:name])
@@ -44,7 +45,7 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
 
   it "should prevent creation of a new label template with invalid label type" do
     expect {
-      post v1_label_templates_path, {data:{attributes:label_template_params_with_invalid_label_type}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"} 
+      post v1_label_templates_path, {data:{attributes:label_template_params_with_invalid_label_type}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
       }.to_not change(LabelTemplate, :count)
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
@@ -52,7 +53,7 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
 
   it "should prevent creation of a new label template with invalid association" do
     expect {
-      post v1_label_templates_path, {data:{attributes:label_template_params_with_invalid_association}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"} 
+      post v1_label_templates_path, {data:{attributes:label_template_params_with_invalid_association}}.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
       }.to_not change(LabelTemplate, :count)
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
