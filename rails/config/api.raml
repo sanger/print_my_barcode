@@ -49,14 +49,14 @@ version: 1.0
                     "type": "string",
                     "pattern": "/\A\d{4}\z/",
                     "example": "0110"
-                  },
+                  }, 
                   "print_width":{
                     "description": "Effective print width (4 digits)",
                     "required": true,
                     "type": "string",
                     "pattern": "/\A\d{4}\z/",
                     "example": "0920"
-                  },
+                  }, 
                   "print_length":{
                     "description": "Effective print length (4 digits)",
                     "required": true,
@@ -69,10 +69,10 @@ version: 1.0
             }
           }
     responses:
-      201:
+      200:
         body:
           application/json:
-            example: |
+            example: |  
               {
                 "data": {
                   "id": "2",
@@ -86,7 +86,7 @@ version: 1.0
                     "name": "Label Type 7"
                   }
                 }
-              }
+              }              
       422:
         body:
           application/json:
@@ -103,14 +103,14 @@ version: 1.0
                 }
               }
   get:
-    description: Return all of the Label Types
+    description: Return all of the Label Types 
     responses:
       200:
         body:
           application/json:
             example: |
               {
-                "data":
+                "data": 
                 [
                   {
                     "id": "1",
@@ -149,7 +149,7 @@ version: 1.0
                     }
                   }
                 ]
-              }
+              }              
 
 /label_templates:
   get:
@@ -160,7 +160,7 @@ version: 1.0
           application/json:
             example: |
               {
-                "data":
+                "data": 
                 [
                   {
                     "id": "1",
@@ -176,7 +176,7 @@ version: 1.0
                         }
                       },
                       "labels": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "1",
@@ -195,7 +195,7 @@ version: 1.0
                     }
                   }
                 ],
-                "included":
+                "included": 
                 [
                   {
                     "id": "1",
@@ -217,7 +217,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "1",
@@ -270,7 +270,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "3",
@@ -282,9 +282,9 @@ version: 1.0
                           }
                         ]
                       },
-                      "barcodes":
+                      "barcodes": 
                       {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "5",
@@ -342,7 +342,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "6",
@@ -464,7 +464,7 @@ version: 1.0
                             "pattern": "/\A\d{1,2}\z/",
                             "example": "05",
                             "default": "1"
-                          },
+                          }, 
                           "vertical_magnification":{
                             "description": "Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1)",
                             "type": "string",
@@ -488,7 +488,7 @@ version: 1.0
                             "required": false,
                             "default": "00",
                             "example": "00"
-                          },
+                          }, 
                           "rotational_angles":{
                             "description": "Rotational angles of character and character string (mostly 00)",
                             "type": "string",
@@ -597,9 +597,9 @@ version: 1.0
               }
             }
           }
-
+          
     responses:
-      201:
+      200:
         body:
           application/json:
             example: |
@@ -618,7 +618,7 @@ version: 1.0
                       }
                     },
                     "labels": {
-                      "data":
+                      "data": 
                       [
                         {
                           "id": "13",
@@ -632,7 +632,7 @@ version: 1.0
                     }
                   }
                 },
-                "included":
+                "included": 
                 [
                   {
                     "id": "1",
@@ -654,7 +654,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "39",
@@ -667,7 +667,7 @@ version: 1.0
                         ]
                       },
                       "barcodes": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "41",
@@ -751,7 +751,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "43",
@@ -764,7 +764,7 @@ version: 1.0
                         ]
                       },
                       "barcodes": {
-                        "data":
+                        "data": 
                         [
                           {
                             "id": "45",
@@ -905,7 +905,7 @@ version: 1.0
             }
           }
     responses:
-      201:
+      200:
         body:
           application/json:
             example: |
@@ -993,7 +993,7 @@ version: 1.0
             }
           }
     responses:
-      201:
+      200:
         body:
           application/json:
             example: |
