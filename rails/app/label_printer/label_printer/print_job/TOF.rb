@@ -8,8 +8,8 @@ module LabelPrinter
     class TOF < Base
       def execute
         return false unless valid?
-        file = File.new("#{Rails.root}/public/print_job.txt", "w+")
-        file.write(data_input.to_s)
+        file = File.new("#{Rails.root}/public/print_job.txt", "w+", encoding: DEFAULT_ENCODING)
+        file.write(input)
         file.close
       end
     end
