@@ -136,6 +136,10 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
                                       subject.labels.to_s)
       end
 
+      it "should have the correct length" do
+        expect(subject.length).to eq(subject.to_s.length)
+      end
+
     end
     
   end

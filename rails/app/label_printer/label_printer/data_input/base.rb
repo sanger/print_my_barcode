@@ -61,6 +61,10 @@ module LabelPrinter
         labels.any?
       end
 
+      def length
+        to_s.length
+      end
+
     private
 
       def create_labels(values)
