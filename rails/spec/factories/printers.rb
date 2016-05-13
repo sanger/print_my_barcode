@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :printer do
-    sequence(:name) {|n| "Printer #{n}" }
+    sequence(:name) {|n| "printer#{n}" }
   end
 
 end

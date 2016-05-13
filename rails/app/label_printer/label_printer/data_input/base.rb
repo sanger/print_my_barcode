@@ -27,7 +27,7 @@ module LabelPrinter
       def initialize(label_template, input_values)
         @label_template = label_template
         @template_attributes = label_template.label_type.template_attributes
-        @values = input_values
+        @values = input_values || {}
         @labels = create_labels(values)
       end
 
@@ -62,7 +62,7 @@ module LabelPrinter
       end
 
       def length
-        to_s.length
+        to_s.bytesize
       end
 
     private

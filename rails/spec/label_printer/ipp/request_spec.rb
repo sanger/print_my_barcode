@@ -25,8 +25,16 @@ RSpec.describe LabelPrinter::IPP::Request, type: :model do
     expect(ipp_request.attribute_tags.to_s).to eq("0x01#{LabelPrinter::IPP::CharsetType.new.to_s}#{LabelPrinter::IPP::NaturalLanguageType.new.to_s}#{LabelPrinter::IPP::UriType.new("http://forest:631/pinetree").to_s}0x03")
   end
 
+  it "should have a header" do
+    expect(ipp_request.header.to_s).to eq("0x01010x0020x00000001")
+  end
+
   it "should have some data input" do
     expect(ipp_request.data_input).to eq(data_input)
+  end
+
+  it "should have a data length" do
+    expect(ipp_request.data_length).to eq((ipp_request.header.length+ipp_request.attribute_tags.length+data_input.length).to_s)
   end
   
 end

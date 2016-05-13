@@ -1,6 +1,6 @@
 module LabelPrinter
   module PrintJob
-
+ 
     ##
     # A print job is an ActiveModel object
     # For a print job to be execute it needs to be valid.
@@ -20,14 +20,13 @@ module LabelPrinter
       attr_accessor :printer_name, :label_template_id, :printer, :labels
       attr_reader :label_template, :data_input
 
-      validates_presence_of :labels
-      validate :check_printer, :check_label_template, :check_labels
+      validates_presence_of :labels, :printer, :label_template
+      validate :check_data_input, if: Proc.new { |print_job| print_job.data_input.present? }
 
       def initialize(attributes = {})
         super
         @printer ||= Printer.find_by_name(printer_name)
         @label_template = LabelTemplate.find_by_id(label_template_id)
-        @labels ||= {}
         @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) if valid?
       end
 
@@ -49,16 +48,12 @@ module LabelPrinter
 
     private
 
-      def check_printer
-        errors.add(:printer, "Printer does not exist") unless printer
-      end
-
-      def check_label_template
-        errors.add(:label_template, "Label template does not exist") unless label_template
-      end
-
-      def check_labels
-        errors.add(:labels, "There should be some labels") unless labels.any?
+      def check_data_input
+        unless data_input.valid?
+          data_input.errors.each do |key, value|
+            errors.add key, value
+          end
+        end
       end
       
     end
