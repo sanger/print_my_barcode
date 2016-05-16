@@ -41,7 +41,7 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       expect(my_list.find("c")).to eq({"c_1" => "three", "c_2" => "four", "c_3" => "five", "c_4" => "six"})
     end
   end
-  
+
   context "Label" do
 
     let!(:label)        { label_template.labels.first }
@@ -129,14 +129,18 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       end
 
       it "should produce the correct output" do
-        expect(subject.to_s).to eq( subject.set_label_size.to_s << 
+        expect(subject.to_s).to eq( subject.set_label_size.to_s <<
                                       subject.adjust_print_density.to_s <<
                                       subject.adjust_position.to_s <<
                                       LabelPrinter::Commands::Feed.command <<
                                       subject.labels.to_s)
       end
 
+      it "properly encodes the label data with CP-850" do
+        expect(subject.to_s.encoding).to eql Encoding::CP850
+      end
+
     end
-    
+
   end
 end

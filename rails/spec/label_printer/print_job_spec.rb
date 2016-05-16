@@ -53,9 +53,4 @@ RSpec.describe LabelPrinter::PrintJob, type: :model do
     expect(print_job).to be_IPP
   end
 
-  it "properly encodes the label data with CP-850" do
-    print_job = LabelPrinter::PrintJob.build(printer_name: printer.name, label_template_id: label_template.id, labels: label_template.dummy_labels.to_h)
-    expect(print_job.input.encoding).to eql Encoding::CP850
-  end
-
 end
