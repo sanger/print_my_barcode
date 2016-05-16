@@ -23,8 +23,6 @@ module LabelPrinter
       validates_presence_of :labels
       validate :check_printer, :check_label_template, :check_labels
 
-      DEFAULT_ENCODING = Encoding::CP850
-
       def initialize(attributes = {})
         super
         @printer ||= Printer.find_by_name(printer_name)
@@ -49,12 +47,8 @@ module LabelPrinter
         nil
       end
 
-      ##
-      # The printers use character code CP-850. We need to ensure the input is encoded correctly.
-      # If the data input contains anything that can't be encoded, or any invalid chars, replace them with
-      # a space, rather than raise an error.
       def input
-        @data_input.to_s.encode(DEFAULT_ENCODING, invalid: :replace, undef: :replace, replace: ' ')
+        @data_input.to_s
       end
 
     private

@@ -11,7 +11,7 @@ module LabelPrinter
       # Clean up by closing the file and removing it.
       def execute
         return false unless valid?
-        temp_file = Tempfile.new('PrintJob', encoding: DEFAULT_ENCODING)
+        temp_file = Tempfile.new('PrintJob', encoding: LabelPrinter::DEFAULT_ENCODING)
         begin
           temp_file.write(input)
           temp_file.close

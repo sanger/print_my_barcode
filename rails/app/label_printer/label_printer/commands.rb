@@ -166,8 +166,13 @@ module LabelPrinter
 
       ##
       # Takes an array of commands produces the output and reduces it into a single string.
+      # The printers use character code CP-850. We need to ensure the input is encoded correctly.
+      # If the data input contains anything that can't be encoded, or any invalid chars, replace them with
+      # a space, rather than raise an error.
       def to_s
-        commands.compact.collect { |c| c.to_s }.reduce(:<<)
+        commands.compact.collect { |c| c.to_s }
+          .reduce(:<<)
+          .encode(LabelPrinter::DEFAULT_ENCODING, invalid: :replace, undef: :replace, replace: ' ')
       end
     end
   end
