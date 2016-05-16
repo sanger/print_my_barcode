@@ -47,6 +47,10 @@ module LabelPrinter
         nil
       end
 
+      def input
+        @data_input.to_s
+      end
+
     private
 
       def check_printer
@@ -60,7 +64,7 @@ module LabelPrinter
       def check_labels
         errors.add(:labels, "There should be some labels") unless labels.any?
       end
-      
+
     end
   end
 end
