@@ -1,7 +1,7 @@
 class V1::PrintersController < ApplicationController
 
   def index
-    render json: Printer.all
+    render json: Printer.where(query_params[:filter])
   end
 
   def show
@@ -26,5 +26,15 @@ protected
   def printer_params
     params.require(:data).require(:attributes).permit(:name)
   end
-  
+
+  def query_params
+    query_params = params.permit(filter: [:name, :protocol])
+
+    if query_params.try(:filter).try(:protocol)
+      query_params[:filter][:protocol] = Printer.protocols[query_params[:filter][:protocol]]
+    end
+
+    query_params
+  end
+
 end

@@ -3,7 +3,7 @@ class V1::LabelTemplatesController < ApplicationController
   #'**' includes all nested associated resources in the "included" member
 
   def index
-    render json: LabelTemplate.all, include: '**'
+    render json: LabelTemplate.where(query_parameters[:filter]), include: '**'
   end
 
   def show
@@ -37,5 +37,9 @@ private
   def label_template_params
     params.require(:data).require(:attributes).permit(LabelTemplate.permitted_attributes)
   end
-  
+
+  def query_parameters
+    params.permit(filter: [:name])
+  end
+
 end

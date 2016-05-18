@@ -49,14 +49,14 @@ version: 1.0
                     "type": "string",
                     "pattern": "/\A\d{4}\z/",
                     "example": "0110"
-                  }, 
+                  },
                   "print_width":{
                     "description": "Effective print width (4 digits)",
                     "required": true,
                     "type": "string",
                     "pattern": "/\A\d{4}\z/",
                     "example": "0920"
-                  }, 
+                  },
                   "print_length":{
                     "description": "Effective print length (4 digits)",
                     "required": true,
@@ -72,7 +72,7 @@ version: 1.0
       200:
         body:
           application/json:
-            example: |  
+            example: |
               {
                 "data": {
                   "id": "2",
@@ -86,7 +86,7 @@ version: 1.0
                     "name": "Label Type 7"
                   }
                 }
-              }              
+              }
       422:
         body:
           application/json:
@@ -103,14 +103,20 @@ version: 1.0
                 }
               }
   get:
-    description: Return all of the Label Types 
+    description: Return all of the Label Types
+    queryParameters:
+      name:
+        type: string
+        description: Returns the Label Type with the given name
+        example: filter[name]=Plate
+        required: false
     responses:
       200:
         body:
           application/json:
             example: |
               {
-                "data": 
+                "data":
                 [
                   {
                     "id": "1",
@@ -149,18 +155,24 @@ version: 1.0
                     }
                   }
                 ]
-              }              
+              }
 
 /label_templates:
   get:
     description: Return a list of all of the Label Templates
+    queryParameters:
+      name:
+        type: string
+        description: Returns the Label Template with the given name
+        example: filter[name]=LabWhere
+        required: false
     responses:
       200:
         body:
           application/json:
             example: |
               {
-                "data": 
+                "data":
                 [
                   {
                     "id": "1",
@@ -176,7 +188,7 @@ version: 1.0
                         }
                       },
                       "labels": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "1",
@@ -195,7 +207,7 @@ version: 1.0
                     }
                   }
                 ],
-                "included": 
+                "included":
                 [
                   {
                     "id": "1",
@@ -217,7 +229,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "1",
@@ -270,7 +282,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "3",
@@ -282,9 +294,9 @@ version: 1.0
                           }
                         ]
                       },
-                      "barcodes": 
+                      "barcodes":
                       {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "5",
@@ -342,7 +354,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "6",
@@ -464,7 +476,7 @@ version: 1.0
                             "pattern": "/\A\d{1,2}\z/",
                             "example": "05",
                             "default": "1"
-                          }, 
+                          },
                           "vertical_magnification":{
                             "description": "Character vertical magnification (The magnification can be designated in 0.1 units between 0.5 to 1)",
                             "type": "string",
@@ -488,7 +500,7 @@ version: 1.0
                             "required": false,
                             "default": "00",
                             "example": "00"
-                          }, 
+                          },
                           "rotational_angles":{
                             "description": "Rotational angles of character and character string (mostly 00)",
                             "type": "string",
@@ -597,7 +609,7 @@ version: 1.0
               }
             }
           }
-          
+
     responses:
       200:
         body:
@@ -618,7 +630,7 @@ version: 1.0
                       }
                     },
                     "labels": {
-                      "data": 
+                      "data":
                       [
                         {
                           "id": "13",
@@ -632,7 +644,7 @@ version: 1.0
                     }
                   }
                 },
-                "included": 
+                "included":
                 [
                   {
                     "id": "1",
@@ -654,7 +666,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "39",
@@ -667,7 +679,7 @@ version: 1.0
                         ]
                       },
                       "barcodes": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "41",
@@ -751,7 +763,7 @@ version: 1.0
                     },
                     "relationships": {
                       "bitmaps": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "43",
@@ -764,7 +776,7 @@ version: 1.0
                         ]
                       },
                       "barcodes": {
-                        "data": 
+                        "data":
                         [
                           {
                             "id": "45",
@@ -958,6 +970,52 @@ version: 1.0
                 }
               }
 /printers:
+  get:
+    description: Return all of the Printers
+    queryParameters:
+      name:
+        type: string
+        description: Returns the printer with the given name
+        example: filter[name]=d304bc
+        required: false
+      protocol:
+        type: string
+        description: Returns all printers with the given protocol
+        example: filter[protocol]=LPD
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                data: [
+                  {
+                    id: "1",
+                    type: "printers",
+                    attributes: {
+                      name: "ippbc",
+                      protocol: "LPD"
+                    }
+                  },
+                  {
+                    id: "2",
+                    type: "printers",
+                    attributes: {
+                      name: "d304bc",
+                      protocol: "LPD"
+                      }
+                  },
+                  {
+                    id: "3",
+                    type: "printers",
+                    attributes: {
+                      name: "e367bc",
+                      protocol: "LPD"
+                    }
+                  }
+                ]
+              }
   post:
     description: Create a new printer
     body:
