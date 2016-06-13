@@ -1,8 +1,10 @@
-# Example: 
+# Example:
 # LabelType.create(name: "Plate", feed_value: "004", fine_adjustment: "08", pitch_length: "0110", print_width: "0920", print_length: "0080")
 # Each label type will have different size and positioning.
 # A label template must have a label type
 class LabelType < ActiveRecord::Base
+
+  include Filterable
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
 

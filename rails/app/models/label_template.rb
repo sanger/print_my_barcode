@@ -1,5 +1,7 @@
 class LabelTemplate < ActiveRecord::Base
 
+  include Filterable
+
   belongs_to :label_type
   has_many :labels, dependent: :destroy
 
@@ -29,10 +31,10 @@ class LabelTemplate < ActiveRecord::Base
   ##
   # For use as permitted attributes in the controller
   def self.permitted_attributes
-    [ 
+    [
       "name",
       "label_type_id",
-      "labels_attributes" => Label.permitted_attributes, 
+      "labels_attributes" => Label.permitted_attributes,
     ]
   end
 

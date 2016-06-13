@@ -1,7 +1,7 @@
 class V1::PrintersController < ApplicationController
 
   def index
-    render json: Printer.all
+    render json: Printer.filter(filter_params[:filter])
   end
 
   def show
@@ -26,5 +26,9 @@ protected
   def printer_params
     params.require(:data).require(:attributes).permit(:name)
   end
-  
+
+  def filter_params
+    params.permit(filter: [:name, :protocol])
+  end
+
 end
