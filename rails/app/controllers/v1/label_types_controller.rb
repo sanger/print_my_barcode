@@ -1,7 +1,7 @@
 class V1::LabelTypesController < ApplicationController
 
   def index
-    render json: LabelType.where(query_params[:filter])
+    render json: LabelType.filter(filter_params[:filter])
   end
 
   def show
@@ -36,7 +36,7 @@ private
     params.require(:data).require(:attributes).permit(:name, :feed_value, :fine_adjustment,:pitch_length, :print_width,:print_length)
   end
 
-  def query_params
+  def filter_params
     params.permit(filter: [:name])
   end
 
