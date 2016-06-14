@@ -12,7 +12,7 @@ module Filterable
       # If nil is passed in
       filters ||= {}
 
-      # Run the filters throught the before_filter
+      # Run the filters through the before_filter
       filters = @_before_filter.call(filters) if @_before_filter
 
       where(filters)
