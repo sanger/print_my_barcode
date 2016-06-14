@@ -12,7 +12,7 @@ class Printer < ActiveRecord::Base
   enum protocol: [:LPD, :IPP, :TOF]
 
   before_filter do |filters|
-    filters.try(:protocol) ? filters.merge!(protocol: protocols[filters[:protocol]]) : filters
+    filters.has_key?(:protocol) ? filters.merge!(protocol: protocols[filters[:protocol]]) : filters
   end
 
 end
