@@ -15,7 +15,7 @@ class V1::LabelTemplatesController < ApplicationController
     if label_template.save
       render json: label_template, include: '**'
     else
-      render json: { errors: label_template.errors }, status: :unprocessable_entity
+      render_error label_template
     end
   end
 
@@ -24,7 +24,7 @@ class V1::LabelTemplatesController < ApplicationController
     if label_template.update_attributes(label_template_params)
       render json: label_template, include: '**'
     else
-      render json: { errors: label_template.errors }, status: :unprocessable_entity
+      render_error label_template
     end
   end
 

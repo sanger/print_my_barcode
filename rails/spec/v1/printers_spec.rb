@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe V1::PrintersController, type: :request do |variable|
+RSpec.describe V1::PrintersController, type: :request, helpers: true do |variable|
 
   it "should allow retrieval of all printers" do
     printers = create_list(:printer, 5)
@@ -56,11 +56,16 @@ RSpec.describe V1::PrintersController, type: :request do |variable|
   end
 
   it "should prevent creation of a new printer with invalid attributes" do
-     expect {
+    expect {
       post v1_printers_path, {data:{attributes:{name:nil}}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
-      }.to_not change(Printer, :count)
+    }.to_not change(Printer, :count)
+
     expect(response).to have_http_status(:unprocessable_entity)
-    expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
+
+    json = ActiveSupport::JSON.decode(response.body)
+
+    expect(json["errors"]).not_to be_empty
+    expect(find_attribute_error_details(json, "name")).to include("can't be blank")
   end
 
 end

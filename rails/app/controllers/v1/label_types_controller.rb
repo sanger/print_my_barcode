@@ -13,7 +13,7 @@ class V1::LabelTypesController < ApplicationController
     if label_type.save
       render json: label_type
     else
-      render json: { errors: label_type.errors }, status: :unprocessable_entity
+      render_error label_type
     end
   end
 
@@ -22,7 +22,7 @@ class V1::LabelTypesController < ApplicationController
     if label_type.update_attributes(label_type_params)
       render json: label_type
     else
-      render json: { errors: label_type.errors }, status: :unprocessable_entity
+      render_error label_type
     end
   end
 

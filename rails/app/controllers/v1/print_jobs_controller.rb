@@ -5,7 +5,7 @@ class V1::PrintJobsController < ApplicationController
     if print_job.execute
       render json: print_job, serializer: PrintJobSerializer
     else
-      render json: { errors: print_job.errors }, status: :unprocessable_entity
+      render_error print_job
     end
   end
 

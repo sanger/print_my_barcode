@@ -13,7 +13,7 @@ class V1::PrintersController < ApplicationController
     if printer.save
       render json: printer
     else
-      render json: { errors: printer.errors }, status: :unprocessable_entity
+      render_error printer
     end
   end
 

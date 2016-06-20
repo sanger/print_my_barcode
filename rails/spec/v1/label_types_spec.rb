@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe V1::LabelTypesController, type: :request do |variable|
+RSpec.describe V1::LabelTypesController, type: :request, helpers: true do |variable|
 
   it "should allow retrieval of all label types" do
     label_types = create_list(:label_type, 5)
@@ -65,7 +65,11 @@ RSpec.describe V1::LabelTypesController, type: :request do |variable|
     label_type = create(:label_type)
     patch v1_label_type_path(label_type), {data:{attributes:{ name: nil }}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
     expect(response).to have_http_status(:unprocessable_entity)
-    expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
+
+    json = ActiveSupport::JSON.decode(response.body)
+
+    expect(json["errors"]).not_to be_empty
+    expect(find_attribute_error_details(json, "name")).to include("can't be blank")
   end
 
 end
