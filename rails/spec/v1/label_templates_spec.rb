@@ -46,6 +46,7 @@ RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |v
       post v1_label_templates_path, params.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
       }.to change(LabelTemplate, :count).by(1)
     expect(response).to be_success
+    expect(response).to have_http_status(:created)
     label_template = LabelTemplate.first
 
     expect(label_template.name).to eq(params[:data][:attributes][:name])

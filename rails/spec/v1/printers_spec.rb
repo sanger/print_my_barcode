@@ -53,6 +53,19 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |variabl
       post v1_printers_path, {data:{attributes:attributes_for(:printer)}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
       }.to change(Printer, :count).by(1)
     expect(response).to be_success
+    expect(response).to have_http_status(:created)
+  end
+
+  it "allows creation of a printer with a specified protocol" do
+    expect {
+      post v1_printers_path, {data:{attributes:{name: "Printer Juan", protocol: "IPP"}}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
+    }.to change(Printer, :count).by(1)
+    expect(response).to be_success
+    expect(response).to have_http_status(:created)
+
+    json = ActiveSupport::JSON.decode(response.body)
+
+    expect(json["data"]["attributes"]["protocol"]).to eq("IPP")
   end
 
   it "should prevent creation of a new printer with invalid attributes" do

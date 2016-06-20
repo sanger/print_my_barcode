@@ -11,7 +11,7 @@ class V1::LabelTypesController < ApplicationController
   def create
     label_type = LabelType.new label_type_params
     if label_type.save
-      render json: label_type
+      render json: label_type, status: :created
     else
       render_error label_type
     end

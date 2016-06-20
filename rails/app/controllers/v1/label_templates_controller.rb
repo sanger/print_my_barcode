@@ -13,7 +13,7 @@ class V1::LabelTemplatesController < ApplicationController
   def create
     label_template = LabelTemplate.new label_template_params
     if label_template.save
-      render json: label_template, include: '**'
+      render json: label_template, include: '**', status: :created
     else
       render_error label_template
     end

@@ -43,6 +43,7 @@ RSpec.describe V1::LabelTypesController, type: :request, helpers: true do |varia
       post v1_label_types_path, {data:{attributes:attributes_for(:label_type)}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
       }.to change(LabelType, :count).by(1)
     expect(response).to be_success
+    expect(response).to have_http_status(:created)
   end
 
   it "should prevent creation of a new label type with invalid attributes" do
