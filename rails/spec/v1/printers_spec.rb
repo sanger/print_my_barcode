@@ -33,6 +33,9 @@ RSpec.describe V1::PrintersController, type: :request do |variable|
     json = ActiveSupport::JSON.decode(response.body)
 
     expect(json["data"].length).to eq(3)
+    expect(json["data"][0]["attributes"]["protocol"]).to eq("LPD")
+    expect(json["data"][1]["attributes"]["protocol"]).to eq("LPD")
+    expect(json["data"][2]["attributes"]["protocol"]).to eq("LPD")
   end
 
   it "should allow retrieval of information about a particular printer" do
