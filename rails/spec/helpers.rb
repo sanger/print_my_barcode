@@ -24,6 +24,12 @@ module Helpers
       )
   end
 
+  def find_attribute_error_details(json, attribute)
+    json["errors"]
+      .find_all { |e| e["source"]["pointer"].include?(attribute) }
+      .map { |e| e["detail"] }
+  end
+
 private
 
   def labels_attributes
