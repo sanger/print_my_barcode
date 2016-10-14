@@ -6,5 +6,9 @@ class ApplicationController < ActionController::API
   def test_exception_notifier
     raise 'This is a test. This is only a test.'
   end
-  
+
+  def render_error(resource, status: :unprocessable_entity)
+    render json: resource, status: status, serializer: ActiveModel::Serializer::ErrorSerializer
+  end
+
 end

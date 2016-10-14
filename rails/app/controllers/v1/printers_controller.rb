@@ -11,9 +11,9 @@ class V1::PrintersController < ApplicationController
   def create
     printer = Printer.new(printer_params)
     if printer.save
-      render json: printer
+      render json: printer, status: :created
     else
-      render json: { errors: printer.errors }, status: :unprocessable_entity
+      render_error printer
     end
   end
 
@@ -24,7 +24,7 @@ protected
   end
 
   def printer_params
-    params.require(:data).require(:attributes).permit(:name)
+    params.require(:data).require(:attributes).permit(:name, :protocol)
   end
 
   def filter_params
