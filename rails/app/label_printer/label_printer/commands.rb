@@ -2,23 +2,23 @@ module LabelPrinter
 
   ##
   # Manages the production of label printer interface commands which make up a print job.
-  # Each command is signified by a unique prefix followed by a set of control codes 
+  # Each command is signified by a unique prefix followed by a set of control codes
   # formatted in a certain way.
   # Each command has fixed and dynamic codes.
   module Commands
 
     ##
-    # A formatting command is one which describes the format of something that will be 
+    # A formatting command is one which describes the format of something that will be
     # drawn on the label either a barcode or bitmap.
     # id, x origin and y origin are added as attributes. These are required.
     # An id links the formatting and drawing commands.
     # The x origin and y origin signify where the drawing will be placed on the label.
     module Formatting
 
-      
+
       extend ActiveSupport::Concern
 
-      included do 
+      included do
         attr_reader :id, :x_origin, :y_origin
       end
 
@@ -100,7 +100,7 @@ module LabelPrinter
       module ClassMethods
 
         ##
-        # e.g. set_prefix "XY" will create two methods: 
+        # e.g. set_prefix "XY" will create two methods:
         # xy? which checks the type of command and
         # prefix which will return "xy"
         def set_prefix(prefix)
@@ -166,8 +166,13 @@ module LabelPrinter
 
       ##
       # Takes an array of commands produces the output and reduces it into a single string.
+      # The printers use character code CP-850. We need to ensure the input is encoded correctly.
+      # If the data input contains anything that can't be encoded, or any invalid chars, replace them with
+      # a space, rather than raise an error.
       def to_s
-        commands.compact.collect { |c| c.to_s }.reduce(:<<)
+        commands.compact.collect { |c| c.to_s }
+          .reduce(:<<)
+          .encode(LabelPrinter::DEFAULT_ENCODING, invalid: :replace, undef: :replace, replace: ' ')
       end
     end
   end

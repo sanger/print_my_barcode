@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe LabelPrinter::PrintJob, type: :model do 
+RSpec.describe LabelPrinter::PrintJob, type: :model do
 
   let!(:printer)            { create(:printer) }
   let!(:label_template)     { create(:label_template) }

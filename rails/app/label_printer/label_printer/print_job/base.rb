@@ -46,6 +46,10 @@ module LabelPrinter
         nil
       end
 
+      def input
+        @data_input.to_s
+      end
+
     private
 
       def check_data_input
@@ -55,7 +59,7 @@ module LabelPrinter
           end
         end
       end
-      
+
     end
   end
 end

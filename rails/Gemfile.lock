@@ -20,7 +20,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    active_model_serializers (0.10.0.rc4)
+    active_model_serializers (0.10.0)
       actionpack (>= 4.0)
       activemodel (>= 4.0)
       railties (>= 4.0)
@@ -156,7 +156,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (~> 0.10.0.rc4)
+  active_model_serializers (~> 0.10)
   byebug
   exception_notification
   factory_girl_rails
@@ -170,4 +170,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.11.2
+   1.12.1
