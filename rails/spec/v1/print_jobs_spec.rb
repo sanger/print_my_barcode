@@ -25,7 +25,6 @@ RSpec.describe V1::PrintJobsController, type: :request, helpers: true do
     json = ActiveSupport::JSON.decode(response.body)
 
     expect(json["errors"]).not_to be_empty
-    expect(find_attribute_error_details(json, "printer")).to include("does not exist")
   end
 
   it "should return an error if request provides incorrect parameters" do
@@ -35,7 +34,6 @@ RSpec.describe V1::PrintJobsController, type: :request, helpers: true do
     json = ActiveSupport::JSON.decode(response.body)
 
     expect(json["errors"]).not_to be_empty
-    expect(find_attribute_error_details(json, "label_template")).to include("does not exist")
   end
 
 end
