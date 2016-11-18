@@ -3,7 +3,7 @@ class V1::LabelTemplatesController < ApplicationController
   #'**' includes all nested associated resources in the "included" member
 
   def index
-    render json: LabelTemplate.all, include: '**'
+    render json: LabelTemplate.filter(filter_parameters[:filter]), include: '**'
   end
 
   def show
@@ -13,9 +13,9 @@ class V1::LabelTemplatesController < ApplicationController
   def create
     label_template = LabelTemplate.new label_template_params
     if label_template.save
-      render json: label_template, include: '**'
+      render json: label_template, include: '**', status: :created
     else
-      render json: { errors: label_template.errors }, status: :unprocessable_entity
+      render_error label_template
     end
   end
 
@@ -24,7 +24,7 @@ class V1::LabelTemplatesController < ApplicationController
     if label_template.update_attributes(label_template_params)
       render json: label_template, include: '**'
     else
-      render json: { errors: label_template.errors }, status: :unprocessable_entity
+      render_error label_template
     end
   end
 
@@ -37,5 +37,9 @@ private
   def label_template_params
     params.require(:data).require(:attributes).permit(LabelTemplate.permitted_attributes)
   end
-  
+
+  def filter_parameters
+    params.permit(filter: [:name])
+  end
+
 end

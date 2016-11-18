@@ -54,15 +54,15 @@ module LabelPrinter
     private
 
       def check_printer
-        errors.add(:printer, "Printer does not exist") unless printer
+        errors.add(:printer, "does not exist") unless printer
       end
 
       def check_label_template
-        errors.add(:label_template, "Label template does not exist") unless label_template
+        errors.add(:label_template, "does not exist") unless label_template
       end
 
       def check_labels
-        errors.add(:labels, "There should be some labels") unless labels.any?
+        errors.add(:labels, "can't be empty") unless labels.any?
       end
 
     end

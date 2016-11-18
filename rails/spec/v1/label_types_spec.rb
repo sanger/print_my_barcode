@@ -1,12 +1,26 @@
 require "rails_helper"
 
-RSpec.describe V1::LabelTypesController, type: :request do |variable|
+RSpec.describe V1::LabelTypesController, type: :request, helpers: true do |variable|
 
   it "should allow retrieval of all label types" do
     label_types = create_list(:label_type, 5)
     get v1_label_types_path
     expect(response).to be_success
     expect(ActiveSupport::JSON.decode(response.body)["data"].length).to eq(label_types.length)
+  end
+
+  it "filters by name" do
+    label_types = create_list(:label_type, 5)
+    label_type  = label_types.first
+
+    get v1_label_types_path, filter: { name: label_type.name }
+
+    expect(response).to be_success
+
+    json = ActiveSupport::JSON.decode(response.body)
+    expect(json["data"].length).to eq(1)
+    expect(json["data"][0]["id"]).to eq(label_type.id.to_s)
+    expect(json["data"][0]["attributes"]["name"]).to eq(label_type.name)
   end
 
   it "should allow retrieval of information about a particular label type" do
@@ -26,9 +40,10 @@ RSpec.describe V1::LabelTypesController, type: :request do |variable|
 
   it "should allow creation of a new label type" do
     expect {
-      post v1_label_types_path, {data:{attributes:attributes_for(:label_type)}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json" 
+      post v1_label_types_path, {data:{attributes:attributes_for(:label_type)}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
       }.to change(LabelType, :count).by(1)
     expect(response).to be_success
+    expect(response).to have_http_status(:created)
   end
 
   it "should prevent creation of a new label type with invalid attributes" do
@@ -51,7 +66,11 @@ RSpec.describe V1::LabelTypesController, type: :request do |variable|
     label_type = create(:label_type)
     patch v1_label_type_path(label_type), {data:{attributes:{ name: nil }}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
     expect(response).to have_http_status(:unprocessable_entity)
-    expect(ActiveSupport::JSON.decode(response.body)["errors"]).not_to be_empty
+
+    json = ActiveSupport::JSON.decode(response.body)
+
+    expect(json["errors"]).not_to be_empty
+    expect(find_attribute_error_details(json, "name")).to include("can't be blank")
   end
 
 end
