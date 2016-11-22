@@ -18,11 +18,7 @@ module LabelPrinter
       def execute
         return false unless valid?
         response = http.post(printer_uri.path, request_body.to_s, headers)
-        if response.code == 200
-          true
-        else
-          false
-        end
+        response.code == 200
       end
       
     end
