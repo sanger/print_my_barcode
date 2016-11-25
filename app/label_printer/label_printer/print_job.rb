@@ -6,6 +6,15 @@ module LabelPrinter
   # TOF is also available to check that the text is correct or to allow you to send a job manually.
   module PrintJob
 
+    # This is neccessary for Travis to pass.
+    # When the build method is called in tests the subclasses of print job are not loaded
+    # so we get a constant does not exist method.
+    # TODO: modify the build method so it doesn't use constantize."
+    require_relative "print_job/base"
+    require_relative "print_job/LPD"
+    require_relative "print_job/IPP"
+    require_relative "print_job/TOF"
+
     ##
     # Build a new print job based on the protocol of the printer name that is passed.
     # e.g. If the printer protocol is IPP it will produce an object of type LabelPrinter::PrintJob::IPP
