@@ -30,7 +30,7 @@ module LabelPrinter
 
       ##
       # Just return the passed in values.
-      # No nonsens with rejigging the whole thing.
+      # No nonsense with rejigging the whole thing.
       def as_json(options = {})
         values
       end

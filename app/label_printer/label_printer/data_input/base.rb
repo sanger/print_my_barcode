@@ -27,7 +27,7 @@ module LabelPrinter
       def initialize(label_template, input_values)
         @label_template = label_template
         @template_attributes = label_template.label_type.template_attributes
-        @values = input_values
+        @values = input_values || {}
         @labels = create_labels(values)
       end
 
@@ -59,6 +59,10 @@ module LabelPrinter
       # Only valid if there are some labels
       def valid?
         labels.any?
+      end
+
+      def length
+        to_s.bytesize
       end
 
     private

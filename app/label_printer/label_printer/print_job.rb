@@ -14,7 +14,7 @@ module LabelPrinter
     # nothing will happen.
     def self.build(attributes)
       printer = Printer.find_by_name(attributes[:printer_name])
-      if printer
+      if printer.present?
         "LabelPrinter::PrintJob::#{printer.protocol}".constantize.new(attributes.merge(printer: printer))
       else
         LabelPrinter::PrintJob::Base.new(attributes)
