@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/sanger/psd_logger.git
+  revision: dd2d634114df75b1d8535715c169a7fc99521389
+  specs:
+    psd_logger (0.1.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -161,6 +167,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   mysql2
+  psd_logger!
   puma
   rails (= 4.2.3)
   rails-api
@@ -170,4 +177,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.12.1
+   1.13.5
