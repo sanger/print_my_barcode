@@ -38,4 +38,5 @@ end
 
 group :deployment do
   gem 'mysql2'
+   gem 'psd_logger', github: 'sanger/psd_logger'
 end
