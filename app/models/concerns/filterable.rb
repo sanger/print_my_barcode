@@ -1,5 +1,4 @@
 module Filterable
-
   extend ActiveSupport::Concern
 
   class_methods do
@@ -17,7 +16,5 @@ module Filterable
 
       where(filters)
     end
-
   end
-
 end

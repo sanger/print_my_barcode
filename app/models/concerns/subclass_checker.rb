@@ -1,5 +1,4 @@
 module SubclassChecker
-
   extend ActiveSupport::Concern
 
   included do
@@ -11,15 +10,14 @@ module SubclassChecker
       options = classes.extract_options!
       classes.each do |klass|
         object_type = if options[:suffix]
-          "#{klass.to_s.capitalize}#{self.to_s.capitalize}"
-        else
-          "#{klass.to_s.capitalize}"
-        end
-        define_method "#{klass.to_s}?" do
+                        klass.to_s.capitalize << to_s.capitalize
+                      else
+                        klass.to_s.capitalize
+                      end
+        define_method "#{klass}?" do
           type == object_type
         end
       end
     end
   end
-  
 end
