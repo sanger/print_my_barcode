@@ -1,4 +1,4 @@
 class BarcodeSerializer < ActiveModel::Serializer
   
-  attributes *Barcode.permitted_attributes
+  attributes(*Barcode.permitted_attributes)
 end

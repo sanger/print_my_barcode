@@ -1,6 +1,5 @@
 module LabelPrinter
   module PrintJob
-
     ##
     # A print job is an ActiveModel object
     # For a print job to be execute it needs to be valid.
@@ -10,7 +9,6 @@ module LabelPrinter
     # * It needs to have some labels.
     # If a print job is valid a DataInput object is created.
     class Base
-
       include ActiveModel::Model
       include ActiveModel::Serialization
       include SubclassChecker
@@ -26,13 +24,16 @@ module LabelPrinter
       def initialize(attributes = {})
         super
         @printer ||= Printer.find_by_name(printer_name)
-        @label_template = LabelTemplate.find_by_id(label_template_id)
+        @label_template = LabelTemplate.includes(:labels).find_by_id(label_template_id)
         @labels ||= {}
-        @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) if valid?
+        if valid?
+          @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) 
+        end
       end
 
       ##
-      # A base object should never send a job to a printer, because there won't be one!
+      # A base object should never send a job to a printer,
+      # because there won't be one!
       def execute
         valid?
       end
@@ -51,20 +52,25 @@ module LabelPrinter
         @data_input.to_s
       end
 
-    private
+      private
 
       def check_printer
-        errors.add(:printer, "does not exist") unless printer
+        unless printer.present?
+          errors.add(:printer, 'does not exist')
+        end
       end
 
       def check_label_template
-        errors.add(:label_template, "does not exist") unless label_template
+        unless label_template.present?
+          errors.add(:label_template, 'does not exist')
+        end
       end
 
       def check_labels
-        errors.add(:labels, "can't be empty") unless labels.any?
+        unless labels.any?
+          errors.add(:labels, "can't be empty")
+        end
       end
-
     end
   end
 end

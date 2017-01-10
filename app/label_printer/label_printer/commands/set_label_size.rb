@@ -1,8 +1,6 @@
 module LabelPrinter
-
   module Commands
-    
-    #Label size set command (D)
+    # Label size set command (D)
     class SetLabelSize < Commands::Base
       
       # Description: Sets the label size
@@ -12,7 +10,7 @@ module LabelPrinter
       # bbbb: Effective print width
       # cccc: Effective print length
 
-      set_prefix "D"
+      set_prefix 'D'
 
       attr_reader :pitch_length, :print_width, :print_length
 
@@ -25,8 +23,6 @@ module LabelPrinter
       def control_codes
         "#{pitch_length},#{print_width},#{print_length}"
       end
-
     end
   end
-
 end

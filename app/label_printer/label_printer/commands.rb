@@ -1,21 +1,19 @@
 module LabelPrinter
-
   ##
-  # Manages the production of label printer interface commands which make up a print job.
-  # Each command is signified by a unique prefix followed by a set of control codes
+  # Manages the production of label printer interface commands
+  # which make up a print job. Each command is signified by a
+  # unique prefix followed by a set of control codes
   # formatted in a certain way.
   # Each command has fixed and dynamic codes.
   module Commands
-
     ##
-    # A formatting command is one which describes the format of something that will be
-    # drawn on the label either a barcode or bitmap.
-    # id, x origin and y origin are added as attributes. These are required.
-    # An id links the formatting and drawing commands.
-    # The x origin and y origin signify where the drawing will be placed on the label.
+    # A formatting command is one which describes the format of
+    # something that will be drawn on the label either a barcode
+    # or bitmap. id, x origin and y origin are added as
+    # attributes. These are required. An id links the formatting
+    # and drawing commands. The x origin and y origin signify where
+    # the drawing will be placed on the label.
     module Formatting
-
-
       extend ActiveSupport::Concern
 
       included do
@@ -23,16 +21,16 @@ module LabelPrinter
       end
 
       module ClassMethods
-
         ##
-        # Apart from the required attributes each format may have a number of optional attributes.
-        # These can be created with a default value so that they would not need to be set when the template
-        # is created.
+        # Apart from the required attributes each format may have a
+        # number of optional attributes. These can be created with a
+        # default value so that they would not need to be set when
+        # the template is created.
         def optional_attributes(options)
-          attr_reader *options.keys
+          attr_reader(*options.keys)
           define_method :set_options do |opt|
-            options.each do |k,v|
-              instance_variable_set "@#{k.to_s}", opt[k] || v
+            options.each do |k, v|
+              instance_variable_set "@#{k}", opt[k] || v
             end
           end
         end
@@ -49,9 +47,10 @@ module LabelPrinter
       end
 
       ##
-      # Formats the output ready for a print job. This does not include escape characters.
+      # Formats the output ready for a print job. 
+      # This does not include escape characters.
       # Example: PF001;ABCDE1234
-      def formatted(separator = ";")
+      def formatted(separator = ';')
         "#{prefix}#{id}#{separator}#{control_codes}"
       end
     end
@@ -61,7 +60,6 @@ module LabelPrinter
     # The only other attribute is the value which will be output.
     # This will either be text or barcode.
     module Drawing
-
       extend ActiveSupport::Concern
 
       included do
@@ -85,7 +83,7 @@ module LabelPrinter
 
       ##
       # Example: PF001;ABCDE1234
-      def formatted(separator = ";")
+      def formatted(separator = ';')
         "#{prefix}#{id}#{separator}#{value}"
       end
     end
@@ -94,11 +92,9 @@ module LabelPrinter
     # Each command has a unique prefix.
     # This module will create a couple of helper methods.
     module SetPrefix
-
       extend ActiveSupport::Concern
 
       module ClassMethods
-
         ##
         # e.g. set_prefix "XY" will create two methods:
         # xy? which checks the type of command and
@@ -115,15 +111,15 @@ module LabelPrinter
     end
 
     ##
-    # Allows the receiver to specify a list of commands which can then be formed into
-    # valid printer output. This list can include standard and derived commands.
-    # The standard commands can be signified by their prefix derived commands need to be a method.
+    # Allows the receiver to specify a list of commands
+    # which can then be formed into valid printer output.
+    # This list can include standard and derived commands.
+    # The standard commands can be signified by their prefix
+    # derived commands need to be a method.
     module Outputter
-
       extend ActiveSupport::Concern
 
       module ClassMethods
-
         ##
         # Define your list of commands.
         def set_commands_list(*list)
@@ -138,41 +134,47 @@ module LabelPrinter
       # The standard commands which never change.
       def standard_commands
         {
-          "C"   => Commands::ClearImageBuffer,
-          "T"   => Commands::Feed,
-          "XS"  => Commands::Issue
+          'C'   => Commands::ClearImageBuffer,
+          'T'   => Commands::Feed,
+          'XS'  => Commands::Issue
         }
       end
 
       ##
       # Take a list of commands and execute them.
       # Returns an array of objects.
-      # In the case of standard commands will just create a new command.
+      # In the case of standard commands will just create a
+      # new command.
       # With a derived command it will execute the method.
-      # A derived command may itself contain a list of commands so the whole
-      # thing is flattened to produce a single array.
+      # A derived command may itself contain a list of commands
+      # so the whole thing is flattened to produce a single array.
       def commands
         @commands ||= [].tap do |c|
           commands_list.each do |command|
             if command.instance_of? String
               c << standard_commands[command].new
             else
-              _command = self.send(command)
-              c << (_command.instance_of?(Hash) ? _command.values : _command)
+              ret_command = send(command)
+              c << (ret_command.instance_of?(Hash) ? ret_command.values : ret_command)
             end
           end
         end.flatten
       end
 
       ##
-      # Takes an array of commands produces the output and reduces it into a single string.
-      # The printers use character code CP-850. We need to ensure the input is encoded correctly.
-      # If the data input contains anything that can't be encoded, or any invalid chars, replace them with
+      # Takes an array of commands produces the output
+      # and reduces it into a single string.
+      # The printers use character code CP-850.
+      # We need to ensure the input is encoded correctly.
+      # If the data input contains anything that can't be encoded,
+      # or any invalid chars, replace them with
       # a space, rather than raise an error.
       def to_s
-        commands.compact.collect { |c| c.to_s }
-          .reduce(:<<)
-          .encode(LabelPrinter::DEFAULT_ENCODING, invalid: :replace, undef: :replace, replace: ' ')
+        commands.compact.collect(&:to_s)
+                .reduce(:<<)
+                .encode(LabelPrinter::DEFAULT_ENCODING, 
+                        invalid: :replace, undef: :replace, 
+                        replace: ' ')
       end
     end
   end
