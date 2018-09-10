@@ -1,4 +1,4 @@
-class LabelTemplate < ActiveRecord::Base
+class LabelTemplate < ApplicationRecord
   include Filterable
 
   belongs_to :label_type

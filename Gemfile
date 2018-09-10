@@ -1,17 +1,16 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.3'
-
-gem 'rails-api'
+gem 'rails', '>= 5.0.0.rc2', '< 5.1'
 
 group :development, :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'spring'
   gem 'byebug'
   gem 'sqlite3'
   gem 'rspec-rails', '~> 3.1'
   gem 'ruby-prof', '~> 0.15.9'
   gem 'mocha'
+  gem 'pry'
 end
 
 gem 'active_model_serializers', '~> 0.10'

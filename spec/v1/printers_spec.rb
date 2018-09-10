@@ -2,6 +2,8 @@ require "rails_helper"
 
 RSpec.describe V1::PrintersController, type: :request, helpers: true do |variable|
 
+  let(:headers) { { 'CONTENT_TYPE' => 'application/vnd.api+json' }}
+
   it "should allow retrieval of all printers" do
     printers = create_list(:printer, 5)
     get v1_printers_path
@@ -13,7 +15,7 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |variabl
     printers = create_list(:printer, 5)
     printer = printers.first
 
-    get v1_printers_path, :filter => { :name => printer.name }
+    get "#{v1_printers_path}?filter[name]=#{printer.name}"
 
     expect(response).to be_success
     json = ActiveSupport::JSON.decode(response.body)
@@ -27,7 +29,7 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |variabl
     lpd_printers = create_list(:printer, 3, protocol: 'LPD')
     ipp_printers = create_list(:printer, 3, protocol: 'IPP')
 
-    get v1_printers_path, :filter => { :protocol => 'LPD' }
+    get "#{v1_printers_path}?filter[protocol]=LPD"
 
     expect(response).to be_success
     json = ActiveSupport::JSON.decode(response.body)
@@ -50,7 +52,7 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |variabl
 
   it "should allow creation of a new printer" do
     expect {
-      post v1_printers_path, {data:{attributes:attributes_for(:printer)}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
+      post v1_printers_path, params: {data:{attributes:attributes_for(:printer)}}.to_json, headers: headers
       }.to change(Printer, :count).by(1)
     expect(response).to be_success
     expect(response).to have_http_status(:created)
@@ -58,7 +60,7 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |variabl
 
   it "allows creation of a printer with a specified protocol" do
     expect {
-      post v1_printers_path, {data:{attributes:{name: "Printer Juan", protocol: "IPP"}}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
+      post v1_printers_path, params: {data:{attributes:{name: "Printer Juan", protocol: "IPP"}}}.to_json, headers: headers
     }.to change(Printer, :count).by(1)
     expect(response).to be_success
     expect(response).to have_http_status(:created)
@@ -70,7 +72,7 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |variabl
 
   it "should prevent creation of a new printer with invalid attributes" do
     expect {
-      post v1_printers_path, {data:{attributes:{name:nil}}}.to_json, 'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"
+      post v1_printers_path, params: {data:{attributes:{name:nil}}}.to_json, headers: headers
     }.to_not change(Printer, :count)
 
     expect(response).to have_http_status(:unprocessable_entity)

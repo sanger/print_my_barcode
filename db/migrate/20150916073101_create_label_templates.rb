@@ -1,4 +1,4 @@
-class CreateLabelTemplates < ActiveRecord::Migration
+class CreateLabelTemplates < ActiveRecord::Migration[4.2]
   def change
     create_table :label_templates do |t|
       t.string :name

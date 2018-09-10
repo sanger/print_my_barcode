@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :data_input, class: LabelPrinter::DataInput::Base do
 
     label_template { create(:label_template) }

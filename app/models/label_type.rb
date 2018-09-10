@@ -4,7 +4,7 @@
 # print_width: "0920", print_length: "0080")
 # Each label type will have different size and positioning.
 # A label template must have a label type
-class LabelType < ActiveRecord::Base
+class LabelType < ApplicationRecord
 
   include Filterable
 

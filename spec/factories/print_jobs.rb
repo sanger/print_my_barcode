@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :print_job, class: LabelPrinter::PrintJob::Base do
 
     transient do

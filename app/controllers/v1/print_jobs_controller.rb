@@ -2,6 +2,7 @@ module V1
   class PrintJobsController < ApplicationController
 
     def create
+      # binding.pry
       print_job = LabelPrinter::PrintJob.build(print_job_params)
       if print_job.execute
         render json: print_job, serializer: PrintJobSerializer, status: :created
@@ -16,7 +17,7 @@ module V1
       params.require(:data).require(:attributes)
             .permit(:printer_name, :label_template_id)
             .tap do |whitelisted|
-              whitelisted[:labels] = params[:data][:attributes][:labels]
+              whitelisted[:labels] = params[:data][:attributes][:labels].permit!
             end
     end
   end

@@ -1,9 +1,9 @@
-class Label < ActiveRecord::Base
+class Label < ApplicationRecord
 
   has_many :bitmaps, dependent: :destroy
   has_many :barcodes, dependent: :destroy
 
-  belongs_to :label_template
+  belongs_to :label_template, optional: true
 
   validates :name, presence: true, format: { with: /\A[\w\_]+\z/ }
   validates :name, uniqueness: { scope: :label_template_id },
