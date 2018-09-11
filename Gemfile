@@ -43,6 +43,7 @@ gem 'rails-perftest'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
   gem 'raml_ruby', '~> 0.1.1'
+  gem 'listen', '~> 3.0'
 end
 
 group :deployment do
