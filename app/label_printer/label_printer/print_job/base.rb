@@ -15,7 +15,7 @@ module LabelPrinter
       include ActiveModel::Serialization
       include SubclassChecker
 
-      has_subclasses :LPD, :IPP, :TOF
+      subclasses :LPD, :IPP, :TOF
 
       attr_accessor :printer_name, :label_template_id, :printer, :labels
       attr_reader :label_template, :data_input

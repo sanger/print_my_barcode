@@ -11,7 +11,7 @@ module LabelPrinter
       # bbbb: Effective print width
       # cccc: Effective print length
 
-      set_prefix 'D'
+      prefix_accessor 'D'
 
       attr_reader :pitch_length, :print_width, :print_length
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module V1
+  # PrintersController
   class PrintersController < ApplicationController
     def index
       render json: Printer.filter(filter_params[:filter])

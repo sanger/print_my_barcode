@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module V1
+  # LabelTemplatesController
   class LabelTemplatesController < ApplicationController
     # '**' includes all nested associated resources in the "included" member
     def index

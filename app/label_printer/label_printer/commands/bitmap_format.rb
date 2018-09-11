@@ -24,7 +24,7 @@ module LabelPrinter
       # ii: Rotational angles of character and character string (mostly 00)
       # j: Character attribution (mostly B for black character)
 
-      set_prefix 'PC'
+      prefix_accessor 'PC'
 
       optional_attributes horizontal_magnification: '1',
                           vertical_magnification: '1',

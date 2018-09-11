@@ -14,7 +14,7 @@ module LabelPrinter
 
       attr_reader :name, :values, :formats, :drawings
 
-      set_commands_list :formats, 'C', :drawings, 'XS', 'C'
+      commands_list_reader :formats, 'C', :drawings, 'XS', 'C'
 
       ##
       # Create a list of formats and drawings

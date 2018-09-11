@@ -18,7 +18,7 @@ module LabelPrinter
       # increased (+) or decreased (-)
       # ff: Amount for finely adjusting the back feed (00 - 99)
 
-      set_prefix 'AX'
+      prefix_accessor 'AX'
 
       attr_reader :feed_value
 

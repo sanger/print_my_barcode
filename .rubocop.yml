@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   TargetRubyVersion: 2.4
   Exclude:
@@ -14,6 +16,7 @@ AllCops:
     - 'config/environments/*'
     - 'bin/*'
     - 'config/application.rb'
+    - 'config/initializers/content_security_policy.rb'
 
 # The cop is meant to enforce conventions regarding variables containing numbers
 # However in 0.43.0 it is bugged. Both changed on master and disabled by default
@@ -26,6 +29,9 @@ Rails:
 # Enforces 1234565789 as 123_456_789: While nice when dealing with actual big
 # numbers, we're more likely to see it shout at us about barcodes.
 Style/NumericLiterals:
+  Enabled: false
+
+Style/AsciiComments:
   Enabled: false
 
 # Blocks are used to structure tests and are part of the shoulda dsl.
@@ -46,6 +52,7 @@ Metrics/LineLength:
     - 'lib/tasks/*'
 
 Metrics/MethodLength:
+  Max: 12
   Exclude:
     - 'db/migrate/*'
 

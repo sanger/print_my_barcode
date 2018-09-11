@@ -16,7 +16,7 @@ class Drawing < ApplicationRecord
   validates :field_name, presence: true, format: { with: /\A[\w\_]+\z/ }
   validates :x_origin, :y_origin, presence: true, format: { with: /\A\d{4}\z/ }
 
-  has_subclasses :bitmap, :barcode
+  subclasses :bitmap, :barcode
 
   ##
   # e.g. 0001

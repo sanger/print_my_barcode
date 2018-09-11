@@ -10,7 +10,7 @@ module LabelPrinter
       # aaa: Character string number
       # bbb ------ bbb: Data string to be printed
 
-      set_prefix 'RC'
+      prefix_accessor 'RC'
 
       include Commands::Drawing
     end

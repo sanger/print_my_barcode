@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Filterable
 module Filterable
   extend ActiveSupport::Concern
 
@@ -9,7 +10,7 @@ module Filterable
     end
 
     def filter(filters)
-      #  If nil is passed in
+      # If nil is passed in
       filters ||= {}
 
       # Run the filters through the before_filter

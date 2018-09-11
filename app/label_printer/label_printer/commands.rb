@@ -22,6 +22,7 @@ module LabelPrinter
         attr_reader :id, :x_origin, :y_origin
       end
 
+      # LabelPrinter::ClassMethods
       module ClassMethods
         ##
         # Apart from the required attributes each format may have a
@@ -93,15 +94,16 @@ module LabelPrinter
     ##
     # Each command has a unique prefix.
     # This module will create a couple of helper methods.
-    module SetPrefix
+    module PrefixAccessor
       extend ActiveSupport::Concern
 
+      # SetPrefix::ClassMethods
       module ClassMethods
         ##
-        # e.g. set_prefix "XY" will create two methods:
+        # e.g. prefix_setter "XY" will create two methods:
         # xy? which checks the type of command and
         # prefix which will return "xy"
-        def set_prefix(prefix)
+        def prefix_accessor(prefix)
           define_method "#{prefix.downcase}?" do
             true
           end
@@ -121,10 +123,11 @@ module LabelPrinter
     module Outputter
       extend ActiveSupport::Concern
 
+      # Outputter::ClassMethods
       module ClassMethods
         ##
         # Define your list of commands.
-        def set_commands_list(*list)
+        def commands_list_reader(*list)
           define_method :commands_list do
             list
           end

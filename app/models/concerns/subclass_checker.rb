@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
+# SubclassChecker
 module SubclassChecker
   extend ActiveSupport::Concern
 
   included do
   end
 
+  # SubclassChecker::ClassMethods
   module ClassMethods
-    def has_subclasses(*classes)
+    def subclasses(*classes)
       options = classes.extract_options!
       classes.each do |klass|
         object_type = klass.to_s.capitalize

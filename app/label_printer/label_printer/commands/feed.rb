@@ -9,7 +9,7 @@ module LabelPrinter
       # Format: [ESC] Tabcde [LF] [NUL]
       # Example: T20C32
 
-      set_prefix 'T'
+      prefix_accessor 'T'
 
       def control_codes
         '20C32'

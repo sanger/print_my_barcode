@@ -223,7 +223,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
 
       attr_reader :nil_command
 
-      set_commands_list :set_label_size, 'C', 'T', 'XS', :nil_command, :array_of_commands, :hash_of_commands
+      commands_list_reader :set_label_size, 'C', 'T', 'XS', :nil_command, :array_of_commands, :hash_of_commands
 
       def set_label_size
         LabelPrinter::Commands::SetLabelSize.new(pitch_length: '1234', print_width: '5678', print_length: '9012')

@@ -12,7 +12,7 @@ module LabelPrinter
 
       include Commands::Drawing
 
-      set_prefix 'RB'
+      prefix_accessor 'RB'
     end
   end
 end

@@ -21,7 +21,7 @@ module LabelPrinter
 
       attr_reader :items
 
-      set_commands_list :items
+      commands_list_reader :items
 
       def initialize
         @items = {}

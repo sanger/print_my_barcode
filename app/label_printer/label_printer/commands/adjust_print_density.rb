@@ -11,7 +11,7 @@ module LabelPrinter
       # bb: Print density fine adjustment command (00 - 10)
       # c: Mode for fine adjustment thermal transfer (0) or direct transfer (1)
 
-      set_prefix 'AY'
+      prefix_accessor 'AY'
 
       attr_reader :fine_adjustment
 

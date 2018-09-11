@@ -9,9 +9,9 @@ module LabelPrinter
     # A command object will produce the necessary
     # standard output to execute the command
     class Base
-      include Commands::SetPrefix
+      include Commands::PrefixAccessor
 
-      set_prefix 'PF'
+      prefix_accessor 'PF'
 
       ##
       # Each valid command requires a set of escape characters.

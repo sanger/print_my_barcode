@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module V1
+  # LabelTypesController
   class LabelTypesController < ApplicationController
     def index
       render json: LabelType.filter(filter_params[:filter])

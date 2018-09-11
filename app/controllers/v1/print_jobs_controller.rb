@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module V1
+  # PrintJobsController
   class PrintJobsController < ApplicationController
     def create
-      # binding.pry
       print_job = LabelPrinter::PrintJob.build(print_job_params)
       if print_job.execute
         render json: print_job, serializer: PrintJobSerializer, status: :created
