@@ -39,6 +39,8 @@ gem 'rubocop', require: false
 
 gem 'rails-perftest'
 
+gem 'rack-cors', require: 'rack/cors'
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
