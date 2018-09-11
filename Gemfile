@@ -1,21 +1,25 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'rails', '>= 5.0.0.rc2', '< 5.1'
+gem 'rails', '5.2.1'
 
 group :development, :test do
-  gem 'factory_bot_rails'
-  gem 'spring'
   gem 'byebug'
-  gem 'sqlite3'
-  gem 'rspec-rails', '~> 3.1'
-  gem 'ruby-prof', '~> 0.15.9'
+  gem 'factory_bot_rails'
   gem 'mocha'
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'ruby-prof', '~> 0.15.9'
+  gem 'spring'
+  gem 'sqlite3'
 end
 
 gem 'active_model_serializers', '~> 0.10'
 
 gem 'puma'
+
+gem 'bootsnap', require: false
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

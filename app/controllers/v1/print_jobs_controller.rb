@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module V1
   class PrintJobsController < ApplicationController
-
     def create
       # binding.pry
       print_job = LabelPrinter::PrintJob.build(print_job_params)

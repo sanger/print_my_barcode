@@ -1,12 +1,14 @@
-if Rails.env == "development"
+# frozen_string_literal: true
+
+if Rails.env.development?
   require 'raml'
 
   namespace :docs do
-    desc "generate the api docs"
-    task :api do |t|
-      puts "generating api docs..." 
-      Raml.document(File.join(Rails.root,"config","api.raml"), File.join(Rails.root,"app","views","v1","docs","index.html.erb"))
-      puts "done"
+    desc 'generate the api docs'
+    task :api do |_t|
+      puts 'generating api docs...'
+      Raml.document(Rails.root.join('config', 'api.raml'), Rails.root.join('app', 'views', 'v1', 'docs', 'index.html.erb'))
+      puts 'done'
     end
   end
 end

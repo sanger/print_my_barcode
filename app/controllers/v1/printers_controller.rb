@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class PrintersController < ApplicationController
     def index
@@ -28,7 +30,7 @@ module V1
     end
 
     def filter_params
-      params.permit(filter: [:name, :protocol])
+      params.permit(filter: %i[name protocol])
     end
   end
 end

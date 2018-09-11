@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module PrintJob
     ##
@@ -5,13 +7,14 @@ module LabelPrinter
     class LPD < Base
       ##
       # Only execute the print job if it is valid.
-      # Create a temporary file of the data output 
+      # Create a temporary file of the data output
       # and send it to the printer using the lpr system command.
       # Clean up by closing the file and removing it.
       def execute
         return false unless valid?
-        temp_file = Tempfile.new('PrintJob', 
-                                  encoding: LabelPrinter::DEFAULT_ENCODING)
+
+        temp_file = Tempfile.new('PrintJob',
+                                 encoding: LabelPrinter::DEFAULT_ENCODING)
         begin
           temp_file.write(input)
           temp_file.close

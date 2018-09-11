@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
-
     # Print density fine adjust command (AY)
     class AdjustPrintDensity < Commands::Base
-
       # description: Adjusts the print density
       # Format: [ESC] AY; abb, c [LF] [NUL]
       # Example: AY;+08,0

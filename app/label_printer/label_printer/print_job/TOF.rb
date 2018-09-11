@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module PrintJob
     ##
@@ -10,6 +12,7 @@ module LabelPrinter
     class TOF < Base
       def execute
         return false unless valid?
+
         file = File.new("#{Rails.root}/public/print_job.txt", 'w+',
                         encoding: LabelPrinter::DEFAULT_ENCODING)
         file.write(input)

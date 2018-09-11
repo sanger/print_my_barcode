@@ -12,23 +12,20 @@ module PrintMyBarcode
     config.load_defaults 5.1
 
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
 
-    config.autoload_paths += %W(#{config.root}/lib/validators)
-
-    # replace fixtures with factory girl
+    # replace fixtures with factory bot
     config.generators do |g|
-        g.test_framework :rspec,
-            fixtures: true,
-            view_specs: false,
-            helper_specs: false,
-            routing_specs: false,
-            controller_specs: false,
-            request_specs: true
-        g.fixture_replacement :factory_bot, dir: "spec/factories"
+      g.test_framework :rspec,
+                       routing_specs: false,
+                       controller_specs: false,
+                       request_specs: true
+      g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
     config.mailer = config_for(:mailer)
+
   end
 end

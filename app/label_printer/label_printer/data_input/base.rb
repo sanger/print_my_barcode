@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module DataInput
     ##
@@ -17,7 +19,7 @@ module LabelPrinter
 
       attr_reader :label_template, :template_attributes, :labels, :values
 
-      set_commands_list :set_label_size, :adjust_print_density, 
+      set_commands_list :set_label_size, :adjust_print_density,
                         :adjust_position, 'T', :labels
 
       ##
@@ -37,21 +39,21 @@ module LabelPrinter
       ##
       # Create an AdjustPosition command
       def adjust_position
-        @adjust_position ||= 
+        @adjust_position ||=
           LabelPrinter::Commands::AdjustPosition.new(template_attributes)
       end
 
       ##
       # Create an AdjustPrintDensity command
       def adjust_print_density
-        @adjust_print_density ||= 
+        @adjust_print_density ||=
           LabelPrinter::Commands::AdjustPrintDensity.new(template_attributes)
       end
 
       ##
       # Create a SetLabelSize command
       def set_label_size
-        @set_label_size ||= 
+        @set_label_size ||=
           LabelPrinter::Commands::SetLabelSize.new(template_attributes)
       end
 
@@ -80,7 +82,7 @@ module LabelPrinter
             end
           end
         end
-      end 
+      end
     end
   end
 end

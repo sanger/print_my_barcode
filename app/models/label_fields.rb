@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # For a label template will produce a list of field names for each label.
 # For example a label template may have the following:
@@ -5,8 +7,6 @@
 #  label_2: { barcode_3, barcode_4, bitmap_3, bitmap_4 }
 # This is useful for interogating the api so as to send a valid print job
 class LabelFields
-  attr_reader :labels
-
   def initialize
     yield self if block_given?
   end
@@ -44,17 +44,15 @@ class LabelFields
   # Simulate a valid json object
   # Creates a header, footer and body which will be an array of labels
   class DummyLabels
-    PLACEHOLDERS = [:header, :footer].freeze
-
-    attr_reader :values
+    PLACEHOLDERS = %i[header footer].freeze
 
     ##
     # Produces a hash for each key.
-    # e.g. 
-    #  dummy_labels = DummyLabels.new({label_1: [:field_1, 
+    # e.g.
+    #  dummy_labels = DummyLabels.new({label_1: [:field_1,
     #                 :field_2], label_2: [:field_3, :field_4]})
-    #  dummy_labels.values => #<OpenStruct: label_1: 
-    #  {field_1: "field_1", field_2: "field_2"}, label_2: 
+    #  dummy_labels.values => #<OpenStruct: label_1:
+    #  {field_1: "field_1", field_2: "field_2"}, label_2:
     #  {field_3: "field_3", field_4: "field_4"}>
     def initialize(labels)
       labels.each_pair do |k, v|
@@ -76,18 +74,18 @@ class LabelFields
 
     ##
     # produces a hash from the open struct.
-    # for any label that is not a header or footer will produce two copies 
+    # for any label that is not a header or footer will produce two copies
     # which will be appended to the hash as an array
     # of key body
     # e.g.
-    #  dummy_labels = DummyLabels.new({label_1: [:field_1, :field_2], 
+    #  dummy_labels = DummyLabels.new({label_1: [:field_1, :field_2],
     #  label_2: [:field_3, :field_4], header: [:field_5, :field_6], footer: [:field_7, :field_8]})
     #  dummy_labels.to_h =>
-    #  { header: {field_5: "field_5", field_6: "field_6"}, 
-    #    footer: {field_7: "field_7", field_8: "field_8"}, 
-    #    body: [{ label_1: {field_1: "field_1", field_2: "field_2"}, 
-    #    label_2: {field_3: "field_3", field_4: "field_4"} }, 
-    #    { label_1: {field_1: "field_1", field_2: "field_2"}, 
+    #  { header: {field_5: "field_5", field_6: "field_6"},
+    #    footer: {field_7: "field_7", field_8: "field_8"},
+    #    body: [{ label_1: {field_1: "field_1", field_2: "field_2"},
+    #    label_2: {field_3: "field_3", field_4: "field_4"} },
+    #    { label_1: {field_1: "field_1", field_2: "field_2"},
     #    label_2: {field_3: "field_3", field_4: "field_4"} }]}
     def to_h
       values.to_h.slice(*PLACEHOLDERS).merge(body: labels)

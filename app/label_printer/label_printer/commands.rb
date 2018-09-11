@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module LabelPrinter
   ##
   # Manages the production of label printer interface commands
@@ -47,7 +49,7 @@ module LabelPrinter
       end
 
       ##
-      # Formats the output ready for a print job. 
+      # Formats the output ready for a print job.
       # This does not include escape characters.
       # Example: PF001;ABCDE1234
       def formatted(separator = ';')
@@ -127,7 +129,6 @@ module LabelPrinter
             list
           end
         end
-
       end
 
       ##
@@ -164,16 +165,17 @@ module LabelPrinter
       ##
       # Takes an array of commands produces the output
       # and reduces it into a single string.
-      # The printers use character code CP-850.
+      #  The printers use character code CP-850.
       # We need to ensure the input is encoded correctly.
       # If the data input contains anything that can't be encoded,
       # or any invalid chars, replace them with
-      # a space, rather than raise an error.
+      #  a space, rather than raise an error.
       def to_s
         commands.compact.collect(&:to_s)
+                .collect(&:dup)
                 .reduce(:<<)
-                .encode(LabelPrinter::DEFAULT_ENCODING, 
-                        invalid: :replace, undef: :replace, 
+                .encode(LabelPrinter::DEFAULT_ENCODING,
+                        invalid: :replace, undef: :replace,
                         replace: ' ')
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SubclassChecker
   extend ActiveSupport::Concern
 
@@ -5,15 +7,11 @@ module SubclassChecker
   end
 
   module ClassMethods
-
     def has_subclasses(*classes)
       options = classes.extract_options!
       classes.each do |klass|
-        object_type = if options[:suffix]
-                        klass.to_s.capitalize << to_s.capitalize
-                      else
-                        klass.to_s.capitalize
-                      end
+        object_type = klass.to_s.capitalize
+        object_type << to_s.capitalize if options[:suffix]
         define_method "#{klass}?" do
           type == object_type
         end

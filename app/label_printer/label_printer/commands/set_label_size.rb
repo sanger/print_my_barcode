@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
     # Label size set command (D)
     class SetLabelSize < Commands::Base
-      
       # Description: Sets the label size
       # Format: [ESC] Daaaa, bbbb, cccc [LF] [NUL]
       # Example: D0110,0920,0080

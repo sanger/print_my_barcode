@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
     # Bar code data command (RB)
@@ -11,7 +13,6 @@ module LabelPrinter
       include Commands::Drawing
 
       set_prefix 'RB'
-      
     end
   end
 end

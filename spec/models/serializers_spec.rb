@@ -1,8 +1,9 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe "Serializers", type: :model do |variable|
-  
-  it "barcode should output the correct attributes" do
+require 'rails_helper'
+
+RSpec.describe 'Serializers', type: :model do |_variable|
+  it 'barcode should output the correct attributes' do
     barcode = create(:barcode)
     json = BarcodeSerializer.new(barcode).object
     expect(json.x_origin).to eq(barcode.x_origin)
@@ -18,7 +19,7 @@ RSpec.describe "Serializers", type: :model do |variable|
     expect(json.bar_height).to eq(barcode.bar_height)
   end
 
-  it "bitmap should output the correct attributes" do
+  it 'bitmap should output the correct attributes' do
     bitmap = create(:bitmap)
     json = BitmapSerializer.new(bitmap).object
     expect(json.x_origin).to eq(bitmap.x_origin)
@@ -31,7 +32,7 @@ RSpec.describe "Serializers", type: :model do |variable|
     expect(json.rotational_angles).to eq(bitmap.rotational_angles)
   end
 
-  it "Print Job should output the correct attributes" do
+  it 'Print Job should output the correct attributes' do
     print_job = build(:print_job)
     json = PrintJobSerializer.new(print_job).object
     expect(json.printer_name).to eq(print_job.printer_name)
@@ -39,7 +40,7 @@ RSpec.describe "Serializers", type: :model do |variable|
     expect(json.labels).to eq(print_job.labels)
   end
 
-  it "label should output the correct attributes" do
+  it 'label should output the correct attributes' do
     label = create(:label_with_drawings)
     json = LabelSerializer.new(label).object
     expect(json.name).to eq(label.name)

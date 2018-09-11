@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ##
 # A networked printer. The name will correspond to it's network name.
 # Each printer is identified by the protocol it will use.
@@ -8,7 +10,7 @@ class Printer < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  enum protocol: [:LPD, :IPP, :TOF]
+  enum protocol: %i[LPD IPP TOF]
 
   before_filter do |filters|
     if filters.key?(:protocol)

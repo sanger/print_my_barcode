@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
     ##
@@ -13,9 +15,9 @@ module LabelPrinter
 
       ##
       # Each valid command requires a set of escape characters.
-      ESC   = "\u001b".freeze
-      LF    = "\n".freeze
-      NUL   = "\u0000".freeze
+      ESC   = "\u001b"
+      LF    = "\n"
+      NUL   = "\u0000"
 
       ##
       # Produces the output for a command without the necessity
@@ -68,7 +70,7 @@ module LabelPrinter
         prefix?(method_name) || super
       end
 
-      private 
+      private
 
       def prefix?(method_name)
         method_name.to_s =~ /[a-z]{1,2}\?/
