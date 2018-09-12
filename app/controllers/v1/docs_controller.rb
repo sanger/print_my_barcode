@@ -2,7 +2,7 @@
 
 module V1
   # DocsController
-  class DocsController < ApplicationController
+  class DocsController < ActionController::Base
     def index
       render layout: false
     end
