@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
-
     # Print density fine adjust command (AY)
     class AdjustPrintDensity < Commands::Base
-
       # description: Adjusts the print density
       # Format: [ESC] AY; abb, c [LF] [NUL]
       # Example: AY;+08,0
@@ -11,7 +11,7 @@ module LabelPrinter
       # bb: Print density fine adjustment command (00 - 10)
       # c: Mode for fine adjustment thermal transfer (0) or direct transfer (1)
 
-      set_prefix 'AY'
+      prefix_accessor 'AY'
 
       attr_reader :fine_adjustment
 

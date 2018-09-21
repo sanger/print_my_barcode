@@ -1,4 +1,7 @@
-class LabelTemplate < ActiveRecord::Base
+# frozen_string_literal: true
+
+# LabelTemplate
+class LabelTemplate < ApplicationRecord
   include Filterable
 
   belongs_to :label_type
@@ -19,7 +22,7 @@ class LabelTemplate < ActiveRecord::Base
   end
 
   ##
-  # A LabelFields object which will return all of 
+  # A LabelFields object which will return all of
   # the field names for the labels.
   # This includes nesting.
   def label_fields
@@ -40,7 +43,7 @@ class LabelTemplate < ActiveRecord::Base
 
   ##
   # An implementation of dup which allows the name to be changed.
-  # Dup the original template. If a name is not passed the name 
+  # Dup the original template. If a name is not passed the name
   # will be changed to "label_template_name copy"
   # dup each of the labels and add it to the new label template
   # Saving the dup will create a whole new record with new ids.

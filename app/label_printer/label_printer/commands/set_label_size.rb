@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
     # Label size set command (D)
     class SetLabelSize < Commands::Base
-      
       # Description: Sets the label size
       # Format: [ESC] Daaaa, bbbb, cccc [LF] [NUL]
       # Example: D0110,0920,0080
@@ -10,7 +11,7 @@ module LabelPrinter
       # bbbb: Effective print width
       # cccc: Effective print length
 
-      set_prefix 'D'
+      prefix_accessor 'D'
 
       attr_reader :pitch_length, :print_width, :print_length
 

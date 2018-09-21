@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module DataInput
-
     ##
     # A special type of list.
     # To make the labels easy to find they are added to a hash.
@@ -20,7 +21,7 @@ module LabelPrinter
 
       attr_reader :items
 
-      set_commands_list :items
+      commands_list_reader :items
 
       def initialize
         @items = {}
@@ -69,6 +70,7 @@ module LabelPrinter
         selection = select(key)
         return nil if selection.empty?
         return selection.values.first if selection.count == 1
+
         selection
       end
 

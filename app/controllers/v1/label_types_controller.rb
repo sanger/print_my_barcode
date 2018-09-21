@@ -1,6 +1,8 @@
-module V1
-  class LabelTypesController < ApplicationController
+# frozen_string_literal: true
 
+module V1
+  # LabelTypesController
+  class LabelTypesController < ApplicationController
     def index
       render json: LabelType.filter(filter_params[:filter])
     end
@@ -20,7 +22,7 @@ module V1
 
     def update
       label_type = current_resource
-      if label_type.update_attributes(label_type_params)
+      if label_type.update(label_type_params)
         render json: label_type
       else
         render_error label_type
@@ -35,7 +37,7 @@ module V1
 
     def label_type_params
       params.require(:data).require(:attributes)
-            .permit(:name, :feed_value, :fine_adjustment,:pitch_length,
+            .permit(:name, :feed_value, :fine_adjustment, :pitch_length,
                     :print_width, :print_length)
     end
 

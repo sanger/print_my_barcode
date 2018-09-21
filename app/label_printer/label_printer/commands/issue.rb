@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
     # Issue command (XS)
@@ -15,7 +17,7 @@ module LabelPrinter
       # g: Tag rotation normally 0 (Printing bottom first)
       # h: Type of status response normally 1 (status response)
 
-      set_prefix 'XS'
+      prefix_accessor 'XS'
 
       def control_codes
         'I,0001,0002C3201'

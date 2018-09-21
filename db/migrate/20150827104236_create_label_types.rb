@@ -1,4 +1,6 @@
-class CreateLabelTypes < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateLabelTypes < ActiveRecord::Migration[4.2]
   def change
     create_table :label_types do |t|
       t.string :pitch_length

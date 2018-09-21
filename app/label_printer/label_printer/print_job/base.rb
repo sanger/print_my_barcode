@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module PrintJob
     ##
@@ -13,7 +15,7 @@ module LabelPrinter
       include ActiveModel::Serialization
       include SubclassChecker
 
-      has_subclasses :LPD, :IPP, :TOF
+      subclasses :LPD, :IPP, :TOF
 
       attr_accessor :printer_name, :label_template_id, :printer, :labels
       attr_reader :label_template, :data_input
@@ -23,12 +25,10 @@ module LabelPrinter
 
       def initialize(attributes = {})
         super
-        @printer ||= Printer.find_by_name(printer_name)
-        @label_template = LabelTemplate.includes(:labels).find_by_id(label_template_id)
+        @printer ||= Printer.find_by(name: printer_name)
+        @label_template = LabelTemplate.includes(:labels).find_by(id: label_template_id)
         @labels ||= {}
-        if valid?
-          @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) 
-        end
+        @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) if valid?
       end
 
       ##
@@ -55,21 +55,15 @@ module LabelPrinter
       private
 
       def check_printer
-        unless printer.present?
-          errors.add(:printer, 'does not exist')
-        end
+        errors.add(:printer, 'does not exist') if printer.blank?
       end
 
       def check_label_template
-        unless label_template.present?
-          errors.add(:label_template, 'does not exist')
-        end
+        errors.add(:label_template, 'does not exist') if label_template.blank?
       end
 
       def check_labels
-        unless labels.any?
-          errors.add(:labels, "can't be empty")
-        end
+        errors.add(:labels, "can't be empty") unless labels.any?
       end
     end
   end

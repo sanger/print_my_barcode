@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
     # Bar code format command (XB)
@@ -51,7 +53,7 @@ module LabelPrinter
       # h: rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)
       # iiii: Bar height (0000 - 0100 in 0.1mm units)
 
-      set_prefix 'XB'
+      prefix_accessor 'XB'
 
       optional_attributes barcode_type: '5', type_of_check_digit: '3',
                           one_module_width: '02', height: '0070',

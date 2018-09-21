@@ -1,10 +1,12 @@
-module V1
-  class LabelTemplatesController < ApplicationController
+# frozen_string_literal: true
 
+module V1
+  # LabelTemplatesController
+  class LabelTemplatesController < ApplicationController
     # '**' includes all nested associated resources in the "included" member
     def index
       render json: LabelTemplate.filter(filter_parameters[:filter]),
-              include: '**'
+             include: '**'
     end
 
     def show
@@ -22,7 +24,7 @@ module V1
 
     def update
       label_template = current_resource
-      if label_template.update_attributes(label_template_params)
+      if label_template.update(label_template_params)
         render json: label_template, include: '**'
       else
         render_error label_template

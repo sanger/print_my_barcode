@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'rails/performance_test_help'
 
@@ -11,18 +13,17 @@ class PrintJobTest < ActionDispatch::PerformanceTest
   def setup
     @label_template = create(:label_template)
     @printer = create(:printer)
-    @print_job_params =  {"data" => { 
-                          "attributes" => {
-                          "printer_name" => printer.name,
-                          "label_template_id" => label_template.id,
-                          "labels" => label_template.dummy_labels.to_h
-                              }
-                            }
-                          }
+    @print_job_params = { 'data' => {
+      'attributes' => {
+        'printer_name' => printer.name,
+        'label_template_id' => label_template.id,
+        'labels' => label_template.dummy_labels.to_h
+      }
+    } }
   end
 
-  test "print job" do
+  test 'print job' do
     LabelPrinter::PrintJob::LPD.any_instance.stubs(:execute).returns(true)
-    post '/v1/print_jobs', print_job_params.to_json, {'ACCEPT' => "application/vnd.api+json", 'CONTENT_TYPE' => "application/vnd.api+json"}
+    post '/v1/print_jobs', params: print_job_params.to_json, session: { 'ACCEPT' => 'application/vnd.api+json', 'CONTENT_TYPE' => 'application/vnd.api+json' }
   end
 end

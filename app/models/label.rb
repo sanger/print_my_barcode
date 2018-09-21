@@ -1,15 +1,17 @@
-class Label < ActiveRecord::Base
+# frozen_string_literal: true
 
+# Label
+class Label < ApplicationRecord
   has_many :bitmaps, dependent: :destroy
   has_many :barcodes, dependent: :destroy
 
-  belongs_to :label_template
+  belongs_to :label_template, optional: true
 
   validates :name, presence: true, format: { with: /\A[\w\_]+\z/ }
   validates :name, uniqueness: { scope: :label_template_id },
-            if: proc { |l| l.label_template.present? || l.label_template_id.present? }
+                   if: proc { |l| l.label_template.present? || l.label_template_id.present? }
   validates_associated :bitmaps, :barcodes
-  
+
   accepts_nested_attributes_for :bitmaps, :barcodes
 
   ##
@@ -24,10 +26,10 @@ class Label < ActiveRecord::Base
   # bitmap attributes and barcode attributes.
   def self.permitted_attributes
     ['name', { 'bitmaps_attributes' => Bitmap.permitted_attributes,
-      'barcodes_attributes' => Barcode.permitted_attributes }]
+               'barcodes_attributes' => Barcode.permitted_attributes }]
   end
 
-  ## 
+  ##
   # A list of the field names from each of the drawings
   def field_names
     drawings.pluck(:field_name)
@@ -48,14 +50,9 @@ class Label < ActiveRecord::Base
     super.tap do |dupped|
       dupped.label_template = nil
       drawings.each do |drawing|
-        if drawing.barcode?
-          dupped.barcodes << drawing.dup
-        else
-          dupped.bitmaps << drawing.dup
-        end
+        drawing.barcode? ? dupped.barcodes << drawing.dup : dupped.bitmaps << drawing.dup
       end
       dupped.save
     end
   end
-  
 end

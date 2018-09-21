@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module LabelPrinter
   ##
   # Manages the production of label printer interface commands
@@ -20,6 +22,7 @@ module LabelPrinter
         attr_reader :id, :x_origin, :y_origin
       end
 
+      # LabelPrinter::ClassMethods
       module ClassMethods
         ##
         # Apart from the required attributes each format may have a
@@ -47,7 +50,7 @@ module LabelPrinter
       end
 
       ##
-      # Formats the output ready for a print job. 
+      # Formats the output ready for a print job.
       # This does not include escape characters.
       # Example: PF001;ABCDE1234
       def formatted(separator = ';')
@@ -91,15 +94,16 @@ module LabelPrinter
     ##
     # Each command has a unique prefix.
     # This module will create a couple of helper methods.
-    module SetPrefix
+    module PrefixAccessor
       extend ActiveSupport::Concern
 
+      # SetPrefix::ClassMethods
       module ClassMethods
         ##
-        # e.g. set_prefix "XY" will create two methods:
+        # e.g. prefix_setter "XY" will create two methods:
         # xy? which checks the type of command and
         # prefix which will return "xy"
-        def set_prefix(prefix)
+        def prefix_accessor(prefix)
           define_method "#{prefix.downcase}?" do
             true
           end
@@ -119,15 +123,15 @@ module LabelPrinter
     module Outputter
       extend ActiveSupport::Concern
 
+      # Outputter::ClassMethods
       module ClassMethods
         ##
         # Define your list of commands.
-        def set_commands_list(*list)
+        def commands_list_reader(*list)
           define_method :commands_list do
             list
           end
         end
-
       end
 
       ##
@@ -164,16 +168,17 @@ module LabelPrinter
       ##
       # Takes an array of commands produces the output
       # and reduces it into a single string.
-      # The printers use character code CP-850.
+      #  The printers use character code CP-850.
       # We need to ensure the input is encoded correctly.
       # If the data input contains anything that can't be encoded,
       # or any invalid chars, replace them with
-      # a space, rather than raise an error.
+      #  a space, rather than raise an error.
       def to_s
         commands.compact.collect(&:to_s)
+                .collect(&:dup)
                 .reduce(:<<)
-                .encode(LabelPrinter::DEFAULT_ENCODING, 
-                        invalid: :replace, undef: :replace, 
+                .encode(LabelPrinter::DEFAULT_ENCODING,
+                        invalid: :replace, undef: :replace,
                         replace: ' ')
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   ##
   # Manages the production of the text for the input for the printer.

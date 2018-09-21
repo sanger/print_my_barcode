@@ -1,4 +1,6 @@
-class CreateLabelTemplates < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateLabelTemplates < ActiveRecord::Migration[4.2]
   def change
     create_table :label_templates do |t|
       t.string :name

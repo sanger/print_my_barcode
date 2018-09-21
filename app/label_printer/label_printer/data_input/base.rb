@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module DataInput
     ##
@@ -17,8 +19,8 @@ module LabelPrinter
 
       attr_reader :label_template, :template_attributes, :labels, :values
 
-      set_commands_list :set_label_size, :adjust_print_density, 
-                        :adjust_position, 'T', :labels
+      commands_list_reader :set_label_size, :adjust_print_density,
+                           :adjust_position, 'T', :labels
 
       ##
       # The labels are created from the input values and turned into a list
@@ -37,21 +39,21 @@ module LabelPrinter
       ##
       # Create an AdjustPosition command
       def adjust_position
-        @adjust_position ||= 
+        @adjust_position ||=
           LabelPrinter::Commands::AdjustPosition.new(template_attributes)
       end
 
       ##
       # Create an AdjustPrintDensity command
       def adjust_print_density
-        @adjust_print_density ||= 
+        @adjust_print_density ||=
           LabelPrinter::Commands::AdjustPrintDensity.new(template_attributes)
       end
 
       ##
       # Create a SetLabelSize command
       def set_label_size
-        @set_label_size ||= 
+        @set_label_size ||=
           LabelPrinter::Commands::SetLabelSize.new(template_attributes)
       end
 
@@ -73,14 +75,22 @@ module LabelPrinter
         List.new.tap do |list|
           values.each do |k, v|
             if v.instance_of? Array
-              v.each { |hsh| list.append(create_labels(hsh)) }
+              add_labels(list, v)
             else
-              label = label_template.labels.detect { |l| l.name == k }
-              list.add(label.name, DataInput::Label.new(label, v)) if label.present?
+              add_label(list, k, v)
             end
           end
         end
-      end 
+      end
+
+      def add_labels(list, values)
+        values.each { |hsh| list.append(create_labels(hsh)) }
+      end
+
+      def add_label(list, key, value)
+        label = label_template.labels.detect { |l| l.name == key }
+        list.add(label.name, DataInput::Label.new(label, value)) if label.present?
+      end
     end
   end
 end

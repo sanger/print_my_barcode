@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   module Commands
     ##
@@ -7,15 +9,15 @@ module LabelPrinter
     # A command object will produce the necessary
     # standard output to execute the command
     class Base
-      include Commands::SetPrefix
+      include Commands::PrefixAccessor
 
-      set_prefix 'PF'
+      prefix_accessor 'PF'
 
       ##
       # Each valid command requires a set of escape characters.
-      ESC   = "\u001b".freeze
-      LF    = "\n".freeze
-      NUL   = "\u0000".freeze
+      ESC   = "\u001b"
+      LF    = "\n"
+      NUL   = "\u0000"
 
       ##
       # Produces the output for a command without the necessity
@@ -68,7 +70,7 @@ module LabelPrinter
         prefix?(method_name) || super
       end
 
-      private 
+      private
 
       def prefix?(method_name)
         method_name.to_s =~ /[a-z]{1,2}\?/

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LabelPrinter
   ##
   # A print job will take data input,
@@ -28,9 +30,10 @@ module LabelPrinter
     # to a printer if you try to execute the print job
     # nothing will happen.
     def self.build(attributes)
-      printer = Printer.find_by_name(attributes[:printer_name])
+      printer = Printer.find_by(name: attributes[:printer_name])
       if printer.present?
-        "LabelPrinter::PrintJob::#{printer.protocol}".constantize.new(attributes.merge(printer: printer))
+        "LabelPrinter::PrintJob::#{printer.protocol}"
+          .constantize.new(attributes.merge(printer: printer))
       else
         LabelPrinter::PrintJob::Base.new(attributes)
       end
