@@ -1,4 +1,6 @@
-class CreateDrawings < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateDrawings < ActiveRecord::Migration[4.2]
   def change
     create_table :drawings do |t|
       t.string :x_origin

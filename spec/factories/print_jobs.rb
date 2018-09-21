@@ -1,6 +1,7 @@
-FactoryGirl.define do
-  factory :print_job, class: LabelPrinter::PrintJob::Base do
+# frozen_string_literal: true
 
+FactoryBot.define do
+  factory :print_job, class: LabelPrinter::PrintJob::Base do
     transient do
       label_template { create(:label_template) }
     end
@@ -11,5 +12,4 @@ FactoryGirl.define do
 
     initialize_with { new(printer_name: printer_name, label_template_id: label_template_id, labels: labels) }
   end
-
 end

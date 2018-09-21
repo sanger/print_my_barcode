@@ -1,13 +1,13 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe "Exceptions notification", type: :request do 
+require 'rails_helper'
 
-  it "should send an email if an error is raised" do
+RSpec.describe 'Exceptions notification', type: :request do
+  it 'should send an email if an error is raised' do
     begin
       get v1_test_exception_notifier_path
-    rescue
+    rescue StandardError
     end
     expect(ActionMailer::Base.deliveries.count).to eq(1)
   end
-
 end
