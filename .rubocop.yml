@@ -34,11 +34,10 @@ Style/NumericLiterals:
 Style/AsciiComments:
   Enabled: false
 
-# Blocks are used to structure tests and are part of the shoulda dsl.
-# The standard BlockLength limits are too stringent for this purpose.
-# Block DSL is also used in routes
-# We should be careful keeping rake tasks here, as large tasks are still an issue.
-# Not sure if we need to split namespaces across several files though.
+Metrics/AbcSize:
+  Exclude:
+    - 'app/label_printer/label_printer/commands/barcode_format.rb'
+
 Metrics/BlockLength:
   Exclude:
     - 'test/**/*'
@@ -55,6 +54,7 @@ Metrics/MethodLength:
   Max: 12
   Exclude:
     - 'db/migrate/*'
+    - 'app/label_printer/label_printer/commands/barcode_format.rb'
 
 Layout/IndentArray:
   EnforcedStyle: consistent

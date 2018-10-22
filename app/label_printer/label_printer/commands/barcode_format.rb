@@ -72,7 +72,6 @@ module LabelPrinter
       # k: rotational angle of barcode (0 - 0, 1 - 90, 2 - 180, 3 - 270)
       # llll: Height of the bar code (0000 - 0100 in 0.1mm units)
 
-
       prefix_accessor 'XB'
 
       optional_attributes barcode_type: '5', type_of_check_digit: '3',
@@ -83,6 +82,7 @@ module LabelPrinter
                           wide_bar_width: '01',
                           wide_space_width: '01', char_to_char_space_width: '01'
 
+      # TODO: Modify method to stop rubocop errors.
       def control_codes
         standard_codes = "#{x_origin},#{y_origin},#{barcode_type}"
 
@@ -92,7 +92,7 @@ module LabelPrinter
         when 'P'
           "#{standard_codes},00,#{one_module_width},#{no_of_columns},"\
           "0,#{bar_height}"
-        when '3','B'
+        when '3', 'B'
           "#{standard_codes},#{type_of_check_digit},#{narrow_bar_width},#{narrow_space_width},"\
           "#{wide_bar_width},#{wide_space_width},#{char_to_char_space_width},"\
           "#{rotational_angle},#{height}"
