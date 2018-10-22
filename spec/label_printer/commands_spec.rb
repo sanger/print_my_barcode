@@ -185,6 +185,22 @@ RSpec.describe LabelPrinter::Commands, type: :model do
         expect(command.control_codes).to eq('0300,0000,P,00,01,10,0,0100')
       end
     end
+
+    context 'CODE39' do
+      let(:options) {{  id: '001', x_origin: '0300', y_origin: '0000',
+                        barcode_type: '3', type_of_check_digit: '3', narrow_bar_width: '02', 
+                        narrow_space_width: '03', wide_bar_width: '04',
+                        wide_space_width: '05', char_to_char_space_width: '06', 
+                        rotational_angle: '1', height: '0100' }}
+
+      it 'should have appropriate control codes' do
+        command = LabelPrinter::Commands::BarcodeFormat.new(options)
+        expect(command.control_codes).to eq('0300,0000,3,3,02,03,04,05,06,1,0100')
+        command = LabelPrinter::Commands::BarcodeFormat.new(options.merge(barcode_type: 'B'))
+        expect(command.control_codes).to eq('0300,0000,B,3,02,03,04,05,06,1,0100')
+      end
+
+    end
   end
 
   context 'Draw Barcode' do
