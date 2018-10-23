@@ -34,10 +34,6 @@ Style/NumericLiterals:
 Style/AsciiComments:
   Enabled: false
 
-Metrics/AbcSize:
-  Exclude:
-    - 'app/label_printer/label_printer/commands/barcode_format.rb'
-
 Metrics/BlockLength:
   Exclude:
     - 'test/**/*'
@@ -54,7 +50,6 @@ Metrics/MethodLength:
   Max: 12
   Exclude:
     - 'db/migrate/*'
-    - 'app/label_printer/label_printer/commands/barcode_format.rb'
 
 Layout/IndentArray:
   EnforcedStyle: consistent

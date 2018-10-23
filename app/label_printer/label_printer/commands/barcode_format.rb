@@ -84,22 +84,37 @@ module LabelPrinter
 
       # TODO: Modify method to stop rubocop errors.
       def control_codes
-        standard_codes = "#{x_origin},#{y_origin},#{barcode_type}"
+        return twod_codes if barcode_type == 'Q'
+        return pdf417_codes if barcode_type == 'P'
+        return code39_codes if barcode_type == '3' || barcode_type == 'B'
 
-        case barcode_type
-        when 'Q'
-          "#{standard_codes},20,#{one_cell_width},05,#{rotational_angle}"
-        when 'P'
-          "#{standard_codes},00,#{one_module_width},#{no_of_columns},"\
-          "0,#{bar_height}"
-        when '3', 'B'
-          "#{standard_codes},#{type_of_check_digit},#{narrow_bar_width},#{narrow_space_width},"\
-          "#{wide_bar_width},#{wide_space_width},#{char_to_char_space_width},"\
-          "#{rotational_angle},#{height}"
-        else
-          "#{standard_codes},#{type_of_check_digit},#{one_module_width},"\
-          "0,#{height},+0000000000,002,0,00"
-        end
+        oned_codes
+      end
+
+      private
+
+      def standard_codes
+        "#{x_origin},#{y_origin},#{barcode_type}"
+      end
+
+      def pdf417_codes
+        "#{standard_codes},00,#{one_module_width},#{no_of_columns},"\
+        "0,#{bar_height}"
+      end
+
+      def twod_codes
+        "#{standard_codes},20,#{one_cell_width},05,#{rotational_angle}"
+      end
+
+      def oned_codes
+        "#{standard_codes},#{type_of_check_digit},#{one_module_width},"\
+        "0,#{height},+0000000000,002,0,00"
+      end
+
+      def code39_codes
+        "#{standard_codes},#{type_of_check_digit},#{narrow_bar_width},#{narrow_space_width},"\
+        "#{wide_bar_width},#{wide_space_width},#{char_to_char_space_width},"\
+        "#{rotational_angle},#{height}"
       end
     end
   end
