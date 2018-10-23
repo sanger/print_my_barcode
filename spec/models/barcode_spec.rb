@@ -45,6 +45,36 @@ RSpec.describe Barcode, type: :model do
     expect(build(:barcode, bar_height: '11111')).to_not be_valid
   end
 
+  it 'should validate format of narrow bar width' do
+    expect(build(:barcode, narrow_bar_width: '01')).to be_valid
+    expect(build(:barcode, narrow_bar_width: 'XX')).to_not be_valid
+    expect(build(:barcode, narrow_bar_width: '111')).to_not be_valid
+  end
+
+  it 'should validate format of narrow space width' do
+    expect(build(:barcode, narrow_space_width: '01')).to be_valid
+    expect(build(:barcode, narrow_space_width: 'XX')).to_not be_valid
+    expect(build(:barcode, narrow_space_width: '111')).to_not be_valid
+  end
+
+  it 'should validate format of wide bar width' do
+    expect(build(:barcode, wide_bar_width: '01')).to be_valid
+    expect(build(:barcode, wide_bar_width: 'XX')).to_not be_valid
+    expect(build(:barcode, wide_bar_width: '111')).to_not be_valid
+  end
+
+  it 'should validate format of wide space width' do
+    expect(build(:barcode, wide_space_width: '01')).to be_valid
+    expect(build(:barcode, wide_space_width: 'XX')).to_not be_valid
+    expect(build(:barcode, wide_space_width: '111')).to_not be_valid
+  end
+
+  it 'should validate format of char to char space width' do
+    expect(build(:barcode, char_to_char_space_width: '01')).to be_valid
+    expect(build(:barcode, char_to_char_space_width: 'XX')).to_not be_valid
+    expect(build(:barcode, char_to_char_space_width: '111')).to_not be_valid
+  end
+
   it 'should assign a placeholder id if there is a section' do
     label = create(:label)
 

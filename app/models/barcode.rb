@@ -7,11 +7,17 @@
 class Barcode < Drawing
   store :options, accessors: %i[barcode_type one_module_width
                                 height rotational_angle one_cell_width
-                                type_of_check_digit no_of_columns bar_height]
+                                type_of_check_digit no_of_columns bar_height
+                                narrow_bar_width narrow_space_width
+                                wide_bar_width wide_space_width
+                                char_to_char_space_width]
 
   validates :barcode_type, format: { with: /\A[0-9A-Z]{1}\z/, allow_blank: true }
 
   validates :one_module_width, :one_cell_width, :no_of_columns,
+            :narrow_bar_width, :narrow_space_width,
+            :wide_bar_width, :wide_space_width,
+            :char_to_char_space_width,
             format: { with: /\A\d{2}\z/, allow_blank: true }
 
   validates :rotational_angle, :type_of_check_digit,
