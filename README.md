@@ -25,3 +25,8 @@ Eg:
 CUPSD_SERVER_NAME=localhost:631 docker run pmb
 
 If not specified, it will use the default value will localhost:631.
+
+Test the connectivity with the Cups server using lpstat -r
+
+Test that printers are detected using lpstat -v
+
