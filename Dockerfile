@@ -2,7 +2,7 @@ FROM starefossen/ruby-node
 ENV BUNDLER_VERSION=2.1.4
 
 RUN apt-get update -qq && apt-get install -y
-RUN apt-get -y install git vim
+RUN apt-get -y install cups-client
 
 WORKDIR /code
 
