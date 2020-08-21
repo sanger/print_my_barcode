@@ -14,7 +14,9 @@ ADD . /code/
 RUN gem install bundler
 RUN bundle install
 
-ENTRYPOINT ["/code/docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3000
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
