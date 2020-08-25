@@ -52,6 +52,9 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # Default setting for adding printers to cupsd server on printer create
+  config.auto_create_printer_in_cupsd = true
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
