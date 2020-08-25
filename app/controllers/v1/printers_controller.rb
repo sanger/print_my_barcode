@@ -38,8 +38,8 @@ module V1
     def create_printer_in_cups(printer)
       existing_printers = `lpstat -a`
       if existing_printers.include? printer.name
-      elsif Rails.configuration.auto_create_printer_in_cupsd
-        sh "sudo lpadmin -p #{printer.name} -v socket://#{printer.name}.internal.sanger.ac.uk -E"
+      elsifRails.configuration.auto_create_printer_in_cupsd
+        `sudo lpadmin -p #{printer.name} -v socket://#{printer.name}.internal.sanger.ac.uk -E`
       end
     end
   end

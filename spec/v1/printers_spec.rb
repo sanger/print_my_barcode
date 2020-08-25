@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe V1::PrintersController, type: :request, helpers: true do |_variable|
   let(:headers) { { 'CONTENT_TYPE' => 'application/vnd.api+json' } }
 
+
   it 'should allow retrieval of all printers' do
     printers = create_list(:printer, 5)
     get v1_printers_path
@@ -52,6 +53,7 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |_variab
   end
 
   it 'should allow creation of a new printer' do
+    Rails.configuration.auto_create_printer_in_cupsd = false
     expect do
       post v1_printers_path, params: { data: { attributes: attributes_for(:printer) } }.to_json, headers: headers
     end.to change(Printer, :count).by(1)
@@ -60,6 +62,7 @@ RSpec.describe V1::PrintersController, type: :request, helpers: true do |_variab
   end
 
   it 'allows creation of a printer with a specified protocol' do
+    Rails.configuration.auto_create_printer_in_cupsd = false
     expect do
       post v1_printers_path, params: { data: { attributes: { name: 'Printer Juan', protocol: 'IPP' } } }.to_json, headers: headers
     end.to change(Printer, :count).by(1)
