@@ -20,13 +20,18 @@ class Printer < ApplicationRecord
     end
   end
 
-  after_save do
+  after_save :update_printer_in_cups
+
+  def update_printer_in_cups
     existing_printers = `lpstat -a`.split("\n")
     existing_printers.map! { |printer| printer.split(' ').first }
-    unless existing_printers.include? name
-      if Rails.configuration.auto_create_printer_in_cupsd
-        `sudo lpadmin -p #{name} -v socket://#{name}.internal.sanger.ac.uk -E`
-      end
-    end
+    check_if_printer_exists(existing_printers)
+  end
+
+  def check_if_printer_exists(existing_printers)
+    return if existing_printers.include? name
+    return unless Rails.configuration.auto_create_printer_in_cupsd
+
+    `sudo lpadmin -p #{name} -v socket://#{name}.internal.sanger.ac.uk -E`
   end
 end
