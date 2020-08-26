@@ -15,7 +15,6 @@ module V1
       printer = Printer.new(printer_params)
       if printer.save
         render json: printer, status: :created
-        create_printer_in_cups(printer)
       else
         render_error printer
       end
@@ -33,14 +32,6 @@ module V1
 
     def filter_params
       params.permit(filter: %i[name protocol])
-    end
-
-    def create_printer_in_cups(printer)
-      existing_printers = `lpstat -a`
-      if existing_printers.include? printer.name
-      elsif Rails.configuration.auto_create_printer_in_cupsd
-        `sudo lpadmin -p #{printer.name} -v socket://#{printer.name}.internal.sanger.ac.uk -E`
-      end
     end
   end
 end

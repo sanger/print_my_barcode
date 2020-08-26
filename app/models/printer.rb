@@ -19,4 +19,14 @@ class Printer < ApplicationRecord
       filters
     end
   end
+
+  after_save do
+    existing_printers = `lpstat -a`.split("\n")
+    existing_printers.map! { |printer| printer.split(' ').first }
+    unless existing_printers.include? name
+      if Rails.configuration.auto_create_printer_in_cupsd
+        `sudo lpadmin -p #{name} -v socket://#{name}.internal.sanger.ac.uk -E`
+      end
+    end
+  end
 end
