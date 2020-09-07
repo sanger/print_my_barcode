@@ -4,8 +4,7 @@
 namespace :printers do
   desc 'generate list of printers'
   task create: :environment do |_t|
-    existing_printers = `lpstat -a`.split("\n")
-    existing_printers.map! { |printer| printer.split(' ').first }
+    existing_printers = Printer.existing_cups_printers
     Printer.all.each do |printer|
       printer.check_if_printer_exists(existing_printers)
     end

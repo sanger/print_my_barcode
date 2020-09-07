@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe V1::PrintersController, type: :request, helpers: true do |_variable|
   let(:headers) { { 'CONTENT_TYPE' => 'application/vnd.api+json' } }
 
-
   it 'should allow retrieval of all printers' do
     printers = create_list(:printer, 5)
     get v1_printers_path
