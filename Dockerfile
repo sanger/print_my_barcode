@@ -3,6 +3,7 @@ ENV BUNDLER_VERSION=2.1.4
 
 RUN apt-get update -qq && apt-get install -y
 RUN apt-get -y install cups-client cups-bsd
+RUN apt-get -y install expect
 
 WORKDIR /code
 
@@ -13,6 +14,9 @@ ADD . /code/
 
 RUN gem install bundler
 RUN bundle install
+
+COPY create-cups-printer.sh /
+RUN ["chmod", "+x", "/create-cups-printer.sh"]
 
 COPY docker-entrypoint.sh /
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]

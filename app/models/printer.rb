@@ -19,4 +19,25 @@ class Printer < ApplicationRecord
       filters
     end
   end
+
+  after_save :update_printer_in_cups
+
+  def update_printer_in_cups
+    return unless Rails.configuration.auto_create_printer_in_cupsd
+
+    existing_printers = Printer.existing_cups_printers
+    check_if_printer_exists(existing_printers)
+  end
+
+  def check_if_printer_exists(existing_printers)
+    return if existing_printers.include? name
+
+    `/create-cups-printer.sh #{name}`
+  end
+
+  def self.existing_cups_printers
+    existing_printers = `lpstat -a`.split("\n")
+    existing_printers.map! { |printer| printer.split(' ').first }
+    existing_printers
+  end
 end
