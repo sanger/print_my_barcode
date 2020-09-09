@@ -32,7 +32,7 @@ class Printer < ApplicationRecord
   def check_if_printer_exists(existing_printers)
     return if existing_printers.include? name
 
-    `./create-cups-printer.sh #{name}`
+    `/create-cups-printer.sh #{name}`
   end
 
   def self.existing_cups_printers
