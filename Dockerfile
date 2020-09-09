@@ -15,6 +15,9 @@ ADD . /code/
 RUN gem install bundler
 RUN bundle install
 
+COPY create-cups-printer.sh /
+RUN ["chmod", "+x", "/create-cups-printer.sh"]
+
 COPY docker-entrypoint.sh /
 RUN ["chmod", "+x", "/docker-entrypoint.sh"]
 ENTRYPOINT ["/docker-entrypoint.sh"]
