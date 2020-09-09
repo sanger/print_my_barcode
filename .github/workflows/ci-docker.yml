@@ -6,7 +6,6 @@ on:
       - develop
       - master
       - gpl592_pmb_into_fce
-      - printers_rake_task
     paths-ignore:
       - "README.md"
     tags:
