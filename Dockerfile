@@ -3,6 +3,7 @@ ENV BUNDLER_VERSION=2.1.4
 
 RUN apt-get update -qq && apt-get install -y
 RUN apt-get -y install cups-client
+RUN apt-get install expect
 
 WORKDIR /code
 
