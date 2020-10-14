@@ -38,6 +38,9 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # Default setting for adding printers to cupsd server on printer create
+  config.auto_create_printer_in_cupsd = false
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
