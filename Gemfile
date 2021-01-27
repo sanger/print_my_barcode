@@ -41,6 +41,8 @@ gem 'rails-perftest'
 
 gem 'rack-cors', require: 'rack/cors'
 
+gem 'sprint_client'
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
