@@ -2,5 +2,5 @@
 
 # PrinterSerializer
 class PrinterSerializer < ActiveModel::Serializer
-  attributes :id, :name, :protocol
+  attributes :id, :name, :protocol, :printer_type
 end

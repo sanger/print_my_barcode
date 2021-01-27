@@ -14,11 +14,12 @@ class PrintJobWrapper
     # return false unless valid?
 
     case printer.printer_type
-    when 'Toshiba'
+    when 'toshiba'
       print_to_toshiba
-    when 'Squix'
+    when 'squix'
       print_to_squix
     end
+    true
   end
 
   def printer

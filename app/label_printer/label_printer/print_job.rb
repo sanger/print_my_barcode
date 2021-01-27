@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# LabelPrinter::PrintJob for printers with printer type 'Toshiba'
 module LabelPrinter
   ##
   # A print job will take data input,

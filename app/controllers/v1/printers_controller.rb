@@ -27,11 +27,11 @@ module V1
     end
 
     def printer_params
-      params.require(:data).require(:attributes).permit(:name, :protocol)
+      params.require(:data).require(:attributes).permit(:name, :protocol, :printer_type)
     end
 
     def filter_params
-      params.permit(filter: %i[name protocol])
+      params.permit(filter: %i[name protocol printer_type])
     end
   end
 end

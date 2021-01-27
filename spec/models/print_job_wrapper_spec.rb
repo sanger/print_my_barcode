@@ -21,16 +21,15 @@ RSpec.describe PrintJobWrapper do
     end
   end
 
-  # Un 'x' below when merged in GPL-831-2
   describe 'print' do
-    xit 'calls print_to_toshiba when printer_type is Toshiba' do
+    it 'calls print_to_toshiba when printer_type is Toshiba' do
       toshiba_printer = create(:printer, printer_type: :toshiba)
       pjw = PrintJobWrapper.new({ printer_name: toshiba_printer.name, label_template_name: label_template.name, label_template_id: label_template.id, labels: labels, copies: copies })
       expect(pjw).to receive(:print_to_toshiba)
       pjw.print
     end
 
-    xit 'calls print_to_sprint when printer_type is Squix' do
+    it 'calls print_to_sprint when printer_type is Squix' do
       squix_printer = create(:printer, printer_type: :squix)
       pjw = PrintJobWrapper.new({ printer_name: squix_printer.name, label_template_name: label_template.name, label_template_id: label_template.id, labels: labels, copies: copies })
 
