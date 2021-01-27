@@ -13,20 +13,16 @@ class PrintJobWrapper
   def print
     # return false unless valid?
 
-    case printer_type
+    case printer.printer_type
     when 'Toshiba'
       print_to_toshiba
     when 'Squix'
       print_to_squix
-    else
-      # TODO: handle errors
-      # errors << "Printer type #{printer_type} for printer #{printer_name} not recognised."
-      false
     end
   end
 
-  def printer_type
-    Printer.find_by(name: printer_name).type
+  def printer
+    Printer.find_by(name: printer_name)
   end
 
   def print_to_toshiba
@@ -64,7 +60,7 @@ class PrintJobWrapper
   # end
 
   # def check_print_job
-  # case printer_type
+  # case printer.printer_type
   # when 'Toshiba'
   #   toshiba.valid?
   # when 'Squix'
