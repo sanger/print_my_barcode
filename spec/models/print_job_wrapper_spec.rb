@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Squix::PrintJobWrapper do
+RSpec.describe PrintJobWrapper do
 
   let!(:printer)          { create(:printer) }
   let(:label_template)      { create(:label_template) }
@@ -11,7 +11,7 @@ RSpec.describe Squix::PrintJobWrapper do
 
   describe 'init' do
     it 'has the correct insatnce variables' do
-      pjw = Squix::PrintJobWrapper.new(printer.name, label_template.name, label_template.id, labels, copies)
+      pjw = PrintJobWrapper.new({ printer_name: printer.name, label_template_name: label_template.name, label_template_id: label_template.id, labels: labels, copies: copies })
 
       assert_equal printer.name, pjw.printer_name
       assert_equal label_template.id, pjw.label_template_id
@@ -23,7 +23,7 @@ RSpec.describe Squix::PrintJobWrapper do
 
   describe 'print' do
     it 'calls print_to_toshiba when printer_type is Toshiba' do
-      pjw = Squix::PrintJobWrapper.new(printer.name, label_template.name, label_template.id, labels, copies)
+      pjw = PrintJobWrapper.new({ printer_name: printer.name, label_template_name: label_template.name, label_template_id: label_template.id, labels: labels, copies: copies })
       allow(pjw).to receive(:printer_type).and_return('Toshiba')
 
       expect(pjw).to receive(:print_to_toshiba)
@@ -31,7 +31,7 @@ RSpec.describe Squix::PrintJobWrapper do
     end
 
     it 'calls print_to_sprint when service is Squix' do
-      pjw = Squix::PrintJobWrapper.new(printer.name,label_template.name, label_template.id, labels, copies)
+      pjw = PrintJobWrapper.new({ printer_name: printer.name, label_template_name: label_template.name, label_template_id: label_template.id, labels: labels, copies: copies })
       allow(pjw).to receive(:printer_type).and_return('Squix')
 
       expect(pjw).to receive(:print_to_squix)
@@ -39,7 +39,7 @@ RSpec.describe Squix::PrintJobWrapper do
     end
 
     it 'adds an error when service is down' do
-      pjw = Squix::PrintJobWrapper.new(printer.name,label_template.name, label_template.id, labels, copies)
+      pjw = PrintJobWrapper.new({ printer_name: printer.name, label_template_name: label_template.name, label_template_id: label_template.id, labels: labels, copies: copies })
       allow(pjw).to receive(:printer_type).and_return('Unknown')
 
       expect(pjw).not_to receive(:print_to_toshiba)
@@ -54,7 +54,7 @@ RSpec.describe Squix::PrintJobWrapper do
       it 'builds a LabelPrinter::PrintJob with the correct arributes and executes' do
         label_template = create(:label_template)
         print_job = build(:print_job)
-        pjw = Squix::PrintJobWrapper.new(printer.name, label_template.name, nil, labels, copies)
+        pjw = PrintJobWrapper.new({ printer_name: printer.name, label_template_name: label_template.name, label_template_id: nil, labels: labels, copies: copies })
 
         allow(LabelPrinter::PrintJob).to receive(:build).and_return(print_job)
 
@@ -68,7 +68,7 @@ RSpec.describe Squix::PrintJobWrapper do
     describe 'when label_template id is present' do
       it 'builds a LabelPrinter::PrintJob with the correct arributes' do
         print_job = build(:print_job)
-        pjw = Squix::PrintJobWrapper.new(printer.name, nil, label_template.id, labels, copies)
+        pjw = PrintJobWrapper.new({ printer_name: printer.name, label_template_name: nil, label_template_id: label_template.id, labels: labels, copies: copies })
 
         allow(LabelPrinter::PrintJob).to receive(:build).and_return(print_job)
 
@@ -84,7 +84,7 @@ RSpec.describe Squix::PrintJobWrapper do
   describe 'print_to_squix' do
     it 'builds a Squix::PrintJob with the correct arributes' do
       squix_print_job = build(:squix_print_job)
-      pjw = Squix::PrintJobWrapper.new(printer.name, label_template.name, label_template.id, labels, copies)
+      pjw = PrintJobWrapper.new({ printer_name: printer.name, label_template_name: label_template.name, label_template_id: label_template.id, labels: labels, copies: copies })
 
       allow(Squix::PrintJob).to receive(:new).and_return(squix_print_job)
 
