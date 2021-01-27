@@ -15,5 +15,10 @@ Rails.application.routes.draw do
     get 'docs', to: 'docs#index'
   end
 
+  namespace :v2 do
+    resources :print_jobs, only: [:create]
+    resources :printers, only: [:index]
+  end
+
   match 'v1/test_exception_notifier', controller: 'application', action: 'test_exception_notifier', via: :get
 end
