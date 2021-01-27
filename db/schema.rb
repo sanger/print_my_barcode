@@ -58,5 +58,6 @@ ActiveRecord::Schema.define(version: 20_150_925_101_550) do
     t.integer 'protocol', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.integer "printer_type"
   end
 end
