@@ -9,21 +9,28 @@ module V2
       if print_job_wrapper.print
         render json: { message: 'labels successfully printed' }
       else
-        render_error print_job_wrapper
+        render 'error'
+        # render_error print_job_wrapper
       end
     end
 
     private
 
-    # TODO: fix
     def print_job_params
-      params.require(:print_job).permit(
-        :printer_name,
-        :label_template_name,
-        :label_template_id,
-        :copies,
-        # labels: []
-      )
+      p1 = params.permit(
+        print_job: %i[
+          printer_name
+          label_template_name
+          label_template_id
+          copies
+        ]
+      )[:print_job].to_h
+
+      p1.merge(labels: labels_params)
+    end
+
+    def labels_params
+      params.require(:print_job)[:labels].map { |label| label.permit!.to_h }
     end
   end
 end
