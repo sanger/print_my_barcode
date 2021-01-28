@@ -5,21 +5,29 @@ class PrintJobWrapper
   include ActiveModel::Model
 
   attr_reader :copies
-  attr_accessor :printer_name, :label_template_name, :label_template_id, :labels, :errors
+  attr_accessor :printer_name, :label_template_name, :label_template_id, :labels
+
+  validate :check_printer
 
   def print
-    return false unless print_job.valid?
+    return false unless valid?
+
+    unless print_job.valid?
+      print_job.errors.each do |k, v|
+        errors.add(k, v)
+      end
+      return false
+    end
 
     print_job.execute
-    # do something with response
   end
 
   def print_job
     case printer.printer_type
     when 'toshiba'
-      @print_job = toshiba_print_job
+      @print_job ||= toshiba_print_job
     when 'squix'
-      @print_job = squix_print_job
+      @print_job ||= squix_print_job
     end
   end
 
@@ -51,5 +59,11 @@ class PrintJobWrapper
 
   def copies=(copies)
     @copies = copies.to_i
+  end
+
+  private
+
+  def check_printer
+    errors.add(:printer, 'does not exist') if printer.blank?
   end
 end

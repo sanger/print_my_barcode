@@ -5,12 +5,11 @@ module V2
   class PrintJobsController < ApplicationController
     def create
       print_job_wrapper = PrintJobWrapper.new(print_job_params)
-      # TODO: fix
+
       if print_job_wrapper.print
         render json: { message: 'labels successfully printed' }
       else
-        render 'error'
-        # render_error print_job_wrapper
+        render_error print_job_wrapper
       end
     end
 
