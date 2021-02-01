@@ -3,11 +3,10 @@
 # PrintJobWrapper
 
 # What did I do:
-# 
+#
 class PrintJobWrapper
   include ActiveModel::Model
 
-  attr_reader :copies
   attr_accessor :printer_name, :label_template_name, :labels
 
   validates :label_template, :printer, :labels, presence: true
@@ -73,8 +72,7 @@ class PrintJobWrapper
 
   private
 
-  def check_print_job
-  end
+  def check_print_job; end
 
   # def check_printer
   #   errors.add(:printer, 'does not exist') if printer.blank?
