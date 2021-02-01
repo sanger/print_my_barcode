@@ -67,9 +67,10 @@ RSpec.describe PrintJobWrapper do
         expect(print_job_wrapper.print_job).to be_instance_of(LabelPrinter::PrintJob::LPD)
       end
 
-      it 'is not valid if the print job is not valid' do
+      it 'will not execute if the print job is not valid' do
         print_job_wrapper = PrintJobWrapper.new(attributes.except(:labels))
         expect(print_job_wrapper).to_not be_valid
+        expect(print_job_wrapper.print).to be_falsy
       end
 
       it 'will execute the print job if it is valid' do
@@ -86,9 +87,10 @@ RSpec.describe PrintJobWrapper do
         expect(print_job_wrapper.print_job).to be_instance_of(Squix::PrintJob)
       end
 
-      it 'is not valid if the print job is not valid' do
-        print_job_wrapper = PrintJobWrapper.new(attributes.except(:labels))
+      it 'will not execute if the print job is not valid' do
+        print_job_wrapper = PrintJobWrapper.new(attributes.except(:labels).merge(printer_name: squix_printer.name))
         expect(print_job_wrapper.print_job).to_not be_valid
+        expect(print_job_wrapper.print).to be_falsy
       end
 
       it 'will execute the print job if it is valid' do

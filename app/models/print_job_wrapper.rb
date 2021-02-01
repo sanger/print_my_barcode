@@ -3,7 +3,12 @@
 # PrintJobWrapper
 
 # What did I do:
-#
+# added validation for required attributes as well as print job
+# added validation for print job
+# added print job creation in single method
+# added print job body creation method
+# made copies optional and create them if they are not passed
+# created printer and label template as attribute readers
 class PrintJobWrapper
   include ActiveModel::Model
 
@@ -22,6 +27,7 @@ class PrintJobWrapper
   def print_job
     @print_job ||= case printer.try(:printer_type)
                    when 'toshiba'
+                     # TODO: we need to convert the labels to the correct format
                      LabelPrinter::PrintJob.build(print_job_body.except(
                                                     :label_template_name, :copies
                                                   ))
