@@ -27,7 +27,7 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
 
     context 'When printer type is Toshiba' do
       it 'should send_print_request to SPrintClient ' do
-        body = { printer_name: toshiba_printer.name, label_template_id: label_template.id,
+        body = { printer_name: toshiba_printer.name, label_template_name: label_template.name,
         labels: labels }
         allow_any_instance_of(LabelPrinter::PrintJob::LPD).to receive(:execute).and_return(true)
 
@@ -43,7 +43,7 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
   describe 'On failure' do
     context 'when wrapper is not valid' do
       it 'should return an error if the printer name is missing' do
-        body = { printer_name: '', label_template_id: label_template.id, labels: labels }
+        body = { printer_name: '', label_template_name: label_template.name, labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -51,13 +51,13 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
         json = ActiveSupport::JSON.decode(response.body)
 
         expect(json['errors']).not_to be_empty
-        expect(find_attribute_error_details(json, 'printer')).to include('does not exist')
+        expect(find_attribute_error_details(json, 'printer')).to include("can't be blank")
       end
     end
 
     context 'when toshiba_print_job is not valid' do
       it 'should return an error' do
-        body = { printer_name: toshiba_printer.name, label_template_id: '', labels: labels }
+        body = { printer_name: toshiba_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -65,13 +65,13 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
         json = ActiveSupport::JSON.decode(response.body)
 
         expect(json['errors']).not_to be_empty
-        expect(find_attribute_error_details(json, 'label_template')).to include('does not exist')
+        expect(find_attribute_error_details(json, 'label_template')).to include("can't be blank")
       end
     end
 
     context 'when squix_print_job is not valid' do
       it 'should return an error' do
-        body = { printer_name: squix_printer.name, label_template_name: label_template.name, labels: labels }
+        body = { printer_name: squix_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -79,7 +79,7 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
         json = ActiveSupport::JSON.decode(response.body)
 
         expect(json['errors']).not_to be_empty
-        expect(find_attribute_error_details(json, 'copies')).to include("can't be blank")
+        expect(find_attribute_error_details(json, 'label_template')).to include("can't be blank")
       end
     end
   end
