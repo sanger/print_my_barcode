@@ -2,6 +2,12 @@
 
 require 'rails_helper'
 
+# what I did:
+# removed extra tests that were testing the same thing twice
+# renamed some tests to reflect what they were testing
+# checked printer type values against their enums rather than using strings
+# checked validity of printer types within creating printer
+# added more descriptive factories for different printer types
 RSpec.describe Printer, type: :model do
   it 'should not be valid without a name' do
     expect(build(:printer, name: nil)).to_not be_valid
@@ -20,33 +26,22 @@ RSpec.describe Printer, type: :model do
   end
 
   describe 'printer_type' do
-    it 'should not be valid without a name' do
+    it 'should not be valid without a type' do
       expect(build(:printer, printer_type: nil)).to_not be_valid
     end
 
-    it 'should create a printer with the squix printer_type' do
-      printer = create(:printer, printer_type: :squix)
-      expect(printer.printer_type).to eq 'squix'
-      expect(printer.squix?).to be_truthy
+    it 'can create a printer with the squix printer_type' do
+      printer = create(:squix_printer)
+      expect(printer).to be_valid
+      expect(printer).to be_squix
     end
 
-    it 'should create a printer with the toshiba printer_type' do
-      printer = create(:printer, printer_type: :toshiba)
-      expect(printer.printer_type).to eq 'toshiba'
-      expect(printer.toshiba?).to be_truthy
+    it 'can create a printer with the toshiba printer_type' do
+      printer = create(:toshiba_printer)
+      expect(printer).to be_valid
+      expect(printer).to be_toshiba
     end
 
-    it 'should not be valid without a printer_type' do
-      expect(build(:printer, name: nil)).to_not be_valid
-    end
-
-    it 'should be valid with a printer_type' do
-      expect(build(:printer, printer_type: :squix)).to be_valid
-    end
-
-    it 'should be valid with a printer_type' do
-      expect(build(:printer, printer_type: :toshiba)).to be_valid
-    end
   end
 
 end

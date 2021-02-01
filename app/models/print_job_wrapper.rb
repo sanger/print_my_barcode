@@ -1,13 +1,18 @@
 # frozen_string_literal: true
 
 # PrintJobWrapper
+
+# What did I do:
+# 
 class PrintJobWrapper
   include ActiveModel::Model
 
   attr_reader :copies
-  attr_accessor :printer_name, :label_template_name, :label_template_id, :labels
+  attr_accessor :printer_name, :label_template_name, :labels
 
-  validate :check_printer
+  validates :label_template, :printer, :labels, presence: true
+
+  validate :check_print_job
 
   def print
     return false unless valid?
@@ -42,13 +47,10 @@ class PrintJobWrapper
   def print_job_body
     case printer.printer_type
     when 'toshiba'
-      unless label_template_id
-        @label_template_id = LabelTemplate.find_by(name: label_template_name).id
-      end
-      @print_job_body = { printer_name: printer_name, label_template_id: label_template_id,
+      @print_job_body = { printer_name: printer_name, label_template_id: label_template.id,
                           labels: labels }
     when 'squix'
-      @print_job_body = { printer_name: printer_name, label_template_name: label_template_name,
+      @print_job_body = { printer_name: printer_name, label_template_name: label_template.name,
                           labels: labels, copies: copies }
     end
   end
@@ -57,13 +59,24 @@ class PrintJobWrapper
     Printer.find_by(name: printer_name)
   end
 
+  def label_template
+    LabelTemplate.find_by(name: label_template_name)
+  end
+
   def copies=(copies)
-    @copies = copies.to_i
+    @copies = copies.try(:to_i)
+  end
+
+  def copies
+    @copies ||= 1
   end
 
   private
 
-  def check_printer
-    errors.add(:printer, 'does not exist') if printer.blank?
+  def check_print_job
   end
+
+  # def check_printer
+  #   errors.add(:printer, 'does not exist') if printer.blank?
+  # end
 end
