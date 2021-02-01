@@ -27,20 +27,22 @@ class PrintJobWrapper
   def print_job
     @print_job ||= case printer.try(:printer_type)
                    when 'toshiba'
-                     # TODO: we need to convert the labels to the correct format
-                     LabelPrinter::PrintJob.build(print_job_body.except(
-                                                    :label_template_name, :copies
-                                                  ))
+                     LabelPrinter::PrintJob.build_from_v2(print_job_body.except(
+                                                            :label_template_name, :copies
+                                                          ))
                    when 'squix'
                      Squix::PrintJob.new(print_job_body.except(:label_template_id))
                    end
   end
 
   def print_job_body
-    @print_job_body ||= { printer_name: printer_name, label_template_id:
-                          label_template.try(:id),
-                          label_template_name: label_template.try(:name),
-                          labels: labels, copies: copies }
+    @print_job_body ||= {
+      printer_name: printer_name,
+      label_template_id: label_template.try(:id),
+      label_template_name: label_template.try(:name),
+      labels: labels,
+      copies: copies
+    }
   end
 
   def printer

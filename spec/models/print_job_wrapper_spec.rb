@@ -25,10 +25,10 @@ RSpec.describe PrintJobWrapper do
     it 'has the correct instance variables' do
       print_job_wrapper = PrintJobWrapper.new(attributes)
 
-      expect(print_job_wrapper.printer).to eq(toshiba_printer) 
+      expect(print_job_wrapper.printer).to eq(toshiba_printer)
       expect(print_job_wrapper.label_template).to eq(label_template)
       expect(print_job_wrapper.labels).to eq(labels)
-      expect(print_job_wrapper.copies).to eq(copies) 
+      expect(print_job_wrapper.copies).to eq(copies)
     end
 
     it 'will be valid with the correct instance variables' do
@@ -55,15 +55,10 @@ RSpec.describe PrintJobWrapper do
   end
 
   describe '#print_job' do
-    
-    context 'Toshiba' do
 
-      # TODO: at the moment we are passing in the labels as the correct format for Toshiba
-      # They need to be in the same format for both
-      let(:toshiba_labels) { label_template.dummy_labels.to_h }
-      
+    context 'Toshiba' do
       it 'creates a new print job of the correct type' do
-        print_job_wrapper = PrintJobWrapper.new(attributes.merge(labels: toshiba_labels))
+        print_job_wrapper = PrintJobWrapper.new(attributes.merge(labels: labels))
         expect(print_job_wrapper.print_job).to be_instance_of(LabelPrinter::PrintJob::LPD)
       end
 

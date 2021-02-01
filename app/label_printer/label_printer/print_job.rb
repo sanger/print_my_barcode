@@ -39,5 +39,24 @@ module LabelPrinter
         LabelPrinter::PrintJob::Base.new(attributes)
       end
     end
+
+    def self.build_from_v2(attributes)
+      labels = attributes[:labels]
+      printer = Printer.find_by(name: attributes[:printer_name])
+
+      if printer.present?
+        "LabelPrinter::PrintJob::#{printer.protocol}"
+          .constantize.new(attributes.merge(printer: printer, labels: convert_labels(labels)))
+      else
+        LabelPrinter::PrintJob::Base.new(attributes)
+      end
+    end
+
+    def self.convert_labels(labels)
+      return if labels.nil?
+
+      labels_with_location = labels.map { |label| { location: label } }
+      { body: labels_with_location }
+    end
   end
 end
