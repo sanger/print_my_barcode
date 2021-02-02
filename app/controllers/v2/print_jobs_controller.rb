@@ -30,7 +30,6 @@ module V2
       p1 = params.permit(
         print_job: %i[
           printer_name
-
           label_template_name
           label_template_id
           copies

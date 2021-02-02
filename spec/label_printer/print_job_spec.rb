@@ -5,8 +5,8 @@ require 'rails_helper'
 RSpec.describe LabelPrinter::PrintJob, type: :model do
   let!(:printer)                { create(:printer) }
   let!(:label_template)         { create(:label_template) }
-  let!(:labels_for_v2)          { [{ "barcode": "aBarcode1", "parent_location": "aParentLocation1", "location": "location1"}, {"barcode": "aBarcode2", "parent_location": "aParentLocation2", "location": "location2"}] }
-  let!(:expected_labels_for_v2) { { "body": [{"location": {"barcode": "aBarcode1", "parent_location": "aParentLocation1", "location": "location1"}}, {"location": {"barcode": "aBarcode2", "parent_location": "aParentLocation2", "location"=>"location2"}}] }.with_indifferent_access }
+  let!(:labels_for_v2)          { [{ "barcode": "aBarcode1", "parent_location": "aParentLocation1", "location": "location1", "label_name": "location_label_name_1"}, {"barcode": "aBarcode2", "parent_location": "aParentLocation2", "location": "location2", "label_name": "location_label_name_2"}] }
+  let!(:expected_labels_for_v2) { { "body": [{"location_label_name_1": {"barcode": "aBarcode1", "parent_location": "aParentLocation1", "location": "location1"}}, {"location_label_name_2": {"barcode": "aBarcode2", "parent_location": "aParentLocation2", "location"=>"location2"}}] }.with_indifferent_access }
 
   it 'should have a printer' do
     expect(build(:print_job, printer_name: printer.name)).to be_valid
@@ -62,8 +62,8 @@ RSpec.describe LabelPrinter::PrintJob, type: :model do
 
       expect(output[:body]).to be_present
       expect(output[:body].length).to eq 2
-      expect(output[:body][0][:location]).to be_present
-      expect(output[:body][1][:location]).to be_present
+      expect(output[:body][0]['location_label_name_1']).to be_present
+      expect(output[:body][1]['location_label_name_2']).to be_present
     end
   end
 

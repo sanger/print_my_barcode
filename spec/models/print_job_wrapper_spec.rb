@@ -17,7 +17,7 @@ RSpec.describe PrintJobWrapper do
   let!(:squix_printer)      { create(:squix_printer) }
   let!(:toshiba_printer)    { create(:toshiba_printer) }
   let(:label_template)      { create(:label_template) }
-  let(:labels)              { [{ 'test_attr' => 'test', 'barcode' => '12345' }] }
+  let(:labels)              { [{ 'test_attr' => 'test', 'barcode' => '11111', 'label_name': 'location' }, { 'test_attr' => 'test2', 'barcode' => '22222', 'label_name': 'location2' }] }
   let(:copies)              { 2 }
   let(:attributes)          { { printer_name: toshiba_printer.name, label_template_name: label_template.name, labels: labels, copies: copies } }
 

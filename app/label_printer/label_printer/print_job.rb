@@ -55,7 +55,10 @@ module LabelPrinter
     def self.convert_labels(labels)
       return if labels.nil?
 
-      labels_with_location = labels.map { |label| { location: label } }
+      labels_with_location = labels.map do |label|
+        label_name = label[:label_name]
+        { label_name => label.except(:label_name) }
+      end
       { body: labels_with_location }
     end
   end
