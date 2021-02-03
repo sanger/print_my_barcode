@@ -6,10 +6,12 @@ module Squix
   #   "right_text"=>"DN9000003B",
   #   "left_text"=>"DN9000003B",
   #   "barcode"=>"DN9000003B",
+  #   "label_name"=>"main_label"
   # },
   # {
   #   "extra_right_text"=>"DN9000003B  LTHR-384 RT",
   #   "extra_left_text"=>"10-NOV-2020"
+  #   "label_name"=>"extra_label"
   # }]
 
   # Squix::PrintJob

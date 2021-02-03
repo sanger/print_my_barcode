@@ -2,16 +2,6 @@
 
 require 'rails_helper'
 
-# What I did:
-# used the printer type factories
-# renamed print_job_wrapper to print_job_wrapper feels better semantically
-# added tests to check validity of print_job_wrapper
-# modified tests which seem to be mocking out the print jobs as we need to check the validity of the print_jobs themselves.
-# changed labels to what should be expected
-# changed assert_equal to rspec expect syntax
-# took copies out of everything except first test
-# did a bit of stuff with copies as it should not be required
-# changed copies to a different number as from what I understand it defaults to 1
 RSpec.describe PrintJobWrapper do
 
   let!(:squix_printer)      { create(:squix_printer) }

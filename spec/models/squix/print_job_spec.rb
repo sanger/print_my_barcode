@@ -2,12 +2,6 @@
 
 require 'rails_helper'
 
-# what I did:
-# Renamed the file as it did not have spec at the end. This means tests will not be run when the bundle exec rspec
-# Renamed pj to print_job
-# Modified setup so that you can reuse attributes
-# Added tests to check that print job was valid
-# modified label setup as it didnt seem to be setup to what sprint client was expecting
 RSpec.describe Squix::PrintJob do
 
   let!(:printer)            { create(:printer) }
