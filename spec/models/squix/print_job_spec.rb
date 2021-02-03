@@ -6,19 +6,20 @@ RSpec.describe Squix::PrintJob do
 
   let!(:printer)            { create(:printer) }
   let(:label_template)      { create(:label_template) }
-  let(:label)               { { 'test_attr' => 'test', 'barcode' => '12345' } }
-  let(:labels)              { [label] }
+  let(:label1)               { { 'test_attr': 'test1', 'barcode': '11111', 'label_name': 'location1' } }
+  let(:label2)               { { 'test_attr': 'test2', 'barcode': '22222', 'label_name': 'location2' } }
+  let(:labels)              { [label1, label2] }
   let(:copies)              { 1 }
-  let(:attributes)          { { printer_name: printer.name, label_template_name: label_template.name, labels: [label], copies: copies } }
+  let(:attributes)          { { printer_name: printer.name, label_template_name: label_template.name, labels: labels, copies: copies } }
 
   describe 'new' do
     it 'will have the correct instance variables' do
       print_job = Squix::PrintJob.new(attributes)
 
-      expect(print_job.printer_name).to eq(printer.name) 
-      expect(print_job.label_template_name).to eq(label_template.name) 
-      expect(print_job.labels).to eq(labels) 
-      expect(print_job.copies).to eq(copies) 
+      expect(print_job.printer_name).to eq(printer.name)
+      expect(print_job.label_template_name).to eq(label_template.name)
+      expect(print_job.labels).to eq(labels)
+      expect(print_job.copies).to eq(copies)
     end
 
     it 'will not be valid without the printer name' do
@@ -48,7 +49,8 @@ RSpec.describe Squix::PrintJob do
   describe '#merge_fields_list' do
     it 'will return the correct number of merge fields when copies is more than 1' do
       print_job = Squix::PrintJob.new(attributes.merge(copies: 2))
-      expect(print_job.merge_fields_list).to eq([label] * 2)
+      expected = print_job.converted_labels
+      expect(print_job.merge_fields_list).to eq(expected * 2)
     end
   end
 

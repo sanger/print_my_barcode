@@ -31,7 +31,13 @@ module Squix
     end
 
     def merge_fields_list
-      labels * copies
+      converted_labels * copies
+    end
+
+    def converted_labels
+      return if labels.nil?
+
+      labels.collect { |l| l.except(:label_name) }
     end
   end
 end

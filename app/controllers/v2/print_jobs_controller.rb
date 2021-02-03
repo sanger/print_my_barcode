@@ -31,7 +31,6 @@ module V2
         print_job: %i[
           printer_name
           label_template_name
-          label_template_id
           copies
         ]
       )[:print_job].to_h

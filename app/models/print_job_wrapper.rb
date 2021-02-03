@@ -31,7 +31,7 @@ class PrintJobWrapper
                                                             :label_template_name, :copies
                                                           ))
                    when 'squix'
-                     Squix::PrintJob.new(squix_print_job_body)
+                     Squix::PrintJob.new(print_job_body.except(:label_template_id))
                    end
   end
 
@@ -71,12 +71,5 @@ class PrintJobWrapper
     print_job.errors.each do |k, v|
       errors.add(k, v)
     end
-  end
-
-  def squix_print_job_body
-    return if labels.nil?
-
-    squix_labels = print_job_body[:labels].collect { |l| l.except(:label_name) }
-    print_job_body.except(:label_template_id).merge(labels: squix_labels)
   end
 end
