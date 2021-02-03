@@ -66,7 +66,7 @@ module LabelPrinter
     #   "right_text"=>"DN9000003B",
     #   "left_text"=>"DN9000003B",
     #   "barcode"=>"DN9000003B",
-    #   
+    #
     # }},
     # { "extra_label" => {
     #   "extra_right_text"=>"DN9000003B  LTHR-384 RT",
@@ -78,7 +78,7 @@ module LabelPrinter
 
       labels_with_location = labels.map do |label|
         label_name = label[:label_name]
-        
+
         # we need to remove the label_name otherwise it will cause a failure
         { label_name => label.except(:label_name) }
       end
