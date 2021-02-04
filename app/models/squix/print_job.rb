@@ -23,11 +23,16 @@ module Squix
     validates :printer_name, :label_template_name, :labels, :copies, presence: true
 
     def execute
-      SPrintClient.send_print_request(
+      response = SPrintClient.send_print_request(
         printer_name,
         label_template_name,
         merge_fields_list
       )
+
+      # Response contains error message, if required
+      return false unless response.code == '200'
+
+      true
     end
 
     def merge_fields_list

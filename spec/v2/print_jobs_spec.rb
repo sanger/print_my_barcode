@@ -9,12 +9,14 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
   let!(:label_template)   { create(:label_template_simple) }
   let(:labels)            { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k,v| v.merge(label_name: k)}}.flatten }
   let(:copies)            { '1' }
+  let(:success_response)  { Net::HTTPResponse.new('1.1', "200", "") }
+  let(:failure_response)  { Net::HTTPResponse.new('1.1', "422", "An error") }
 
   describe 'On success' do
     context 'When printer type is Squix' do
       it 'should send_print_request to SPrintClient ' do
         body = { printer_name: squix_printer.name, label_template_name: label_template.name, labels: labels, copies: copies }
-        allow(SPrintClient).to receive(:send_print_request).and_return(true)
+        allow(SPrintClient).to receive(:send_print_request).and_return(success_response)
 
         post v2_print_jobs_path, params: { print_job: body }
 
@@ -42,7 +44,19 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
 
   describe 'On failure' do
     context 'when wrapper is not valid' do
-      it 'should return an error if the printer name is missing' do
+      it 'fails when label_template name is missing' do
+        body = { printer_name: squix_printer.name, label_template_name: '', labels: labels }
+
+        post v2_print_jobs_path, params: { print_job: body }
+        expect(response).to have_http_status(:unprocessable_entity)
+
+        json = ActiveSupport::JSON.decode(response.body)
+
+        expect(json['errors']).not_to be_empty
+        expect(find_attribute_error_details(json, 'label_template')).to include("can't be blank")
+      end
+
+      it 'fails when printer name is missing' do
         body = { printer_name: '', label_template_name: label_template.name, labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
