@@ -6,8 +6,10 @@ RSpec.describe PrintJobWrapper do
 
   let!(:squix_printer)      { create(:squix_printer) }
   let!(:toshiba_printer)    { create(:toshiba_printer) }
-  let(:label_template)      { create(:label_template) }
-  let(:labels)              { [{ 'test_attr' => 'test', 'barcode' => '11111', 'label_name': 'location' }, { 'test_attr' => 'test2', 'barcode' => '22222', 'label_name': 'location2' }] }
+  let(:label_template)      { create(:label_template_simple) }
+  let(:dodgy_labels)        { [{ 'test_attr' => 'test', 'barcode' => '11111', 'label_name': 'location' }, { 'test_attr' => 'test2', 'barcode' => '22222', 'label_name': 'location2' }] }
+  # TODO: move this to a method
+  let(:labels)              { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k,v| v.merge(label_name: k)}}.flatten}
   let(:copies)              { 2 }
   let(:attributes)          { { printer_name: toshiba_printer.name, label_template_name: label_template.name, labels: labels, copies: copies } }
 
@@ -41,6 +43,11 @@ RSpec.describe PrintJobWrapper do
       print_job_wrapper = PrintJobWrapper.new(attributes.except(:copies))
       expect(print_job_wrapper).to be_valid
       expect(print_job_wrapper.copies).to be_present
+    end
+
+    it 'will not be valid if the label names dont match' do
+      print_job_wrapper = PrintJobWrapper.new(attributes.merge(labels: dodgy_labels))
+      expect(print_job_wrapper).to_not be_valid
     end
   end
 

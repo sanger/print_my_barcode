@@ -6,8 +6,8 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
 
   let!(:squix_printer)    { create(:printer, printer_type: :squix) }
   let!(:toshiba_printer)  { create(:printer, printer_type: :toshiba) }
-  let!(:label_template)   { create(:label_template) }
-  let(:labels)            { [{ 'test_attr' => 'test', 'barcode' => '12345' }] }
+  let!(:label_template)   { create(:label_template_simple) }
+  let(:labels)            { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k,v| v.merge(label_name: k)}}.flatten }
   let(:copies)            { '1' }
 
   describe 'On success' do
