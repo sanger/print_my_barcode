@@ -16,7 +16,7 @@ class PrintJobWrapper
 
   validates :label_template, :printer, :labels, presence: true
 
-  validate :check_print_job
+  validate :check_print_job, :check_label_names
 
   def print
     return false unless valid?
@@ -71,5 +71,14 @@ class PrintJobWrapper
     print_job.errors.each do |k, v|
       errors.add(k, v)
     end
+  end
+
+  def check_label_names
+    expected_label_names = label_template.labels.pluck(:name)
+    received_label_names = labels.map { |l| l["label_name"] }.uniq
+
+    # each item in received_label_names has to exist in expected_label_names
+    return if expected_label_names & received_label_names == received_label_names
+    errors.add(:label_name, 'does not match label template label names')
   end
 end
