@@ -20,33 +20,22 @@ RSpec.describe Printer, type: :model do
   end
 
   describe 'printer_type' do
-    it 'should not be valid without a name' do
+    it 'should not be valid without a type' do
       expect(build(:printer, printer_type: nil)).to_not be_valid
     end
 
-    it 'should create a printer with the squix printer_type' do
-      printer = create(:printer, printer_type: :squix)
-      expect(printer.printer_type).to eq 'squix'
-      expect(printer.squix?).to be_truthy
+    it 'can create a printer with the squix printer_type' do
+      printer = create(:squix_printer)
+      expect(printer).to be_valid
+      expect(printer).to be_squix
     end
 
-    it 'should create a printer with the toshiba printer_type' do
-      printer = create(:printer, printer_type: :toshiba)
-      expect(printer.printer_type).to eq 'toshiba'
-      expect(printer.toshiba?).to be_truthy
+    it 'can create a printer with the toshiba printer_type' do
+      printer = create(:toshiba_printer)
+      expect(printer).to be_valid
+      expect(printer).to be_toshiba
     end
 
-    it 'should not be valid without a printer_type' do
-      expect(build(:printer, name: nil)).to_not be_valid
-    end
-
-    it 'should be valid with a printer_type' do
-      expect(build(:printer, printer_type: :squix)).to be_valid
-    end
-
-    it 'should be valid with a printer_type' do
-      expect(build(:printer, printer_type: :toshiba)).to be_valid
-    end
   end
 
 end
