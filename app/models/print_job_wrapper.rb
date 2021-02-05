@@ -77,18 +77,22 @@ class PrintJobWrapper
   # label names in the label template this would cause an encode error
   # which is hard to debug which we found out to our cost
   # this will tell you to check!
-  # TODO: fix rubocop
-  # rubocop:disable Metrics/AbcSize
   def check_label_names
     return if labels.nil? || label_template.nil?
 
-    expected_label_names = label_template.labels.pluck(:name)
-    received_label_names = labels.map { |l| l['label_name'] }.uniq
+    # extract the label names for the label template
+    expected_labels = label_template.labels.pluck(:name)
 
-    # each item in received_label_names has to exist in expected_label_names
-    return if expected_label_names & received_label_names == received_label_names
+    # pull out the label names that are received in the request
+    received_labels = labels.map { |l| l['label_name'] }.uniq
+
+    return if labels_match(expected_labels, received_labels)
 
     errors.add(:label_name, 'does not match label template label names')
   end
-  # rubocop:enable Metrics/AbcSize
+
+  # uses the array intersection method
+  def labels_match(expected, received)
+    expected & received == received
+  end
 end
