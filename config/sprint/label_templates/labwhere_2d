@@ -1,0 +1,29 @@
+[
+  {
+    "barcodeFields": [
+      {
+        "x": 3,
+        "y": 1,
+        "cellWidth": 0.29,
+        "barcodeType": "datamatrix",
+        "value": "<%= merge_fields[:barcode] %>"
+      }
+    ],
+    "textFields": [
+      {
+        "x": 30,
+        "y": 3,
+        "value": "<%= merge_fields[:location] %>",
+        "font": "proportional",
+        "fontSize": 1.7
+      },
+      {
+        "x": 30,
+        "y": 6,
+        "value": "<%= merge_fields[:parent_location] %>",
+        "font": "proportional",
+        "fontSize": 1.7
+      }
+    ]
+  }
+]
