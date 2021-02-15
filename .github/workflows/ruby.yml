@@ -1,0 +1,43 @@
+name: Ruby
+
+env:
+  TZ: Europe/London
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true # Runs bundle install and caches gems. See the ruby_test.yml
+                            # example if you need more control over bundler.
+    - name: Run tests
+      run: bundle exec rake
+
+  lint:
+
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true # Runs bundle install and caches gems. See the ruby_test.yml
+                            # example if you need more control over bundler.
+    - name: Run rubocop
+      run: bundle exec rubocop -c .rubocop.yml --fail-fast 
