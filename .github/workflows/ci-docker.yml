@@ -3,13 +3,13 @@ name: CI docker
 on:
   push:
     branches:
-      - develop
+      - devel
       - master
-      - gpl592_pmb_into_fce
     paths-ignore:
       - "README.md"
     tags:
       - uat-*
+      - release-*
 env:
   IMAGE_NAME: ${{ github.repository }}/${{ github.event.repository.name }}
 
