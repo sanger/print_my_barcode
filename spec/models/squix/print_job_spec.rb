@@ -43,7 +43,7 @@ RSpec.describe Squix::PrintJob do
       it 'sends a print request and returns true' do
         print_job = Squix::PrintJob.new(attributes)
         allow(SPrintClient).to receive(:send_print_request).and_return Net::HTTPResponse.new('1.1', "200", "")
-        expect(SPrintClient).to receive(:send_print_request).with(print_job.printer_name, print_job.label_template_name, print_job.merge_fields_list)
+        expect(SPrintClient).to receive(:send_print_request).with(print_job.printer_name, "#{print_job.label_template_name}.yml.erb", print_job.merge_fields_list)
         result = print_job.execute
         expect(result).to eq true
       end
@@ -53,7 +53,7 @@ RSpec.describe Squix::PrintJob do
       it 'sends a print request and returns false' do
         print_job = Squix::PrintJob.new(attributes)
         allow(SPrintClient).to receive(:send_print_request).and_return Net::HTTPResponse.new('1.1', "422", "an error")
-        expect(SPrintClient).to receive(:send_print_request).with(print_job.printer_name, print_job.label_template_name, print_job.merge_fields_list)
+        expect(SPrintClient).to receive(:send_print_request).with(print_job.printer_name, "#{print_job.label_template_name}.yml.erb", print_job.merge_fields_list)
         result = print_job.execute
         expect(result).to eq false
       end

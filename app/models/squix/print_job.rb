@@ -25,7 +25,7 @@ module Squix
     def execute
       response = SPrintClient.send_print_request(
         printer_name,
-        label_template_name,
+        "#{label_template_name}.yml.erb",
         merge_fields_list
       )
 
