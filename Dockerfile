@@ -1,4 +1,3 @@
-# FROM starefossen/ruby-node
 FROM ruby:2.6
 ENV BUNDLER_VERSION=2.2.6
 
