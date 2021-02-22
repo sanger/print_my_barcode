@@ -54,4 +54,6 @@ Rails.application.configure do
                           sender_address: %("Projects Exception Notifier" <#{Rails.configuration.mailer['smtp']['sender']}>),
                           exception_recipients: %w(#{Rails.configuration.mailer['smtp']['recipient']})
                         }
+
+  config.sprint_uri = 'http://example_sprint.com/graphql'
 end
