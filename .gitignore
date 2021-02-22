@@ -23,3 +23,5 @@
 
 /public/print_job.txt
 .byebug_history
+
+/config/sprint/label_templates/*

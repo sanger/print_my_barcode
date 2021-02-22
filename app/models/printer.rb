@@ -5,12 +5,15 @@
 # Each printer is identified by the protocol it will use.
 # A printer will either implement the IPP or LPD protocol
 # The TOF protocol implements the ability to send the print job to a file.
+# A printer with either be of type Toshiba or Squix
 class Printer < ApplicationRecord
   include Filterable
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :printer_type, presence: true
 
   enum protocol: %i[LPD IPP TOF]
+  enum printer_type: %i[toshiba squix]
 
   before_filter do |filters|
     if filters.key?(:protocol)

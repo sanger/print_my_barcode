@@ -70,4 +70,6 @@ Rails.application.configure do
       resource '*', headers: :any, methods: [:get, :post, :options]
     end
   end
+
+  config.sprint_uri = 'http://sprint.psd.sanger.ac.uk/graphql'
 end

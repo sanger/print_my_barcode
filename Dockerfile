@@ -1,5 +1,5 @@
-FROM starefossen/ruby-node
-ENV BUNDLER_VERSION=2.1.4
+FROM ruby:2.6
+ENV BUNDLER_VERSION=2.2.6
 
 RUN apt-get update -qq && apt-get install -y
 RUN apt-get -y install cups-client cups-bsd

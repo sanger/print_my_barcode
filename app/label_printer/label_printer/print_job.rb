@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# LabelPrinter::PrintJob for printers with printer type 'Toshiba'
 module LabelPrinter
   ##
   # A print job will take data input,
@@ -37,6 +38,51 @@ module LabelPrinter
       else
         LabelPrinter::PrintJob::Base.new(attributes)
       end
+    end
+
+    # If the data is coming from v2 then we need to convert the labels
+    # into a compatible format
+    def self.build_from_v2(attributes)
+      build(attributes.merge(labels: convert_labels(attributes[:labels])))
+    end
+
+    # Example labels from v2:
+    # labels:
+    # [{
+    #   "right_text"=>"DN9000003B",
+    #   "left_text"=>"DN9000003B",
+    #   "barcode"=>"DN9000003B",
+    #   "label_name"=>"main_label"
+    # },
+    # {
+    #   "extra_right_text"=>"DN9000003B  LTHR-384 RT",
+    #   "extra_left_text"=>"10-NOV-2020"
+    #   "label_name"=>"extra_label"
+    # }]
+    # and v1 equivalent
+    # {
+    #  "body" => [{
+    #   "main_label" => {
+    #   "right_text"=>"DN9000003B",
+    #   "left_text"=>"DN9000003B",
+    #   "barcode"=>"DN9000003B",
+    #
+    # }},
+    # { "extra_label" => {
+    #   "extra_right_text"=>"DN9000003B  LTHR-384 RT",
+    #   "extra_left_text"=>"10-NOV-2020"
+    # }}]
+    # }
+    def self.convert_labels(labels)
+      return if labels.nil?
+
+      labels_with_location = labels.map do |label|
+        label_name = label[:label_name]
+
+        # we need to remove the label_name otherwise it will cause a failure
+        { label_name => label.except(:label_name) }
+      end
+      { body: labels_with_location }
     end
   end
 end

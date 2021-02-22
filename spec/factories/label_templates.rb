@@ -10,4 +10,12 @@ FactoryBot.define do
        FactoryBot.create(:label_with_drawings, name: 'footer')].flatten
     end
   end
+
+  factory :label_template_simple, class: LabelTemplate do
+    sequence(:name) { |n| "label_template_#{n}" }
+    label_type
+    labels do
+      [FactoryBot.create(:label_with_drawings)]
+    end
+  end
 end

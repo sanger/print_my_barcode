@@ -18,4 +18,24 @@ RSpec.describe Printer, type: :model do
     printer.update_attribute(:protocol, 'IPP')
     expect(printer.reload).to be_IPP
   end
+
+  describe 'printer_type' do
+    it 'should not be valid without a type' do
+      expect(build(:printer, printer_type: nil)).to_not be_valid
+    end
+
+    it 'can create a printer with the squix printer_type' do
+      printer = create(:squix_printer)
+      expect(printer).to be_valid
+      expect(printer).to be_squix
+    end
+
+    it 'can create a printer with the toshiba printer_type' do
+      printer = create(:toshiba_printer)
+      expect(printer).to be_valid
+      expect(printer).to be_toshiba
+    end
+
+  end
+
 end
