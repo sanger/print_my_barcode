@@ -12,8 +12,8 @@ class Printer < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :printer_type, presence: true
 
-  enum protocol: %i[LPD IPP TOF]
-  enum printer_type: %i[toshiba squix]
+  enum protocol: { LPD: 0, IPP: 1, TOF: 2 }
+  enum printer_type: { toshiba: 0, squix: 1 }
 
   before_filter do |filters|
     if filters.key?(:protocol)

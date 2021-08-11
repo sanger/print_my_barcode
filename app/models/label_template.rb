@@ -37,7 +37,7 @@ class LabelTemplate < ApplicationRecord
     [
       'name',
       'label_type_id',
-      'labels_attributes' => Label.permitted_attributes
+      { 'labels_attributes' => Label.permitted_attributes }
     ]
   end
 
