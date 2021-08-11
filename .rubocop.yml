@@ -58,7 +58,3 @@ Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 Style/ClassAndModuleChildren:
   Enabled: false
-
-# This should be the rubocop defaults, not sure why its kicking up a fuss.
-Layout/SpaceBeforeBlockBraces:
-  EnforcedStyle: space
