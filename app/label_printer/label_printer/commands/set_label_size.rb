@@ -16,6 +16,7 @@ module LabelPrinter
       attr_reader :pitch_length, :print_width, :print_length
 
       def initialize(options = {})
+        super
         @pitch_length = options[:pitch_length]
         @print_width = options[:print_width]
         @print_length = options[:print_length]
