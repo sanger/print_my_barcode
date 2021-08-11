@@ -23,7 +23,7 @@ module LabelPrinter
       attr_reader :feed_value
 
       def initialize(options = {})
-        super
+        super()
         @feed_value = options[:feed_value]
       end
 

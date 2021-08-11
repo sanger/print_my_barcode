@@ -16,7 +16,7 @@ module LabelPrinter
       attr_reader :fine_adjustment
 
       def initialize(options = {})
-        super
+        super()
         @fine_adjustment = options[:fine_adjustment]
       end
 
