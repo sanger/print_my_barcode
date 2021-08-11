@@ -1,7 +1,9 @@
 inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rails
 
 AllCops:
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.6
   Exclude:
     - db/schema.rb
     - db/migrate/*
@@ -41,30 +43,21 @@ Metrics/BlockLength:
     - 'config/routes.rb'
     - 'lib/tasks/*'
 
-Metrics/LineLength:
-  Max: 100
-  Exclude:
-    - 'lib/tasks/*'
-
 Metrics/MethodLength:
   Max: 12
   Exclude:
     - 'db/migrate/*'
 
-Layout/IndentArray:
+Layout/LineLength:
+  Max: 100
+  Exclude:
+    - 'lib/tasks/*'
+
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 Style/ClassAndModuleChildren:
   Enabled: false
 
-# Rubocop has a few issues with this when generating the ignore files.
-# Also, I'm far from convinced that its correct. It argues in favour of
-# +'' over Sting.new when creating a mutable string due to marginal
-# performance improvements.
-# See: http://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Performance/UnfreezeString
-# That said, I can see potential advantages wrt. encoding
-# Anyway, leaving this off for now.
-Performance/UnfreezeString:
-  Enabled: false
 # This should be the rubocop defaults, not sure why its kicking up a fuss.
 Layout/SpaceBeforeBlockBraces:
   EnforcedStyle: space
