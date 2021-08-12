@@ -13,7 +13,7 @@ class Drawing < ApplicationRecord
 
   belongs_to :label, optional: true
 
-  validates :field_name, presence: true, format: { with: /\A[\w\_]+\z/ }
+  validates :field_name, presence: true, format: { with: /\A[\w_]+\z/ }
   validates :x_origin, :y_origin, presence: true, format: { with: /\A\d{4}\z/ }
 
   subclasses :bitmap, :barcode

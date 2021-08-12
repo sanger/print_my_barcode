@@ -31,6 +31,7 @@ module LabelPrinter
         # the template is created.
         def optional_attributes(options)
           attr_reader(*options.keys)
+
           define_method :set_options do |opt|
             options.each do |k, v|
               instance_variable_set "@#{k}", opt[k] || v
@@ -138,9 +139,9 @@ module LabelPrinter
       # The standard commands which never change.
       def standard_commands
         {
-          'C'   => Commands::ClearImageBuffer,
-          'T'   => Commands::Feed,
-          'XS'  => Commands::Issue
+          'C' => Commands::ClearImageBuffer,
+          'T' => Commands::Feed,
+          'XS' => Commands::Issue
         }
       end
 

@@ -7,7 +7,7 @@ class Label < ApplicationRecord
 
   belongs_to :label_template, optional: true
 
-  validates :name, presence: true, format: { with: /\A[\w\_]+\z/ }
+  validates :name, presence: true, format: { with: /\A[\w_]+\z/ }
   validates :name, uniqueness: { scope: :label_template_id },
                    if: proc { |l| l.label_template.present? || l.label_template_id.present? }
   validates_associated :bitmaps, :barcodes

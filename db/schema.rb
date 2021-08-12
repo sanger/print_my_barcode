@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_27_122039) do
+ActiveRecord::Schema.define(version: 2021_08_11_114323) do
 
   create_table "drawings", force: :cascade do |t|
     t.string "x_origin"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_122039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["label_type_id"], name: "index_label_templates_on_label_type_id"
+    t.index ["name"], name: "index_label_templates_on_name", unique: true
   end
 
   create_table "label_types", force: :cascade do |t|
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_122039) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_label_types_on_name", unique: true
   end
 
   create_table "labels", force: :cascade do |t|
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_122039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "printer_type"
+    t.index ["name"], name: "index_printers_on_name", unique: true
   end
 
 end
