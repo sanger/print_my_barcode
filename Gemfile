@@ -36,6 +36,8 @@ gem 'bootsnap', require: false
 gem 'exception_notification'
 
 gem 'rubocop', require: false
+gem 'rubocop-rails', '~> 2.11', require: false
+gem 'rubocop-rspec', '~> 2.4', require: false
 
 gem 'rails-perftest'
 
