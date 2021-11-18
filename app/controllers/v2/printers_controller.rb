@@ -21,6 +21,5 @@ module V2
     def printer_params
       params.require(:data).require(:attributes).permit(:name, :protocol, :printer_type)
     end
-
   end
 end
