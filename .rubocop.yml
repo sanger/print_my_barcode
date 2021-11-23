@@ -1,9 +1,9 @@
-inherit_from: .rubocop_todo.yml
 require:
   - rubocop-rails
   - rubocop-rspec
 
 AllCops:
+  NewCops: enable
   Exclude:
     - db/schema.rb
     - db/migrate/*
@@ -59,3 +59,9 @@ Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 Style/ClassAndModuleChildren:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - 'app/label_printer/label_printer/print_job/IPP.rb'
+    - 'app/label_printer/label_printer/print_job/LPD.rb'
+    - 'app/label_printer/label_printer/print_job/TOF.rb'

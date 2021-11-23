@@ -108,7 +108,7 @@ class LabelFields
     end
 
     def keys_to_values(values)
-      Hash[values.collect { |v| [v, v] }]
+      values.collect { |v| [v, v] }.to_h
     end
   end
 end

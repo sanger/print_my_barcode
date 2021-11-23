@@ -40,7 +40,7 @@ class Printer < ApplicationRecord
 
   def self.existing_cups_printers
     existing_printers = `lpstat -a`.split("\n")
-    existing_printers.map! { |printer| printer.split(' ').first }
+    existing_printers.map! { |printer| printer.split.first }
     existing_printers
   end
 end

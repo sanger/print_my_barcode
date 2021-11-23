@@ -33,8 +33,8 @@ module LabelPrinter
 
       def control_codes
         "#{x_origin},#{y_origin},#{horizontal_magnification},"\
-        "#{vertical_magnification},"\
-        "#{font},+#{space_adjustment},#{rotational_angles},B"
+          "#{vertical_magnification},"\
+          "#{font},+#{space_adjustment},#{rotational_angles},B"
       end
     end
   end
