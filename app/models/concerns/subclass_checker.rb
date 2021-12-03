@@ -4,9 +4,6 @@
 module SubclassChecker
   extend ActiveSupport::Concern
 
-  included do
-  end
-
   # SubclassChecker::ClassMethods
   module ClassMethods
     def subclasses(*classes)

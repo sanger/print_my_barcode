@@ -17,8 +17,8 @@ module V1
     def print_job_params
       params.require(:data).require(:attributes)
             .permit(:printer_name, :label_template_id)
-            .tap do |whitelisted|
-              whitelisted[:labels] = params[:data][:attributes][:labels].permit!
+            .tap do |allowlisted|
+              allowlisted[:labels] = params[:data][:attributes][:labels].permit!
             end
     end
   end
