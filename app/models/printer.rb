@@ -35,12 +35,15 @@ class Printer < ApplicationRecord
   def check_if_printer_exists(existing_printers)
     return if existing_printers.include? name
 
+    puts "CHECK PRINTER NAME: #{name}"
     `/create-cups-printer.sh #{name}`
   end
 
   def self.existing_cups_printers
     existing_printers = `lpstat -a`.split("\n")
     existing_printers.map! { |printer| printer.split.first }
+    puts "EXISTING PRINTERS"
+    puts existing_printers
     existing_printers
   end
 end
