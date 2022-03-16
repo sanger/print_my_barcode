@@ -13,11 +13,11 @@ TIMEOUT=$3
 TIMEOUT_END=$(($(date +%s) + TIMEOUT))
 result=1
 while [ $result -ne 0 ]; do
-  echo "Waiting for connection to ${DBHOST}:${DBPORT}..."
+  echo "Waiting for connection to ${HOST}:${PORT}..."
   nc -w 1 -z "${HOST}" "${PORT}" > /dev/null 2>&1
   result=$?
   if [ $result -eq 0 ]; then
-    echo "Connected to ${DBHOST}:${DBPORT}."
+    echo "Connected to ${HOST}:${PORT}."
     exit 0
   else
     if [ $(date +%s) -ge $TIMEOUT_END ]; then
