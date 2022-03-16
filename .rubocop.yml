@@ -65,3 +65,6 @@ Naming/FileName:
     - 'app/label_printer/label_printer/print_job/IPP.rb'
     - 'app/label_printer/label_printer/print_job/LPD.rb'
     - 'app/label_printer/label_printer/print_job/TOF.rb'
+
+Rails/Output:
+  Enabled: false
