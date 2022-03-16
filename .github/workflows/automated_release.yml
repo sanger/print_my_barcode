@@ -5,7 +5,6 @@ on:
     branches:
       - master
       - develop
-      - printer-script-test
     paths-ignore:
       - "README.md"
 

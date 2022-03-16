@@ -6,7 +6,7 @@ CUPSPORT=631
 CUPSHOST=cupsd
 if [ $CUPSD_UPDATE == "true" ]
 then
-    echo "-> Waiting for cupsd to become available"
+    echo "-> Waiting for cups to become available"
     bash ./wait_for_connection.sh "${CUPSHOST}" "${CUPSPORT}" "${TIMEOUT}"
     echo "-> Running printers rake task"
     bundle exec rails printers:create
