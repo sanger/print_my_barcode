@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.5'
+gem 'rails', '5.2.6'
 
 group :development, :test do
   gem 'byebug'
@@ -10,7 +10,7 @@ group :development, :test do
   gem 'mocha'
   gem 'pry'
   gem 'rspec-rails'
-  gem 'ruby-prof', '~> 0.15.9'
+  gem 'ruby-prof', '~>1.4'
   gem 'spring'
   gem 'sqlite3'
 end

@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.7
 ENV BUNDLER_VERSION=2.2.6
 
 RUN apt-get update -qq && apt-get install -y
@@ -24,4 +24,3 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3000
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
-

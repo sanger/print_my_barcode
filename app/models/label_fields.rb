@@ -15,21 +15,21 @@ class LabelFields
   # Add a label with a key which is the name of the label
   # value is the list of field names for that label
   def add(label)
-    labels[label.name.to_sym] = label.field_names
+    labels[label.name] = label.field_names
   end
 
   def labels
-    @labels ||= OpenStruct.new
+    @labels ||= {}.with_indifferent_access
   end
 
   def to_h
-    labels.to_h.with_indifferent_access
+    labels
   end
 
   ##
   # returns the field names for the label signified by key
   def find(key)
-    labels[key.to_sym]
+    labels[key]
   end
 
   ##
@@ -44,7 +44,7 @@ class LabelFields
   # Simulate a valid json object
   # Creates a header, footer and body which will be an array of labels
   class DummyLabels
-    PLACEHOLDERS = %i[header footer].freeze
+    PLACEHOLDERS = %w[header footer].freeze
 
     ##
     # Produces a hash for each key.
@@ -63,17 +63,17 @@ class LabelFields
     ##
     # find value for key
     def find(key)
-      values[key.to_sym]
+      values[key]
     end
 
     ##
-    # Labels is of type OpenStruct
+    # Labels is a hash
     def values
-      @values ||= OpenStruct.new
+      @values ||= {}.with_indifferent_access
     end
 
     ##
-    # produces a hash from the open struct.
+    # produces a hash from values store.
     # for any label that is not a header or footer will produce two copies
     # which will be appended to the hash as an array
     # of key body
@@ -88,27 +88,24 @@ class LabelFields
     #    { label_1: {field_1: "field_1", field_2: "field_2"},
     #    label_2: {field_3: "field_3", field_4: "field_4"} }]}
     def to_h
-      values.to_h.slice(*PLACEHOLDERS).merge(body: labels)
-            .with_indifferent_access
+      values.slice(*PLACEHOLDERS).merge(body: labels)
     end
 
     ##
     # The actual count includes the doubling of labels that are not header or footer
     def actual_count
-      values.to_h.reduce(0) do |result, (k, _)|
-        result + (PLACEHOLDERS.include?(k) ? 1 : 2)
-      end
+      values.sum { |k, _| PLACEHOLDERS.include?(k) ? 1 : 2 }
     end
 
     private
 
     def labels
-      hsh = values.to_h.except(*PLACEHOLDERS)
+      hsh = values.except(*PLACEHOLDERS)
       [hsh, hsh]
     end
 
     def keys_to_values(values)
-      values.collect { |v| [v, v] }.to_h
+      values.to_h { |v| [v, v] }
     end
   end
 end
