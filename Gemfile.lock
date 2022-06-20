@@ -156,6 +156,7 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
+    rails-perftest (0.0.7)
     railties (6.1.6)
       actionpack (= 6.1.6)
       activesupport (= 6.1.6)
@@ -246,6 +247,7 @@ DEPENDENCIES
   puma
   rack-cors
   rails (~> 6.1.0)
+  rails-perftest
   raml_ruby (~> 0.1.1)
   rspec-rails
   rubocop

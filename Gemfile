@@ -14,6 +14,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'ruby-prof'
+  gem 'rails-perftest'
   gem 'spring'
   gem 'sqlite3'
 end
