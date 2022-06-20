@@ -26,14 +26,10 @@ gem 'bootsnap', require: false
 
 gem 'exception_notification'
 
-# gem 'rails-perftest'
-
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'sprint_client'
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
   gem 'listen', '~> 3.0'
   gem 'raml_ruby', '~> 0.1.1'
