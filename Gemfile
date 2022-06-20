@@ -9,12 +9,12 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'mocha'
   gem 'pry'
+  gem 'rails-perftest'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'ruby-prof'
-  gem 'rails-perftest'
   gem 'spring'
   gem 'sqlite3'
 end
