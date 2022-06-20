@@ -60,8 +60,8 @@ class PrintJobWrapper
     return if print_job.blank?
     return if print_job.valid?
 
-    print_job.errors.each do |k, v|
-      errors.add(k, v)
+    print_job.errors.each do |error|
+      errors.add(error.attribute, error.message)
     end
   end
 
