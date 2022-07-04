@@ -15,6 +15,8 @@ ADD . /code/
 RUN gem install bundler
 RUN bundle install
 
+RUN mkdir -p tmp/pids
+
 COPY create-cups-printer.sh /
 RUN ["chmod", "+x", "/create-cups-printer.sh"]
 
