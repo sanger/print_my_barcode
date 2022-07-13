@@ -2,51 +2,35 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '5.2.5'
+gem 'rails', '~>6.1.0'
 
 group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails'
   gem 'mocha'
   gem 'pry'
+  gem 'rails-perftest'
   gem 'rspec-rails'
-  gem 'ruby-prof', '~> 0.15.9'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'ruby-prof'
   gem 'spring'
   gem 'sqlite3'
 end
 
-gem 'active_model_serializers', '~> 0.10'
+gem 'active_model_serializers'
 
 gem 'puma'
 
 gem 'bootsnap', require: false
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development
-
 gem 'exception_notification'
-
-gem 'rubocop', require: false
-gem 'rubocop-rails', '~> 2.11', require: false
-gem 'rubocop-rspec', '~> 2.4', require: false
-
-gem 'rails-perftest'
 
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'sprint_client'
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
 group :development do
   gem 'listen', '~> 3.0'
   gem 'raml_ruby', '~> 0.1.1'

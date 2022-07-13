@@ -1,4 +1,4 @@
-FROM ruby:2.6
+FROM ruby:2.7
 ENV BUNDLER_VERSION=2.2.6
 
 RUN apt-get update -qq && apt-get install -y
@@ -15,6 +15,8 @@ ADD . /code/
 RUN gem install bundler
 RUN bundle install
 
+RUN mkdir -p tmp/pids
+
 COPY create-cups-printer.sh /
 RUN ["chmod", "+x", "/create-cups-printer.sh"]
 
@@ -24,4 +26,3 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3000
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
-

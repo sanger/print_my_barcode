@@ -44,8 +44,6 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
-
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.middleware.use ExceptionNotification::Rack,
