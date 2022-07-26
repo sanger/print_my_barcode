@@ -27,5 +27,6 @@ module PrintMyBarcode
 
     config.mailer = config_for(:mailer)
 
+    config.active_record.yaml_column_permitted_classes = [ActiveSupport::HashWithIndifferentAccess]
   end
 end
