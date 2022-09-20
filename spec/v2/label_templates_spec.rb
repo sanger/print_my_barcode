@@ -2,8 +2,7 @@
 
 require 'rails_helper'
 
-# Think this should say V2::LabelTemplatesController
-RSpec.describe V1::LabelTemplatesController, type: :request, helpers: true do |_variable|
+RSpec.describe V2::LabelTemplatesController, type: :request, helpers: true do |_variable|
   let(:headers) { { 'CONTENT_TYPE' => 'application/vnd.api+json' } }
 
   it 'should allow retrieval of all label template' do
