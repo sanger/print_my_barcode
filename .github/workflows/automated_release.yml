@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - develop
+      - dpl-364-testing
     paths-ignore:
       - "README.md"
 
