@@ -23,12 +23,15 @@ module Squix
     validates :printer_name, :label_template_name, :labels, :copies, presence: true
 
     def execute
+      Rails.logger.info { 'SENDING PRINT REQUEST' }
+      Rails.logger.debug { "DETAILS #{printer_name}, #{label_template_name}, #{merge_fields_list}" }
       response = SPrintClient.send_print_request(
         printer_name,
         "#{label_template_name}.yml.erb",
         merge_fields_list
       )
 
+      Rails.logger.debug { "RESPONSE: #{response}" }
       # Response contains error message, if required
       return false unless response.code == '200'
 
