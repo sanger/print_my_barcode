@@ -5,7 +5,7 @@ on:
     branches:
       - master
       - develop
-      - dpl-364-testing
+      - dpl-364-label-printing
     paths-ignore:
       - "README.md"
 
