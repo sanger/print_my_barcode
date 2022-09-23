@@ -17,6 +17,8 @@ class PrintJobWrapper
   end
 
   def print_job
+    Rails.logger.info { 'CHOOSING THE PRINT JOB BASED ON THE PRINTER' }
+    Rails.logger.debug { print_job_body }
     @print_job ||= case printer.try(:printer_type)
                    when 'toshiba'
                      LabelPrinter::PrintJob.build_from_v2(print_job_body.except(
