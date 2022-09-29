@@ -13,7 +13,7 @@ module LabelPrinter
       def execute
         return false unless valid?
 
-        file = File.new(Rails.root.join('public', 'print_job.txt'), 'w+',
+        file = File.new(Rails.public_path.join('print_job.txt'), 'w+',
                         encoding: LabelPrinter::DEFAULT_ENCODING)
         file.write(input)
         file.close
