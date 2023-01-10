@@ -211,7 +211,7 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
     rubocop-rspec (2.13.2)
       rubocop (~> 1.33)
-    ruby-prof (1.4.3)
+    ruby-prof (1.4.5)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     spring (4.1.0)
