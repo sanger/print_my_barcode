@@ -27,7 +27,7 @@ class Drawing < ApplicationRecord
   ##
   # Find a drawing by its field name
   def find_by_field_name(field_name)
-    find_by(field_name: field_name)
+    find_by(field_name:)
   end
 
   ##
@@ -41,7 +41,7 @@ class Drawing < ApplicationRecord
   # Used to create commands when building a print job.
   # All of the options along with the placeholder_id and x and y origins.
   def template_attributes
-    options.merge(id: padded_placeholder_id, x_origin: x_origin, y_origin: y_origin)
+    options.merge(id: padded_placeholder_id, x_origin:, y_origin:)
   end
 
   ##

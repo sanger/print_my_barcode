@@ -34,7 +34,7 @@ module LabelPrinter
       printer = Printer.find_by(name: attributes[:printer_name])
       if printer.present?
         "LabelPrinter::PrintJob::#{printer.protocol}"
-          .constantize.new(attributes.merge(printer: printer))
+          .constantize.new(attributes.merge(printer:))
       else
         LabelPrinter::PrintJob::Base.new(attributes)
       end

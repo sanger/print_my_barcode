@@ -58,7 +58,7 @@ module LabelPrinter
       # respond to that method. If that method does not exist the
       # command will return false. The prefix method is always of a
       # certain format ie. one or two uppercase characters.
-      def method_missing(method_name, *arguments, &block)
+      def method_missing(method_name, *arguments, &)
         if prefix?(method_name)
           false
         else

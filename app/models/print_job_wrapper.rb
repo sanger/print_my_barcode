@@ -29,11 +29,11 @@ class PrintJobWrapper
 
   def print_job_body
     @print_job_body ||= {
-      printer_name: printer_name,
+      printer_name:,
       label_template_id: label_template.try(:id),
       label_template_name: label_template.try(:name),
-      labels: labels,
-      copies: copies
+      labels:,
+      copies:
     }
   end
 
@@ -76,7 +76,7 @@ class PrintJobWrapper
     expected_labels = label_template.labels.pluck(:name)
 
     # pull out the label names that are received in the request
-    received_labels = labels.map { |l| l['label_name'] }.uniq
+    received_labels = labels.pluck('label_name').uniq
 
     return if labels_match(expected_labels, received_labels)
 
