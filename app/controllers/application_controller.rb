@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_error(resource, status: :unprocessable_entity)
-    render json: resource, status: status,
+    render json: resource, status:,
            serializer: ActiveModel::Serializer::ErrorSerializer
   end
 end

@@ -91,8 +91,8 @@ module LabelPrinter
 
       ##
       # We only need to loop through the values not the keys
-      def each(&block)
-        items.values.each(&block)
+      def each(&)
+        items.values.each(&)
       end
     end
   end
