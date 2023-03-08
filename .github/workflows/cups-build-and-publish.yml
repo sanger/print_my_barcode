@@ -1,5 +1,8 @@
 name: Docker CUPS-debian build and publish
 
+on:
+  workflow_dispatch:
+
 env:
   IMAGE_NAME: sanger/cupsd
 
