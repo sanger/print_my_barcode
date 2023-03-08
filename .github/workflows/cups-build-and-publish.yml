@@ -1,7 +1,7 @@
 name: Docker CUPS-debian build and publish
 
 env:
-  IMAGE_NAME: sanger/cups
+  IMAGE_NAME: sanger/cupsd
 
 jobs:
   build_and_publish:
