@@ -16,7 +16,7 @@ jobs:
 
       - name: Build the Docker image
         run: >-
-          docker build ../../cups/
+          docker build cups/
           --tag docker.pkg.github.com/${IMAGE_NAME}:${{ env.RELEASE_VERSION }}
 
       - name: Login to registry
