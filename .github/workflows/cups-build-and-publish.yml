@@ -16,8 +16,7 @@ jobs:
 
       - name: Build the Docker image
         run: >-
-          docker build .
-          --file Dockerfile
+          docker build ../../cups/
           --tag docker.pkg.github.com/${IMAGE_NAME}:cupsd-${{ env.RELEASE_VERSION }}
 
       - name: Login to registry
