@@ -3,7 +3,7 @@ name: Docker CUPS-debian build and publish
 on: workflow_dispatch
 
 env:
-  IMAGE_NAME: sanger/cupsd
+  IMAGE_NAME: ${{ github.repository }}/cupsd
 
 jobs:
   build_and_publish:
@@ -16,8 +16,7 @@ jobs:
 
       - name: Build the Docker image
         run: >-
-          docker build .
-          --file Dockerfile
+          docker build cups/
           --tag docker.pkg.github.com/${IMAGE_NAME}:${{ env.RELEASE_VERSION }}
 
       - name: Login to registry
