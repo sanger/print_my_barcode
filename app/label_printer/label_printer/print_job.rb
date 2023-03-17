@@ -30,7 +30,6 @@ module LabelPrinter
     # LabelPrinter::PrintJob::Base. As it is not attached
     # to a printer if you try to execute the print job
     # nothing will happen.
-    # rubocop:disable Style/HashSyntax
     def self.build(attributes)
       printer = Printer.find_by(name: attributes[:printer_name])
       if printer.present?
@@ -40,7 +39,6 @@ module LabelPrinter
         LabelPrinter::PrintJob::Base.new(attributes)
       end
     end
-    # rubocop:enable Style/HashSyntax
 
     # If the data is coming from v2 then we need to convert the labels
     # into a compatible format

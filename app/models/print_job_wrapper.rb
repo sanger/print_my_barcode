@@ -29,11 +29,11 @@ class PrintJobWrapper
 
   def print_job_body
     @print_job_body ||= {
-      printer_name:,
+      printer_name: printer_name,
       label_template_id: label_template.try(:id),
       label_template_name: label_template.try(:name),
-      labels:,
-      copies:
+      labels: labels,
+      copies: copies
     }
   end
 
