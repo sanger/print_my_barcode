@@ -56,6 +56,10 @@ Print job POST request bodies will look something like this:
 }
 ```
 
+#### Headers
+
+Content-Type: application/vnd.api+json
+
 ### V1 API
 
 This API is regarded as deprecated. Please use the V2 API instead.
