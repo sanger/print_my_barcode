@@ -38,6 +38,12 @@ Style/NumericLiterals:
 Style/AsciiComments:
   Enabled: false
 
+Style/HashSyntax:
+  Enabled: false
+
+Naming/BlockForwarding:
+  Enabled: false
+
 Metrics/BlockLength:
   Exclude:
     - 'test/**/*'
