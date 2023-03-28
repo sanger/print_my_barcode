@@ -98,7 +98,7 @@ module LabelPrinter
       end
 
       def pdf417_codes
-        "#{standard_codes},00,#{one_module_width},#{no_of_columns},"\
+        "#{standard_codes},00,#{one_module_width},#{no_of_columns}," \
           "0,#{bar_height}"
       end
 
@@ -107,13 +107,13 @@ module LabelPrinter
       end
 
       def oned_codes
-        "#{standard_codes},#{type_of_check_digit},#{one_module_width},"\
+        "#{standard_codes},#{type_of_check_digit},#{one_module_width}," \
           "0,#{height},+0000000000,002,0,00"
       end
 
       def code39_codes
-        "#{standard_codes},#{type_of_check_digit},#{narrow_bar_width},#{narrow_space_width},"\
-          "#{wide_bar_width},#{wide_space_width},#{char_to_char_space_width},"\
+        "#{standard_codes},#{type_of_check_digit},#{narrow_bar_width},#{narrow_space_width}," \
+          "#{wide_bar_width},#{wide_space_width},#{char_to_char_space_width}," \
           "#{rotational_angle},#{height}"
       end
     end

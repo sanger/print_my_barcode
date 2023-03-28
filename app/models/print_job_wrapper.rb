@@ -76,7 +76,7 @@ class PrintJobWrapper
     expected_labels = label_template.labels.pluck(:name)
 
     # pull out the label names that are received in the request
-    received_labels = labels.map { |l| l['label_name'] }.uniq
+    received_labels = labels.pluck('label_name').uniq
 
     return if labels_match(expected_labels, received_labels)
 

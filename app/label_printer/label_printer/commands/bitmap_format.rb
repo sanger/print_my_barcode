@@ -32,8 +32,8 @@ module LabelPrinter
                           rotational_angles: '00'
 
       def control_codes
-        "#{x_origin},#{y_origin},#{horizontal_magnification},"\
-          "#{vertical_magnification},"\
+        "#{x_origin},#{y_origin},#{horizontal_magnification}," \
+          "#{vertical_magnification}," \
           "#{font},+#{space_adjustment},#{rotational_angles},B"
       end
     end
