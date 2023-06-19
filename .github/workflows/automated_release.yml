@@ -11,6 +11,9 @@ on:
 env:
   IMAGE_NAME: ${{ github.repository }}/${{ github.event.repository.name }}
 
+permissions:
+  packages: write
+
 jobs:
   build_and_test_job:
     runs-on: ubuntu-18.04
@@ -71,8 +74,15 @@ jobs:
           docker push
           docker.pkg.github.com/${IMAGE_NAME}:${{ env.RELEASE_VERSION }}
 
-      - name: Remove the oldest package
-        if: false
-        uses: actions/delete-package-versions@v1
+      - name: Remove old releases
+        uses: snok/container-retention-policy@v2
         with:
-          package-name: "${{ github.event.repository.name }}"
+          image-names: ${{ github.event.repository.name }}/*
+          cut-off: Ten months ago UTC
+          timestamp-to-use: updated_at
+          account-type: org
+          org-name: sanger
+          keep-at-least: 5
+          skip-tags: latest
+          token: ${{ secrets.REMOVE_OLD_IMAGES }}
+
