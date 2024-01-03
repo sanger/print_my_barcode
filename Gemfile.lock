@@ -237,7 +237,7 @@ GEM
     ruby-prof (1.6.3)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    spring (4.1.1)
+    spring (4.1.3)
     sprint_client (0.1.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
