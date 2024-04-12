@@ -75,7 +75,7 @@ jobs:
         uses: snok/container-retention-policy@v2
         with:
           image-names: ${{ github.event.repository.name }}/*
-          cut-off: Four months ago UTC
+          cut-off: Two week ago UTC
           timestamp-to-use: updated_at
           account-type: org
           org-name: sanger
