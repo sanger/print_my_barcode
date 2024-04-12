@@ -75,11 +75,11 @@ jobs:
         uses: snok/container-retention-policy@v2
         with:
           image-names: ${{ github.event.repository.name }}/*
-          cut-off: Two week ago UTC
+          cut-off: Two weeks ago UTC
           timestamp-to-use: updated_at
           account-type: org
           org-name: sanger
-          keep-at-least: 5
+          keep-at-least: 0
           skip-tags: latest, *[!develop] # This will DELETE any images where the tag contains ANY characters in "develop"
           dry-run: true
           token: ${{ secrets.REMOVE_OLD_IMAGES }}
