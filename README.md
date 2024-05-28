@@ -24,6 +24,16 @@ Barcode printing service
 
 ## Running in Docker
 
+### Application
+
+To run the application in Docker for development, build the image and run it with the command below:
+
+```sh
+docker build . -t print_my_barcode && docker run --rm -p 3000:3000 print_my_barcode
+```
+
+### CUPS Server
+
 Print my barcode requires a CUPS server to send the printing jobs, that can be
 specified with the environment variable CUPSD_SERVER_NAME for the Docker container context:
 
