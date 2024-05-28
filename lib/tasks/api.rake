@@ -7,7 +7,11 @@ if Rails.env.development?
     desc 'generate the api docs'
     task api: :environment do |_t|
       puts 'generating api docs...'
-      Raml.document(Rails.root.join('config', 'api.raml'), Rails.root.join('app', 'views', 'v1', 'docs', 'index.html.erb'))
+      Raml.document(
+        Rails.root.join('config', 'api.raml'),
+        Rails.root.join('app', 'views', 'v1', 'docs', 'index.html.erb'),
+        Rails.root.join('app', 'views', 'v2', 'docs', 'index.html.erb')
+      )
       puts 'done'
     end
   end
