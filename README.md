@@ -15,6 +15,13 @@ Barcode printing service
 
 ```rake db:migrate```
 
+1. Seed the database
+
+   ```sh
+   rake db:seed # labels
+   rake printers_dev:create # printers - dev only
+   ```
+
 ## Running in Docker
 
 Print my barcode requires a CUPS server to send the printing jobs, that can be
