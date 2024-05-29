@@ -29,8 +29,10 @@ Barcode printing service
 To run the application in Docker for development, build the image and run it with the command below:
 
 ```sh
-docker build . -t print_my_barcode && docker run --rm -p 3000:3000 print_my_barcode
+docker build . -t print_my_barcode && docker run --rm -p 9292:3000 print_my_barcode
 ```
+
+Then browse to http://localhost:9292/v2
 
 ### CUPS Server
 
@@ -114,4 +116,4 @@ Print job POST request bodies will look something like this:
 }
 ```
 
-See documentation on port `9292`, endpoint `/v1`.
+For more details, see the built-in API 1 documentation at http://localhost:9292/v1
