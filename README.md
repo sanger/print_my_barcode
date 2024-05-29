@@ -56,6 +56,9 @@ Test that printers are detected using lpstat -v
 Support for both Toshiba and Squix printers. When it receives a request, PMB looks at the printer name it is passed in the request, and determines whether it's a Toshiba or a Squix (`printers` database table, `printer_type` column). It then handles the printing itself for Toshibas, or sends a request to SPrint (https://github.com/sanger/sprint) for Squixes.
 The same templates (`label_templates` and `label_types` tables) can be used with both types of printer.
 
+In addition, V2 uses exactly the same `PrintersController` and `LabelTemplatesController` as in V1. However, the print job has been simplified so that the client can select a printer without needing to know if it is a Toshiba or a Squix, as they operate quite differently.
+If the printer is Squix it will create a squix specific print job and forward it on to SPrint.
+
 More complete details can be found on the [Confluence Article - Understanding Label Printing](https://ssg-confluence.internal.sanger.ac.uk/display/PSDPUB/Understanding+Label+Printing), under the heading _PMB v2_.
 
 #### Print Job Example
@@ -89,7 +92,7 @@ The request body should be a JSON object with the following structure:
 
 This API is regarded as deprecated. Please use the V2 API instead.
 
-Support for Toshiba printers only.
+Prints directly to Toshiba printers. No other printer types (or brands) are supported.
 
 Print job POST request bodies will look something like this:
 
