@@ -133,13 +133,13 @@ For more details, see the built-in API 1 documentation at http://localhost:9292/
   <dd>The "paper" used by the printer. It defines the size of the physical label, the pitch between labels on a roll, and other physical properties. It is represented in the database by a record in the `label_types` table.</dd>
 
   <dt>Label Template</dt>
-  <dd>A label template defines the layout of the data on the physical label.</dd>
+  <dd>A label template defines the layout of the data on the physical label. It should be linked to a specific label (see below). It is represented in the database by a record in the `label_templates` table.</dd>
 
   <dt>Label</dt>
   <dd>A collection of fields that are printed on a label. Includes bitmaps, barcodes, and text. Ideally, there should be one label template for each Label type (384/96/tube etc). It is represented in the database by a record in the `labels` table.</dd>
 
   <dt>Print Job</dt>
-  <dd>A print job is a request to a printer to print the provided data using a specified label template.</dd>
+  <dd>A print job is a request to a printer to print the provided data using a specified label template. Many labels can be submitted on one job, provided they use the same label template.</dd>
 </dl>
 
 ### Testing
