@@ -70,22 +70,45 @@ The request body should be a JSON object with the following structure:
 
 ```json
 {
-  "print_job": {
-    "printer_name": "stub",
-    "label_template": "traction_tube_label_template",
-    "label_template_name": "traction_tube_label_template",
-    "labels": [
+  "printer_name": "stub",
+  "label_template": "traction_tube_label_template",
+  "label_template_name": "traction_tube_label_template",
+  "labels": [
+    {
+      "barcode": "TRAC-2-4-N1",
+      "first_line": "15-Sep-22",
+      "second_line": "TRAC-2-4-N1",
+      "third_line": "",
+      "label_name": "main_label"
+    }
+  ],
+  "copies": "1"
+}
+```
+
+#### Minimum Working Example
+
+Here is a certified minimum working example sent from the command line:
+
+```sh
+curl -X POST 'https://uat.print-my-barcode.psd.sanger.ac.uk/v2/print_jobs' \
+-H 'Content-Type: application/json' \
+-H 'Access-Control-Allow-Origin: *' \
+-d '{
+    "printer_name": "morgan-tube-barcode",
+    "label_template_name":"traction_tube_label_template",
+    "labels":[
       {
-        "barcode": "TRAC-2-4-N1",
-        "first_line": "15-Sep-22",
-        "second_line": "TRAC-2-4-N1",
-        "third_line": "",
-        "label_name": "main_label"
+        "barcode":"test",
+        "first_line":"31-May-24",
+        "second_line":"",
+        "third_line":"test",
+        "fourth_line":"",
+        "label_name":"main_label"
       }
     ],
     "copies": "1"
-  }
-}
+  }'
 ```
 
 ### V1 API
