@@ -16,9 +16,13 @@ Rails.application.routes.draw do
   end
 
   namespace :v2 do
+    root 'docs#index'
+
     resources :print_jobs, only: [:create]
     resources :printers, only: %i[index show create]
     resources :label_templates
+
+    get 'docs', to: 'docs#index'
   end
 
   match 'v1/test_exception_notifier', controller: 'application', action: 'test_exception_notifier', via: :get

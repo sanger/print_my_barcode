@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Print My Barcode (API V2) <%= Deployed::VERSION_ID %></title>
+  <style type="text/css">
+    .highlight table td { padding: 5px; }
+    .highlight table pre { margin: 0; }
+    .highlight .cm {
+      color: #999988;
+      font-style: italic;
+    }
+    .highlight .cp {
+      color: #999999;
+      font-weight: bold;
+    }
+    .highlight .c1 {
+      color: #999988;
+      font-style: italic;
+    }
+    .highlight .cs {
+      color: #999999;
+      font-weight: bold;
+      font-style: italic;
+    }
+    .highlight .c, .highlight .cd {
+      color: #999988;
+      font-style: italic;
+    }
+    .highlight .err {
+      color: #a61717;
+      background-color: #e3d2d2;
+    }
+    .highlight .gd {
+      color: #000000;
+      background-color: #ffdddd;
+    }
+    .highlight .ge {
+      color: #000000;
+      font-style: italic;
+    }
+    .highlight .gr {
+      color: #aa0000;
+    }
+    .highlight .gh {
+      color: #999999;
+    }
+    .highlight .gi {
+      color: #000000;
+      background-color: #ddffdd;
+    }
+    .highlight .go {
+      color: #888888;
+    }
+    .highlight .gp {
+      color: #555555;
+    }
+    .highlight .gs {
+      font-weight: bold;
+    }
+    .highlight .gu {
+      color: #aaaaaa;
+    }
+    .highlight .gt {
+      color: #aa0000;
+    }
+    .highlight .kc {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .kd {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .kn {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .kp {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .kr {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .kt {
+      color: #445588;
+      font-weight: bold;
+    }
+    .highlight .k, .highlight .kv {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .mf {
+      color: #009999;
+    }
+    .highlight .mh {
+      color: #009999;
+    }
+    .highlight .il {
+      color: #009999;
+    }
+    .highlight .mi {
+      color: #009999;
+    }
+    .highlight .mo {
+      color: #009999;
+    }
+    .highlight .m, .highlight .mb, .highlight .mx {
+      color: #009999;
+    }
+    .highlight .sb {
+      color: #d14;
+    }
+    .highlight .sc {
+      color: #d14;
+    }
+    .highlight .sd {
+      color: #d14;
+    }
+    .highlight .s2 {
+      color: #d14;
+    }
+    .highlight .se {
+      color: #d14;
+    }
+    .highlight .sh {
+      color: #d14;
+    }
+    .highlight .si {
+      color: #d14;
+    }
+    .highlight .sx {
+      color: #d14;
+    }
+    .highlight .sr {
+      color: #009926;
+    }
+    .highlight .s1 {
+      color: #d14;
+    }
+    .highlight .ss {
+      color: #990073;
+    }
+    .highlight .s {
+      color: #d14;
+    }
+    .highlight .na {
+      color: #008080;
+    }
+    .highlight .bp {
+      color: #999999;
+    }
+    .highlight .nb {
+      color: #0086B3;
+    }
+    .highlight .nc {
+      color: #445588;
+      font-weight: bold;
+    }
+    .highlight .no {
+      color: #008080;
+    }
+    .highlight .nd {
+      color: #3c5d5d;
+      font-weight: bold;
+    }
+    .highlight .ni {
+      color: #800080;
+    }
+    .highlight .ne {
+      color: #990000;
+      font-weight: bold;
+    }
+    .highlight .nf {
+      color: #990000;
+      font-weight: bold;
+    }
+    .highlight .nl {
+      color: #990000;
+      font-weight: bold;
+    }
+    .highlight .nn {
+      color: #555555;
+    }
+    .highlight .nt {
+      color: #000080;
+    }
+    .highlight .vc {
+      color: #008080;
+    }
+    .highlight .vg {
+      color: #008080;
+    }
+    .highlight .vi {
+      color: #008080;
+    }
+    .highlight .nv {
+      color: #008080;
+    }
+    .highlight .ow {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .o {
+      color: #000000;
+      font-weight: bold;
+    }
+    .highlight .w {
+      color: #bbbbbb;
+    }
+    .highlight {
+      background-color: #f8f8f8;
+    }
+  </style>
+  <style type="text/css">
+    @import url(http://fonts.googleapis.com/css?family=Inconsolata);
+    html {
+      -webkit-font-smoothing: antialiased;
+      font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+      font-size: 11pt; }
+
+    main {
+      display: block;
+      width: 75em;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2em;
+      margin-bottom: 2em; }
+
+    h1.title {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 24pt; }
+
+    h2 {
+      font-family: "Inconsolata", monospace;
+      font-size: 16pt;
+      font-weight: normal;
+      margin-bottom: 0.25em; }
+
+    h3 {
+      font-size: 15pt;
+      font-weight: normal;
+      color: #444; }
+
+    h4 {
+      font-size: 14pt;
+      font-weight: normal;
+      font-style: italic;
+      color: #444; }
+
+    h5 {
+      font-size: 11pt;
+      font-style: italic;
+      color: #333;
+      margin-top: 1em;
+      margin-bottom: 1em; }
+
+    h6 {
+      font-size: 11pt;
+      font-weight: normal;
+      text-decoration: underline;
+      margin-top: 1em;
+      margin-bottom: 1em; }
+
+    .documentation {
+      margin-bottom: 3em; }
+
+    .properties {
+      margin-bottom: 1.25em; }
+
+    .property {
+      font-variant: small-caps;
+      font-size: 1.15em;
+      color: #252525;
+      margin-right: 0.3em; }
+
+    .param {
+      margin-bottom: .75em; }
+
+    .param_names {
+      margin-right: 1em; }
+
+    .param_name {
+      font-family: "Inconsolata", monospace;
+      font-weight: bold;
+      color: #444; }
+
+    .param_attrs {
+      color: #555;
+      font-style: italic; }
+
+    .param_attr {
+      margin-right: 0.5em; }
+
+    .param_attr:after {
+      content: ", "; }
+
+    .param_attr:last-child:after {
+      content: ""; }
+
+    .param_val {
+      color: #000; }
+
+    .param_description {
+      margin-top: 0.5em;
+      margin-left: 1em;
+      color: #252525; }
+
+    .method_description {
+      color: #252525; }
+
+    .response_description {
+      color: #252525; }
+
+    .url_param {
+      color: red; }
+
+    main section > .collapse_content {
+      margin-left: 1em; }
+
+    .subsection {
+      margin-left: 1em; }
+
+    label {
+      cursor: pointer; }
+
+    input[type=checkbox] {
+      display: none; }
+
+    input[type=checkbox]:checked ~ div {
+      display: none; }
+
+  </style>
+</head>
+<main>
+  <h1 class="title">
+    Print My Barcode (API V2) <%= Deployed::VERSION_ID %>
+  </h1>
+  <section>
+    <div class="properties">
+      <div>
+        <span class="property">base uri:</span> http://localhost/v2/
+      </div>
+    </div>
+  </section><section>
+  <div class="method_description">
+  <p>See the README for usage details.</p>
+</div>
+</section>
+</main>

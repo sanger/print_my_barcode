@@ -33,7 +33,6 @@ gem 'sprint_client'
 
 group :development do
   gem 'listen', '~> 3.0'
-  gem 'raml_ruby', '~> 0.1.1'
 end
 
 group :deployment do
