@@ -51,9 +51,9 @@ RSpec.describe LabelPrinter::PrintJob, type: :model do
 
   it 'with a particular protocol should build a print job of the correct class' do
     print_job = LabelPrinter::PrintJob.build(printer_name: printer.name, label_template_id: label_template.id, labels: label_template.dummy_labels.to_h)
-    expect(print_job).to be_LPD
+    expect(print_job).to be_a(LabelPrinter::PrintJob::LPD)
     print_job = LabelPrinter::PrintJob.build(printer_name: create(:printer, protocol: 'IPP').name, label_template_id: label_template.id, labels: label_template.dummy_labels.to_h)
-    expect(print_job).to be_IPP
+    expect(print_job).to be_a(LabelPrinter::PrintJob::IPP)
   end
 
   describe '#convert_labels' do

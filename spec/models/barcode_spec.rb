@@ -91,4 +91,12 @@ RSpec.describe Barcode, type: :model do
     barcode = create(:barcode)
     expect(barcode.template_attributes).to eq(barcode.options.merge(id: barcode.padded_placeholder_id, x_origin: barcode.x_origin, y_origin: barcode.y_origin))
   end
+
+  it 'should return true for barcode?' do
+    expect(build(:barcode).barcode?).to be_truthy
+  end
+
+  it 'should return false for bitmap?' do
+    expect(build(:barcode).bitmap?).to be_falsey
+  end
 end
