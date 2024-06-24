@@ -7,16 +7,12 @@
 # respect to its label.
 # Each drawing must have a field name, x origin and y origin
 class Drawing < ApplicationRecord
-  include SubclassChecker
-
   before_create :add_placeholder_id
 
   belongs_to :label, optional: true
 
   validates :field_name, presence: true, format: { with: /\A[\w_]+\z/ }
   validates :x_origin, :y_origin, presence: true, format: { with: /\A\d{4}\z/ }
-
-  subclasses :bitmap, :barcode
 
   ##
   # e.g. 0001
@@ -48,6 +44,14 @@ class Drawing < ApplicationRecord
   # A list of all of the stored attributes along with required fields
   def self.permitted_attributes
     (stored_attributes[:options] || []) + %i[x_origin y_origin field_name]
+  end
+
+  def barcode?
+    instance_of?(Barcode)
+  end
+
+  def bitmap?
+    instance_of?(Bitmap)
   end
 
   private
