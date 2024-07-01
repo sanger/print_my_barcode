@@ -44,4 +44,12 @@ RSpec.describe Bitmap, type: :model do
     bitmap = create(:bitmap)
     expect(bitmap.template_attributes).to eq(bitmap.options.merge(id: bitmap.padded_placeholder_id, x_origin: bitmap.x_origin, y_origin: bitmap.y_origin))
   end
+
+  it 'should return false for barcode?' do
+    expect(build(:bitmap).barcode?).to be_falsey
+  end
+
+  it 'should return true for bitmap?' do
+    expect(build(:bitmap).bitmap?).to be_truthy
+  end
 end

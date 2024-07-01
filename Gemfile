@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~>6.1.0'
+gem 'rails', '~> 7.1.3'
 
 group :development, :test do
   gem 'byebug'
@@ -33,7 +33,6 @@ gem 'sprint_client'
 
 group :development do
   gem 'listen', '~> 3.0'
-  gem 'raml_ruby', '~> 0.1.1'
 end
 
 group :deployment do

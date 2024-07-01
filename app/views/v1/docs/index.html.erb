@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <title>Print My Barcode <%= Deployed::VERSION_ID %></title>
+  <title>Print My Barcode (API V1) <%= Deployed::VERSION_ID %></title>
   <style type="text/css">
     .highlight table td { padding: 5px; }
     .highlight table pre { margin: 0; }
@@ -219,7 +219,7 @@
       -webkit-font-smoothing: antialiased;
       font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
       font-size: 11pt; }
-    
+
     main {
       display: block;
       width: 75em;
@@ -227,121 +227,121 @@
       margin-right: auto;
       margin-top: 2em;
       margin-bottom: 2em; }
-    
+
     h1.title {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-weight: 300;
       font-size: 24pt; }
-    
+
     h2 {
       font-family: "Inconsolata", monospace;
       font-size: 16pt;
       font-weight: normal;
       margin-bottom: 0.25em; }
-    
+
     h3 {
       font-size: 15pt;
       font-weight: normal;
       color: #444; }
-    
+
     h4 {
       font-size: 14pt;
       font-weight: normal;
       font-style: italic;
       color: #444; }
-    
+
     h5 {
       font-size: 11pt;
       font-style: italic;
       color: #333;
       margin-top: 1em;
       margin-bottom: 1em; }
-    
+
     h6 {
       font-size: 11pt;
       font-weight: normal;
       text-decoration: underline;
       margin-top: 1em;
       margin-bottom: 1em; }
-    
+
     .documentation {
       margin-bottom: 3em; }
-    
+
     .properties {
       margin-bottom: 1.25em; }
-    
+
     .property {
       font-variant: small-caps;
       font-size: 1.15em;
       color: #252525;
       margin-right: 0.3em; }
-    
+
     .param {
       margin-bottom: .75em; }
-    
+
     .param_names {
       margin-right: 1em; }
-    
+
     .param_name {
       font-family: "Inconsolata", monospace;
       font-weight: bold;
       color: #444; }
-    
+
     .param_attrs {
       color: #555;
       font-style: italic; }
-    
+
     .param_attr {
       margin-right: 0.5em; }
-    
+
     .param_attr:after {
       content: ", "; }
-    
+
     .param_attr:last-child:after {
       content: ""; }
-    
+
     .param_val {
       color: #000; }
-    
+
     .param_description {
       margin-top: 0.5em;
       margin-left: 1em;
       color: #252525; }
-    
+
     .method_description {
       color: #252525; }
-    
+
     .response_description {
       color: #252525; }
-    
+
     .url_param {
       color: red; }
-    
+
     main section > .collapse_content {
       margin-left: 1em; }
-    
+
     .subsection {
       margin-left: 1em; }
-    
+
     label {
       cursor: pointer; }
-    
+
     input[type=checkbox] {
       display: none; }
-    
+
     input[type=checkbox]:checked ~ div {
       display: none; }
-    
+
   </style>
 </head>
 <main>
   <h1 class="title">
-    Print My Barcode <%= Deployed::VERSION_ID %>
+    Print My Barcode (API V1) <%= Deployed::VERSION_ID %>
   </h1>
   <section>
     <div class="properties">
       <div>
-        <span class="property">base uri:</span> http://localhost
+        <span class="property">base uri:</span> http://localhost/v1/
       </div>
     </div>
   </section><section>
@@ -353,7 +353,7 @@
   <div class="collapse_content">
 <div class="method_description">
   <p>Create a new Label Type</p>
-  
+
 </div><section>
   <label for="collapse-3"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-3" type="checkbox">
   <div class="collapse_content"><section>
@@ -487,7 +487,7 @@
   <div class="collapse_content">
 <div class="method_description">
   <p>Return all of the Label Types</p>
-  
+
 </div><section>
   <label for="collapse-14"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-14" type="checkbox">
   <div class="collapse_content">
@@ -500,7 +500,7 @@
           </div>
           <div class="param_description">
             <p>Returns the Label Type with the given name</p>
-            
+
           </div>
         </div>
       </div>
@@ -577,7 +577,7 @@
   <div class="collapse_content">
 <div class="method_description">
   <p>Return a list of all of the Label Templates</p>
-  
+
 </div><section>
   <label for="collapse-22"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-22" type="checkbox">
   <div class="collapse_content">
@@ -590,7 +590,7 @@
           </div>
           <div class="param_description">
             <p>Returns the Label Template with the given name</p>
-            
+
           </div>
         </div>
       </div>
@@ -850,7 +850,7 @@
   <div class="collapse_content">
 <div class="method_description">
   <p>Create a new Label Template</p>
-  
+
 </div><section>
   <label for="collapse-29"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-29" type="checkbox">
   <div class="collapse_content"><section>
@@ -1350,7 +1350,7 @@
   <div class="collapse_content">
 <div class="method_description">
   <p>Print a label to a named printer and selected label template</p>
-  
+
 </div><section>
   <label for="collapse-41"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-41" type="checkbox">
   <div class="collapse_content"><section>
@@ -1502,7 +1502,7 @@
   <div class="collapse_content">
 <div class="method_description">
   <p>Return all of the Printers</p>
-  
+
 </div><section>
   <label for="collapse-53"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-53" type="checkbox">
   <div class="collapse_content">
@@ -1515,7 +1515,7 @@
           </div>
           <div class="param_description">
             <p>Returns the printer with the given name</p>
-            
+
           </div>
         </div>
         <div class="param">
@@ -1524,7 +1524,7 @@
           </div>
           <div class="param_description">
             <p>Returns all printers with the given protocol</p>
-            
+
           </div>
         </div>
       </div>
@@ -1582,7 +1582,7 @@
   <div class="collapse_content">
 <div class="method_description">
   <p>Create a new printer</p>
-  
+
 </div><section>
   <label for="collapse-60"><h4>Request </h4></label><input aria-hidden="true" checked id="collapse-60" type="checkbox">
   <div class="collapse_content"><section>
