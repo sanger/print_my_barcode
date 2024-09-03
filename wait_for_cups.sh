@@ -9,7 +9,7 @@ set -o nounset
 TIMEOUT=$1
 
 TIMEOUT_END=$(($(date +%s) + TIMEOUT))
-result=1
+result=0
 while [ $result -ne 1 ]; do
   echo "Waiting for connection to cups..."
   result="`lpstat -r | grep 'scheduler is running' | wc -l`"
