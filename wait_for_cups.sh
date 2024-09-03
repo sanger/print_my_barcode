@@ -10,10 +10,10 @@ TIMEOUT=$1
 
 TIMEOUT_END=$(($(date +%s) + TIMEOUT))
 result=1
-while [ $result -ne 0 ]; do
+while [ $result -ne 1 ]; do
   echo "Waiting for connection to cups..."
-  result="`lpstat -r | grep 'scheduler is not running' | wc -l`"
-  if [ $result -eq 0 ]; then
+  result="`lpstat -r | grep 'scheduler is running' | wc -l`"
+  if [ $result -eq 1 ]; then
     echo "Connected to cups"
     exit 0
   else
