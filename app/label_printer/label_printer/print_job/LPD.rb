@@ -22,7 +22,6 @@ module LabelPrinter
           true
         ensure
           temp_file.unlink
-          false
         end
       end
     end
