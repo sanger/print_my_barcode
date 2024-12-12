@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.2.1'
+gem 'rails', '~> 7.2.2', '>= 7.2.2.1'
 
 group :development, :test do
   gem 'byebug'
