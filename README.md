@@ -22,6 +22,12 @@ Barcode printing service
    rake db:migrate
    ```
 
+## Credentials
+
+Secrets are now managed differently. This can be done by running the command `bundle exec rails credentials:edit` locally
+
+This will create a `credentials.yml.enc` and `master.key` in the config directory
+
 ## Running in Docker
 
 ### Application
