@@ -18,6 +18,7 @@ group :development, :test do
   gem 'ruby-prof'
   gem 'spring'
   gem 'sqlite3'
+  gem 'syslog' # no longer part of the standard library in ruby 3.4
 end
 
 gem 'active_model_serializers'
