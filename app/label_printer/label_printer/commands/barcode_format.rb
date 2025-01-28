@@ -86,7 +86,7 @@ module LabelPrinter
       def control_codes
         return twod_codes if barcode_type == 'Q'
         return pdf417_codes if barcode_type == 'P'
-        return code39_codes if barcode_type == '3' || barcode_type == 'B'
+        return code39_codes if %w[3 B].include?(barcode_type)
 
         oned_codes
       end

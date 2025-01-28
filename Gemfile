@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.1.3'
+gem 'rails', '~> 7.2.1'
 
 group :development, :test do
   gem 'byebug'
@@ -18,6 +18,7 @@ group :development, :test do
   gem 'ruby-prof'
   gem 'spring'
   gem 'sqlite3'
+  gem 'syslog' # no longer part of the standard library in ruby 3.4
 end
 
 gem 'active_model_serializers'

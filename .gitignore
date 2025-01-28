@@ -28,3 +28,7 @@
 .byebug_history
 
 /config/sprint/label_templates/*
+
+# Ignore master key for decrypting credentials and more.
+/config/credentials.yml.enc
+/config/master.key
