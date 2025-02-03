@@ -95,6 +95,7 @@ RSpec.describe PrintJobWrapper do
       it 'raises a StandardError with a 422 status code if label_template validation fails' do
         print_job_wrapper = PrintJobWrapper.new(attributes.except(:label_template_name))
         expect(print_job_wrapper).to_not be_valid
+        expect(print_job_wrapper.errors[:label_template]).to include("can't be blank")
         expect(print_job_wrapper.print).to be_falsy
       end
     end
