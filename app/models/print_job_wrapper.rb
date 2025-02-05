@@ -42,7 +42,9 @@ class PrintJobWrapper
   end
 
   def label_template
-    LabelTemplate.find_by(name: label_template_name)
+    lt = LabelTemplate.find_by(name: label_template_name)
+    errors.add(:label_template_name, 'does not exist') if lt.nil?
+    lt
   end
 
   def copies=(copies)

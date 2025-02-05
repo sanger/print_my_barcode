@@ -91,6 +91,13 @@ RSpec.describe PrintJobWrapper do
         expect(print_job_wrapper).to be_valid
         expect(print_job_wrapper.print).to be_truthy
       end
+
+      it 'will not execute if the label template does not exist' do
+        print_job_wrapper = PrintJobWrapper.new(attributes.except(:label_template_name))
+        expect(print_job_wrapper).to_not be_valid
+        expect(print_job_wrapper.errors[:label_template]).to include("can't be blank")
+        expect(print_job_wrapper.print).to be_falsy
+      end
     end
   end
 
