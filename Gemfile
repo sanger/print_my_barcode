@@ -27,6 +27,8 @@ gem 'puma'
 
 gem 'bootsnap', require: false
 
+# TODO: There is currently no release for this gem so we have to use master branch.
+# This should be updated when a release is made. It will not be updated by depfu until then.
 gem 'exception_notification', git: 'https://github.com/smartinez87/exception_notification.git',
                               branch: 'master'
 
