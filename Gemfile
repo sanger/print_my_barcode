@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 7.2.1'
+gem 'rails', '~> 8.0.1'
 
 group :development, :test do
   gem 'byebug'
@@ -27,7 +27,10 @@ gem 'puma'
 
 gem 'bootsnap', require: false
 
-gem 'exception_notification'
+# TODO: There is currently no release for this gem so we have to use master branch.
+# This should be updated when a release is made. It will not be updated by depfu until then.
+gem 'exception_notification', git: 'https://github.com/smartinez87/exception_notification.git',
+                              branch: 'master'
 
 gem 'rack-cors', require: 'rack/cors'
 
