@@ -275,7 +275,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     securerandom (0.4.1)
-    spring (4.2.1)
+    spring (4.3.0)
     sprint_client (0.1.0)
     sqlite3 (2.6.0)
       mini_portile2 (~> 2.8.0)
