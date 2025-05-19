@@ -45,6 +45,7 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
   describe 'On failure' do
     context 'when wrapper is not valid' do
       it 'fails when label_template name is missing' do
+        allow(Rails.logger).to receive(:error)
         body = { printer_name: squix_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
@@ -54,9 +55,11 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
 
         expect(json['errors']).not_to be_empty
         expect(find_attribute_error_details(json, 'label_template')).to include("can't be blank")
+        expect(Rails.logger).to have_received(:error).with(include("Error: Label template name does not exist, Label template can't be blank"))
       end
 
       it 'fails when printer name is missing' do
+        allow(Rails.logger).to receive(:error)
         body = { printer_name: '', label_template_name: label_template.name, labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
@@ -66,11 +69,13 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
 
         expect(json['errors']).not_to be_empty
         expect(find_attribute_error_details(json, 'printer')).to include("can't be blank")
+        expect(Rails.logger).to have_received(:error).with("Error: Printer can't be blank")
       end
     end
 
     context 'when toshiba_print_job is not valid' do
       it 'should return an error' do
+        allow(Rails.logger).to receive(:error)
         body = { printer_name: toshiba_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
@@ -80,11 +85,13 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
 
         expect(json['errors']).not_to be_empty
         expect(find_attribute_error_details(json, 'label_template')).to include("can't be blank")
+        expect(Rails.logger).to have_received(:error).with(include("Error: Label template name does not exist, Label template can't be blank"))
       end
     end
 
     context 'when squix_print_job is not valid' do
       it 'should return an error' do
+        allow(Rails.logger).to receive(:error)
         body = { printer_name: squix_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
@@ -94,6 +101,7 @@ RSpec.describe V2::PrintJobsController, type: :request, helpers: true do
 
         expect(json['errors']).not_to be_empty
         expect(find_attribute_error_details(json, 'label_template')).to include("can't be blank")
+         expect(Rails.logger).to have_received(:error).with(include("Error: Label template name does not exist, Label template can't be blank"))
       end
     end
   end
