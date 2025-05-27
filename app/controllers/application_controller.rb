@@ -11,6 +11,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_error(resource, status: :unprocessable_entity)
+    Rails.logger.error "Error: #{resource.errors.full_messages.join(', ')}"
     render json: resource, status: status,
            serializer: ActiveModel::Serializer::ErrorSerializer
   end
