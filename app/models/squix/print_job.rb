@@ -22,7 +22,7 @@ module Squix
 
     validates :printer_name, :label_template_name, :labels, :copies, presence: true
 
-    def execute
+    def execute # rubocop:disable Naming/PredicateMethod
       response = SPrintClient.send_print_request(
         printer_name,
         "#{label_template_name}.yml.erb",
