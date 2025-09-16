@@ -22,7 +22,7 @@ module LabelPrinter
 
       def initialize(attributes = {})
         super
-        @printer ||= Printer.find_by(name: printer_name)
+        @printer = Printer.find_by(name: printer_name) unless defined?(@printer)
         @label_template = LabelTemplate.includes(:labels).find_by(id: label_template_id)
         @labels ||= {}
         @data_input = LabelPrinter::DataInput::Base.new(label_template, labels) if valid?
