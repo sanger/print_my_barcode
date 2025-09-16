@@ -31,7 +31,7 @@ module LabelPrinter
       ##
       # A base object should never send a job to a printer,
       # because there won't be one!
-      def execute
+      def execute # rubocop:disable Naming/PredicateMethod
         valid?
       end
 
