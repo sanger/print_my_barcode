@@ -18,10 +18,10 @@ module V2
     def print_job_params
       params.expect(print_job: %i[printer_name label_template_name copies])
             .tap do |allow_listed|
-        allow_listed[:labels] = []
-        params[:print_job][:labels].each do |label|
-          allow_listed[:labels] << label.permit!
-        end
+              allow_listed[:labels] = []
+              params[:print_job][:labels].each do |label|
+                allow_listed[:labels] << label.permit!
+              end
       end
     end
   end
