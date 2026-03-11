@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   end
 
   match 'v1/test_exception_notifier', controller: 'application', action: 'test_exception_notifier', via: :get
+
+  get '/health' => 'rails/health#show', :as => :rails_health_check
 end
