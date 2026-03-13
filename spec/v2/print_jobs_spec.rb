@@ -47,7 +47,7 @@ RSpec.describe V2::PrintJobsController, :helpers, type: :request do
         body = { printer_name: squix_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
 
         json = ActiveSupport::JSON.decode(response.body)
 
@@ -61,7 +61,7 @@ RSpec.describe V2::PrintJobsController, :helpers, type: :request do
         body = { printer_name: '', label_template_name: label_template.name, labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
 
         json = ActiveSupport::JSON.decode(response.body)
 
@@ -77,7 +77,7 @@ RSpec.describe V2::PrintJobsController, :helpers, type: :request do
         body = { printer_name: toshiba_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
 
         json = ActiveSupport::JSON.decode(response.body)
 
@@ -93,7 +93,7 @@ RSpec.describe V2::PrintJobsController, :helpers, type: :request do
         body = { printer_name: squix_printer.name, label_template_name: '', labels: labels }
 
         post v2_print_jobs_path, params: { print_job: body }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
 
         json = ActiveSupport::JSON.decode(response.body)
 

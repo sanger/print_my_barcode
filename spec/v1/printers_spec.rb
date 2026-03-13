@@ -93,7 +93,7 @@ RSpec.describe V1::PrintersController, :helpers, type: :request do |_variable|
       post v1_printers_path, params: { data: { attributes: { name: nil } } }.to_json, headers: headers
     end.not_to change(Printer, :count)
 
-    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to have_http_status(:unprocessable_content)
 
     json = ActiveSupport::JSON.decode(response.body)
 

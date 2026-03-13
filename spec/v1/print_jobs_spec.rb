@@ -22,7 +22,7 @@ RSpec.describe V1::PrintJobsController, :helpers, type: :request do
 
   it 'returns an error if the label is not valid' do
     post v1_print_jobs_path, params: { data: { attributes: { label_template_id: label_template.id, labels: label_template.dummy_labels.to_h } } }.to_json, headers: headers
-    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to have_http_status(:unprocessable_content)
 
     json = ActiveSupport::JSON.decode(response.body)
 
@@ -32,7 +32,7 @@ RSpec.describe V1::PrintJobsController, :helpers, type: :request do
 
   it 'returns an error if request provides incorrect parameters' do
     post v1_print_jobs_path, params: { data: { attributes: { printer_name: printer.name, label_type_id: label_template.id, labels: label_template.dummy_labels.to_h } } }.to_json, headers: headers
-    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to have_http_status(:unprocessable_content)
 
     json = ActiveSupport::JSON.decode(response.body)
 

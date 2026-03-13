@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
     raise 'This is a test. This is only a test.'
   end
 
-  def render_error(resource, status: :unprocessable_entity)
+  def render_error(resource, status: :unprocessable_content)
     Rails.logger.error "Error: #{resource.errors.full_messages.join(', ')}"
     render json: resource, status: status,
            serializer: ActiveModel::Serializer::ErrorSerializer
