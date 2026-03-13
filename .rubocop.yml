@@ -48,7 +48,6 @@ Naming/BlockForwarding:
 
 Metrics/BlockLength:
   Exclude:
-    - 'test/**/*'
     - 'spec/**/*'
     - 'config/routes.rb'
     - 'lib/tasks/*'
