@@ -11,6 +11,6 @@ FactoryBot.define do
     labels { [{ 'label' => { 'test_attr' => 'test', 'barcode' => '12345' } }] }
     copies { 1 }
 
-    initialize_with { new(printer_name: printer_name, label_template_name: label_template_name, labels: labels, copies: copies)}
+    initialize_with { new(printer_name:, label_template_name:, labels:, copies:)}
   end
 end

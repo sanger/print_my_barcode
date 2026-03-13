@@ -62,6 +62,7 @@ Layout/LineLength:
   Max: 100
   Exclude:
     - 'lib/tasks/*'
+    - 'spec/**/*'
 
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
