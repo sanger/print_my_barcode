@@ -8,15 +8,15 @@ RSpec.describe LabelPrinter::PrintJob, type: :model do
   let!(:labels_for_v2)          { [{ "barcode": "aBarcode1", "parent_location": "aParentLocation1", "location": "location1", "label_name": "location_label_name_1"}, {"barcode": "aBarcode2", "parent_location": "aParentLocation2", "location": "location2", "label_name": "location_label_name_2"}] }
   let!(:expected_labels_for_v2) { { "body": [{"location_label_name_1": {"barcode": "aBarcode1", "parent_location": "aParentLocation1", "location": "location1"}}, {"location_label_name_2": {"barcode": "aBarcode2", "parent_location": "aParentLocation2", "location"=>"location2"}}] }.with_indifferent_access }
 
-  it 'should have a printer' do
+  it 'has a printer' do
     expect(build(:print_job, printer_name: printer.name)).to be_valid
-    expect(build(:print_job, printer_name: nil)).to_not be_valid
-    expect(build(:print_job, printer_name: 999)).to_not be_valid
+    expect(build(:print_job, printer_name: nil)).not_to be_valid
+    expect(build(:print_job, printer_name: 999)).not_to be_valid
   end
 
-  it 'should have a label template' do
-    expect(build(:print_job, printer_name: printer.name, label_template_id: nil)).to_not be_valid
-    expect(build(:print_job, label_template_id: 999)).to_not be_valid
+  it 'has a label template' do
+    expect(build(:print_job, printer_name: printer.name, label_template_id: nil)).not_to be_valid
+    expect(build(:print_job, label_template_id: 999)).not_to be_valid
   end
 
   it 'should have some values' do

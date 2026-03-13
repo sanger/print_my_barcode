@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe V1::PrintJobsController, type: :request, helpers: true do
+RSpec.describe V1::PrintJobsController, :helpers, type: :request do
   let(:headers)           { { 'CONTENT_TYPE' => 'application/vnd.api+json' } }
   let!(:printer)          { create(:printer) }
   let!(:label_template)   { create(:label_template) }
 
-  it 'should print a valid label' do
+  it 'prints a valid label' do
     allow_any_instance_of(LabelPrinter::PrintJob::LPD).to receive(:execute).and_return(true)
     post v1_print_jobs_path, params: { data: { attributes: { printer_name: printer.name, label_template_id: label_template.id, labels: label_template.dummy_labels.to_h } } }.to_json, headers: headers
     expect(response).to be_successful

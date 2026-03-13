@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :squix_print_job, class: Squix::PrintJob do
+  factory :squix_print_job, class: 'Squix::PrintJob' do
     transient do
       label_template { create(:label_template) }
     end

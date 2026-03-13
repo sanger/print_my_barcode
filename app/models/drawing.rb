@@ -23,7 +23,7 @@ class Drawing < ApplicationRecord
   ##
   # Find a drawing by its field name
   def find_by_field_name(field_name)
-    find_by(field_name: field_name)
+    find_by(field_name:)
   end
 
   ##

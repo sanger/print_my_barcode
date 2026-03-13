@@ -2,42 +2,42 @@
 
 require 'rails_helper'
 
-RSpec.describe LabelTemplate, type: :model, helpers: true do
+RSpec.describe LabelTemplate, :helpers, type: :model do
   let!(:label_type) { create(:label_type) }
 
-  it 'should not be valid without a name' do
-    expect(build(:label_template, name: nil)).to_not be_valid
+  it 'is not valid without a name' do
+    expect(build(:label_template, name: nil)).not_to be_valid
   end
 
-  it 'should not be valid without a unique name' do
+  it 'is not valid without a unique name' do
     label_template = create(:label_template)
-    expect(build(:label_template, name: label_template.name)).to_not be_valid
+    expect(build(:label_template, name: label_template.name)).not_to be_valid
   end
 
   context 'label type' do
-    it 'should be valid if it exists' do
+    it 'is valid if it exists' do
       expect(build(:label_template, label_type_id: label_type.id)).to be_valid
     end
 
-    it 'should not be valid if it is blank' do
-      expect(build(:label_template, label_type: nil)).to_not be_valid
+    it 'is not valid if it is blank' do
+      expect(build(:label_template, label_type: nil)).not_to be_valid
     end
 
-    it 'should not be valid if label type id is not a valid label type' do
-      expect(build(:label_template, label_type_id: 100)).to_not be_valid
+    it 'is not valid if label type id is not a valid label type' do
+      expect(build(:label_template, label_type_id: 100)).not_to be_valid
     end
   end
 
-  it 'should not be valid unless label is valid' do
-    expect(build(:label_template, labels_attributes: [invalid_label_attributes])).to_not be_valid
+  it 'is not valid unless label is valid' do
+    expect(build(:label_template, labels_attributes: [invalid_label_attributes])).not_to be_valid
   end
 
-  it 'should have labels' do
+  it 'has labels' do
     label_template = build(:label_template)
-    expect(label_template.labels).to_not be_empty
+    expect(label_template.labels).not_to be_empty
   end
 
-  it 'should be able to extract field names' do
+  it 'is able to extract field names' do
     label_template = create(:label_template)
     label_template.labels.each do |label|
       expect(label_template.field_names[label.name]).to eq(label.field_names)
@@ -87,7 +87,7 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     end
   end
 
-  it 'should destroy associated records' do
+  it 'destroys associated records' do
     label_template = create(:label_template)
     label_ids = label_template.labels.pluck(:id)
     label_template.destroy
@@ -96,7 +96,7 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     end
   end
 
-  it 'should dup a label correctly' do
+  it 'dups a label correctly' do
     label_template = create(:label_template)
     label_template_dup = label_template.super_dup
     expect(label_template_dup.name).to eq("#{label_template.name} copy")
@@ -104,7 +104,7 @@ RSpec.describe LabelTemplate, type: :model, helpers: true do
     expect(label_template_dup.labels.count).to eq(label_template.labels.count)
     label_template_dup_label_ids = label_template_dup.labels.pluck(:id)
     label_template.labels.pluck(:id).each do |id|
-      expect(label_template_dup_label_ids).to_not include(id)
+      expect(label_template_dup_label_ids).not_to include(id)
     end
     label_template_dup = label_template.super_dup('A new label template')
     expect(label_template_dup.name).to eq('A new label template')

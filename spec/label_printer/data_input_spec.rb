@@ -24,18 +24,18 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       end
     end
 
-    it 'should have the correct number of items' do
+    it 'has the correct number of items' do
       expect(my_list.count).to eq(5)
     end
 
-    it 'should label each item correctly' do
+    it 'labels each item correctly' do
       expect(my_list.find('a')).to eq('one')
       expect(my_list.find('b')).to eq('two')
       expect(my_list.find('c')).to eq('c_1' => 'three', 'c_2' => 'four', 'c_3' => 'five')
       expect(my_list.find_by('c')).to eq('three')
     end
 
-    it 'should be able to append another array and not lose any keys' do
+    it 'is able to append another array and not lose any keys' do
       my_list.append(other_list)
       expect(my_list.count).to eq(8)
       expect(my_list.find('d')).to eq('seven')
@@ -52,7 +52,7 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       expect(subject.name).to eq(label.name)
     end
 
-    it 'should have the correct number of formats and drawings' do
+    it 'has the correct number of formats and drawings' do
       expect(subject.formats.count).to eq(label.drawings.count)
       expect(subject.drawings.count).to eq(label.drawings.count)
     end
@@ -79,11 +79,11 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
       expect(drawing.value).to eq(label_template.dummy_labels.find(label.name)[bitmap.field_name])
     end
 
-    it 'should have the correct list of commands' do
+    it 'has the correct list of commands' do
       expect(subject.commands_list).to eq([:formats, 'C', :drawings, 'XS', 'C'])
     end
 
-    it 'should produce the correct json' do
+    it 'produces the correct json' do
       expect(subject.as_json).to eq(label_template.dummy_labels.find(label.name))
     end
   end
@@ -92,30 +92,30 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
     context 'with all sections' do
       subject { LabelPrinter::DataInput.build(label_template, label_template.dummy_labels.to_h) }
 
-      it 'should have the correct feed value' do
+      it 'has the correct feed value' do
         expect(subject.adjust_position.feed_value).to eq(label_template.label_type.feed_value)
       end
 
-      it 'should have the correct fine adjustment' do
+      it 'has the correct fine adjustment' do
         expect(subject.adjust_print_density.fine_adjustment).to eq(label_template.label_type.fine_adjustment)
       end
 
-      it 'should have the correct pitch length' do
+      it 'has the correct pitch length' do
         expect(subject.set_label_size.pitch_length).to eq(label_template.label_type.pitch_length)
       end
 
-      it 'should have the correct print width' do
+      it 'has the correct print width' do
         expect(subject.set_label_size.print_width).to eq(label_template.label_type.print_width)
       end
 
-      it 'should have the correct print length' do
+      it 'has the correct print length' do
         expect(subject.set_label_size.print_length).to eq(label_template.label_type.print_length)
       end
 
-      it 'should have the correct labels' do
+      it 'has the correct labels' do
         expect(subject.labels.count).to eq(label_template.dummy_labels.actual_count)
         label_template.labels.each do |label|
-          expect(subject.labels.find(label.name)).to_not be_nil
+          expect(subject.labels.find(label.name)).not_to be_nil
           expect(subject.labels.find_by(label.name).values).to eq(label_template.dummy_labels.find(label.name))
         end
       end
@@ -124,11 +124,11 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
         expect(subject.commands_list).to eq([:set_label_size, :adjust_print_density, :adjust_position, 'T', :labels])
       end
 
-      it 'should produce the correct json' do
+      it 'produces the correct json' do
         expect(subject.as_json).to eq(label_template.dummy_labels.to_h)
       end
 
-      it 'should produce the correct output' do
+      it 'produces the correct output' do
         expect(subject.to_s).to eq(subject.set_label_size.to_s.dup <<
                                       subject.adjust_print_density.to_s.dup <<
                                       subject.adjust_position.to_s.dup <<

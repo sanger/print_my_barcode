@@ -3,16 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe Printer, type: :model do
-  it 'should not be valid without a name' do
-    expect(build(:printer, name: nil)).to_not be_valid
+  it 'is not valid without a name' do
+    expect(build(:printer, name: nil)).not_to be_valid
   end
 
-  it 'should not be valid without a unique name' do
+  it 'is not valid without a unique name' do
     printer = create(:printer)
-    expect(build(:printer, name: printer.name)).to_not be_valid
+    expect(build(:printer, name: printer.name)).not_to be_valid
   end
 
-  it 'should have a valid protocol' do
+  it 'has a valid protocol' do
     printer = create(:printer)
     expect(printer).to be_LPD
     printer.update_attribute(:protocol, 'IPP')
@@ -20,8 +20,8 @@ RSpec.describe Printer, type: :model do
   end
 
   describe 'printer_type' do
-    it 'should not be valid without a type' do
-      expect(build(:printer, printer_type: nil)).to_not be_valid
+    it 'is not valid without a type' do
+      expect(build(:printer, printer_type: nil)).not_to be_valid
     end
 
     it 'can create a printer with the squix printer_type' do
@@ -35,7 +35,5 @@ RSpec.describe Printer, type: :model do
       expect(printer).to be_valid
       expect(printer).to be_toshiba
     end
-
   end
-
 end

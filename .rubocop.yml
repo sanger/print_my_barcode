@@ -40,8 +40,9 @@ Style/NumericLiterals:
 Style/AsciiComments:
   Enabled: false
 
+# Only use shorthand hash syntax when all keys match the variables for better readability
 Style/HashSyntax:
-  Enabled: false
+  EnforcedShorthandSyntax: consistent
 
 Naming/BlockForwarding:
   Enabled: false
