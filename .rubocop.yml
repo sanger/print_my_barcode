@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 plugins:
   - rubocop-rails
   - rubocop-rspec
@@ -12,15 +14,13 @@ AllCops:
     # Travis installs gems in the vendor directory, which causes rubocop to try
     # and cop our gems. We don't want it to.
     - vendor/**/*
-    - 'test/**/*'
-    - 'spec/**/*'
-    - 'config/routes.rb'
-    - 'config/initializers/secret_token.rb'
-    - 'config/initializers/backtrace_silencers.rb'
-    - 'config/environments/*'
-    - 'bin/*'
-    - 'config/application.rb'
-    - 'config/initializers/content_security_policy.rb'
+    - config/routes.rb
+    - config/initializers/secret_token.rb
+    - config/initializers/backtrace_silencers.rb
+    - config/environments/*
+    - bin/*
+    - config/application.rb
+    - config/initializers/content_security_policy.rb
 
 # The cop is meant to enforce conventions regarding variables containing numbers
 # However in 0.43.0 it is bugged. Both changed on master and disabled by default
