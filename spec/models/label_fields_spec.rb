@@ -31,7 +31,7 @@ RSpec.describe LabelFields, type: :model do
     expect(label_fields.find(:footer)).to eq(%w[footer_text_1 footer_text_2])
   end
 
-  it 'should be able to create some dummy labels' do
+  it 'is able to create some dummy labels' do
     expect(label_fields.dummy_labels.find(:header)).to eq({ header_text_1: 'header_text_1', header_text_2: 'header_text_2' }.with_indifferent_access)
     expect(label_fields.dummy_labels.find(:label2)).to eq({ label_text_3: 'label_text_3', label_text_4: 'label_text_4' }.with_indifferent_access)
     expect(label_fields.dummy_labels.to_h).to eq({

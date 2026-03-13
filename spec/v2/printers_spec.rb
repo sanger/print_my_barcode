@@ -91,7 +91,7 @@ RSpec.describe V2::PrintersController, :helpers, type: :request do |_variable|
   it 'prevents creation of a new printer with invalid attributes' do
     expect do
       post v2_printers_path, params: { data: { attributes: { name: nil } } }.to_json, headers: headers
-    end.to_not change(Printer, :count)
+    end.not_to change(Printer, :count)
 
     expect(response).to have_http_status(:unprocessable_entity)
 

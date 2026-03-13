@@ -63,7 +63,7 @@ RSpec.describe V1::LabelTemplatesController, :helpers, type: :request do |_varia
   it 'prevents creation of a new label template with invalid label type' do
     expect do
       post v1_label_templates_path, params: { data: { attributes: label_template_params_with_invalid_label_type } }.to_json, headers: headers
-    end.to_not change(LabelTemplate, :count)
+    end.not_to change(LabelTemplate, :count)
     expect(response).to have_http_status(:unprocessable_entity)
 
     json = ActiveSupport::JSON.decode(response.body)
@@ -77,7 +77,7 @@ RSpec.describe V1::LabelTemplatesController, :helpers, type: :request do |_varia
   it 'prevents creation of a new label template with invalid association' do
     expect do
       post v1_label_templates_path, params: { data: { attributes: label_template_params_with_invalid_association } }.to_json, headers: headers
-    end.to_not change(LabelTemplate, :count)
+    end.not_to change(LabelTemplate, :count)
     expect(response).to have_http_status(:unprocessable_entity)
 
     json = ActiveSupport::JSON.decode(response.body)

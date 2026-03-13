@@ -3,11 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Squix::PrintJob do
-
   let!(:printer)            { create(:printer) }
   let(:label_template)      { create(:label_template) }
-  let(:label1)               { { 'test_attr': 'test1', 'barcode': '11111', 'label_name': 'location1' } }
-  let(:label2)               { { 'test_attr': 'test2', 'barcode': '22222', 'label_name': 'location2' } }
+  let(:label1)               { { test_attr: 'test1', barcode: '11111', label_name: 'location1' } }
+  let(:label2)               { { test_attr: 'test2', barcode: '22222', label_name: 'location2' } }
   let(:labels)              { [label1, label2] }
   let(:copies)              { 1 }
   let(:attributes)          { { printer_name: printer.name, label_template_name: label_template.name, labels: labels, copies: copies } }

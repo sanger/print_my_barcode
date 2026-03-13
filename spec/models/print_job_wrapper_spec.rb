@@ -3,13 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe PrintJobWrapper do
-
   let!(:squix_printer)      { create(:squix_printer) }
   let!(:toshiba_printer)    { create(:toshiba_printer) }
   let(:label_template)      { create(:label_template_simple) }
-  let(:dodgy_labels)        { [{ 'test_attr' => 'test', 'barcode' => '11111', 'label_name': 'location' }, { 'test_attr' => 'test2', 'barcode' => '22222', 'label_name': 'location2' }] }
+  let(:dodgy_labels)        { [{ 'test_attr' => 'test', 'barcode' => '11111', label_name: 'location' }, { 'test_attr' => 'test2', 'barcode' => '22222', label_name: 'location2' }] }
   # TODO: move this to a method
-  let(:labels)              { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k,v| v.merge(label_name: k)}}.flatten}
+  let(:labels)              { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k, v| v.merge(label_name: k) } }.flatten }
   let(:copies)              { 2 }
   let(:attributes)          { { printer_name: toshiba_printer.name, label_template_name: label_template.name, labels: labels, copies: copies } }
 

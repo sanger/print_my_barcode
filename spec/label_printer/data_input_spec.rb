@@ -45,10 +45,11 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
   end
 
   context 'Label' do
-    let!(:label)        { label_template.labels.first }
     subject             { LabelPrinter::DataInput::Label.new(label, label_template.dummy_labels.find(label.name)) }
 
-    it 'should have the correct name' do
+    let!(:label)        { label_template.labels.first }
+
+    it 'has the correct name' do
       expect(subject.name).to eq(label.name)
     end
 
@@ -120,7 +121,7 @@ RSpec.describe LabelPrinter::DataInput, type: :model do
         end
       end
 
-      it 'should have the correct list of commands' do
+      it 'has the correct list of commands' do
         expect(subject.commands_list).to eq([:set_label_size, :adjust_print_density, :adjust_position, 'T', :labels])
       end
 

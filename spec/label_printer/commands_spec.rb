@@ -187,12 +187,13 @@ RSpec.describe LabelPrinter::Commands, type: :model do
     end
 
     context 'CODE39' do
-      let(:options) {{  id: '001', x_origin: '0300', y_origin: '0000',
-                        barcode_type: '3', type_of_check_digit: '3', narrow_bar_width: '02',
-                        narrow_space_width: '03', wide_bar_width: '04',
-                        wide_space_width: '05', char_to_char_space_width: '06',
-                        rotational_angle: '1', height: '0100' }
-      }
+      let(:options) do
+        { id: '001', x_origin: '0300', y_origin: '0000',
+          barcode_type: '3', type_of_check_digit: '3', narrow_bar_width: '02',
+          narrow_space_width: '03', wide_bar_width: '04',
+          wide_space_width: '05', char_to_char_space_width: '06',
+          rotational_angle: '1', height: '0100' }
+      end
 
       it 'has appropriate control codes' do
         command = LabelPrinter::Commands::BarcodeFormat.new(options)
@@ -264,7 +265,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
 
     subject { MyCommands.new }
 
-    it 'should have the correct list of commands' do
+    it 'has the correct list of commands' do
       expect(subject.commands_list).to eq([:set_label_size, 'C', 'T', 'XS', :nil_command, :array_of_commands, :hash_of_commands])
     end
 
@@ -284,16 +285,16 @@ RSpec.describe LabelPrinter::Commands, type: :model do
       expect(commands.last).to be_ay
     end
 
-    it 'should have the correct output' do
-      output = "#{LabelPrinter::Commands::SetLabelSize.command(pitch_length: '1234', print_width: '5678', print_length: '9012')}"\
-               "#{LabelPrinter::Commands::ClearImageBuffer.command}"\
-               "#{LabelPrinter::Commands::Feed.command}"\
-               "#{LabelPrinter::Commands::Issue.command}"\
-               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '25')}"\
-               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'ABC')}"\
-               "#{LabelPrinter::Commands::AdjustPrintDensity.command(fine_adjustment: '4')}"\
-               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '100')}"\
-               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'CDE')}"\
+    it 'has the correct output' do
+      output = "#{LabelPrinter::Commands::SetLabelSize.command(pitch_length: '1234', print_width: '5678', print_length: '9012')}" \
+               "#{LabelPrinter::Commands::ClearImageBuffer.command}" \
+               "#{LabelPrinter::Commands::Feed.command}" \
+               "#{LabelPrinter::Commands::Issue.command}" \
+               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '25')}" \
+               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'ABC')}" \
+               "#{LabelPrinter::Commands::AdjustPrintDensity.command(fine_adjustment: '4')}" \
+               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '100')}" \
+               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'CDE')}" \
                "#{LabelPrinter::Commands::AdjustPrintDensity.command(fine_adjustment: '5')}"
       expect(subject.to_s).to eq(output)
     end

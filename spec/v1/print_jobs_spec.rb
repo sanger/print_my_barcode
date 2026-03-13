@@ -20,7 +20,7 @@ RSpec.describe V1::PrintJobsController, :helpers, type: :request do
     expect(json['type']).to eq('print_jobs')
   end
 
-  it 'should return an error if the label is not valid' do
+  it 'returns an error if the label is not valid' do
     post v1_print_jobs_path, params: { data: { attributes: { label_template_id: label_template.id, labels: label_template.dummy_labels.to_h } } }.to_json, headers: headers
     expect(response).to have_http_status(:unprocessable_entity)
 
@@ -30,7 +30,7 @@ RSpec.describe V1::PrintJobsController, :helpers, type: :request do
     expect(find_attribute_error_details(json, 'printer')).to include('does not exist')
   end
 
-  it 'should return an error if request provides incorrect parameters' do
+  it 'returns an error if request provides incorrect parameters' do
     post v1_print_jobs_path, params: { data: { attributes: { printer_name: printer.name, label_type_id: label_template.id, labels: label_template.dummy_labels.to_h } } }.to_json, headers: headers
     expect(response).to have_http_status(:unprocessable_entity)
 

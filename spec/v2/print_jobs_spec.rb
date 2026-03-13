@@ -6,14 +6,14 @@ RSpec.describe V2::PrintJobsController, :helpers, type: :request do
   let!(:squix_printer)    { create(:printer, printer_type: :squix) }
   let!(:toshiba_printer)  { create(:printer, printer_type: :toshiba) }
   let!(:label_template)   { create(:label_template_simple) }
-  let(:labels)            { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k,v| v.merge(label_name: k)}}.flatten }
+  let(:labels)            { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k, v| v.merge(label_name: k) } }.flatten }
   let(:copies)            { '1' }
   let(:success_response)  { Net::HTTPResponse.new('1.1', '200', '') }
   let(:failure_response)  { Net::HTTPResponse.new('1.1', '422', 'An error') }
 
   describe 'On success' do
     context 'When printer type is Squix' do
-      it 'should send_print_request to SPrintClient ' do
+      it 'send_print_requests to SPrintClient' do
         body = { printer_name: squix_printer.name, label_template_name: label_template.name, labels: labels, copies: copies }
         allow(SPrintClient).to receive(:send_print_request).and_return(success_response)
 
@@ -28,8 +28,7 @@ RSpec.describe V2::PrintJobsController, :helpers, type: :request do
 
     context 'When printer type is Toshiba' do
       it 'send_print_requests to SPrintClient' do
-        body = { printer_name: toshiba_printer.name, label_template_name: label_template.name,
-        labels: labels }
+        body = { printer_name: toshiba_printer.name, label_template_name: label_template.name, labels: labels }
         allow_any_instance_of(LabelPrinter::PrintJob::LPD).to receive(:execute).and_return(true)
 
         post v2_print_jobs_path, params: { print_job: body }

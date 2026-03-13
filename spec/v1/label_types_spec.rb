@@ -52,7 +52,7 @@ RSpec.describe V1::LabelTypesController, :helpers, type: :request do |_variable|
   it 'prevents creation of a new label type with invalid attributes' do
     expect do
       post v1_label_types_path, params: { data: { attributes: attributes_for(:label_type).except(:name) } }.to_json, headers: headers
-    end.to_not change(LabelType, :count)
+    end.not_to change(LabelType, :count)
     expect(response).to have_http_status(:unprocessable_entity)
     expect(ActiveSupport::JSON.decode(response.body)['errors']).not_to be_empty
   end
