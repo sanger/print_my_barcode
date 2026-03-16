@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :data_input, class: LabelPrinter::DataInput::Base do
+  factory :data_input, class: 'LabelPrinter::DataInput::Base' do
     label_template { create(:label_template) }
     input_values { label_template.dummy_labels.to_h }
 

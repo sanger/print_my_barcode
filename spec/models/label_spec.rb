@@ -5,48 +5,48 @@ require 'rails_helper'
 RSpec.describe Label, type: :model do
   it 'can have many drawings' do
     bitmaps = create_list(:bitmap, 3)
-    label = create(:label, bitmaps: bitmaps)
+    label = create(:label, bitmaps:)
     expect(label.drawings.count).to eq(3)
   end
 
   it 'can have many barcodes' do
     barcodes = create_list(:barcode, 3)
-    label = create(:label, barcodes: barcodes)
+    label = create(:label, barcodes:)
     expect(label.barcodes.count).to eq(3)
   end
 
   it 'can have many bitmaps' do
     bitmaps = create_list(:bitmap, 3)
-    label = create(:label, bitmaps: bitmaps)
+    label = create(:label, bitmaps:)
     expect(label.bitmaps.count).to eq(3)
   end
 
   it '#field_names should return a list of field names' do
     barcodes = create_list(:barcode, 3)
-    label = create(:label, barcodes: barcodes)
+    label = create(:label, barcodes:)
     expect(label.field_names).to eq(barcodes.map(&:field_name))
   end
 
   it 'label should not be valid without a name' do
-    expect(build(:label, name: nil)).to_not be_valid
+    expect(build(:label, name: nil)).not_to be_valid
   end
 
   it 'label should be unique for a particular label template' do
     label_template_1 = create(:label_template)
     label_template_2 = create(:label_template)
     label = create(:label, label_template: label_template_1)
-    expect(build(:label, label_template: label_template_1, name: label.name)).to_not be_valid
+    expect(build(:label, label_template: label_template_1, name: label.name)).not_to be_valid
     expect(build(:label, label_template: label_template_2, name: label.name)).to be_valid
   end
 
   it 'name should only be valid in a particular format' do
     expect(build(:label, name: 'label_1')).to be_valid
-    expect(build(:label, name: 'label 1')).to_not be_valid
-    expect(build(:label, name: 'label-1')).to_not be_valid
-    expect(build(:label, name: 'label1*')).to_not be_valid
+    expect(build(:label, name: 'label 1')).not_to be_valid
+    expect(build(:label, name: 'label-1')).not_to be_valid
+    expect(build(:label, name: 'label1*')).not_to be_valid
   end
 
-  it 'should destroy all associated records' do
+  it 'destroys all associated records' do
     label = create(:label_with_drawings)
     drawing_ids = label.drawings.pluck(:id)
     label.destroy
@@ -55,7 +55,7 @@ RSpec.describe Label, type: :model do
     end
   end
 
-  it 'should dup a label correctly' do
+  it 'dups a label correctly' do
     label = create(:label_with_drawings, label_template: create(:label_template))
     duped_label = label.dup
     expect(duped_label.name).to eq(label.name)
@@ -64,7 +64,7 @@ RSpec.describe Label, type: :model do
     expect(duped_label.bitmaps.count).to eq(label.bitmaps.count)
     duped_label_drawing_ids = duped_label.drawings.pluck(:id)
     label.drawings.pluck(:id).each do |id|
-      expect(duped_label_drawing_ids).to_not include(id)
+      expect(duped_label_drawing_ids).not_to include(id)
     end
   end
 end

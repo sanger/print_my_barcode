@@ -6,42 +6,42 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Base' do
     let(:command) { LabelPrinter::Commands::Base.new }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('PF')
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('CC12345')
     end
 
-    it 'should produce some appropriate formatted text' do
+    it 'produces some appropriate formatted text' do
       expect(command.formatted).to eq('PFCC12345')
       expect(command.formatted(';')).to eq('PF;CC12345')
     end
 
-    it 'should output the line' do
+    it 'outputs the line' do
       expect(command.to_s).to eq("\u001bPFCC12345\n\u0000")
     end
 
-    it 'should produce an appropriate command' do
+    it 'produces an appropriate command' do
       expect(LabelPrinter::Commands::Base.command).to eq(command.to_s)
     end
 
-    it 'should respond to the appropriate prefix' do
+    it 'responds to the appropriate prefix' do
       expect(command).to be_pf
-      expect(command).to_not be_xs
+      expect(command).not_to be_xs
     end
   end
 
   context 'Set Label Size' do
     let(:command) { LabelPrinter::Commands::SetLabelSize.new(pitch_length: '0110', print_width: '0920', print_length: '0080') }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('D')
       expect(command).to be_d
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('0110,0920,0080')
     end
   end
@@ -49,16 +49,16 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Adjust Position' do
     let(:command) { LabelPrinter::Commands::AdjustPosition.new(feed_value: '004') }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('AX')
       expect(command).to be_ax
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('+004,+000,+00')
     end
 
-    it 'should have an appropriate separator in the output' do
+    it 'has an appropriate separator in the output' do
       expect(command.to_s).to include(';')
     end
   end
@@ -66,16 +66,16 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Adjust Print Density' do
     let(:command) { LabelPrinter::Commands::AdjustPrintDensity.new(fine_adjustment: '08') }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('AY')
       expect(command).to be_ay
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('+08,0')
     end
 
-    it 'should have an appropriate separator in the output' do
+    it 'has an appropriate separator in the output' do
       expect(command.to_s).to include(';')
     end
   end
@@ -83,12 +83,12 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Feed' do
     let(:command) { LabelPrinter::Commands::Feed.new }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('T')
       expect(command).to be_t
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('20C32')
     end
   end
@@ -96,7 +96,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Clear Image Buffer' do
     let(:command) { LabelPrinter::Commands::ClearImageBuffer.new }
 
-    it 'should produce some appropriate output text' do
+    it 'produces some appropriate output text' do
       expect(command.formatted).to eq('C')
       expect(command).to be_c
     end
@@ -109,17 +109,17 @@ RSpec.describe LabelPrinter::Commands, type: :model do
                                                horizontal_magnification: '05', vertical_magnification: '05', font: 'B', space_adjustment: '12', rotational_angles: '11')
     end
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('PC')
       expect(command).to be_pc
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('0020,0035,1,1,G,+00,00,B')
       expect(command_with_options.control_codes).to eq('0020,0035,05,05,B,+12,11,B')
     end
 
-    it 'should have the id in the formatting' do
+    it 'has the id in the formatting' do
       expect(command.formatted).to start_with('PC001;')
     end
   end
@@ -127,12 +127,12 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Draw Bitmap' do
     let(:command) { LabelPrinter::Commands::BitmapDraw.new('001', 'a_value') }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('RC')
       expect(command).to be_rc
     end
 
-    it 'should produce some appropriate formatting' do
+    it 'produces some appropriate formatting' do
       expect(command.formatted).to eq("#{command.prefix}001;a_value")
     end
   end
@@ -140,16 +140,16 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Format Barcode' do
     let(:command) { LabelPrinter::Commands::BarcodeFormat.new(id: '001', x_origin: '0300', y_origin: '0000') }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('XB')
       expect(command).to be_xb
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('0300,0000,5,3,02,0,0070,+0000000000,002,0,00')
     end
 
-    it 'should have the id in the formatting' do
+    it 'has the id in the formatting' do
       expect(command.formatted).to start_with('XB001;')
     end
 
@@ -159,7 +159,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
                                                   barcode_type: '9', type_of_check_digit: '2', one_module_width: '01', height: '0100')
       end
 
-      it 'should have appropriate control codes' do
+      it 'has appropriate control codes' do
         expect(command.control_codes).to eq('0300,0000,9,2,01,0,0100,+0000000000,002,0,00')
       end
     end
@@ -170,7 +170,7 @@ RSpec.describe LabelPrinter::Commands, type: :model do
                                                   barcode_type: 'Q', one_cell_width: '50', rotational_angle: '3')
       end
 
-      it 'should have appropriate control codes' do
+      it 'has appropriate control codes' do
         expect(command.control_codes).to eq('0300,0000,Q,20,50,05,3')
       end
     end
@@ -181,37 +181,38 @@ RSpec.describe LabelPrinter::Commands, type: :model do
                                                   barcode_type: 'P', one_module_width: '01', no_of_columns: '10', bar_height: '0100')
       end
 
-      it 'should have appropriate control codes' do
+      it 'has appropriate control codes' do
         expect(command.control_codes).to eq('0300,0000,P,00,01,10,0,0100')
       end
     end
 
     context 'CODE39' do
-      let(:options) {{  id: '001', x_origin: '0300', y_origin: '0000',
-                        barcode_type: '3', type_of_check_digit: '3', narrow_bar_width: '02', 
-                        narrow_space_width: '03', wide_bar_width: '04',
-                        wide_space_width: '05', char_to_char_space_width: '06', 
-                        rotational_angle: '1', height: '0100' }}
+      let(:options) do
+        { id: '001', x_origin: '0300', y_origin: '0000',
+          barcode_type: '3', type_of_check_digit: '3', narrow_bar_width: '02',
+          narrow_space_width: '03', wide_bar_width: '04',
+          wide_space_width: '05', char_to_char_space_width: '06',
+          rotational_angle: '1', height: '0100' }
+      end
 
-      it 'should have appropriate control codes' do
+      it 'has appropriate control codes' do
         command = LabelPrinter::Commands::BarcodeFormat.new(options)
         expect(command.control_codes).to eq('0300,0000,3,3,02,03,04,05,06,1,0100')
         command = LabelPrinter::Commands::BarcodeFormat.new(options.merge(barcode_type: 'B'))
         expect(command.control_codes).to eq('0300,0000,B,3,02,03,04,05,06,1,0100')
       end
-
     end
   end
 
   context 'Draw Barcode' do
     let(:command) { LabelPrinter::Commands::BarcodeDraw.new('001', 'a_value') }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('RB')
       expect(command).to be_rb
     end
 
-    it 'should produce some appropriate formatting' do
+    it 'produces some appropriate formatting' do
       expect(command.formatted).to eq("#{command.prefix}001;a_value")
     end
   end
@@ -219,16 +220,16 @@ RSpec.describe LabelPrinter::Commands, type: :model do
   context 'Issue' do
     let(:command) { LabelPrinter::Commands::Issue.new }
 
-    it 'should have an appropriate prefix' do
+    it 'has an appropriate prefix' do
       expect(command.prefix).to eq('XS')
       expect(command).to be_xs
     end
 
-    it 'should have appropriate control codes' do
+    it 'has appropriate control codes' do
       expect(command.control_codes).to eq('I,0001,0002C3201')
     end
 
-    it 'should produce some appropriate output' do
+    it 'produces some appropriate output' do
       expect(command.to_s).to include(';')
     end
   end
@@ -259,16 +260,16 @@ RSpec.describe LabelPrinter::Commands, type: :model do
           b: LabelPrinter::Commands::BarcodeDraw.new('123', 'CDE'),
           c: LabelPrinter::Commands::AdjustPrintDensity.new(fine_adjustment: '5')
         }
-     end
+      end
     end
 
     subject { MyCommands.new }
 
-    it 'should have the correct list of commands' do
+    it 'has the correct list of commands' do
       expect(subject.commands_list).to eq([:set_label_size, 'C', 'T', 'XS', :nil_command, :array_of_commands, :hash_of_commands])
     end
 
-    it 'should have the correct commands' do
+    it 'has the correct commands' do
       commands = subject.commands
       expect(commands.count).to eq(11)
       expect(commands.first).to be_d
@@ -284,16 +285,16 @@ RSpec.describe LabelPrinter::Commands, type: :model do
       expect(commands.last).to be_ay
     end
 
-    it 'should have the correct output' do
-      output = "#{LabelPrinter::Commands::SetLabelSize.command(pitch_length: '1234', print_width: '5678', print_length: '9012')}"\
-               "#{LabelPrinter::Commands::ClearImageBuffer.command}"\
-               "#{LabelPrinter::Commands::Feed.command}"\
-               "#{LabelPrinter::Commands::Issue.command}"\
-               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '25')}"\
-               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'ABC')}"\
-               "#{LabelPrinter::Commands::AdjustPrintDensity.command(fine_adjustment: '4')}"\
-               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '100')}"\
-               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'CDE')}"\
+    it 'has the correct output' do
+      output = "#{LabelPrinter::Commands::SetLabelSize.command(pitch_length: '1234', print_width: '5678', print_length: '9012')}" \
+               "#{LabelPrinter::Commands::ClearImageBuffer.command}" \
+               "#{LabelPrinter::Commands::Feed.command}" \
+               "#{LabelPrinter::Commands::Issue.command}" \
+               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '25')}" \
+               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'ABC')}" \
+               "#{LabelPrinter::Commands::AdjustPrintDensity.command(fine_adjustment: '4')}" \
+               "#{LabelPrinter::Commands::AdjustPosition.command(feed_value: '100')}" \
+               "#{LabelPrinter::Commands::BarcodeDraw.command('123', 'CDE')}" \
                "#{LabelPrinter::Commands::AdjustPrintDensity.command(fine_adjustment: '5')}"
       expect(subject.to_s).to eq(output)
     end

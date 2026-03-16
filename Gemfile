@@ -9,7 +9,6 @@ group :development, :test do
   gem 'factory_bot_rails', require: false
   gem 'mocha'
   gem 'pry'
-  gem 'rails-perftest'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false
