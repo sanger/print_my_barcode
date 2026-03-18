@@ -22,58 +22,61 @@ AllCops:
     - config/application.rb
     - config/initializers/content_security_policy.rb
 
+Rails:
+  Enabled: true
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/IndentationWidth:
+  EnforcedStyleAlignWith: relative_to_receiver
+
+Layout/LineLength:
+  Max: 100
+  Exclude:
+  - lib/tasks/*
+  - spec/**/*
+
+Metrics/BlockLength:
+  Exclude:
+  - spec/**/*
+  - config/routes.rb
+  - lib/tasks/*
+
+Metrics/MethodLength:
+  Max: 12
+  Exclude:
+  - db/migrate/*
+
+Naming/BlockForwarding:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+  - app/label_printer/label_printer/print_job/IPP.rb
+  - app/label_printer/label_printer/print_job/LPD.rb
+  - app/label_printer/label_printer/print_job/TOF.rb
+
 # The cop is meant to enforce conventions regarding variables containing numbers
 # However in 0.43.0 it is bugged. Both changed on master and disabled by default
 # The exclusions don't even get added to the rubocop_todo properly!
 Naming/VariableNumber:
   Enabled: false
-Rails:
-  Enabled: true
+
 Rails/FilePath:
   EnforcedStyle: arguments
 
-# Enforces 1234565789 as 123_456_789: While nice when dealing with actual big
-# numbers, we're more likely to see it shout at us about barcodes.
-Style/NumericLiterals:
+Style/AsciiComments:
   Enabled: false
 
-Style/AsciiComments:
+Style/ClassAndModuleChildren:
   Enabled: false
 
 # Only use shorthand hash syntax when all keys match the variables for better readability
 Style/HashSyntax:
   EnforcedShorthandSyntax: consistent
 
-Naming/BlockForwarding:
+# Enforces 1234565789 as 123_456_789: While nice when dealing with actual big
+# numbers, we're more likely to see it shout at us about barcodes.
+Style/NumericLiterals:
   Enabled: false
-
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
-    - 'config/routes.rb'
-    - 'lib/tasks/*'
-
-Metrics/MethodLength:
-  Max: 12
-  Exclude:
-    - 'db/migrate/*'
-
-Layout/LineLength:
-  Max: 100
-  Exclude:
-    - 'lib/tasks/*'
-    - 'spec/**/*'
-
-Layout/IndentationWidth:
-  EnforcedStyleAlignWith: relative_to_receiver
-
-Layout/FirstArrayElementIndentation:
-  EnforcedStyle: consistent
-Style/ClassAndModuleChildren:
-  Enabled: false
-
-Naming/FileName:
-  Exclude:
-    - 'app/label_printer/label_printer/print_job/IPP.rb'
-    - 'app/label_printer/label_printer/print_job/LPD.rb'
-    - 'app/label_printer/label_printer/print_job/TOF.rb'
