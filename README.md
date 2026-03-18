@@ -2,6 +2,10 @@
 
 Barcode printing service
 
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
 ## Set up a development environment
 
 1. Create an empty database
