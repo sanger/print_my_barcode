@@ -64,6 +64,9 @@ Layout/LineLength:
     - 'lib/tasks/*'
     - 'spec/**/*'
 
+Layout/IndentationWidth:
+  EnforcedStyleAlignWith: relative_to_receiver
+
 Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
 Style/ClassAndModuleChildren:
