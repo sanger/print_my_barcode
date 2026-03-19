@@ -80,13 +80,13 @@ class PrintJobWrapper
     # pull out the label names that are received in the request
     received_labels = labels.pluck('label_name').uniq
 
-    return if labels_match(expected_labels, received_labels)
+    return if labels_match?(expected_labels, received_labels)
 
     errors.add(:label_name, 'does not match label template label names')
   end
 
   # uses the array intersection method
-  def labels_match(expected, received)
+  def labels_match?(expected, received)
     expected & received == received
   end
 end

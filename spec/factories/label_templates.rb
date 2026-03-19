@@ -11,7 +11,7 @@ FactoryBot.define do
     end
   end
 
-  factory :label_template_simple, class: LabelTemplate do
+  factory :label_template_simple, class: 'LabelTemplate' do
     sequence(:name) { |n| "label_template_#{n}" }
     label_type { create(:label_type) }
     labels do

@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe V2::PrintersController, type: :request, helpers: true do |_variable|
+RSpec.describe V2::PrintersController, :helpers, type: :request do |_variable|
   let(:headers) { { 'CONTENT_TYPE' => 'application/vnd.api+json' } }
 
-  it 'should allow retrieval of all printers' do
+  it 'allows retrieval of all printers' do
     printers = create_list(:printer, 5)
     get v2_printers_path
     expect(response).to be_successful
@@ -27,7 +27,7 @@ RSpec.describe V2::PrintersController, type: :request, helpers: true do |_variab
   end
 
   it 'filters printers by type' do
-    squix_printers = create_list(:printer, 3, printer_type: :squix)
+    create_list(:printer, 3, printer_type: :squix)
     toshiba_printer = create(:printer, printer_type: :toshiba)
 
     get "#{v2_printers_path}?filter[printer_type]=#{toshiba_printer.printer_type}"
@@ -56,7 +56,7 @@ RSpec.describe V2::PrintersController, type: :request, helpers: true do |_variab
     expect(json['data'][2]['attributes']['protocol']).to eq('LPD')
   end
 
-  it 'should allow retrieval of information about a particular printer' do
+  it 'allows retrieval of information about a particular printer' do
     printer = create(:printer)
     get v2_printer_path(printer)
     expect(response).to be_successful
@@ -67,7 +67,7 @@ RSpec.describe V2::PrintersController, type: :request, helpers: true do |_variab
     expect(json_attributes['printer_type']).to eq(printer.printer_type)
   end
 
-  it 'should allow creation of a new printer' do
+  it 'allows creation of a new printer' do
     expect do
       post v2_printers_path, params: { data: { attributes: attributes_for(:printer) } }.to_json, headers: headers
     end.to change(Printer, :count).by(1)
@@ -88,12 +88,12 @@ RSpec.describe V2::PrintersController, type: :request, helpers: true do |_variab
     expect(json['data']['attributes']['printer_type']).to eq('squix')
   end
 
-  it 'should prevent creation of a new printer with invalid attributes' do
+  it 'prevents creation of a new printer with invalid attributes' do
     expect do
       post v2_printers_path, params: { data: { attributes: { name: nil } } }.to_json, headers: headers
-    end.to_not change(Printer, :count)
+    end.not_to change(Printer, :count)
 
-    expect(response).to have_http_status(:unprocessable_entity)
+    expect(response).to have_http_status(:unprocessable_content)
 
     json = ActiveSupport::JSON.decode(response.body)
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :print_job, class: LabelPrinter::PrintJob::Base do
+  factory :print_job, class: 'LabelPrinter::PrintJob::Base' do
     transient do
       label_template { create(:label_template) }
     end
@@ -10,6 +10,8 @@ FactoryBot.define do
     label_template_id { label_template.id }
     labels { label_template.dummy_labels.to_h }
 
-    initialize_with { new(printer_name: printer_name, label_template_id: label_template_id, labels: labels) }
+    initialize_with do
+      new(printer_name:, label_template_id:, labels:)
+    end
   end
 end

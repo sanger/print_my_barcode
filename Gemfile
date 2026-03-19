@@ -2,14 +2,13 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~> 8.0.1'
+gem 'rails', '~> 8.1.1'
 
 group :development, :test do
   gem 'byebug'
   gem 'factory_bot_rails', require: false
   gem 'mocha'
   gem 'pry'
-  gem 'rails-perftest'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-factory_bot', require: false

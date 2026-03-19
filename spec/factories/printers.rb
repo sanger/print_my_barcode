@@ -9,7 +9,7 @@ FactoryBot.define do
     factory :toshiba_printer
 
     factory :squix_printer do
-      printer_type    { :squix }
+      printer_type { :squix }
     end
   end
 end

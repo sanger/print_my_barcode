@@ -3,13 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe PrintJobWrapper do
-
   let!(:squix_printer)      { create(:squix_printer) }
   let!(:toshiba_printer)    { create(:toshiba_printer) }
   let(:label_template)      { create(:label_template_simple) }
-  let(:dodgy_labels)        { [{ 'test_attr' => 'test', 'barcode' => '11111', 'label_name': 'location' }, { 'test_attr' => 'test2', 'barcode' => '22222', 'label_name': 'location2' }] }
+  let(:dodgy_labels)        { [{ 'test_attr' => 'test', 'barcode' => '11111', label_name: 'location' }, { 'test_attr' => 'test2', 'barcode' => '22222', label_name: 'location2' }] }
   # TODO: move this to a method
-  let(:labels)              { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k,v| v.merge(label_name: k)}}.flatten}
+  let(:labels)              { label_template.dummy_labels.to_h[:body].collect { |label| label.collect { |k, v| v.merge(label_name: k) } }.flatten }
   let(:copies)              { 2 }
   let(:attributes)          { { printer_name: toshiba_printer.name, label_template_name: label_template.name, labels: labels, copies: copies } }
 
@@ -23,49 +22,48 @@ RSpec.describe PrintJobWrapper do
       expect(print_job_wrapper.copies).to eq(copies)
     end
 
-    it 'will be valid with the correct instance variables' do
+    it 'is valid with the correct instance variables' do
       expect(PrintJobWrapper.new(attributes)).to be_valid
     end
 
     it 'is not valid without a printer name' do
-      expect(PrintJobWrapper.new(attributes.except(:printer_name))).to_not be_valid
+      expect(PrintJobWrapper.new(attributes.except(:printer_name))).not_to be_valid
     end
 
     it 'is not valid without a label template name' do
-      expect(PrintJobWrapper.new(attributes.except(:label_template_name))).to_not be_valid
+      expect(PrintJobWrapper.new(attributes.except(:label_template_name))).not_to be_valid
     end
 
     it 'is not valid without some labels' do
-      expect(PrintJobWrapper.new(attributes.except(:labels))).to_not be_valid
+      expect(PrintJobWrapper.new(attributes.except(:labels))).not_to be_valid
     end
 
-    it 'will be valid if copies is not passed' do
+    it 'is valid if copies is not passed' do
       print_job_wrapper = PrintJobWrapper.new(attributes.except(:copies))
       expect(print_job_wrapper).to be_valid
       expect(print_job_wrapper.copies).to be_present
     end
 
-    it 'will not be valid if the label names dont match' do
+    it 'does not be valid if the label names dont match' do
       print_job_wrapper = PrintJobWrapper.new(attributes.merge(labels: dodgy_labels))
-      expect(print_job_wrapper).to_not be_valid
+      expect(print_job_wrapper).not_to be_valid
     end
   end
 
   describe '#print_job' do
-
     context 'Toshiba' do
       it 'creates a new print job of the correct type' do
-        print_job_wrapper = PrintJobWrapper.new(attributes.merge(labels: labels))
+        print_job_wrapper = PrintJobWrapper.new(attributes.merge(labels:))
         expect(print_job_wrapper.print_job).to be_instance_of(LabelPrinter::PrintJob::LPD)
       end
 
-      it 'will not execute if the print job is not valid' do
+      it 'does not execute if the print job is not valid' do
         print_job_wrapper = PrintJobWrapper.new(attributes.except(:labels))
-        expect(print_job_wrapper).to_not be_valid
+        expect(print_job_wrapper).not_to be_valid
         expect(print_job_wrapper.print).to be_falsy
       end
 
-      it 'will execute the print job if it is valid' do
+      it 'executes the print job if it is valid' do
         print_job_wrapper = PrintJobWrapper.new(attributes)
         allow(print_job_wrapper.print_job).to receive(:execute).and_return(true)
         expect(print_job_wrapper).to be_valid
@@ -79,26 +77,25 @@ RSpec.describe PrintJobWrapper do
         expect(print_job_wrapper.print_job).to be_instance_of(Squix::PrintJob)
       end
 
-      it 'will not execute if the print job is not valid' do
+      it 'does not execute if the print job is not valid' do
         print_job_wrapper = PrintJobWrapper.new(attributes.except(:labels).merge(printer_name: squix_printer.name))
-        expect(print_job_wrapper.print_job).to_not be_valid
+        expect(print_job_wrapper.print_job).not_to be_valid
         expect(print_job_wrapper.print).to be_falsy
       end
 
-      it 'will execute the print job if it is valid' do
+      it 'executes the print job if it is valid' do
         print_job_wrapper = PrintJobWrapper.new(attributes.merge(printer_name: squix_printer.name))
         allow(print_job_wrapper.print_job).to receive(:execute).and_return(true)
         expect(print_job_wrapper).to be_valid
         expect(print_job_wrapper.print).to be_truthy
       end
 
-      it 'will not execute if the label template does not exist' do
+      it 'does not execute if the label template does not exist' do
         print_job_wrapper = PrintJobWrapper.new(attributes.except(:label_template_name))
-        expect(print_job_wrapper).to_not be_valid
+        expect(print_job_wrapper).not_to be_valid
         expect(print_job_wrapper.errors[:label_template]).to include("can't be blank")
         expect(print_job_wrapper.print).to be_falsy
       end
     end
   end
-
 end

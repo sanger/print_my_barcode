@@ -69,7 +69,7 @@ module LabelPrinter
       def find(key)
         selection = select(key)
         return nil if selection.empty?
-        return selection.values.first if selection.count == 1
+        return selection.values.first if selection.one?
 
         selection
       end
