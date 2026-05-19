@@ -1,4 +1,4 @@
-FROM ruby:3.4.9
+FROM ruby:4.0.4
 ENV BUNDLER_VERSION=2.2.6
 
 RUN apt-get update -qq && apt-get install -y
