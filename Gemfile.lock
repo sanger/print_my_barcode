@@ -151,7 +151,7 @@ GEM
       prism (~> 1.5)
     mocha (3.0.2)
       ruby2_keywords (>= 0.0.5)
-    msgpack (1.8.1)
+    msgpack (1.8.4)
     mysql2 (0.5.7)
       bigdecimal
     net-imap (0.6.4.1)
