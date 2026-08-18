@@ -293,7 +293,7 @@ GEM
     securerandom (0.4.1)
     spring (4.7.0)
     sprint_client (0.1.0)
-    sqlite3 (2.9.5)
+    sqlite3 (2.9.6)
       mini_portile2 (~> 2.8.0)
     syslog (0.4.0)
       logger
