@@ -27,7 +27,7 @@ module V2
     protected
 
     def current_resource
-      Printer.find(params[:id]) if params[:id]
+      Printer.find(params.expect(:id)) if params[:id]
     end
 
     def printer_params
