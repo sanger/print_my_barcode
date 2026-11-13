@@ -2,11 +2,10 @@
 
 module V2
   # DocsController
-  # rubocop:disable Rails/ApplicationController
+  # rubocop:disable-next Rails/ApplicationController
   class DocsController < ActionController::Base
     def index
       render layout: false
     end
   end
-  # rubocop:enable Rails/ApplicationController
 end
