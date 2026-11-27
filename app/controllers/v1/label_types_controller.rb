@@ -32,7 +32,7 @@ module V1
     private
 
     def current_resource
-      LabelType.find(params[:id]) if params[:id]
+      LabelType.find(params.expect(:id)) if params[:id]
     end
 
     def label_type_params

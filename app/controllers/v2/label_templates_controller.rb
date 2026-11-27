@@ -34,7 +34,7 @@ module V2
     private
 
     def current_resource
-      LabelTemplate.find(params[:id]) if params[:id]
+      LabelTemplate.find(params.expect(:id)) if params[:id]
     end
 
     def label_template_params
